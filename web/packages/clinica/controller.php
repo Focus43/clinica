@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.01';
+	    protected $pkgVersion 			= '0.02';
 	
 		
 		/**
@@ -29,9 +29,13 @@
 		 */
 	    public function on_start(){
 	        define('CLINICA_TOOLS_URL', BASE_URL . REL_DIR_FILES_TOOLS_PACKAGES . '/' . $this->pkgHandle . '/');
+			define('CLINICA_IMAGES_URL', BASE_URL . DIR_REL . '/packages/' . $this->pkgHandle . '/images/');
 			
 			// autoload classes
 			Loader::registerAutoload(array(
+				// page controller
+				'ClinicaPageController'		=> array('library', 'clinica_page_controller', $this->pkgHandle),
+				
 				// Authorize.net; use Concrete5's autoloader instead of the require statements in AuthorizeNet.php fake autoloader
 				'AuthorizeNetException' 	=> array('library', 'authorize_net_exception', $this->pkgHandle),
 				'AuthorizeNetRequest' 		=> array('library', 'authorize_net_sdk/lib/shared/AuthorizeNetRequest', $this->pkgHandle),
@@ -83,6 +87,9 @@
 			$this->setupAttributeSets()
 				 ->setupUserGroups()
 				 ->setupUserAttributes()
+				 ->setupCollectionAttributes()
+				 ->setupTheme()
+				 ->setupPageTypes()
 				 ->setupSitePages();
 		}
 		
@@ -136,6 +143,49 @@
 		
 		
 		/**
+	     * @return ClinicaPackage 
+	     */
+	    private function setupCollectionAttributes(){
+	        if( !is_object(CollectionAttributeKey::getByHandle('page_background')) ){
+	            CollectionAttributeKey::add($this->attributeType('image_file'), array(
+	                'akHandle'  => 'page_background',
+	                'akName'    => 'Page Background'
+	            ));
+	        }
+	        
+	        return $this;
+	    }
+		
+		
+		/**
+		 * @return ClinicaPackage
+		 */
+		private function setupTheme(){
+			try {
+				PageTheme::add('clinica_site', $this->packageObject());
+			}catch(Exception $e){ /* fail gracefully */ }
+			
+			return $this;
+		}
+		
+		
+		/**
+		 * @return ClinicaPackage
+		 */
+		private function setupPageTypes(){
+			if( !is_object($this->pageType('home')) ){
+	            CollectionType::add(array('ctHandle' => 'home', 'ctName' => 'Home'), $this->packageObject());
+	        }
+
+			if( !is_object($this->pageType('default')) ){
+	            CollectionType::add(array('ctHandle' => 'default', 'ctName' => 'Default'), $this->packageObject());
+	        }
+
+			return $this;
+		}
+		
+		
+		/**
 		 * @return ClinicaPackage
 		 */
 		private function setupSitePages(){
@@ -183,7 +233,7 @@
 		 * @param string Handle of the page_type to use
 		 * @return Page
 		 */
-		private function pageFactory( Page $parent, $name, $typeHandle = 'full' ){
+		private function pageFactory( Page $parent, $name, $typeHandle = 'default' ){
 			return $parent->add( $this->pageType($typeHandle), array(
 				'cName' => $name,
 				'pkgID' => $this->packageObject()->getPackageID()
