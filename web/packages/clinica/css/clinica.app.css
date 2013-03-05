@@ -19,11 +19,6 @@ div#homeWrap div.forceHeight {height:100% !important;min-height:100% !important;
 	#headerInner div.orangeBar a {color:#fff;}
 	#headerInner div.orangeBar a.active {font-weight:500;}
 
-#welcomeText {color:#fff;margin:40px 0;text-align:center;background:rgba(217,165,0,.6);padding:20px 0;}
-#welcomeText div.lead {margin:0;padding:0;}
-#welcomeText div.lead * {line-height:1em;padding:5px 0;margin:0;}
-#welcomeText div.lead p {margin-bottom:0;padding:0;line-height:1.3em;font-size:1.8em;}
-
 #homeMain {}
 #homeMain .span4 {color:#fff;}
 #homeMain .span4 h2 {text-align:center;color:#fff;font-weight:100;}

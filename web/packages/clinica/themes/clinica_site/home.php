@@ -20,18 +20,6 @@
 						</div>
 					</div>
 				</div>
-			
-				<!--<div id="welcomeText" class="visible-desktop">
-					<div class="container">
-						<div class="row">
-							<div class="span12">
-								<div class="lead">
-									<?php $area1 = new Area('Tag Line'); $area1->display($c); ?>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>-->
 				
 				<div id="homeMain" class="container">
 					<div class="row">
