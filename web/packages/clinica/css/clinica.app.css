@@ -1,21 +1,32 @@
 html, body {height:100% !important;min-height:100% !important;/*overflow:hidden;*/}
 
 /* GLOBALLY REUSED */
+a {cursor:pointer;}
 .centerize {text-align:center;}
 
 div#homeWrap {position:relative;width:100%;height:100% !important;min-height:100% !important;}
 div#homeWrap div.homeInner {width:100%;height:100% !important;min-height:100% !important;/*overflow-y: auto;*/}
-div#homeWrap div.homeInner {background:transparent url('../images/opaque_gradient.png') repeat-x 0 0;background-size:contain;}
+div#homeWrap div.homeInner {/*background:transparent url('../images/opaque_gradient.png') repeat-x 0 0;background-size:contain;*/}
 div#homeWrap div.forceHeight {height:100% !important;min-height:100% !important;}
 
-#cHeader {padding-top:20px;height:120px;}
+#cHeader {padding-top:20px;margin-bottom:1em;}
+	#headerInner {position:relative;width:1010px;margin:0 auto;height:132px;background:transparent url('../images/header_bg.png') no-repeat 50% 50%;}
+		ul#headerNavigation {position:absolute;right:25px;top:38px;font-family: 'Enriqueta', serif;font-weight:700;}
+		ul#headerNavigation li {display:inline-block;float:left;margin-left:1.7em;}
+		ul#headerNavigation li a {display:block;color:#444;font-size:1.4em;line-height:1em;text-shadow:0 1px rgba(255,255,255,.7);}
+		ul#headerNavigation li a:hover {color:#005073;background:none;}
+	#headerInner div.orangeBar {color:#fff;position:absolute;bottom:21px;left:25px;right:25px;}
+	#headerInner div.orangeBar a {color:#fff;}
+	#headerInner div.orangeBar a.active {font-weight:500;}
 
-#welcomeText {margin:40px 0;text-align:center;background:rgba(200,200,200,.6);padding:20px 0;}
-#welcomeText div.lead {margin:0;padding:0;line-height:1.3em;font-size:2.4em;}
-#welcomeText div.lead * {margin-bottom:0;}
+#welcomeText {color:#fff;margin:40px 0;text-align:center;background:rgba(217,165,0,.6);padding:20px 0;}
+#welcomeText div.lead {margin:0;padding:0;}
+#welcomeText div.lead * {line-height:1em;padding:5px 0;margin:0;}
+#welcomeText div.lead p {margin-bottom:0;padding:0;line-height:1.3em;font-size:1.8em;}
 
 #homeMain {}
+#homeMain .span4 {color:#fff;}
 #homeMain .span4 h2 {text-align:center;color:#fff;font-weight:100;}
 #homeMain .span4 img {margin:0 auto;position:relative;/*padding:4px;background:rgba(150,150,150,.4);*/border-radius:4px;box-shadow:0 0 13px rgba(0,0,0,.6);}
 
-div.pageContent {background:url('../images/bedge_grunge.png');}
+div.pageContent {padding:20px 0;background:url('../images/bedge_grunge.png');}

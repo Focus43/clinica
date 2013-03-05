@@ -45,7 +45,7 @@
 				'AuthorizeNetAIM,AuthorizeNetAIM_Response' => array('library', 'authorize_net_sdk/lib/AuthorizeNetAIM', $this->pkgHandle)
 			));
 			
-			// load the SOAP client, it it exists
+			// load the SOAP client, if it exists
 			if( class_exists('SoapClient') ){
 				Loader::registerAutoload(array('AuthorizeNetSOAP', array('library', 'authorize_net_sdk/lib/AuthorizeNetSOAP', $this->pkgHandle)));
 			}
@@ -191,7 +191,7 @@
 		private function setupSitePages(){
 			$homePage = Page::getByID(1);
 			
-			$aboutPage = $this->pageFactory($homePage, 'About Clinica');
+			$aboutPage = $this->pageFactory($homePage, 'About');
 				$this->pageFactory($aboutPage, 'Mission + Vision');
 				$this->pageFactory($aboutPage, 'History');
 				$this->pageFactory($aboutPage, 'Services & Who We Serve');
@@ -208,7 +208,11 @@
 				$this->pageFactory($innovationsPage, 'ACC');
 				$this->pageFactory($innovationsPage, 'EHR / CACHIE / iPn');
 				
-			$locationsPage = $this->pageFactory($homePage, 'Our Locations');
+			$patientsPage = $this->pageFactory($homePage, 'Patient Information');
+			
+			$givingPage = $this->pageFactory($homePage, 'Giving');
+				
+			$locationsPage = $this->pageFactory($homePage, 'Locations');
 				$this->pageFactory($locationsPage, 'Federal Heights');
 				$this->pageFactory($locationsPage, 'Lafayette');
 				$this->pageFactory($locationsPage, 'Pocos');
@@ -216,6 +220,8 @@
 				$this->pageFactory($locationsPage, 'Thornton');
 				$this->pageFactory($locationsPage, 'Dental');
 				$this->pageFactory($locationsPage, 'Administration');
+				
+			$contactPage = $this->pageFactory($homePage, 'Contact Us');
 				
 			// same idea as "links" page below
 			$employeesPage = $this->pageFactory($homePage, 'Employees');
