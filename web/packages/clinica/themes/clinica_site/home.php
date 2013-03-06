@@ -44,7 +44,7 @@
 							<?php $a = new Area('Main Content 1'); $a->display($c); ?>
 						</div>
 					</div>
-					<div class="row">
+					<div class="row visible-desktop">
 						<div class="abstract orange">
 							<?php $area = new Area('Abstract Text'); $area->display($c); ?>
 						</div>
@@ -71,7 +71,7 @@
 							<?php $a = new Area('Main Content 3'); $a->display($c); ?>
 						</div>
 					</div>
-					<div class="row">
+					<div class="row visible-desktop">
 						<div class="abstract light-blue">
 							<?php $area = new Area('Abstract Text 3'); $area->display($c); ?>
 						</div>

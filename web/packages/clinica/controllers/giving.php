@@ -5,6 +5,12 @@
 		public $helpers = array('form');
 		
 		
+		public function on_start(){
+			parent::on_start();
+			$this->addFooterItem( $this->getHelper('html')->javascript('libs/ajaxify.form.js', self::PACKAGE_HANDLE) );
+		}
+		
+		
 		public function view(){
 			if( !( isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on') ) ){
 				header("Location: " . $this->secureAction(''));

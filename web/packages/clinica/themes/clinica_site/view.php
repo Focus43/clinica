@@ -13,9 +13,9 @@
 	<?php Loader::packageElement('theme_header', 'clinica'); ?>
 	
 	<div class="container">
-		<div class="row">
+		<div class="row hidden-phone">
 			<div class="span12">
-				<h1><?php echo Page::getCurrentPage()->getCollectionName(); ?> <small><?php echo Page::getCurrentPage()->getCollectionDescription(); ?></small></h1>
+				<h1><?php echo Page::getCurrentPage()->getCollectionName(); ?> <small class="visible-desktop"><?php echo Page::getCurrentPage()->getCollectionDescription(); ?></small></h1>
 			</div>
 		</div>
 		<div class="row">
