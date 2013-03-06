@@ -5,6 +5,13 @@
 		public $helpers = array('form');
 		
 		
+		public function view(){
+			if( !( isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on') ) ){
+				header("Location: " . $this->secureAction(''));
+			}
+		}
+		
+		
 		public function on_before_render(){
 			// never send back the credit card
 			$_POST['card_number'] = false;
@@ -21,9 +28,9 @@
 				$this->flash('Success! Thank you for supporting Clinica.');
 				$this->redirect('/giving');
 			}else{
-				echo 'failed';
+				$this->flash('Transaction failed.', self::FLASH_TYPE_ERROR);
+				$this->redirect('/giving');
 			}
-			exit;
 		}
 		
 	}

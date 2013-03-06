@@ -4,7 +4,7 @@
 		<p>Your financial support is invaluable.</p>
 	</div>
 	<div class="span6">
-		<form method="post" action="<?php echo $this->action('process'); ?>">
+		<form method="post" action="<?php echo $this->controller->secureAction('process'); ?>">
 			<h3>Donation Form</h3>
 			<div class="well">
 				
