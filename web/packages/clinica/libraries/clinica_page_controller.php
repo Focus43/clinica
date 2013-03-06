@@ -32,6 +32,10 @@
 			$this->addHeaderItem( $this->getHelper('html')->css('clinica.app.css', self::PACKAGE_HANDLE) );
 			$this->addHeaderItem( $this->getHelper('html')->javascript('libs/modernizr.min.js', self::PACKAGE_HANDLE) );
 			
+			// ie8 stylesheet
+			$ie8 = "<!--[if lt IE 9]>\n" . $this->getHelper('html')->css('ie8.css', self::PACKAGE_HANDLE) . "\n<![endif]-->";
+			$this->addHeaderItem( $ie8 );
+			
 			// footer stuff (usually javascript)
 			$this->addFooterItem( $this->getHelper('html')->javascript('libs/bootstrap.min.js', self::PACKAGE_HANDLE) );
 			$this->addFooterItem( $this->getHelper('html')->javascript('clinica.app.js', self::PACKAGE_HANDLE) );
