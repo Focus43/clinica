@@ -7,7 +7,7 @@ h1 {color:#005073;margin-left:25px;margin-top:0;}
 
 /* GLOBALLY REUSED */
 a {cursor:pointer;}
-.centerize {text-align:center;}
+span.centerize {display:block;text-align:center;}
 .serifFont {font-family: 'Enriqueta', serif;font-weight:400;}
 
 #minHeighter {min-height:100% !important;}
@@ -35,10 +35,12 @@ a {cursor:pointer;}
 
 /* CLINICA HOMEPAGE; BIG IMAGE OVERLAY SECTION */
 #clinicaWelcome {}
-#clinicaWelcome .span4 {color:#fff;}
-#clinicaWelcome .span4 h2 {text-align:center;color:#fff;font-weight:100;}
+#clinicaWelcome .span4 {color:#fff;text-align:center;}
+#clinicaWelcome .span4 a {color:inherit;}
+#clinicaWelcome .span4 h2 {text-align:center;color:#fff;font-weight:100;text-shadow:0 1px #111;}
 #clinicaWelcome .span4 img {margin:0 auto;position:relative;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-moz-box-shadow:0 0 13px rgba(0,0,0,.6);-webkit-box-shadow:0 0 13px rgba(0,0,0,.6);box-shadow:0 0 13px rgba(0,0,0,.6);}
 
+div#homeBody {color:#514131;}
 
 /* ABSTRACT "paintbrush" AREAS */
 div.abstract {padding:70px;margin:0 auto;font-family: 'Enriqueta', serif;font-size:1.6em;text-align:center;line-height:1.4em;text-shadow:0 1px rgba(255,255,255,.7);background-size:90% 90%;background-position:50% 50%;background-repeat: no-repeat;}
@@ -47,9 +49,6 @@ div.abstract {padding:70px;margin:0 auto;font-family: 'Enriqueta', serif;font-si
 	div.abstract.orange {color:#71471e;background-image: url('../images/abstracts/orange.png');}
 	div.abstract.blue {color:#005073;background-image: url('../images/abstracts/blue_tagline.png');}
 
-div.homeBody {color:#514131;}
-div.homeBody h3, div.homeBody h4, div.homeBody h5 {font-family: 'Enriqueta', serif;color:#71471e;text-shadow:0 1px rgba(255,255,255,.7);}
-
 div.section {border-top:1px solid #aca085;background:url('../images/textures/bedge_grunge.png');}
 	div.section.fabric {background:url('../images/textures/fabric_of_squares_gray.png');}
 	div.section.subtle-grunge {background:url('../images/textures/subtle_grunge.png');}
@@ -57,8 +56,11 @@ div.section {border-top:1px solid #aca085;background:url('../images/textures/bed
 	div.section.straws {background:url('../images/textures/straws.png');}
 	div.section.cardboard {background:url('../images/textures/cardboard_flat.png');}
 	div.section.paper {background:url('../images/textures/natural_paper.png');}
-div.section div.inner {padding:20px 0;background:transparent url('../images/upper_shadow.png') no-repeat 50% -11px;}
+div.section div.inner {padding:40px 0;background:transparent url('../images/upper_shadow.png') no-repeat 50% -11px;}
 
+#scrollTopTrigger {display:none;color:#fff;text-align:center;position:fixed;top:0;right:0;left:0;padding:8px;background:rgba(0,77,111,.5);z-index:98;-moz-box-shadow:0 0 5px rgba(11,11,11,.4);-webkit-box-shadow:0 0 5px rgba(11,11,11,.4);box-shadow:0 0 5px rgba(11,11,11,.4);}
+#scrollTopTrigger i {position:relative;top:2px;left:3px;}
+#scrollTopTrigger:hover {text-decoration:none;background:rgba(185,91,3,.35);}
 
 /* LANDING PAGES */
 #cPrimary {margin-top:5px;margin-bottom:30px;background:#fff;padding:20px;-webkit-border-radius:7px;-moz-border-radius:7px;border-radius:7px;-moz-box-shadow:0 0 5px rgba(11,11,11,.4);-webkit-box-shadow:0 0 5px rgba(11,11,11,.4);box-shadow:0 0 5px rgba(11,11,11,.4);}

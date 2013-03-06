@@ -1,5 +1,5 @@
 <? defined('C5_EXECUTE') or die("Access Denied."); ?>
 
-<div class="centerize">
+<span class="centerize">
 	<?php echo($controller->getContentAndGenerate()); ?>
-</div>
+</span>

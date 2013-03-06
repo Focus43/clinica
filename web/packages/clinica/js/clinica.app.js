@@ -49,7 +49,9 @@
 				animation: false,
 				selector: '.poptip',
 				trigger: 'hover',
-				placement: 'top'
+				placement: function(){
+					return this.$element.attr('data-placement') || 'top';
+				}
 			}).tooltip({
 				animation: false,
 				selector: '.showtooltip',
@@ -58,6 +60,36 @@
 				container: 'body'
 			});
 			
+			
+			/**
+			 * Smooth page scrolling
+			 */
+			$document.on('click', 'a[href^="#"]', function( _event ){
+				_event.preventDefault();
+				var $target = $( $(this).attr('href') );
+				if( $target.length ){
+					var fromTop = $target.offset().top;
+					$('html,body').stop().animate({scrollTop: fromTop}, 850, 'easeOutExpo');
+				}
+					
+			});
+			
 		}
+		
+		
+		/**
+		 * jQuery Easing Methods
+		 */
+		jQuery.extend( jQuery.easing, {
+			easeInSine: function (x, t, b, c, d) {
+				return -c * Math.cos(t/d * (Math.PI/2)) + c + b;
+			},
+			easeInExpo: function (x, t, b, c, d) {
+				return (t==0) ? b : c * Math.pow(2, 10 * (t/d - 1)) + b;
+			},
+			easeOutExpo: function (x, t, b, c, d) {
+				return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
+			}
+		});
 		
 	});

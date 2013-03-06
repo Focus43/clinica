@@ -6,12 +6,15 @@
 	<div class="span6">
 		<form method="post" action="<?php echo $this->action('process'); ?>">
 			<h3>Donation Form</h3>
-				<div class="well">
+			<div class="well">
+				
+				<?php Loader::packageElement('flash_message', 'clinica', array('flash' => $flash)); ?>
+				
 				<h4>Your Information <small>Must match credit card entered below</small></h4>
-				<div class="controls poptip" title="Email Address" data-content="Your donation receipt will be emailed to this address, and is used for nothing else.">
+				<div class="controls poptip" title="Email Address" data-placement="left" data-content="Your donation receipt will be emailed to this address, and is used for nothing else.">
 					<input class="span12" type="text" placeholder="Email Address" />
 				</div>
-				<div class="poptip" title="Name &amp; Address" data-content="The following information will be used when processing your credit card. Please make sure it matches the card being used.">
+				<div class="poptip" title="Name &amp; Address" data-placement="left" data-content="The following information will be used when processing your credit card. Please make sure it matches the card being used.">
 					<div class="controls controls-row">
 						<?php echo $form->text('first_name', '', array('class'=>'span5','placeholder'=>'First Name')); ?>
 						<?php echo $form->text('middle_init', '', array('class'=>'span2','placeholder'=>'M.I.')); ?>
@@ -30,7 +33,7 @@
 				</div>
 				
 				<h4>Credit Card <small>Card Number, Type, And Expiration Date</small></h4>
-				<div class="controls controls-row poptip" title="Credit Card Details" data-content="All transactions are securely processed immediately, and none of your information is saved.">
+				<div class="controls controls-row poptip" data-placement="left" title="Credit Card Details" data-content="All transactions are securely processed immediately, and none of your information is saved.">
 					<?php echo $form->text('card_number', '', array('class'=>'span5 showtooltip','placeholder'=>'Credit Card #','title'=>'All numeric, no spaces')); ?>
 					<?php echo $form->select('card_type', ClinicaTransaction::$cardTypes, '', array('class'=>'span3')); ?>
 					<?php echo $form->select('exp_month', ClinicaTransaction::expiryMonths(), '', array('class'=>'span2')); ?>
@@ -38,7 +41,7 @@
 				</div>
 				
 				<h4>Donation Amount</h4>
-				<div class="controls controls-row poptip" title="Donation Amount" data-content="On behalf of everyone at Clinica, and all the people we serve - thank you!">
+				<div class="controls controls-row poptip" data-placement="left" title="Donation Amount" data-content="On behalf of everyone at Clinica, and all the people we serve - thank you!">
 					<div class="input-prepend input-append">
 						<span class="add-on">$</span>
 						<?php echo $form->text('amount'); ?>

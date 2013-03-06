@@ -18,6 +18,8 @@
 			// what happened?
 			if( $transaction->result() ){
 				$transaction->saveRecord();
+				$this->flash('Success! Thank you for supporting Clinica.');
+				$this->redirect('/giving');
 			}else{
 				echo 'failed';
 			}

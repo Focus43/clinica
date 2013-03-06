@@ -9,7 +9,8 @@
 
 <!-- Enjoy checking out what's under the hood? We should talk! www.focus-43.com -->
 
-<body data-background="<?php echo $backgroundImage; ?>">
+<body id="pageTopTarget" data-background="<?php echo $backgroundImage; ?>">
+	<a id="scrollTopTrigger" class="serifFont" href="#pageTopTarget">Back To Top <i class="icon-arrow-up icon-white"></i></a>
 	
 	<div id="minHeighter">
 		<?php Loader::packageElement('theme_header', 'clinica'); ?>
@@ -20,7 +21,7 @@
 					<?php $area = new Area('Tag Line'); $area->display($c); ?>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" style="margin-bottom:20px;">
 				<div class="span4">
 					<?php $area2 = new Area('Editable Area 1'); $area2->setCustomTemplate('image', 'templates/align_center.php'); $area2->display($c); ?>
 				</div>
@@ -34,8 +35,8 @@
 		</div>
 	</div>
 	
-	<div class="homeBody">
-		<div class="section">
+	<div id="homeBody">
+		<div class="section paper">
 			<div class="inner">
 				<div class="container">
 					<div class="row">
@@ -51,7 +52,7 @@
 				</div>				
 			</div>
 		</div>
-		<div class="section paper">
+		<div class="section">
 			<div class="inner">
 				<div class="container">
 					<div class="row">
@@ -59,11 +60,6 @@
 							<?php $a = new Area('Main Content 2'); $a->display($c); ?>
 						</div>
 					</div>
-					<!--<div class="row">
-						<div class="abstract orange">
-							<?php $area = new Area('Abstract Text 2'); $area->display($c); ?>
-						</div>
-					</div>-->
 				</div>				
 			</div>
 		</div>
@@ -85,6 +81,27 @@
 		</div>
 	</div>
 	
+	<script type="text/javascript">
+		$(function(){
+			var $_html  = $('html'),
+				$_match = $('#homeBody'),
+				$_trig	= $('#scrollTopTrigger');
+				
+			$(document).on('scroll', {html: $_html, match: $_match, trigger: $_trig}, function( _event ){
+				var _htmlOffset = -(_event.data.html.offset().top);
+				
+				if( _htmlOffset >= _event.data.match.offset().top ){
+					if( !_event.data.trigger.is(':visible') ){
+						_event.data.trigger.slideDown(150, 'easeOutExpo');
+					}
+				}
+				
+				if( _htmlOffset == 0 ){
+					_event.data.trigger.slideUp(150, 'easeInExpo');
+				}
+			})
+		});
+	</script>
     
     <?php Loader::element('footer_required'); // REQUIRED BY C5 // ?>
 </body>
