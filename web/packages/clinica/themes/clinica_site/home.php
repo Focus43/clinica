@@ -15,12 +15,23 @@
 	<div id="minHeighter">
 		<?php Loader::packageElement('theme_header', 'clinica'); ?>
 				
-		<div id="clinicaWelcome" class="container">
-			<div class="row visible-desktop">
-				<div class="abstract heavy blue">
-					<?php $area = new Area('Tag Line'); $area->display($c); ?>
+		<div id="tagLiner" class="serifFont">
+			<div class="container">
+				<div class="row">
+					<div class="span12">
+						<?php $area = new Area('Tag Line'); $area->display($c); ?>
+					</div>
 				</div>
 			</div>
+		</div>
+				
+		<div id="clinicaWelcome" class="container">
+			<!--<div class="row visible-desktop">
+				<div class="abstract heavy blue">
+					<?php// $area = new Area('Tag Line'); $area->display($c); ?>
+				</div>
+			</div>-->
+			
 			<div class="row" style="margin-bottom:20px;">
 				<div class="span4">
 					<?php $area2 = new Area('Editable Area 1'); $area2->setCustomTemplate('image', 'templates/align_center.php'); $area2->display($c); ?>
@@ -80,6 +91,8 @@
 			</div>
 		</div>
 	</div>
+	
+	<?php Loader::packageElement('theme_footer', 'clinica'); ?>
 	
 	<script type="text/javascript">
 		$(function(){
