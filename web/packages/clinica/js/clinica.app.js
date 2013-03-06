@@ -41,6 +41,23 @@
 				$('.backstretch').css({position:'fixed'})
 			}
 			
+			
+			/**
+			 * Popovers and tooltips
+			 */
+			$document.popover({
+				animation: false,
+				selector: '.poptip',
+				trigger: 'hover',
+				placement: 'top'
+			}).tooltip({
+				animation: false,
+				selector: '.showtooltip',
+				trigger: 'hover focus',
+				placement: 'top',
+				container: 'body'
+			});
+			
 		}
 		
 	});

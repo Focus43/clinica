@@ -45,6 +45,21 @@
 		
 		
 		/**
+		 * Same as $view->action(), but forces to return a fully qualified URL prepended
+		 * with https://
+		 * @param string $action
+		 * @param string $task(s)
+		 * @return string
+		 */
+		public function secureAction($action, $task = null){
+			$args = func_get_args();
+			array_unshift($args, Page::getCurrentPage()->getCollectionPath());
+			$path = call_user_func_array(array('View', 'url'), $args);
+			return 'https://' . $_SERVER['HTTP_HOST'] . $path;
+		}
+		
+		
+		/**
 		 * "Memoize" helpers so they're only loaded once.
 		 * @param string $handle Handle of the helper to load
 		 * @param string $pkg Package to get the helper from

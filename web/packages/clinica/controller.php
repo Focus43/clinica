@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.03';
+	    protected $pkgVersion 			= '0.05';
 	
 		
 		/**
@@ -42,7 +42,8 @@
 				'AuthorizeNetTypes'			=> array('library', 'authorize_net_sdk/lib/shared/AuthorizeNetTypes', $this->pkgHandle),
 				'AuthorizeNetXMLResponse' 	=> array('library', 'authorize_net_sdk/lib/shared/AuthorizeNetXMLResponse', $this->pkgHandle),
 				'AuthorizeNetResponse' 		=> array('library', 'authorize_net_sdk/lib/shared/AuthorizeNetResponse', $this->pkgHandle),
-				'AuthorizeNetAIM,AuthorizeNetAIM_Response' => array('library', 'authorize_net_sdk/lib/AuthorizeNetAIM', $this->pkgHandle)
+				'AuthorizeNetAIM,AuthorizeNetAIM_Response' => array('library', 'authorize_net_sdk/lib/AuthorizeNetAIM', $this->pkgHandle),
+				'ClinicaTransaction'		=> array('library', 'transaction', $this->pkgHandle)
 			));
 			
 			// load the SOAP client, if it exists
@@ -195,43 +196,49 @@
 		private function setupSitePages(){
 			$homePage = Page::getByID(1);
 			
-			$aboutPage = $this->pageFactory($homePage, 'About');
-				$this->pageFactory($aboutPage, 'Mission + Vision');
-				$this->pageFactory($aboutPage, 'History');
-				$this->pageFactory($aboutPage, 'Services & Who We Serve');
-				$this->pageFactory($aboutPage, 'Executive Team');
-				$this->pageFactory($aboutPage, 'Board Of Directors');
-				$this->pageFactory($aboutPage, 'Accredidations & Certifications');
-				$this->pageFactory($aboutPage, 'Clinica News, Reports, Press');
-				
-			$innovationsPage = $this->pageFactory($homePage, 'Innovations');
-				$this->pageFactory($innovationsPage, 'PCMH');
-				$this->pageFactory($innovationsPage, 'Group Visits');
-				$this->pageFactory($innovationsPage, 'Our Facilities');
-				$this->pageFactory($innovationsPage, 'Behavioral Health Care');
-				$this->pageFactory($innovationsPage, 'ACC');
-				$this->pageFactory($innovationsPage, 'EHR / CACHIE / iPn');
-				
-			$patientsPage = $this->pageFactory($homePage, 'Patient Information');
+			// setup pages if less than 0.3
+			if( (float) $this->pkgVersion <= 0.03 ){
+				$aboutPage = $this->pageFactory($homePage, 'About');
+					$this->pageFactory($aboutPage, 'Mission + Vision');
+					$this->pageFactory($aboutPage, 'History');
+					$this->pageFactory($aboutPage, 'Services & Who We Serve');
+					$this->pageFactory($aboutPage, 'Executive Team');
+					$this->pageFactory($aboutPage, 'Board Of Directors');
+					$this->pageFactory($aboutPage, 'Accredidations & Certifications');
+					$this->pageFactory($aboutPage, 'Clinica News, Reports, Press');
+					
+				$innovationsPage = $this->pageFactory($homePage, 'Innovations');
+					$this->pageFactory($innovationsPage, 'PCMH');
+					$this->pageFactory($innovationsPage, 'Group Visits');
+					$this->pageFactory($innovationsPage, 'Our Facilities');
+					$this->pageFactory($innovationsPage, 'Behavioral Health Care');
+					$this->pageFactory($innovationsPage, 'ACC');
+					$this->pageFactory($innovationsPage, 'EHR / CACHIE / iPn');
+					
+				$patientsPage = $this->pageFactory($homePage, 'Patient Information');
+					
+				$locationsPage = $this->pageFactory($homePage, 'Locations');
+					$this->pageFactory($locationsPage, 'Federal Heights');
+					$this->pageFactory($locationsPage, 'Lafayette');
+					$this->pageFactory($locationsPage, 'Pocos');
+					$this->pageFactory($locationsPage, 'People\'s');
+					$this->pageFactory($locationsPage, 'Thornton');
+					$this->pageFactory($locationsPage, 'Dental');
+					$this->pageFactory($locationsPage, 'Administration');
+					
+				$contactPage = $this->pageFactory($homePage, 'Contact Us');
+					
+				// same idea as "links" page below
+				$employeesPage = $this->pageFactory($homePage, 'Employees');
+					
+				// have a links page where all (most) outgoing links are stored
+				$linksPage = $this->pageFactory($homePage, 'Links');
+			}
 			
-			$givingPage = $this->pageFactory($homePage, 'Giving');
-				
-			$locationsPage = $this->pageFactory($homePage, 'Locations');
-				$this->pageFactory($locationsPage, 'Federal Heights');
-				$this->pageFactory($locationsPage, 'Lafayette');
-				$this->pageFactory($locationsPage, 'Pocos');
-				$this->pageFactory($locationsPage, 'People\'s');
-				$this->pageFactory($locationsPage, 'Thornton');
-				$this->pageFactory($locationsPage, 'Dental');
-				$this->pageFactory($locationsPage, 'Administration');
-				
-			$contactPage = $this->pageFactory($homePage, 'Contact Us');
-				
-			// same idea as "links" page below
-			$employeesPage = $this->pageFactory($homePage, 'Employees');
-				
-			// have a links page where all (most) outgoing links are stored
-			$linksPage = $this->pageFactory($homePage, 'Links');
+			
+			// setup single pages
+			SinglePage::add('/giving', $this->packageObject());
+			SinglePage::add('/bill_pay', $this->packageObject());
 			
 			return $this;
 		}
