@@ -9,7 +9,7 @@
 
 <!-- Enjoy checking out what's under the hood? We should talk! www.focus-43.com -->
 
-<body id="pageTopTarget" data-background="<?php echo $backgroundImage; ?>">
+<body id="pageTopTarget" class="clinicaPage" data-background="<?php echo $backgroundImage; ?>">
 	<a id="scrollTopTrigger" class="serifFont" href="#pageTopTarget">Back To Top <i class="icon-arrow-up icon-white"></i></a>
 	
 	<div id="minHeighter">

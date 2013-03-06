@@ -9,7 +9,7 @@
 
 <!-- Enjoy checking out what's under the hood? We should talk! www.focus-43.com -->
 
-<body class="default">
+<body class="clinicaPage fullWidth">
 	<?php Loader::packageElement('theme_header', 'clinica'); ?>
 	
 	<div class="container">

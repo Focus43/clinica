@@ -1,14 +1,14 @@
 html, body {height:100% !important;min-height:100% !important;/*overflow:hidden;*/}
 
-body.default {background:url('../images/textures/natural_paper.png');}
+body.default, body.clinicaPage {background:url('../images/textures/natural_paper.png');}
 
-h1, h2, h3, h4, h5 {font-family: 'Enriqueta', serif;color:#71471e;font-weight:700;text-shadow:0 1px rgba(255,255,255,.7);}
-h1 {color:#005073;margin-left:25px;margin-top:0;}
+body.clinicaPage h1, h2, h3, h4, h5 {font-family: 'Enriqueta', serif;color:#71471e;font-weight:700;text-shadow:0 1px rgba(255,255,255,.7);}
+body.clinicaPage h1 {color:#005073;margin-left:25px;margin-top:0;}
 
 /* GLOBALLY REUSED */
-a {cursor:pointer;}
-span.centerize {display:block;text-align:center;}
-.serifFont {font-family: 'Enriqueta', serif;font-weight:400;}
+body.clinicaPage a {cursor:pointer;}
+body.clinicaPage span.centerize {display:block;text-align:center;}
+body.clinicaPage .serifFont {font-family: 'Enriqueta', serif;font-weight:400;}
 
 #minHeighter {min-height:100% !important;}
 
@@ -37,6 +37,7 @@ span.centerize {display:block;text-align:center;}
 #clinicaWelcome {}
 #clinicaWelcome .span4 {color:#fff;text-align:center;}
 #clinicaWelcome .span4 a {color:inherit;}
+#clinicaWelcome .span4 a:hover {text-decoration:none;}
 #clinicaWelcome .span4 h2 {text-align:center;color:#fff;font-weight:100;text-shadow:0 1px #111;}
 #clinicaWelcome .span4 img {margin:0 auto;position:relative;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-moz-box-shadow:0 0 13px rgba(0,0,0,.6);-webkit-box-shadow:0 0 13px rgba(0,0,0,.6);box-shadow:0 0 13px rgba(0,0,0,.6);}
 
