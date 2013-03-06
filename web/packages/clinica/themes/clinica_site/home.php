@@ -56,11 +56,11 @@
 							<?php $a = new Area('Main Content 2'); $a->display($c); ?>
 						</div>
 					</div>
-					<div class="row">
+					<!--<div class="row">
 						<div class="abstract orange">
 							<?php $area = new Area('Abstract Text 2'); $area->display($c); ?>
 						</div>
-					</div>
+					</div>-->
 				</div>				
 			</div>
 		</div>
