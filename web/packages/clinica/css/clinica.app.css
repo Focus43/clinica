@@ -2,9 +2,11 @@ html, body {height:100% !important;min-height:100% !important;/*overflow:hidden;
 
 body.default, body.clinicaPage {background:url('../images/textures/natural_paper.png');}
 
-body.clinicaPage h1, h2, h3, h4, h5 {font-family: 'Enriqueta', serif;color:#71471e;font-weight:700;text-shadow:0 1px rgba(255,255,255,.7);}
+body.clinicaPage h1, h2, h3, h4, h5 {font-family: 'Enriqueta', serif;color:#b95b03;font-weight:700;text-shadow:0 1px rgba(255,255,255,.7);}
 body.clinicaPage h1 {color:#005073;margin-left:25px;margin-top:0;}
+body.clinicaPage h2 {color:#b95b03;}
 body.clinicaPage h3 {color:#005073;}
+body.clinicaPage h4 {color:#454545;}
 
 /* GLOBALLY REUSED */
 body.clinicaPage a {cursor:pointer;}
