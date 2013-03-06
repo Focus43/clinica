@@ -4,6 +4,7 @@ body.default, body.clinicaPage {background:url('../images/textures/natural_paper
 
 body.clinicaPage h1, h2, h3, h4, h5 {font-family: 'Enriqueta', serif;color:#71471e;font-weight:700;text-shadow:0 1px rgba(255,255,255,.7);}
 body.clinicaPage h1 {color:#005073;margin-left:25px;margin-top:0;}
+body.clinicaPage h3 {color:#005073;}
 
 /* GLOBALLY REUSED */
 body.clinicaPage a {cursor:pointer;}
