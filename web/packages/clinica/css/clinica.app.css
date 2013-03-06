@@ -49,6 +49,7 @@ div.abstract {padding:70px;margin:0 auto;font-family: 'Enriqueta', serif;font-si
 	div.abstract.heavy {font-weight:700;}
 	div.abstract.orange {color:#71471e;background-image: url('../images/abstracts/orange.png');}
 	div.abstract.blue {color:#005073;background-image: url('../images/abstracts/blue_tagline.png');}
+	div.abstract.light-blue {color:#005073;background-image: url('../images/abstracts/light_blue.png');}
 
 div.section {border-top:1px solid #aca085;background:url('../images/textures/bedge_grunge.png');}
 	div.section.fabric {background:url('../images/textures/fabric_of_squares_gray.png');}

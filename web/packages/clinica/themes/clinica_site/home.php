@@ -72,7 +72,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="abstract orange">
+						<div class="abstract light-blue">
 							<?php $area = new Area('Abstract Text 3'); $area->display($c); ?>
 						</div>
 					</div>
