@@ -38,6 +38,7 @@
 						img	= $el.attr('data-background');
 					if( img.length ){ $el.backstretch( img ); }
 				});
+				$('.backstretch').css({position:'fixed'})
 			}
 			
 		}
