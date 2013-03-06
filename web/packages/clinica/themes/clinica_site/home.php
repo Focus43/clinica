@@ -2,9 +2,12 @@
 <html lang="<?php echo LANGUAGE; ?>">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href='http://fonts.googleapis.com/css?family=Enriqueta:400,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Enriqueta:400,700' rel='stylesheet' type='text/css' />
     <?php Loader::element('header_required'); // REQUIRED BY C5 // ?>
+    <?php Loader::packageElement('modernizr', 'clinica'); ?>
 </head>
+
+<!-- Enjoy checking out what's under the hood? We should talk! www.focus-43.com -->
 
 <body data-background="<?php echo $backgroundImage; ?>">
 	

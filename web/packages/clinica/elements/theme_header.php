@@ -3,7 +3,9 @@
 		<div class="span12">
 			<div id="flexHeader">
 				<div class="main clearfix">
-					<img src="<?php echo CLINICA_IMAGES_URL; ?>logo_header.png" alt="Clinica Family Health Services Logo" />
+					<a href="<?php echo $this->url(''); ?>">
+						<img src="<?php echo CLINICA_IMAGES_URL; ?>logo_header.png" alt="Clinica Family Health Services Logo" />
+					</a>
 					
 					<!-- responsive "show on tablets/phones" -->
 					<a id="responsiveTrigger" class="btn pull-right hidden-desktop" data-toggle="collapse" data-target=".nav-collapse">
@@ -16,7 +18,7 @@
 							$bt->controller->displayPages 				= 'top';
 							$bt->controller->displaySubPages 			= 'none';
 							$bt->controller->displaySubPageLevels 		= 'enough';
-							$bt->render('templates/header_navigation');
+							$bt->render('templates/clinica_header');
 						?>
 					</div>
 				</div>

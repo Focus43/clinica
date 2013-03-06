@@ -32,18 +32,7 @@
 					
 					<div class="container-fluid" style="padding:0;">
 						<div class="row-fluid">
-							<div class="span3">
-								<?php
-									$bt = BlockType::getByHandle('autonav');
-									$bt->controller->orderBy 					= 'display_asc';
-									$bt->controller->displayPages 				= 'second_level';
-									$bt->controller->displaySubPages 			= 'none';
-									$bt->controller->displaySubPageLevels 		= 'enough';
-									$bt->render('templates/clinica_sidebar');
-								?>
-								<?php $a = new Area('Sidebar Content'); $a->display($c); ?>
-							</div>
-							<div class="span9">
+							<div class="span12">
 								<?php $a = new Area('Main Content'); $a->display($c); ?>
 							</div>
 						</div>

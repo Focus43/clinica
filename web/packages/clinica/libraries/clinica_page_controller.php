@@ -30,9 +30,10 @@
 			$this->addHeaderItem( '<meta id="clinicaToolsDir" value="'.CLINICA_TOOLS_URL.'" />' );
 			$this->addHeaderItem( $this->getHelper('html')->css('bootstrap.min.css', self::PACKAGE_HANDLE) );
 			$this->addHeaderItem( $this->getHelper('html')->css('clinica.app.css', self::PACKAGE_HANDLE) );
+			$this->addHeaderItem( $this->getHelper('html')->javascript('libs/modernizr.min.js', self::PACKAGE_HANDLE) );
 			
 			// footer stuff (usually javascript)
-			$this->addFooterItem( $this->getHelper('html')->javascript('bootstrap.min.js', self::PACKAGE_HANDLE) );
+			$this->addFooterItem( $this->getHelper('html')->javascript('libs/bootstrap.min.js', self::PACKAGE_HANDLE) );
 			$this->addFooterItem( $this->getHelper('html')->javascript('clinica.app.js', self::PACKAGE_HANDLE) );
 
 			// message flash

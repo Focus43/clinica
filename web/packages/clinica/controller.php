@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.02';
+	    protected $pkgVersion 			= '0.03';
 	
 		
 		/**
@@ -179,6 +179,10 @@
 
 			if( !is_object($this->pageType('default')) ){
 	            CollectionType::add(array('ctHandle' => 'default', 'ctName' => 'Default'), $this->packageObject());
+	        }
+			
+			if( !is_object($this->pageType('full_width')) ){
+	            CollectionType::add(array('ctHandle' => 'full_width', 'ctName' => 'Full Width'), $this->packageObject());
 	        }
 
 			return $this;
