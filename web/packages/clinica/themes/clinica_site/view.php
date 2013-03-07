@@ -1,3 +1,21 @@
+<?php
+if( !($this->controller instanceof ClinicaPageController) ){
+	$htmlHelper = Loader::helper('html');
+	// header and CSS items
+	$this->addHeaderItem( '<meta id="clinicaToolsDir" value="'.CLINICA_TOOLS_URL.'" />' );
+	$this->addHeaderItem( $htmlHelper->css('bootstrap.min.css', 'clinica') );
+	$this->addHeaderItem( $htmlHelper->css('clinica.app.css', 'clinica') );
+	$this->addHeaderItem( $htmlHelper->javascript('libs/modernizr.min.js', 'clinica') );
+	
+	// ie8 stylesheet
+	$ie8 = "<!--[if lt IE 9]>\n" . $htmlHelper->css('ie8.css', 'clinica') . "\n<![endif]-->";
+	$this->addHeaderItem( $ie8 );
+	
+	// footer stuff (usually javascript)
+	$this->addFooterItem( $htmlHelper->javascript('libs/bootstrap.min.js', 'clinica') );
+	$this->addFooterItem( $htmlHelper->javascript('clinica.app.js', 'clinica') );
+}
+?>
 <!DOCTYPE HTML>
 <html lang="<?php echo LANGUAGE; ?>">
 <head>
