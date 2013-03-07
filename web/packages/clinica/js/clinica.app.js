@@ -74,6 +74,30 @@
 					
 			});
 			
+			
+			/**
+			 * Scroll-to-top spy (homepage only right now)
+			 */
+			var $_html  = $('html'),
+				$_match = $('#homeBody'),
+				$_trig	= $('#scrollTopTrigger');
+				
+			if( $_trig.length ){
+				$document.on('scroll', {html: $_html, match: $_match, trigger: $_trig}, function( _event ){
+					var _htmlOffset = -(_event.data.html.offset().top);
+					
+					if( _htmlOffset >= _event.data.match.offset().top ){
+						if( !_event.data.trigger.is(':visible') ){
+							_event.data.trigger.slideDown(150, 'easeOutExpo');
+						}
+					}
+					
+					if( _htmlOffset == 0 ){
+						_event.data.trigger.slideUp(150, 'easeInExpo');
+					}
+				});
+			}
+
 		}
 		
 		

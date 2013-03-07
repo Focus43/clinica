@@ -2,3 +2,6 @@
 	ul#headerNavigation {font-weight:700;}
 	ul#headerNavigation li {margin-left:3em;}
 }
+
+#flexHeader div.sub {background:transparent url('../images/opaque_orange.png');}
+#tagLiner {background:transparent url('../images/opaque_yellow.png');}

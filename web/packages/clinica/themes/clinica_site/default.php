@@ -53,6 +53,7 @@
 		</div>
 	</div>
 	
+	<?php Loader::packageElement('theme_footer', 'clinica'); ?>
     
     <?php Loader::element('footer_required'); // REQUIRED BY C5 // ?>
 </body>
