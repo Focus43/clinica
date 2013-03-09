@@ -29,7 +29,7 @@
 		 */
 	    public function on_start(){
 	        define('CLINICA_TOOLS_URL', BASE_URL . REL_DIR_FILES_TOOLS_PACKAGES . '/' . $this->pkgHandle . '/');
-			define('CLINICA_IMAGES_URL', BASE_URL . DIR_REL . '/packages/' . $this->pkgHandle . '/images/');
+			define('CLINICA_IMAGES_URL', '/packages/' . $this->pkgHandle . '/images/');
 			
 			// autoload classes
 			Loader::registerAutoload(array(

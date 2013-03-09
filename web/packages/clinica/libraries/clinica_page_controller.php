@@ -5,6 +5,8 @@
 		const PACKAGE_HANDLE	= 'clinica',
 			  FLASH_TYPE_OK		= 'success',
 			  FLASH_TYPE_ERROR	= 'error';
+			  
+		protected $requireHttps = false;
 		
 		
 		/**
@@ -26,6 +28,20 @@
 		 * @return void
 		 */
 		public function on_start(){
+			// @NOTE: Currently doesn't work b/c of full page caching
+			// redirect to non-https url?
+			/*if( !$this->requireHttps && (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on')) && !(User::isLoggedIn()) ){
+				if( !($_SERVER['REQUEST_METHOD'] == 'POST') ){
+					$nonHttps = str_replace('https', 'http', BASE_URL . Page::getCurrentPage()->getCollectionPath());
+					header("Location: " . $nonHttps);
+				}
+			}*/
+			
+			// force https
+			if( $this->requireHttps && !( isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on') ) ){
+				header("Location: " . str_replace('http', 'https', BASE_URL . Page::getCurrentPage()->getCollectionPath()));
+			}
+			
 			// header and CSS items
 			$this->addHeaderItem( '<meta id="clinicaToolsDir" value="'.CLINICA_TOOLS_URL.'" />' );
 			$this->addHeaderItem( $this->getHelper('html')->css('bootstrap.min.css', self::PACKAGE_HANDLE) );
