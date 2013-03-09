@@ -52,7 +52,7 @@ body.clinicaPage .serifFont {font-family: 'Enriqueta', serif;font-weight:400;}
 
 /* FOOTER AREA */
 div#pushFooter {height:195px;} /* NEEDED FOR IE8 STICKY FOOTER */
-div#cFooter {height:155px;font-size:13px;color:#e1e1e1;position:relative;border-top:3px solid #db9d25;background:url('../images/blue_wood_01.jpg');}
+div#cFooter {height:155px;font-size:13px;color:#e1e1e1;position:relative;border-top:3px solid #db9d25;background:url('../images/blue_wood.jpg');}
 div#cFooter div.content {padding-top:10px;}
 div#cFooter div.content h4 {color:#2F96B4;text-shadow:none;}
 div#cFooter div.content ul li {padding-bottom:2px;}
