@@ -1,5 +1,5 @@
 <div id="cFooter">
-	<div class="container">
+	<div class="container content">
 		<div class="row">
 			<div class="span8">
 				<div class="container-fluid">
@@ -9,7 +9,6 @@
 								<li><h4>Visiting Clinica</h4></li>
 								<li><a>Link 1</a></li>
 								<li><a>Link 2 Here</a></li>
-								<li><a>And Another Link </a></li>
 							</ul>
 						</div>
 						<div class="span4">
@@ -17,7 +16,6 @@
 								<li><h4>Get Involved</h4></li>
 								<li><a>Volunteer With Clinica</a></li>
 								<li><a>Donations</a></li>
-								<li><a>Community Events</a></li>
 							</ul>
 						</div>
 						<div class="span4">
@@ -25,7 +23,6 @@
 								<li><h4>Something Else</h4></li>
 								<li><a>Link 1</a></li>
 								<li><a>Link 2 Here</a></li>
-								<li><a>And Another Link </a></li>
 							</ul>
 						</div>
 					</div>
@@ -36,7 +33,6 @@
 					<li><h4 style="color:#b95b03;">Contact Us</h4></li>
 					<li>1345 Plaza Court North, 1A, Lafayette, CO 80026</li>
 					<li>Patient Services: (303) 123-4567</li>
-					<li>Administration: (303) 123-4567</li>
 				</ul>
 			</div>
 		</div>

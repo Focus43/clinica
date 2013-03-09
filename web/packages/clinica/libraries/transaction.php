@@ -62,6 +62,11 @@
 		}
 		
 		
+		public function responseMessageText(){
+			return $this->response->response_reason_text;
+		}
+		
+		
 		/**
 		 * Log the transaction, according to its type (eg. donation, bill_payment). Tests
 		 * for if null to make sure the record is only saved once.

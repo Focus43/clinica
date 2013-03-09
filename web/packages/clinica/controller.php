@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.06';
+	    protected $pkgVersion 			= '0.09';
 	
 		
 		/**
@@ -239,6 +239,11 @@
 			// setup single pages
 			SinglePage::add('/giving', $this->packageObject());
 			SinglePage::add('/bill_pay', $this->packageObject());
+			SinglePage::add('/dashboard/clinica', $this->packageObject());
+			$transactions = SinglePage::add('/dashboard/clinica/transactions', $this->packageObject());
+			if( is_object($transactions) ){
+				$transactions->setAttribute('icon_dashboard', 'icon-search');
+			}
 			
 			return $this;
 		}

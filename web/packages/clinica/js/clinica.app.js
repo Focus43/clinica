@@ -38,7 +38,15 @@
 						img	= $el.attr('data-background');
 					if( img.length ){ $el.backstretch( img ); }
 				});
-				$('.backstretch').css({position:'fixed'})
+				//$('.backstretch').css({position:'fixed'})
+			}
+			
+			
+			/**
+			 * Ajaxify forms
+			 */
+			if( $.fn.ajaxifyForm ){
+				$('form[data-method="ajax"]').ajaxifyForm();
 			}
 			
 			
@@ -78,7 +86,7 @@
 			/**
 			 * Scroll-to-top spy (homepage only right now)
 			 */
-			var $_html  = $('html'),
+			/*var $_html  = $('html'),
 				$_match = $('#homeBody'),
 				$_trig	= $('#scrollTopTrigger');
 				
@@ -96,7 +104,7 @@
 						_event.data.trigger.slideUp(150, 'easeInExpo');
 					}
 				});
-			}
+			}*/
 
 		}
 		

@@ -22,19 +22,22 @@
 		
 		// assemble the response message html; depends on bootstrap's .alert classes
 		function responseOutput( _respData ){
-            console.log(_respData)
-			var alertClass = _respData.code == 1 ? 'alert-success' : 'alert-error';
-	            $output    = $('<div class="message alert info '+alertClass+'"><a class="close" data-dismiss="alert">×</a><ul></ul></div>');
-	            
-	        $('ul', $output).append(function(){
-	            var list = '';
-	            $.each( _respData.messages, function(idx, msg){
-	                list += '<li>'+msg+'</li>';
-	            });
-	            return list;
-	        });
-	        
-	        return $output;
+			if( typeof(_respData != 'undefined') ){
+				var alertClass = _respData.code == 1 ? 'alert-success' : 'alert-error';
+		            $output    = $('<div class="message alert info '+alertClass+'"><a class="close" data-dismiss="alert">×</a><ul class="unstyled"></ul></div>');
+		            
+		        $('ul', $output).append(function(){
+		            var list = '';
+		            if( _respData.messages ){
+		            	$.each( (_respData.messages || ['']), function(idx, msg){
+			                list += '<li>'+msg+'</li>';
+			            });
+		            }
+		            return list;
+		        });
+		        
+		        return $output;
+			}
 		}
 		
 		

@@ -6,8 +6,8 @@
 		
 		
 		public function on_start(){
-			parent::on_start();
 			$this->addFooterItem( $this->getHelper('html')->javascript('libs/ajaxify.form.js', self::PACKAGE_HANDLE) );
+			parent::on_start();
 		}
 		
 		
@@ -28,15 +28,37 @@
 			// run the transaction
 			$transaction = new ClinicaTransaction( $_POST, ClinicaTransaction::TYPE_DONATION );
 			
-			// what happened?
+			// should exit after this
 			if( $transaction->result() ){
 				$transaction->saveRecord();
-				$this->flash('Success! Thank you for supporting Clinica.');
-				$this->redirect('/giving');
-			}else{
-				$this->flash('Transaction failed.', self::FLASH_TYPE_ERROR);
-				$this->redirect('/giving');
+				$this->respond(true, 'Success! Thank you for supporting Clinica.');
+				return;
 			}
+			
+			// if we get here, it failed
+			$this->respond(false, $transaction->responseMessageText());
+		}
+		
+		
+		protected function respond( $okOrFail, $message ){
+			$accept = explode( ',', $_SERVER['HTTP_ACCEPT'] );
+			$accept = array_map('trim', $accept);
+			
+			
+			// send back a JSON response
+			if( in_array($accept[0], array('application/json', 'text/javascript')) || $_SERVER['X_REQUESTED_WITH'] == 'XMLHttpRequest'){
+				header('Content-Type: application/json');
+				echo json_encode( (object) array(
+					'code'		=> (int) $okOrFail,
+					'messages'	=> array($message)
+				));
+				exit;
+			}
+
+			// somehow a plain old html browser request got through, redirect it
+			$this->flash( $message, ((bool)$okOrFail === true ? self::FLASH_TYPE_OK : self::FLASH_TYPE_ERROR) );
+			$this->redirect('/giving');
+			
 		}
 		
 	}
