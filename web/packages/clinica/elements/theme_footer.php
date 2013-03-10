@@ -30,7 +30,7 @@
 			</div>
 			<div class="span4">
 				<ul class="unstyled">
-					<li><h4 style="color:#b95b03;">Contact Us</h4></li>
+					<li><h4>Contact Us</h4></li>
 					<li>1345 Plaza Court North, 1A, Lafayette, CO 80026</li>
 					<li>Patient Services: (303) 123-4567</li>
 				</ul>

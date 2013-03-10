@@ -14,7 +14,7 @@ body.clinicaPage h5 {font-family: 'Enriqueta', serif;color:#b95b03;font-weight:7
 	body.clinicaPage h4 {color:#454545;}
 /* RANDOM STUFF */
 body.clinicaPage a {cursor:pointer;}
-body.clinicaPage span.centerize {display:block;text-align:center;}
+body.clinicaPage .centerize {display:block;text-align:center;}
 body.clinicaPage .serifFont {font-family: 'Enriqueta', serif;font-weight:400;}
 /* FOR STICKY FOOTER, AND HOMEPAGE POSITIONING */
 #minHeighter {position:relative;min-height:100%;height:auto !important;height:100%;margin:0 auto -158px;}
@@ -54,9 +54,9 @@ body.clinicaPage .serifFont {font-family: 'Enriqueta', serif;font-weight:400;}
 div#pushFooter {height:195px;} /* NEEDED FOR IE8 STICKY FOOTER */
 div#cFooter {height:155px;font-size:13px;color:#e1e1e1;position:relative;border-top:3px solid #db9d25;background:url('../images/blue_wood.jpg');}
 div#cFooter div.content {padding-top:10px;}
-div#cFooter div.content h4 {color:#2F96B4;text-shadow:none;}
+div#cFooter div.content h4 {color:#b5b5b5;text-shadow:0 1px rgba(0,0,0,.8);}
 div#cFooter div.content ul li {padding-bottom:2px;}
-div#cFooter div.content ul li a {color:#e1e1e1;display:block;}
+div#cFooter div.content ul li a {color:#d5d5d5;display:block;}
 div#cFooter div.legaleze {color:#969696;background:#2a2a2a;border-top:1px solid #444;font-size:11px;padding:10px 0;position:absolute;bottom:0;left:0;right:0;}
 div#cFooter div.legaleze a {color:#969696;}
 
