@@ -4,3 +4,5 @@
 		<?php echo $flash['msg']; ?>
 	</div>
 <?php endif; ?>
+<!-- target if generated via ajax -->
+<div class="ajax-flash-target"></div>

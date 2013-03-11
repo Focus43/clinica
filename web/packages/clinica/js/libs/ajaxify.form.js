@@ -75,10 +75,12 @@
 				dataType: _config.expectBack,
 				success: function( _respData ){
 					
+					var $flashTarget = $('.ajax-flash-target', $form) || $form;
+					
 					// show the response message? uses automatic output template in showResponse()
 					if( _config.showFeedback && _config.expectBack == 'json' ){
 						$output = responseOutput(_respData);
-						$form.prepend( $output );
+						$flashTarget.prepend( $output );
 						
 						// remove the feedback automatically after a set time?
 						if( _config.hideFeedbackAfter >= 1 ){

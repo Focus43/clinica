@@ -24,7 +24,9 @@
 						<h3 style="color:inherit;text-shadow:inherit;">Clinica Family Health Services</h3>
 						<p>Clinica's mission is to provide quality affordable health care to underserved individuals and families. Clinica is a non-profit organization, having provided affordable health care
 							since 1972.</p>
-						<p class="centerize" style="margin-top:1.4em;"><a class="btn btn-large btn-info">Learn More About Clinica</a></p>
+						<p class="centerize" style="margin-top:1.4em;">
+							<a class="btn btn-large btn-info" href="<?php echo $this->url('/about'); ?>">Learn More About Clinica</a>
+						</p>
 					</div>
 				</div>
 			</div>
