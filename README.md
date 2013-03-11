@@ -1,4 +1,4 @@
-# Concrete5 CMS, v5.6.1 (Pagodabox Quickstart) #
+# Concrete5 CMS, v5.6.1 (Clinica.org) #
 
 Release of Concrete5 (latest) for Pagodabox, with a couple extra free add-ons.
 
@@ -14,8 +14,7 @@ Check out the Boxfile to see the basic install settings. Features:
 
 ## Usage ##
 
-Visit https://pagodabox.com/cafe/jonohartman/concrete-5-6-1. The one-click install will clone
-this repository and perform all setup.
+Please visit http://11robot.com/ for instructions on installing Concrete5 and how to develop locally.
 
 ## Installing Locally ##
 
