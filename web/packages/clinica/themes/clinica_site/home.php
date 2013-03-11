@@ -20,10 +20,10 @@
 			<div class="row">
 				<div class="span12 clearfix">
 					<div id="homeContent">
-						<?php// $area2 = new Area('Editable Area 1'); $area2->setCustomTemplate('image', 'templates/align_center.php'); $area2->display($c); ?>
-						<h3 style="color:inherit;text-shadow:inherit;">Clinica Family Health Services</h3>
+						<?php $area1 = new Area('Editable Area 1'); $area1->setCustomTemplate('image', 'templates/align_center.php'); $area1->display($c); ?>
+						<!--<h3>Clinica Family Health Services</h3>
 						<p>Clinica's mission is to provide quality affordable health care to underserved individuals and families. Clinica is a non-profit organization, having provided affordable health care
-							since 1972.</p>
+							since 1972.</p>-->
 						<p class="centerize" style="margin-top:1.4em;">
 							<a class="btn btn-large btn-info" href="<?php echo $this->url('/about'); ?>">Learn More About Clinica</a>
 						</p>
@@ -32,27 +32,13 @@
 			</div>
 		</div>
 		
-		<!--<div id="clinicaWelcome" class="container">			
-			<div class="row">
-				<div class="span4">
-					<?php $area2 = new Area('Editable Area 1'); $area2->setCustomTemplate('image', 'templates/align_center.php'); $area2->display($c); ?>
-				</div>
-				<div class="span4">
-					<?php $area3 = new Area('Editable Area 2'); $area3->setCustomTemplate('image', 'templates/align_center.php'); $area3->display($c); ?>
-				</div>
-				<div class="span4" style="margin-bottom:130px;">
-					<?php $area4 = new Area('Editable Area 3'); $area4->setCustomTemplate('image', 'templates/align_center.php'); $area4->display($c); ?>
-				</div>
-			</div>
-		</div>-->
-		
 		<div style="position:absolute;left:0;bottom:0;right:0;">
 			<div style="position:relative;">
 				<div id="tagLiner" class="serifFont">
 					<div class="container">
 						<div class="row">
 							<div class="span12" style="color:#222;text-shadow:0 1px rgba(255,255,255,.5);">
-								<?php $area = new Area('Tag Line'); $area->display($c); ?>
+								<?php $area2 = new Area('Tag Line'); $area2->setBlockLimit(1); $area2->display($c); ?>
 							</div>
 						</div>
 					</div>

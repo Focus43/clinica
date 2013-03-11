@@ -43,12 +43,7 @@ body.clinicaPage .serifFont {font-family: 'Enriqueta', serif;font-weight:400;}
 /* CLINICA HOMEPAGE; BIG IMAGE OVERLAY SECTION */
 #bgContainer {position:absolute;left:0;top:0;right:0;bottom:155px;}
 #homeContent {float:right;max-width:32%;position:relative;background:rgba(0,0,0,.45);z-index:2;padding:12px;border-radius:6px; color:#f1f1f1;text-shadow:0 1px #111;}
-#clinicaWelcome {}
-#clinicaWelcome .span4 {color:#fff;text-align:center;}
-#clinicaWelcome .span4 a {color:inherit;}
-#clinicaWelcome .span4 a:hover {text-decoration:none;}
-#clinicaWelcome .span4 h2 {font-size:2em;text-align:center;color:#fff;font-weight:100;text-shadow:0 1px #111;}
-#clinicaWelcome .span4 img {z-index:2;margin:0 auto;position:relative;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-moz-box-shadow:0 0 13px rgba(0,0,0,.6);-webkit-box-shadow:0 0 13px rgba(0,0,0,.6);box-shadow:0 0 13px rgba(0,0,0,.6);}
+#homeContent h3 {color:inherit;text-shadow:inherit;}
 #tagLiner {padding:15px 0 5px;color:#fff;text-align:center;background:rgba(216,155,36, 0.57);text-shadow:0 1px #111;}
 
 /* FOOTER AREA */
