@@ -26,7 +26,7 @@
 		}
 		
 		// application profiler. disable this for live sites! (just comment out)
-		define('ENABLE_APPLICATION_PROFILER', true);
+		//define('ENABLE_APPLICATION_PROFILER', true);
 		
 		// AUTHORIZE.NET STUFF (CLINICA SPECIFIC)
 		define('AUTHORIZENET_API_LOGIN_ID', '');
