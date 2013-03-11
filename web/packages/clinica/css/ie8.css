@@ -5,3 +5,5 @@
 
 #flexHeader div.sub {background:transparent url('../images/opaque_orange.png');}
 #tagLiner {background:transparent url('../images/opaque_yellow.png');}
+#homeContent {background:transparent url('../images/opaque_black.png');}
+#homeContent h3 {font-size:1.6em;}

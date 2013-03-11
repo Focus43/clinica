@@ -42,6 +42,7 @@ body.clinicaPage .serifFont {font-family: 'Enriqueta', serif;font-weight:400;}
 
 /* CLINICA HOMEPAGE; BIG IMAGE OVERLAY SECTION */
 #bgContainer {position:absolute;left:0;top:0;right:0;bottom:155px;}
+#homeContent {float:right;max-width:32%;position:relative;background:rgba(0,0,0,.45);z-index:2;padding:12px;border-radius:6px; color:#f1f1f1;text-shadow:0 1px #111;}
 #clinicaWelcome {}
 #clinicaWelcome .span4 {color:#fff;text-align:center;}
 #clinicaWelcome .span4 a {color:inherit;}

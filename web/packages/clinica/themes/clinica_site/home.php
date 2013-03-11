@@ -19,7 +19,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="span12 clearfix">
-					<div style="float:right;max-width:32%;position:relative;background:rgba(0,0,0,.45);z-index:2;padding:12px;border-radius:6px; color:#f1f1f1;text-shadow:0 1px #111;">
+					<div id="homeContent">
 						<?php// $area2 = new Area('Editable Area 1'); $area2->setCustomTemplate('image', 'templates/align_center.php'); $area2->display($c); ?>
 						<h3 style="color:inherit;text-shadow:inherit;">Clinica Family Health Services</h3>
 						<p>Clinica's mission is to provide quality affordable health care to underserved individuals and families. Clinica is a non-profit organization, having provided affordable health care
