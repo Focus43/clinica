@@ -6,7 +6,7 @@
 		
 		
 		protected $autoSortColumns 	= array('createdUTC', 'modifiedUTC', 'typeHandle', 'firstName', 'lastName', 'email', 'city', 'state', 'amount', 'cardLastFour', 'cardExpMonth', 'cardExpYear'),
-				  $itemsPerPage		= 20,
+				  $itemsPerPage		= 10,
 				  $attributeClass	= 'ClinicaTransactionAttributeKey',
 				  $attributeFilters = array();
 		
@@ -28,7 +28,7 @@
 		public function filterByKeywords($keywords) {
             $db = Loader::db();
             $this->searchKeywords = $db->quote($keywords);
-            $qkeywords = $db->quote('%' . $keywords);
+            $qkeywords = $db->quote('%' . $keywords . '%');
             $keys = ClinicaTransactionAttributeKey::getSearchableIndexedList();
             $attribsStr = '';
             foreach ($keys as $ak) {
@@ -47,6 +47,16 @@
             $name = Loader::db()->quote('%'.$name.'%');
             $this->filter(false, "ct.firstName LIKE $name OR ct.lastName LIKE $name");
         }
+		
+		
+		public function filterByTypeHandle( $typeHandle ){
+			$this->filter('ct.typeHandle', $typeHandle, '=');
+		}
+		
+		
+		public function filterByAmount( $amount ){
+			$this->filter('ct.amount', $amount, '=');
+		}
 		
 		
 		public function get( $itemsToGet = 100, $offset = 0 ){
@@ -78,5 +88,50 @@
             $queryStr = "SELECT ct.id FROM ClinicaTransaction ct";
             $this->setQuery( $queryStr );
         }
+		
+	}
+
+
+	class ClinicaTransactionDefaultColumnSet extends DatabaseItemListColumnSet {
+		
+		protected $attributeClass = 'ClinicaTransactionAttributeKey';
+		
+		
+		public function __construct(){
+			$this->addColumn(new DatabaseItemListColumn('createdUTC', t('Added'), 'getDateCreated'));
+			$this->addColumn(new DatabaseItemListColumn('typeHandle', t('Type'), array('ClinicaTransactionDefaultColumnSet', 'getTypeHandle')));
+			$this->addColumn(new DatabaseItemListColumn('firstName', t('First Name'), 'getFirstName'));
+			$this->addColumn(new DatabaseItemListColumn('lastName', t('Last Name'), 'getLastName'));
+			$this->addColumn(new DatabaseItemListColumn('cardLastFour', t('Card Last 4'), array('ClinicaTransactionDefaultColumnSet', 'getCardLastFour')));
+			$this->addColumn(new DatabaseItemListColumn('amount', t('Amount ($)'), array('ClinicaTransactionDefaultColumnSet', 'getAmount')));
+			$added = $this->getColumnByKey('createdUTC');
+			$this->setDefaultSortColumn($added, 'desc');
+		}
+		
+		
+		public function getCardLastFour( ClinicaTransaction $transaction ){
+			return "**** {$transaction->getCardLastFour()}";
+		}
+		
+		
+		public function getTypeHandle( ClinicaTransaction $transaction ){
+			return ucwords(str_replace(array('_', '-', '/'), ' ', $transaction->getTypeHandle()));
+		}
+		
+		
+		public function getAmount( ClinicaTransaction $transaction ){
+			return number_format( $transaction->getAmount(), 2 );
+		}
+		
+	}
+	
+	
+	class ClinicaTransactionColumnSet extends DatabaseItemListColumnSet {
+		
+		protected $attributeClass = 'ClinicaTransactionAttributeKey';
+		
+		public function getCurrent(){
+			return new ClinicaTransactionDefaultColumnSet;
+		}
 		
 	}
