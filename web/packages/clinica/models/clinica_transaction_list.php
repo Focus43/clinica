@@ -35,7 +35,7 @@
                     $cnt = $ak->getController();
                     $attribsStr.=' OR ' . $cnt->searchKeywords($keywords);
             }
-            $this->filter(false, "(ct.firstName LIKE $qkeywords OR ct.lastName LIKE $qkeywords OR ct.phone LIKE $qkeywords OR ct.email LIKE $qkeywords OR ct.address1 LIKE $qkeywords OR ct.city LIKE $qkeywords OR $qkeywords {$attribsStr})");
+            $this->filter(false, "(ct.firstName LIKE $qkeywords OR ct.lastName LIKE $qkeywords OR ct.phone LIKE $qkeywords OR ct.email LIKE $qkeywords OR ct.address1 LIKE $qkeywords OR ct.city LIKE $qkeywords OR ct.zip LIKE $qkeywords OR $qkeywords {$attribsStr})");
 		}
 		
 		
@@ -98,8 +98,8 @@
 		
 		
 		public function __construct(){
-			$this->addColumn(new DatabaseItemListColumn('createdUTC', t('Added'), 'getDateCreated'));
 			$this->addColumn(new DatabaseItemListColumn('typeHandle', t('Type'), array('ClinicaTransactionDefaultColumnSet', 'getTypeHandle')));
+			$this->addColumn(new DatabaseItemListColumn('createdUTC', t('Added'), array('ClinicaTransactionDefaultColumnSet', 'getDateCreated')));
 			$this->addColumn(new DatabaseItemListColumn('firstName', t('First Name'), 'getFirstName'));
 			$this->addColumn(new DatabaseItemListColumn('lastName', t('Last Name'), 'getLastName'));
 			$this->addColumn(new DatabaseItemListColumn('cardLastFour', t('Card Last 4'), array('ClinicaTransactionDefaultColumnSet', 'getCardLastFour')));
@@ -109,13 +109,20 @@
 		}
 		
 		
+		public function getDateCreated( ClinicaTransaction $transaction ){
+			return date('M d, Y', strtotime($transaction->getDateCreated()));
+		}
+		
+		
 		public function getCardLastFour( ClinicaTransaction $transaction ){
 			return "**** {$transaction->getCardLastFour()}";
 		}
 		
 		
 		public function getTypeHandle( ClinicaTransaction $transaction ){
-			return ucwords(str_replace(array('_', '-', '/'), ' ', $transaction->getTypeHandle()));
+			$url  = View::url('dashboard/clinica/transactions/', $transaction->getTransactionID());
+			$name = ucwords(str_replace(array('_', '-', '/'), ' ', $transaction->getTypeHandle()));
+			return '<a href="'.$url.'">'.$name.'</a>';
 		}
 		
 		

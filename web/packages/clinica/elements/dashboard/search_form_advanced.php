@@ -2,16 +2,44 @@
 	$formHelper 		= Loader::helper('form');
 	$dateHelper			= Loader::helper('form/date_time');
 	$transactionHelper 	= Loader::helper('clinica_transaction', 'clinica');
+	$searchFields		= array(
+		'' 				=> '** ' . t('Fields'),
+		'added_between'	=> t('Added Between'),
+		'card_exp' 		=> t('Card Expiration'),
+		'address'		=> t('Address Includes')
+	);
 ?>
 
-	<div id="clinicaSearchBaseElements" style="display:none;">
+	<style type="text/css">
+		table#ccm-transactions-search-advanced-fields thead tr th {padding:8px;}
+	</style>
+
+	<div id="ccm-transactions-search-field-base-elements" style="display:none;">
+		<span class="ccm-search-option ccm-search-option-type-date_time"  search-field="added_between">
+		<?php echo $formHelper->text('date_from', array('style' => 'width: 86px'))?>
+		<?php echo t('to')?>
+		<?php echo $formHelper->text('date_to', array('style' => 'width: 86px'))?>
+		</span>
 		
+		<span class="ccm-search-option" search-field="card_exp">
+			<?php echo $formHelper->select('cardExpMonth', ClinicaTransactionHelper::expiryMonths(), '', array('class' => 'span2')); ?>
+			<?php echo $formHelper->select('cardExpYear', ClinicaTransactionHelper::expiryYears(), '', array('class' => 'span2')); ?>
+		</span>
+		
+		<span class="ccm-search-option" search-field="address">
+			<?php echo $formHelper->text('address1', '', array('class' => 'span2', 'placeholder' => 'Address')); ?>
+			<?php echo $formHelper->text('city', '', array('class' => 'span2', 'placeholder' => 'City')); ?>
+			<?php echo $formHelper->select('address1', array(), '', array('class' => 'span2')); ?>
+			<?php echo $formHelper->text('zip', '', array('class' => 'span1', 'placeholder' => 'Zip')); ?>
+		</span>
 	</div>
 
 	<form method="get" id="ccm-transactions-advanced-search" action="<?php echo CLINICA_TOOLS_URL . 'dashboard/transactions/search_results'; ?>">
 		
+		<!-- show more search options trigger -->
 		<a href="javascript:void(0)" onclick="ccm_paneToggleOptions(this)" class="ccm-icon-option-closed"><?php echo t('Advanced Search')?></a>
 		
+		<!-- default search options -->
 		<div class="ccm-pane-options-permanent-search">
 			<div class="span2">
 				<?php echo $formHelper->text('keywords', $_REQUEST['keywords'], array('class' => 'input-block-level', 'placeholder' => t('Keyword Search'))); ?>
@@ -25,14 +53,36 @@
 			<div class="span2">
 				<?php echo $formHelper->select('numResults', array('10' => 'Show 10 (Default)', '25' => 'Show 25', '50' => 'Show 50', '100' => 'Show 100', '500' => 'Show 500'), $_REQUEST['numResults'], array('class' => 'input-block-level')); ?>
 			</div>
-			<!--<div class="span4">
-				<span style="display:inline-block;position:relative;top:2px;padding-right:2px;">Date Range</span>
-				<?php echo $dateHelper->date('dateRangeStart'); ?>
-				<?php echo $dateHelper->date('dateRangeEnd'); ?>
-			</div>-->
 			<div class="span1">
 				<button type="submit" class="btn info pull-right">Search</button>
+				<img src="<?php echo ASSETS_URL_IMAGES?>/loader_intelligent_search.gif" width="43" height="11" class="ccm-search-loading" id="ccm-locales-search-loading" />
 			</div>
+		</div>
+		
+		<!-- extra search options -->
+		<div class="clearfix ccm-pane-options-content">
+			<table id="ccm-transactions-search-advanced-fields" class="table zebra-striped ccm-search-advanced-fields" style="margin-top:1em;">
+				<thead>
+					<tr>
+						<th colspan="2" width="100%"><?php echo t('Additional Filters')?></th>
+						<th style="text-align: right; white-space: nowrap"><a href="javascript:void(0)" id="ccm-transactions-search-add-option" class="ccm-advanced-search-add-field"><span class="ccm-menu-icon ccm-icon-view"></span><?php echo t('Add')?></a></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr id="ccm-search-field-base">
+						<td><?php echo $formHelper->select('searchField', $searchFields);?></td>
+						<td width="100%">
+							<input type="hidden" value="" class="ccm-transactions-selected-field" name="selectedSearchField[]" />
+							<div class="ccm-selected-field-content">
+								<?php echo t('Select Search Field.')?>				
+							</div>
+						</td>
+						<td>
+							<a href="javascript:void(0)" class="ccm-search-remove-option"><img src="<?php echo ASSETS_URL_IMAGES?>/icons/remove_minus.png" width="16" height="16" /></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 		
 	</form>

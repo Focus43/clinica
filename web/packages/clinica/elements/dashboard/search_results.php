@@ -38,10 +38,11 @@
 			</tbody>
 		</table>
 		
-		<!-- paging and # of results -->
+		<!-- # of results -->
 		<?php $listObject->displaySummary(); ?>
 	</div>
 	
+	<!-- paging stuff -->
 	<div class="ccm-pane-footer">
 		<?php $listObject->displayPagingV2((CLINICA_TOOLS_URL . 'dashboard/transactions/search_results'), array()) ?>
 	</div>
