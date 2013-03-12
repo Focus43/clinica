@@ -9,6 +9,7 @@
 		
 		public function on_start(){
 			$this->addFooterItem( $this->getHelper('html')->javascript('libs/ajaxify.form.js', self::PACKAGE_HANDLE) );
+			$this->set('transactionHelper', Loader::helper('clinica_transaction', 'clinica'));
 			parent::on_start();
 		}
 		
@@ -21,17 +22,16 @@
 		
 		public function process(){
 			// run the transaction
-			$transaction = new ClinicaTransaction( $_POST, ClinicaTransaction::TYPE_DONATION );
+			$transaction = new ClinicaTransactionHandler( $_POST, ClinicaTransaction::TYPE_DONATION );
 			
 			// should exit after this
-			if( $transaction->result() ){
-				$transaction->saveRecord();
+			if( (bool) $transaction->getResponse()->approved ){
 				$this->respond(true, 'Success! Thank you for supporting Clinica.');
 				return;
 			}
 			
 			// if we get here, it failed
-			$this->respond(false, $transaction->responseMessageText());
+			$this->respond(false, $transaction->getResponse()->response_reason_text);
 		}
 		
 		

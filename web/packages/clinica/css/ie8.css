@@ -1,3 +1,5 @@
+body.home #flexHeader div.main {border:1px solid #adaaa1;}
+
 @media (min-width:1200px) {
 	ul#headerNavigation {font-weight:700;}
 	ul#headerNavigation li {margin-left:3em;}

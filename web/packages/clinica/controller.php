@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.09';
+	    protected $pkgVersion 			= '0.22';
 	
 		
 		/**
@@ -37,13 +37,19 @@
 				'ClinicaPageController'		=> array('library', 'clinica_page_controller', $this->pkgHandle),
 				
 				// Authorize.net; use Concrete5's autoloader instead of the require statements in AuthorizeNet.php fake autoloader
-				'AuthorizeNetException' 	=> array('library', 'authorize_net_exception', $this->pkgHandle),
+				'AuthorizeNetException' 	=> array('library', 'authorize_net_sdk/authorize_net_exception', $this->pkgHandle),
 				'AuthorizeNetRequest' 		=> array('library', 'authorize_net_sdk/lib/shared/AuthorizeNetRequest', $this->pkgHandle),
 				'AuthorizeNetTypes'			=> array('library', 'authorize_net_sdk/lib/shared/AuthorizeNetTypes', $this->pkgHandle),
 				'AuthorizeNetXMLResponse' 	=> array('library', 'authorize_net_sdk/lib/shared/AuthorizeNetXMLResponse', $this->pkgHandle),
 				'AuthorizeNetResponse' 		=> array('library', 'authorize_net_sdk/lib/shared/AuthorizeNetResponse', $this->pkgHandle),
 				'AuthorizeNetAIM,AuthorizeNetAIM_Response' => array('library', 'authorize_net_sdk/lib/AuthorizeNetAIM', $this->pkgHandle),
-				'ClinicaTransaction'		=> array('library', 'transaction', $this->pkgHandle)
+				
+				// Clinica transactional stuff (handler, records, attributes, search interface, etc.)
+				'ClinicaBaseObject'			=> array('library', 'clinica_base_object', $this->pkgHandle),
+				'ClinicaTransactionHandler'	=> array('model', 'clinica_transaction_handler', $this->pkgHandle),
+				'ClinicaTransaction'		=> array('model', 'clinica_transaction', $this->pkgHandle),
+				'ClinicaTransactionAttributeKey,ClinicaTransactionAttributeValue' => array('model', 'attribute/categories/clinica_transaction', $this->pkgHandle),
+				'ClinicaTransactionList'	=> array('model', 'clinica_transaction_list', $this->pkgHandle)
 			));
 			
 			// load the SOAP client, if it exists
@@ -59,6 +65,15 @@
 		 */
 	    public function uninstall() {
 	        parent::uninstall();
+			
+			try {
+				$db = Loader::db();
+				$db->Execute("DROP TABLE ClinicaTransaction");
+				$db->Execute("DROP TABLE ClinicaTransactionAttributeValues");
+				$db->Execute("DROP TABLE ClinicaTransactionSearchIndexAttributes");
+			}catch(Exception $e){
+				// fail gracefully
+			}
 	    }
 	    
 		
@@ -85,13 +100,31 @@
 		 * @return void
 		 */
 		private function installAndUpdate(){
-			$this->setupAttributeSets()
+			$this->registerEntityCategories()
+				 ->setupAttributeSets()
 				 ->setupUserGroups()
 				 ->setupUserAttributes()
 				 ->setupCollectionAttributes()
 				 ->setupTheme()
 				 ->setupPageTypes()
 				 ->setupSitePages();
+		}
+		
+		
+		/**
+		 * @return ClinicaPackage
+		 */
+		private function registerEntityCategories(){
+			if( !($this->attributeKeyCategory('clinica_transaction') instanceof AttributeKeyCategory) ){
+				$transactionAkc = AttributeKeyCategory::add('clinica_transaction', AttributeKeyCategory::ASET_ALLOW_MULTIPLE, $this->packageObject());
+				$transactionAkc->associateAttributeKeyType( $this->attributeType('text') );
+				$transactionAkc->associateAttributeKeyType( $this->attributeType('boolean') );
+				$transactionAkc->associateAttributeKeyType( $this->attributeType('number') );
+				$transactionAkc->associateAttributeKeyType( $this->attributeType('textarea') );
+				$transactionAkc->associateAttributeKeyType( $this->attributeType('select') );
+			}
+			
+			return $this;
 		}
 		
 		
@@ -239,11 +272,14 @@
 			// setup single pages
 			SinglePage::add('/giving', $this->packageObject());
 			SinglePage::add('/bill_pay', $this->packageObject());
-			SinglePage::add('/dashboard/clinica', $this->packageObject());
-			$transactions = SinglePage::add('/dashboard/clinica/transactions', $this->packageObject());
+			
+			// dashboard pages
+			SinglePage::add('/dashboard/clinica/', $this->packageObject());
+			$transactions = SinglePage::add('/dashboard/clinica/transactions/', $this->packageObject());
 			if( is_object($transactions) ){
 				$transactions->setAttribute('icon_dashboard', 'icon-search');
 			}
+			SinglePage::add('/dashboard/clinica/transactions/search/', $this->packageObject());
 			
 			return $this;
 		}
@@ -309,10 +345,10 @@
 		 * @return CollectionType
 		 */
 		private function pageType( $handle ){
-			if( $this->{ '_pt_' . $handle } === null ){
-				$this->{ '_pt_' . $handle } = CollectionType::getByHandle( $handle );
+			if( $this->{ "pt_{$handle}" } === null ){
+				$this->{ "pt_{$handle}" } = CollectionType::getByHandle( $handle );
 			}
-			return $this->{ '_pt_' . $handle };
+			return $this->{ "pt_{$handle}" };
 		}
 		
 		
@@ -320,10 +356,22 @@
 		 * @return AttributeType
 		 */
 		private function attributeType( $atHandle ){
-			if( $this->{'at_' . $atHandle} === null ){
-				$this->{'at_' . $atHandle} = AttributeType::getByHandle( $atHandle );
+			if( $this->{ "at_{$atHandle}" } === null ){
+				$this->{ "at_{$atHandle}" } = AttributeType::getByHandle( $atHandle );
 			}
-			return $this->{'at_' . $atHandle};
+			return $this->{ "at_{$atHandle}" };
+		}
+		
+		
+		/**
+		 * Get an attribute key category object (eg: an entity category) by its handle
+		 * @return AttributeKeyCategory
+		 */
+		private function attributeKeyCategory( $handle ){
+			if( !($this->{ "akc_{$handle}" } instanceof AttributeKeyCategory) ){
+				$this->{ "akc_{$handle}" } = AttributeKeyCategory::getByHandle( $handle );
+			}
+			return $this->{ "akc_{$handle}" };
 		}
 		
 		
