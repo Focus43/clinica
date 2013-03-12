@@ -59,6 +59,46 @@
 		}
 		
 		
+		public function filterByDateCreated($date, $comparison = '='){
+			$this->filter('ct.createdUTC', $date, $comparison);
+		}
+		
+		
+		public function filterByBetweenDates( $dateStart, $dateEnd ){
+			$this->filter(false, "(ct.createdUTC between '$dateStart' and '$dateEnd')");
+		}
+		
+		
+		public function filterByCreditCardMonth( $numericMonth, $comparison = '=' ){
+			$this->filter('ct.cardExpMonth', (int) $numericMonth, $comparison);
+		}
+		
+		
+		public function filterByCreditCardYear( $numericYear, $comparison = '=' ){
+			$this->filter('ct.cardExpYear', (int) $numericYear, $comparison);
+		}
+		
+		
+		public function filterByAddress1( $address1 ){
+			$this->filter('ct.address1', "{$address1}%", 'LIKE');
+		}
+		
+		
+		public function filterByCity( $city ){
+			$this->filter('ct.city', "{$city}%", 'LIKE');
+		}
+		
+		
+		public function filterByState( $state ){
+			$this->filter('ct.state', $state, '=');
+		}
+		
+		
+		public function filterByZip( $zip ){
+			$this->filter('ct.zip', "{$zip}%", 'LIKE');
+		}
+		
+		
 		public function get( $itemsToGet = 100, $offset = 0 ){
             $transactions = array();
             $this->createQuery();

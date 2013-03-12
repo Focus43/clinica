@@ -1,6 +1,7 @@
 <?php
 	$formHelper 		= Loader::helper('form');
 	$dateHelper			= Loader::helper('form/date_time');
+	$listHelper			= Loader::helper('lists/states_provinces');
 	$transactionHelper 	= Loader::helper('clinica_transaction', 'clinica');
 	$searchFields		= array(
 		'' 				=> '** ' . t('Fields'),
@@ -16,9 +17,9 @@
 
 	<div id="ccm-transactions-search-field-base-elements" style="display:none;">
 		<span class="ccm-search-option ccm-search-option-type-date_time"  search-field="added_between">
-		<?php echo $formHelper->text('date_from', array('style' => 'width: 86px'))?>
+		<?php echo $formHelper->text('dateRangeStart', array('style' => 'width: 86px'))?>
 		<?php echo t('to')?>
-		<?php echo $formHelper->text('date_to', array('style' => 'width: 86px'))?>
+		<?php echo $formHelper->text('dateRangeEnd', array('style' => 'width: 86px'))?>
 		</span>
 		
 		<span class="ccm-search-option" search-field="card_exp">
@@ -29,7 +30,7 @@
 		<span class="ccm-search-option" search-field="address">
 			<?php echo $formHelper->text('address1', '', array('class' => 'span2', 'placeholder' => 'Address')); ?>
 			<?php echo $formHelper->text('city', '', array('class' => 'span2', 'placeholder' => 'City')); ?>
-			<?php echo $formHelper->select('address1', array(), '', array('class' => 'span2')); ?>
+			<?php echo $formHelper->select('state', (array('' => 'State') + $listHelper->getStates()), '', array('class' => 'span2')); ?>
 			<?php echo $formHelper->text('zip', '', array('class' => 'span1', 'placeholder' => 'Zip')); ?>
 		</span>
 	</div>
@@ -42,16 +43,16 @@
 		<!-- default search options -->
 		<div class="ccm-pane-options-permanent-search">
 			<div class="span2">
-				<?php echo $formHelper->text('keywords', $_REQUEST['keywords'], array('class' => 'input-block-level', 'placeholder' => t('Keyword Search'))); ?>
+				<?php echo $formHelper->text('keywords', $_REQUEST['keywords'], array('class' => 'input-block-level helpTooltip', 'placeholder' => t('Keyword Search'), 'title' => 'First/Last name, phone, email, address, city, or zip')); ?>
 			</div>
 			<div class="span1">
-				<?php echo $formHelper->text('amount', $_REQUEST['amount'], array('class' => 'input-block-level', 'placeholder' => t('Amount'))); ?>
+				<?php echo $formHelper->text('amount', $_REQUEST['amount'], array('class' => 'input-block-level helpTooltip', 'placeholder' => t('Amount'), 'title' => 'Search by donation amount')); ?>
 			</div>
 			<div class="span2">
-				<?php echo $formHelper->select('typeHandle', ClinicaTransactionHelper::typeHandles(), $_REQUEST['typeHandle'], array('class' => 'input-block-level')); ?>
+				<?php echo $formHelper->select('typeHandle', ClinicaTransactionHelper::typeHandles(), $_REQUEST['typeHandle'], array('class' => 'input-block-level helpTooltip', 'title' => 'Search by transaction type')); ?>
 			</div>
 			<div class="span2">
-				<?php echo $formHelper->select('numResults', array('10' => 'Show 10 (Default)', '25' => 'Show 25', '50' => 'Show 50', '100' => 'Show 100', '500' => 'Show 500'), $_REQUEST['numResults'], array('class' => 'input-block-level')); ?>
+				<?php echo $formHelper->select('numResults', array('10' => 'Show 10 (Default)', '25' => 'Show 25', '50' => 'Show 50', '100' => 'Show 100', '500' => 'Show 500'), $_REQUEST['numResults'], array('class' => 'input-block-level helpTooltip', 'title' => '# of results to display')); ?>
 			</div>
 			<div class="span1">
 				<button type="submit" class="btn info pull-right">Search</button>

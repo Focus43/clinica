@@ -4,12 +4,13 @@
 	<div class="ccm-pane-body">
 		<div class="clearfix">
 			<div class="pull-left">
-				<select class="span3">
+				<select id="actionMenu" class="span3" disabled="disabled">
 					<option value="">** With Selected</option>
+					<option value="delete">Delete Transaction(s)</option>
 				</select>
 			</div>
 			<div class="pull-right">
-				<a class="btn success">Manually Add Transaction</a>
+				<a class="btn success" href="<?php echo View::url('dashboard/clinica/transactions/add'); ?>" target="_blank">Manually Add Transaction</a>
 			</div>
 		</div>
 		
@@ -29,7 +30,7 @@
 			<tbody>
 				<?php foreach($listResults AS $transaction): ?>
 					<tr>
-						<td><input type="checkbox" /></td>
+						<td><input type="checkbox" name="transactionID[]" value="<?php echo $transaction->getTransactionID(); ?>" /></td>
 						<?php foreach($columns->getColumns() AS $colObj){ ?>
 							<td><?php echo $colObj->getColumnValue($transaction); ?></td>
 						<?php } ?>

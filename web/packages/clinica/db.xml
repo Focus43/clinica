@@ -57,6 +57,9 @@
         	<notnull />
         </field>
         
+        <!-- message -->
+        <field name="message" type="X" />
+        
         <!-- indices -->
         <index name="created">
 	    	<col>created</col>

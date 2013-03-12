@@ -12,7 +12,7 @@
 				
 				<h4>Your Information <small>Must match credit card entered below</small></h4>
 				<div class="controls poptip" title="Email Address" data-placement="left" data-content="Your donation receipt will be emailed to this address, and is used for nothing else.">
-					<input class="span12" type="text" placeholder="Email Address" />
+					<?php echo $form->text('email', '', array('class' => 'input-block-level', 'placeholder' => 'Email address')) ?>
 				</div>
 				<div class="poptip" title="Name &amp; Address" data-placement="left" data-content="The following information will be used when processing your credit card. Please make sure it matches the card being used.">
 					<div class="controls controls-row">
@@ -28,9 +28,7 @@
 					</div>
 					<div class="controls controls-row">
 						<?php echo $form->text('city', '', array('class'=>'span7','placeholder'=>'City')); ?>
-						<select name="state" class="span3">
-							<option>State</option>
-						</select>
+						<?php echo $form->select('state', (array('' => 'State') + Loader::helper('lists/states_provinces')->getStates()), '', array('class' => 'span3')); ?>
 						<?php echo $form->text('zip', '', array('class'=>'span2','placeholder'=>'Zip')); ?>
 					</div>
 				</div>
@@ -54,9 +52,16 @@
 				
 				<h4>Other</h4>
 				<div class="controls">
-					<select class="span12">
+					<?php
+						$attrs = ClinicaTransactionAttributeKey::getList();
+						foreach($attrs AS $akObj){ /** @var $akObj Concrete5_Model_AttributeKey */
+							echo $akObj->render('form');
+						}
+					?>
+					
+					<!--<select class="span12">
 						<option>Please Use This Donation For</option>
-					</select>
+					</select>-->
 					<?php echo $form->textarea('message', '', array('class'=>'input-block-level','placeholder'=>'Message')); ?>
 				</div>
 				

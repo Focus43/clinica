@@ -5,7 +5,7 @@
 		
 		const TYPE_DONATION 	= 'donation',
 			  TYPE_BILL_PAY 	= 'bill_payment',
-			  TYPE_MISS_GREEK	= 'miss_greek';
+			  TYPE_MISS_GREEK	= 'miss_greek_donation';
 		
 		
 		protected $attrCategoryHandle = 'clinica_transaction';
@@ -91,6 +91,9 @@
 		/** @return int Get credit card expiration year */
 		public function getCardExpYear(){ return $this->cardExpYear; }
 		
+		/** @return int Get the associated message */
+		public function getMessage(){ return $this->message; }
+		
 		
 		protected function persistable(){
 			$fields = array(
@@ -98,35 +101,37 @@
 				'phone', 'email', 'address1', 'address2', 'city', 'state', 'zip', 'amount',
 				'authNetResponseCode', 'authNetAuthorizationCode', 'authNetAvsResponse',
 				'authNetTransactionID', 'authNetMethod', 'authNetTransactionType', 'authNetMd5Hash',
-				'cardLastFour', 'cardExpMonth', 'cardExpYear'
+				'cardLastFour', 'cardExpMonth', 'cardExpYear', 'message'
 			);
 			return $fields;
 		}
 		
 		
 		public function save(){
-			if( $this->validateOnSave() ){
-				// record already exists, do an update
-				if( $this->id >= 1 ){
-					
-				}else{
-					$db 		= Loader::db();
-					$fields		= $this->persistable();
-					$fieldNames = "createdUTC, modifiedUTC, " . implode(',', $fields);
-					$fieldCount	= implode(',', array_fill(0, count($fields), '?'));
-					$values		= array();
-					foreach($fields AS $property){
-						$values[] = $this->{$property};
-					}
-					$db->Execute("INSERT INTO ClinicaTransaction ($fieldNames) VALUES (UTC_TIMESTAMP(), UTC_TIMESTAMP(), $fieldCount)", $values);
-					$this->isNew = true;
-					$this->id	 = $db->Insert_ID();
+			// record already exists, do an update
+			if( $this->id >= 1 ){
+				
+			}else{
+				$db 		= Loader::db();
+				$fields		= $this->persistable();
+				$fieldNames = "createdUTC, modifiedUTC, " . implode(',', $fields);
+				$fieldCount	= implode(',', array_fill(0, count($fields), '?'));
+				$values		= array();
+				foreach($fields AS $property){
+					$values[] = $this->{$property};
 				}
-				
-				// save attributes
-				
-				return self::getByID( $this->id );
+				$db->Execute("INSERT INTO {$this->tableName} ($fieldNames) VALUES (UTC_TIMESTAMP(), UTC_TIMESTAMP(), $fieldCount)", $values);
+				$this->isNew = true;
+				$this->id	 = $db->Insert_ID();
 			}
+			
+			// save attributes
+			$attrKeys = ClinicaTransactionAttributeKey::getList();
+			foreach($attrKeys AS $akObj){
+				$akObj->saveAttributeForm( $this );
+			}
+			
+			return self::getByID( $this->id );
 		}
 		
 		
@@ -138,13 +143,15 @@
 		}
 		
 		
+		/**
+		 * Delete the record, and any attribute values associated w/ it
+		 * @return void
+		 */
 		public function delete(){
-			
-		}
-		
-		
-		protected function validateOnSave(){
-			return true;
+			$db = Loader::db();
+			$db->Execute("DELETE FROM ClinicaTransactionAttributeValues WHERE transactionID = ?", array($this->id));
+			$db->Execute("DELETE FROM ClinicaTransactionSearchIndexAttributes WHERE transactionID = ?", array($this->id));
+			$db->Execute("DELETE FROM {$this->tableName} WHERE id = ?", array($this->id));
 		}
 		
 		

@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.22';
+	    protected $pkgVersion 			= '0.25';
 	
 		
 		/**
@@ -105,6 +105,7 @@
 				 ->setupUserGroups()
 				 ->setupUserAttributes()
 				 ->setupCollectionAttributes()
+				 ->setupTransactionAttributes()
 				 ->setupTheme()
 				 ->setupPageTypes()
 				 ->setupSitePages();
@@ -134,6 +135,11 @@
 		private function setupAttributeSets(){
 			$this->getOrCreateAttributeSet('user_info', 'user');
 			
+			// transaction attribute sets
+			$this->getOrCreateAttributeSet(ClinicaTransaction::TYPE_DONATION, 'clinica_transaction');
+			$this->getOrCreateAttributeSet(ClinicaTransaction::TYPE_BILL_PAY, 'clinica_transaction');
+			$this->getOrCreateAttributeSet(ClinicaTransaction::TYPE_MISS_GREEK, 'clinica_transaction');
+			
 			return $this;
 		}
 		
@@ -144,6 +150,27 @@
 		private function setupUserGroups(){
 			if( !(Group::getByName('Clinica Employees') instanceof Group ) ){
 				Group::add('Clinica Employees', 'Employees at Clinica; limited access to certain areas');
+			}
+			
+			return $this;
+		}
+		
+		
+		/**
+		 * @return ClinicaPackage
+		 */
+		private function setupTransactionAttributes(){
+			// donation attributes
+			if( !(is_object(ClinicaTransactionAttributeKey::getByHandle('use_donation_for'))) ){
+				$useDonationForAk = ClinicaTransactionAttributeKey::add($this->attributeType('select'), array(
+					'akHandle'						=> 'use_donation_for',
+					'akName'						=> 'Please Use Donation For',
+					'akIsSearchable'				=> true, 
+					'akIsSearchableIndexed'			=> true, 
+					'akSelectOptionDisplayOrder'	=> 'alpha_asc'
+				), $this->packageObject())->setAttributeSet( $this->getOrCreateAttributeSet(ClinicaTransaction::TYPE_DONATION) );
+				SelectAttributeTypeOption::add($useDonationForAk, 'General Operations', 1);
+				SelectAttributeTypeOption::add($useDonationForAk, 'Reach Out And Read', 1);
 			}
 			
 			return $this;
