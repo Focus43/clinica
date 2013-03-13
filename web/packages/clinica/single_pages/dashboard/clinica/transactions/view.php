@@ -1,3 +1,4 @@
+<?php /** @var $transactionObj ClinicaTransaction */ ?>
 <?php echo Loader::helper('concrete/dashboard')->getDashboardPaneHeaderWrapper(t('Transaction Details'), t('View transaction details.'), false, false ); ?>
 	
 	<div id="ctManager">
@@ -11,16 +12,8 @@
 			</div>
 			<div class="row-fluid">
 				<div class="span12">
-					<p>Message from sender</p>
-					<blockquote>
-						<?php echo $transactionObj->getMessage() != '' ? $transactionObj->getMessage() : '<i>Empty</i>'; ?>
-					</blockquote>
-				</div>
-			</div>
-			<div class="row-fluid">
-				<div class="span12">
 					<h4>Contact Information</h4>
-					<table class="table table-bordered table-condensed trxn-details">
+					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr>
 								<th>Name</th>
@@ -45,7 +38,7 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<h4>Transaction Information (Authorize.Net)</h4>
-					<table class="table table-bordered trxn-details">
+					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr>
 								<th>Auth Code</th>
@@ -66,6 +59,30 @@
 								<td><?php echo $transactionObj->getAuthNetMd5Hash(); ?></td>
 							</tr>
 						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span12">
+					<h4>Extra</h4>
+					<table class="table table-bordered table-condensed">
+						<tr>
+							<td style="white-space:nowrap;width:1%;padding-right:7px;font-weight:bold;">Message</td>
+							<td><?php echo $transactionObj->getMessage(); ?></td>
+						</tr>
+						<?php foreach($attributeKeys AS $akObj): ?>
+							<tr>
+								<td style="white-space:nowrap;width:1%;padding-right:7px;font-weight:bold;"><?php echo $akObj->getAttributeKeyName(); ?></td>
+								<td>
+									<?php
+										$valueObj = $transactionObj->getAttributeValueObject($akObj);
+										if( is_object($valueObj) ){
+											echo $valueObj->getValue('display');
+										}
+									?>
+								</td>
+							</tr>
+						<?php endforeach; ?>
 					</table>
 				</div>
 			</div>

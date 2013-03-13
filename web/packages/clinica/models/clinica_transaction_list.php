@@ -175,6 +175,12 @@
 
 	class ClinicaTransactionAvailableColumnSet extends ClinicaTransactionDefaultColumnSet {
 		public function __construct(){
+			$this->addColumn(new DatabaseItemListColumn('email', t('Email'), 'getEmail'));
+			$this->addColumn(new DatabaseItemListColumn('phone', t('Phone'), 'getPhone'));
+			$this->addColumn(new DatabaseItemListColumn('city', t('City'), 'getCity'));
+			$this->addColumn(new DatabaseItemListColumn('state', t('State'), 'getState'));
+			$this->addColumn(new DatabaseItemListColumn('zip', t('Zip'), 'getZip'));
+			$this->addColumn(new DatabaseItemListColumn('message', t('Message'), 'getMessage'));
 			parent::__construct();
 		}
 	}
