@@ -171,6 +171,13 @@
 		}
 		
 	}
+
+
+	class ClinicaTransactionAvailableColumnSet extends ClinicaTransactionDefaultColumnSet {
+		public function __construct(){
+			parent::__construct();
+		}
+	}
 	
 	
 	class ClinicaTransactionColumnSet extends DatabaseItemListColumnSet {
@@ -178,7 +185,15 @@
 		protected $attributeClass = 'ClinicaTransactionAttributeKey';
 		
 		public function getCurrent(){
-			return new ClinicaTransactionDefaultColumnSet;
+			$userObj = new User();
+			$columns = $userObj->config('CLINICA_TRANSACTION_DEFAULT_COLUMNS');
+			if( $columns != '' ){
+				$columns = @unserialize($columns);
+			}
+			if( !($columns instanceof DatabaseItemListColumnSet) ){
+				$columns = new ClinicaTransactionDefaultColumnSet;
+			}
+			return $columns;
 		}
 		
 	}

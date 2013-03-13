@@ -11,11 +11,7 @@
 	);
 ?>
 
-	<style type="text/css">
-		table#ccm-transactions-search-advanced-fields thead tr th {padding:8px;}
-	</style>
-
-	<div id="ccm-transactions-search-field-base-elements" style="display:none;">
+	<div id="ccm-<?php echo $searchInstance; ?>-search-field-base-elements" style="display:none;">
 		<span class="ccm-search-option ccm-search-option-type-date_time"  search-field="added_between">
 		<?php echo $formHelper->text('dateRangeStart', array('style' => 'width: 86px'))?>
 		<?php echo t('to')?>
@@ -35,7 +31,7 @@
 		</span>
 	</div>
 
-	<form method="get" id="ccm-transactions-advanced-search" action="<?php echo CLINICA_TOOLS_URL . 'dashboard/transactions/search_results'; ?>">
+	<form method="get" id="ccm-<?php echo $searchInstance; ?>-advanced-search" action="<?php echo CLINICA_TOOLS_URL . 'dashboard/transactions/search_results'; ?>">
 		
 		<!-- show more search options trigger -->
 		<a href="javascript:void(0)" onclick="ccm_paneToggleOptions(this)" class="ccm-icon-option-closed"><?php echo t('Advanced Search')?></a>
@@ -62,18 +58,18 @@
 		
 		<!-- extra search options -->
 		<div class="clearfix ccm-pane-options-content">
-			<table id="ccm-transactions-search-advanced-fields" class="table zebra-striped ccm-search-advanced-fields" style="margin-top:1em;">
+			<table id="ccm-<?php echo $searchInstance; ?>-search-advanced-fields" class="table zebra-striped ccm-search-advanced-fields" style="margin-top:1em;">
 				<thead>
 					<tr>
 						<th colspan="2" width="100%"><?php echo t('Additional Filters')?></th>
-						<th style="text-align: right; white-space: nowrap"><a href="javascript:void(0)" id="ccm-transactions-search-add-option" class="ccm-advanced-search-add-field"><span class="ccm-menu-icon ccm-icon-view"></span><?php echo t('Add')?></a></th>
+						<th style="text-align: right; white-space: nowrap"><a href="javascript:void(0)" id="ccm-<?php echo $searchInstance; ?>-search-add-option" class="ccm-advanced-search-add-field"><span class="ccm-menu-icon ccm-icon-view"></span><?php echo t('Add')?></a></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr id="ccm-search-field-base">
 						<td><?php echo $formHelper->select('searchField', $searchFields);?></td>
 						<td width="100%">
-							<input type="hidden" value="" class="ccm-transactions-selected-field" name="selectedSearchField[]" />
+							<input type="hidden" value="" class="ccm-<?php echo $searchInstance; ?>-selected-field" name="selectedSearchField[]" />
 							<div class="ccm-selected-field-content">
 								<?php echo t('Select Search Field.')?>				
 							</div>
@@ -84,6 +80,8 @@
 					</tr>
 				</tbody>
 			</table>
+			<div id="ccm-search-fields-submit">
+				<a href="<?php echo CLINICA_TOOLS_URL; ?>dashboard/transactions/customize_search_columns?searchInstance=<?php echo $searchInstance; ?>" id="ccm-list-view-customize"><span class="ccm-menu-icon ccm-icon-properties"></span><?php echo t('Customize Results')?></a>
+			</div>
 		</div>
-		
 	</form>

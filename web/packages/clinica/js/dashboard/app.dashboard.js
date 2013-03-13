@@ -47,7 +47,7 @@
 				
 				switch( $this.val() ){
 					case 'delete':
-						if( confirm('Delete the selected transactions? This cannot be undone.') ){
+						if( confirm('Delete the selected transactions? This cannot be undone! Deleting a transaction will only delete the record of it, the historical transaction is still in place.') ){
 							$.post( tools + 'dashboard/transactions/delete', data, function(resp){
 								if( resp.code == 1 ){
 									$checkd.parents('tr').fadeOut(150);

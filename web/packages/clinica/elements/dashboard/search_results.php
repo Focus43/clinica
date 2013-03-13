@@ -1,6 +1,6 @@
 <?php $columns = ClinicaTransactionColumnSet::getCurrent(); ?>
 
-<div id="ccm-transactions-search-results">
+<div id="ccm-<?php echo $searchInstance; ?>-search-results">
 	<div class="ccm-pane-body">
 		<div class="clearfix">
 			<div class="pull-left">
