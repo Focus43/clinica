@@ -10,7 +10,8 @@
 <!-- Enjoy checking out what's under the hood? We should talk! www.focus-43.com -->
 
 <body class="clinicaPage home">
-
+	<a id="onlineBillPay" href="<?php echo $this->url('bill_pay'); ?>" title="Online Bill Pay"></a>
+	
 	<div id="minHeighter">
 		<div id="bgContainer" data-background="<?php echo $backgroundImage; ?>"></div>
 		

@@ -28,6 +28,7 @@ if( !($this->controller instanceof ClinicaPageController) ){
 <!-- Enjoy checking out what's under the hood? We should talk! www.focus-43.com -->
 
 <body class="clinicaPage fullWidth">
+	<a id="onlineBillPay" href="<?php echo $this->url('bill_pay'); ?>" title="Online Bill Pay"></a>
 	
 	<div id="minHeighter">
 		<?php Loader::packageElement('theme_header', 'clinica'); ?>
