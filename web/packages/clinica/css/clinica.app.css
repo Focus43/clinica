@@ -16,6 +16,7 @@ body.clinicaPage h5 {font-family: 'Enriqueta', serif;color:#b95b03;font-weight:7
 body.clinicaPage a {cursor:pointer;}
 body.clinicaPage .centerize {display:block;text-align:center;}
 body.clinicaPage .serifFont {font-family: 'Enriqueta', serif;font-weight:400;}
+body.clinicaPage div.message.alert ul {margin:0;}
 /* FOR STICKY FOOTER, AND HOMEPAGE POSITIONING */
 #minHeighter {position:relative;min-height:100%;height:auto !important;height:100%;margin:0 auto -158px;}
 	body.home #minHeighter {margin:0;}

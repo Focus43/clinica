@@ -14,46 +14,44 @@
 		}
 		
 		
-		public function on_before_render(){
-			// never send back the credit card
-			$_POST['card_number'] = false;
-		}
-		
-		
 		public function process(){
+			// first, validate all the form data not checked by auth.net
+			if( !$this->validator()->test() ){
+				$this->formResponder(false, $this->validator()->getError()->getList());
+				return;
+			}
+			
 			// run the transaction
 			$transaction = new ClinicaTransactionHandler( $_POST, ClinicaTransaction::TYPE_DONATION );
 			
 			// should exit after this
 			if( (bool) $transaction->getResponse()->approved ){
-				$this->respond(true, 'Success! Thank you for supporting Clinica.');
+				$this->formResponder(true, 'Success! Thank you for supporting Clinica.');
 				return;
 			}
 			
 			// if we get here, it failed
-			$this->respond(false, $transaction->getResponse()->response_reason_text);
+			$this->formResponder(false, $transaction->getResponse()->response_reason_text);
 		}
 		
 		
-		protected function respond( $okOrFail, $message ){
-			$accept = explode( ',', $_SERVER['HTTP_ACCEPT'] );
-			$accept = array_map('trim', $accept);
-			
-			
-			// send back a JSON response
-			if( in_array($accept[0], array('application/json', 'text/javascript')) || $_SERVER['X_REQUESTED_WITH'] == 'XMLHttpRequest'){
-				header('Content-Type: application/json');
-				echo json_encode( (object) array(
-					'code'		=> (int) $okOrFail,
-					'messages'	=> array($message)
-				));
-				exit;
+		/**
+		 * Setup the validator, but *don't* execute the test() method yet
+		 * @return ValidationFormHelper
+		 */
+		protected function validator(){
+			if( $this->_formValidator === null ){
+				$this->_formValidator = Loader::helper('validation/form');
+				$this->_formValidator->setData( $_POST );
+				$this->_formValidator->addRequiredEmail('email', 'A valid email address is required.');
+				$this->_formValidator->addRequired('firstName', 'Missing required field first name.');
+				$this->_formValidator->addRequired('lastName', 'Missing required field last name.');
+				$this->_formValidator->addRequired('address1', 'Missing required field address 1.');
+				$this->_formValidator->addRequired('city', 'Missing required field city.');
+				$this->_formValidator->addRequired('state', 'Missing required field state.');
+				$this->_formValidator->addRequired('zip', 'Missing required field zip.');
 			}
-
-			// somehow a plain old html browser request got through, redirect it
-			$this->flash( $message, ((bool)$okOrFail === true ? self::FLASH_TYPE_OK : self::FLASH_TYPE_ERROR) );
-			$this->redirect('/giving');
-			
+			return $this->_formValidator;
 		}
 		
 	}

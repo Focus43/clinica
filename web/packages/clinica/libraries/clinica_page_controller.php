@@ -24,6 +24,16 @@
 		
 		
 		/**
+		 * Before a page gets rendered, always make sure that the $_POST card_number
+		 * field is empty. For any page. No matter what.
+		 */
+		public function on_before_render(){
+			// never send back the credit card
+			$_POST['card_number'] = false;
+		}
+		
+		
+		/**
 		 * Add js/css + tools URL meta tag; clear the flash.
 		 * @return void
 		 */
@@ -76,6 +86,34 @@
 			array_unshift($args, Page::getCurrentPage()->getCollectionPath());
 			$path = call_user_func_array(array('View', 'url'), $args);
 			return 'https://' . $_SERVER['HTTP_HOST'] . $path;
+		}
+		
+		
+		/**
+		 * Send back an ajax response if request headers accept json, or handle 
+		 * redirect if just doing regular http
+		 * @param bool $okOrFail
+		 * @param mixed String || Array $message
+		 * @return void
+		 */
+		protected function formResponder( $okOrFail, $message ){
+			$accept = explode( ',', $_SERVER['HTTP_ACCEPT'] );
+			$accept = array_map('trim', $accept);
+			
+			
+			// send back a JSON response
+			if( in_array($accept[0], array('application/json', 'text/javascript')) || $_SERVER['X_REQUESTED_WITH'] == 'XMLHttpRequest'){
+				header('Content-Type: application/json');
+				echo json_encode( (object) array(
+					'code'		=> (int) $okOrFail,
+					'messages'	=> is_array($message) ? $message : array($message)
+				));
+				exit;
+			}
+
+			// somehow a plain old html browser request got through, redirect it
+			$this->flash( $message, ((bool)$okOrFail === true ? self::FLASH_TYPE_OK : self::FLASH_TYPE_ERROR) );
+			$this->redirect( Page::getCurrentPage()->getCollectionPath() );
 		}
 		
 		

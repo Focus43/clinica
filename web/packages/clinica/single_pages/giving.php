@@ -1,45 +1,20 @@
 <div class="row-fluid">
-	<div class="span6">
+	
+	<div class="span5">
 		<h3>Support Clinica!</h3>
-		<p>Your financial support is invaluable.</p>
+		<?php $area = new Area('Giving Page Content'); $area->display($c); ?>
 	</div>
-	<div class="span6">
+	
+	<div class="span7">
 		<form method="post" data-method="ajax" action="<?php echo $this->controller->secureAction('process'); ?>">
 			<h3>Donation Form</h3>
 			<div class="well">
 				
 				<?php Loader::packageElement('flash_message', 'clinica', array('flash' => $flash)); ?>
 				
-				<h4>Your Information <small>Must match credit card entered below</small></h4>
-				<div class="controls poptip" title="Email Address" data-placement="left" data-content="Your donation receipt will be emailed to this address, and is used for nothing else.">
-					<?php echo $form->text('email', '', array('class' => 'input-block-level', 'placeholder' => 'Email address')) ?>
-				</div>
-				<div class="poptip" title="Name &amp; Address" data-placement="left" data-content="The following information will be used when processing your credit card. Please make sure it matches the card being used.">
-					<div class="controls controls-row">
-						<?php echo $form->text('firstName', '', array('class'=>'span5','placeholder'=>'First Name')); ?>
-						<?php echo $form->text('middleInitial', '', array('class'=>'span2','placeholder'=>'M.I.')); ?>
-						<?php echo $form->text('lastName', '', array('class'=>'span5','placeholder'=>'Last Name')); ?>
-					</div>
-					<div class="controls">
-						<?php echo $form->text('address1', '', array('class'=>'span12','placeholder'=>'Address 1')); ?>
-					</div>
-					<div class="controls">
-						<?php echo $form->text('address2', '', array('class'=>'span12','placeholder'=>'Address 2')); ?>
-					</div>
-					<div class="controls controls-row">
-						<?php echo $form->text('city', '', array('class'=>'span7','placeholder'=>'City')); ?>
-						<?php echo $form->select('state', (array('' => 'State') + Loader::helper('lists/states_provinces')->getStates()), '', array('class' => 'span3')); ?>
-						<?php echo $form->text('zip', '', array('class'=>'span2','placeholder'=>'Zip')); ?>
-					</div>
-				</div>
+				<?php Loader::packageElement('payment_form/personal_info', 'clinica', array('form' => $form)); ?>
 				
-				<h4>Credit Card <small>Card Number, Type, And Expiration Date</small></h4>
-				<div class="controls controls-row poptip" data-placement="left" title="Credit Card Details" data-content="All transactions are securely processed immediately, and none of your information is saved.">
-					<?php echo $form->text('card_number', '', array('class'=>'span5 showtooltip','placeholder'=>'Credit Card #','title'=>'All numeric, no spaces')); ?>
-					<?php echo $form->select('card_type', ClinicaTransactionHelper::$cardTypes, '', array('class'=>'span3')); ?>
-					<?php echo $form->select('exp_month', ClinicaTransactionHelper::expiryMonths(), '', array('class'=>'span2')); ?>
-					<?php echo $form->select('exp_year', ClinicaTransactionHelper::expiryYears(), '', array('class'=>'span2')); ?>
-				</div>
+				<?php Loader::packageElement('payment_form/credit_card', 'clinica', array('form' => $form)); ?>
 				
 				<h4>Donation Amount</h4>
 				<div class="controls controls-row poptip" data-placement="left" title="Donation Amount" data-content="On behalf of everyone at Clinica, and all the people we serve - thank you!">
@@ -53,15 +28,12 @@
 				<h4>Other</h4>
 				<div class="controls">
 					<?php
-						$attrs = ClinicaTransactionAttributeKey::getList();
-						foreach($attrs AS $akObj){ /** @var $akObj Concrete5_Model_AttributeKey */
+						$attrs = AttributeSet::getByHandle(ClinicaTransaction::TYPE_DONATION)->getAttributeKeys();
+						foreach($attrs AS $akObj){ /** @var $akObj AttributeKey */
+							echo '<label>'.$akObj->getAttributeKeyName().'</label>';
 							echo $akObj->render('form');
 						}
 					?>
-					
-					<!--<select class="span12">
-						<option>Please Use This Donation For</option>
-					</select>-->
 					<?php echo $form->textarea('message', '', array('class'=>'input-block-level','placeholder'=>'Message')); ?>
 				</div>
 				

@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.25';
+	    protected $pkgVersion 			= '0.26';
 	
 		
 		/**
@@ -171,6 +171,40 @@
 				), $this->packageObject())->setAttributeSet( $this->getOrCreateAttributeSet(ClinicaTransaction::TYPE_DONATION) );
 				SelectAttributeTypeOption::add($useDonationForAk, 'General Operations', 1);
 				SelectAttributeTypeOption::add($useDonationForAk, 'Reach Out And Read', 1);
+			}
+			
+			// bill payment attributes
+			if( !(is_object(ClinicaTransactionAttributeKey::getByHandle('clinica_account_number'))) ){
+				$useDonationForAk = ClinicaTransactionAttributeKey::add($this->attributeType('text'), array(
+					'akHandle'						=> 'clinica_account_number',
+					'akName'						=> 'Clinica Account Number',
+					'akIsSearchable'				=> true, 
+					'akIsSearchableIndexed'			=> true
+				), $this->packageObject())->setAttributeSet( $this->getOrCreateAttributeSet(ClinicaTransaction::TYPE_BILL_PAY) );
+			}
+			if( !(is_object(ClinicaTransactionAttributeKey::getByHandle('patient_first_name'))) ){
+				$useDonationForAk = ClinicaTransactionAttributeKey::add($this->attributeType('text'), array(
+					'akHandle'						=> 'patient_first_name',
+					'akName'						=> 'Patient First Name',
+					'akIsSearchable'				=> true, 
+					'akIsSearchableIndexed'			=> true
+				), $this->packageObject())->setAttributeSet( $this->getOrCreateAttributeSet(ClinicaTransaction::TYPE_BILL_PAY) );
+			}
+			if( !(is_object(ClinicaTransactionAttributeKey::getByHandle('patient_last_name'))) ){
+				$useDonationForAk = ClinicaTransactionAttributeKey::add($this->attributeType('text'), array(
+					'akHandle'						=> 'patient_last_name',
+					'akName'						=> 'Patient Last Name',
+					'akIsSearchable'				=> true, 
+					'akIsSearchableIndexed'			=> true
+				), $this->packageObject())->setAttributeSet( $this->getOrCreateAttributeSet(ClinicaTransaction::TYPE_BILL_PAY) );
+			}
+			if( !(is_object(ClinicaTransactionAttributeKey::getByHandle('patient_birthdate'))) ){
+				$useDonationForAk = ClinicaTransactionAttributeKey::add($this->attributeType('text'), array(
+					'akHandle'						=> 'patient_birthdate',
+					'akName'						=> 'Patient Birth Date',
+					'akIsSearchable'				=> true, 
+					'akIsSearchableIndexed'			=> true
+				), $this->packageObject())->setAttributeSet( $this->getOrCreateAttributeSet(ClinicaTransaction::TYPE_BILL_PAY) );
 			}
 			
 			return $this;

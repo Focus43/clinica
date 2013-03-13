@@ -87,6 +87,14 @@
 				$this->_authNetObj->amount 		= $this->data['amount'];
 				$this->_authNetObj->card_num	= $this->data['card_number'];
 				$this->_authNetObj->exp_date	= "{$this->data['exp_month']}/{$this->data['exp_year']}";
+				$this->_authNetObj->first_name	= $this->data['firstName'];
+				$this->_authNetObj->last_name	= $this->data['lastName'];
+				$this->_authNetObj->address		= $this->data['address1'];
+				$this->_authNetObj->city		= $this->data['city'];
+				$this->_authNetObj->state		= $this->data['state'];
+				$this->_authNetObj->zip			= $this->data['zip'];
+				$this->_authNetObj->phone		= $this->data['phone'];
+				$this->_authNetObj->email		= $this->data['email'];
 			}
 			return $this->_authNetObj;
 		}

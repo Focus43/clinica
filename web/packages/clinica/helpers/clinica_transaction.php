@@ -8,7 +8,8 @@
 		public static $cardTypes = array(
 			''				=> 'Type',
 			'visa' 			=> 'Visa',
-			'mastercard'	=> 'Mastercard'
+			'mastercard'	=> 'Mastercard',
+			'discover'		=> 'Discover'
 		);
 		
 		
