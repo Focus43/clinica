@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.26';
+	    protected $pkgVersion 			= '0.27';
 	
 		
 		/**
@@ -169,8 +169,11 @@
 					'akIsSearchableIndexed'			=> true, 
 					'akSelectOptionDisplayOrder'	=> 'alpha_asc'
 				), $this->packageObject())->setAttributeSet( $this->getOrCreateAttributeSet(ClinicaTransaction::TYPE_DONATION) );
-				SelectAttributeTypeOption::add($useDonationForAk, 'General Operations', 1);
-				SelectAttributeTypeOption::add($useDonationForAk, 'Reach Out And Read', 1);
+				
+				if( $useDonationForAk instanceof AttributeKey ){
+					SelectAttributeTypeOption::add($useDonationForAk, 'General Operations', 1);
+					SelectAttributeTypeOption::add($useDonationForAk, 'Reach Out And Read', 1);
+				}
 			}
 			
 			// bill payment attributes
@@ -182,6 +185,7 @@
 					'akIsSearchableIndexed'			=> true
 				), $this->packageObject())->setAttributeSet( $this->getOrCreateAttributeSet(ClinicaTransaction::TYPE_BILL_PAY) );
 			}
+			
 			if( !(is_object(ClinicaTransactionAttributeKey::getByHandle('patient_first_name'))) ){
 				$useDonationForAk = ClinicaTransactionAttributeKey::add($this->attributeType('text'), array(
 					'akHandle'						=> 'patient_first_name',
@@ -190,6 +194,7 @@
 					'akIsSearchableIndexed'			=> true
 				), $this->packageObject())->setAttributeSet( $this->getOrCreateAttributeSet(ClinicaTransaction::TYPE_BILL_PAY) );
 			}
+			
 			if( !(is_object(ClinicaTransactionAttributeKey::getByHandle('patient_last_name'))) ){
 				$useDonationForAk = ClinicaTransactionAttributeKey::add($this->attributeType('text'), array(
 					'akHandle'						=> 'patient_last_name',
@@ -198,6 +203,7 @@
 					'akIsSearchableIndexed'			=> true
 				), $this->packageObject())->setAttributeSet( $this->getOrCreateAttributeSet(ClinicaTransaction::TYPE_BILL_PAY) );
 			}
+			
 			if( !(is_object(ClinicaTransactionAttributeKey::getByHandle('patient_birthdate'))) ){
 				$useDonationForAk = ClinicaTransactionAttributeKey::add($this->attributeType('text'), array(
 					'akHandle'						=> 'patient_birthdate',
@@ -335,12 +341,12 @@
 			SinglePage::add('/bill_pay', $this->packageObject());
 			
 			// dashboard pages
-			SinglePage::add('/dashboard/clinica/', $this->packageObject());
-			$transactions = SinglePage::add('/dashboard/clinica/transactions/', $this->packageObject());
+			SinglePage::add('/dashboard/clinica', $this->packageObject());
+			$transactions = SinglePage::add('/dashboard/clinica/transactions', $this->packageObject());
 			if( is_object($transactions) ){
 				$transactions->setAttribute('icon_dashboard', 'icon-search');
 			}
-			SinglePage::add('/dashboard/clinica/transactions/search/', $this->packageObject());
+			SinglePage::add('/dashboard/clinica/transactions/search', $this->packageObject());
 			
 			return $this;
 		}
