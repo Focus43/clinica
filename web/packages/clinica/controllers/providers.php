@@ -23,28 +23,19 @@
 		}
 		
 		
+		public function location( $providerHandle ){
+			$this->personnelListObj()->filterByProviderHandle($providerHandle);
+			$this->set('providerHandle', $providerHandle);
+			$this->view();
+		}
+		
+		
 		private function personnelListObj(){
 			if( $this->_personnelListObj === null ){
 				$this->_personnelListObj = new ClinicaPersonnelList();
 				$this->_personnelListObj->sortByLastName();
-				$this->applySearchFilters( $this->_personnelListObj );
 			}
 			return $this->_personnelListObj;
-		}
-		
-		
-		private function applySearchFilters( ClinicaPersonnelList $listObj ){
-			if( !empty($_REQUEST['numResults']) ){
-				$listObj->setItemsPerPage( $_REQUEST['numResults'] );
-			}
-			
-			if( !empty($_REQUEST['keywords']) ){
-				$listObj->filterByKeywords( $_REQUEST['keywords'] );
-			}
-			
-			if( !empty($_REQUEST['providerHandle']) ){
-				$listObj->filterByProviderHandle( $_REQUEST['providerHandle'] );
-			}
 		}
 		
 	}

@@ -32,9 +32,11 @@
 					<tr>
 						<td><input type="checkbox" name="personnelID[]" value="<?php echo $personnel->getPersonnelID(); ?>" /></td>
 						<td>
-							<a class="thumbnail">
-								<?php $imageHelper->outputThumbnail($personnel->getPictureFileObj(), 75, 75); ?>
-							</a>
+							<?php if($personnel->getPictureFileObj()->getFileID() >= 1): ?>
+								<img class="thumbnail" src="<?php echo $imageHelper->getThumbnail($personnel->getPictureFileObj(), 75, 65, true)->src; ?>" />
+							<?php else: ?>
+								<span class="thumbnail" style="display:block;width:75px;height:55px;background:#f1f1f1;font-size:11px;text-align:center;padding-top:10px;">None</span>
+							<?php endif; ?>
 						</td>
 						<?php foreach($columns->getColumns() AS $colObj){ ?>
 							<td class="<?php echo strtolower($colObj->getColumnName()); ?>"><?php echo $colObj->getColumnValue($personnel); ?></td>

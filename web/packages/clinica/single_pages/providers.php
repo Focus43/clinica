@@ -2,16 +2,16 @@
 	<div class="row-fluid">
 		<div class="span3">
 			<div class="well" style="padding:8px 0;">
-				<ul class="nav nav-list serifFont">
-					<li><a>Alphabetical</a></li>
+				<ul id="providerTypeList" class="nav nav-list serifFont">
+					<li class="<?php echo !isset($providerHandle) ? 'active' : ''; ?>"><a href="<?php echo $this->url('providers'); ?>">Alphabetical</a></li>
 					<li class="nav-header">By Location</li>
-					<li><a>Federal Heights</a></li>
-					<li><a>Lafayette</a></li>
-					<li><a>Pecos</a></li>
-					<li><a>People's</a></li>
-					<li><a>Thornton</a></li>
+					<li class="<?php echo ($providerHandle == ClinicaPersonnel::PROVIDER_FEDERAL_HEIGHTS) ? 'active' : ''; ?>"><a href="<?php echo $this->action('location', ClinicaPersonnel::PROVIDER_FEDERAL_HEIGHTS); ?>">Federal Heights</a></li>
+					<li class="<?php echo ($providerHandle == ClinicaPersonnel::PROVIDER_LAFAYETTE) ? 'active' : ''; ?>"><a href="<?php echo $this->action('location', ClinicaPersonnel::PROVIDER_LAFAYETTE); ?>">Lafayette</a></li>
+					<li class="<?php echo ($providerHandle == ClinicaPersonnel::PROVIDER_PECOS) ? 'active' : ''; ?>"><a href="<?php echo $this->action('location', ClinicaPersonnel::PROVIDER_PECOS); ?>">Pecos</a></li>
+					<li class="<?php echo ($providerHandle == ClinicaPersonnel::PROVIDER_PEOPLES) ? 'active' : ''; ?>"><a href="<?php echo $this->action('location', ClinicaPersonnel::PROVIDER_PEOPLES); ?>">People's</a></li>
+					<li class="<?php echo ($providerHandle == ClinicaPersonnel::PROVIDER_THORNTON) ? 'active' : ''; ?>"><a href="<?php echo $this->action('location', ClinicaPersonnel::PROVIDER_THORNTON); ?>">Thornton</a></li>
 					<li class="divider"></li>
-					<li><a>Dental</a></li>
+					<li class="<?php echo ($providerHandle == ClinicaPersonnel::PROVIDER_DENTAL) ? 'active' : ''; ?>"><a href="<?php echo $this->action('location', ClinicaPersonnel::PROVIDER_DENTAL); ?>">Dental</a></li>
 				</ul>
 			</div>
 		</div>
@@ -30,9 +30,9 @@
 				</div>
 				
 			<?php else: ?>
-				<?php// $a = new Area('Main Content'); $a->display($c); ?>
+				
 				<div class="clearfix">
-					<h2 class="pull-left">Our Providers (Alphabetical)</h2>
+					<h2 class="pull-left">Our Providers <small id="providerTypeLabel"></small></h2>
 					<div class="pull-right">
 						<input id="providerFilter" type="text" value="" style="margin-top:10px;" placeholder="Search by provider name" />
 					</div>
@@ -49,6 +49,7 @@
 						<?php endforeach; ?>
 					</div>
 				</div>
+				
 			<?php endif; ?>
 		</div>
 	</div>
@@ -58,8 +59,29 @@
 	$(function(){
 		var $providers = $('a.provider', '#providersList');
 		
+		/*$('#providerTypeList').on('click', 'a[data-show]', function(){
+			var $this   = $(this),
+				_handle = $this.attr('data-show');
+			// show active menu status
+			$this.parent('li').addClass('active').siblings('li').removeClass('active');
+			
+			// show alpha? then display all
+			if( _handle == 'alpha' ){
+				$providers.show();
+				return;
+			}
+			
+			// filter results
+			$providers.each(function(idx, element){
+				var $item = $(element);
+				$item.toggle( $item.attr('data-provider').toLowerCase().indexOf(_handle) !== -1 );
+			});
+		});*/
+		
+		// search filter
 		$('#providerFilter').on('keyup', function(){
 			var _str = this.value.toLowerCase();
+			$('a[data-show="alpha"]', '#providerTypeList').trigger('click');
 			$providers.each(function(idx, element){
 				var $item = $(element);
 				$item.toggle( $item.attr('data-name').toLowerCase().indexOf(_str) !== -1 );
