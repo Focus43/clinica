@@ -14,6 +14,7 @@
 					<li class="<?php echo ($providerHandle == ClinicaPersonnel::PROVIDER_DENTAL) ? 'active' : ''; ?>"><a href="<?php echo $this->action('location', ClinicaPersonnel::PROVIDER_DENTAL); ?>">Dental</a></li>
 				</ul>
 			</div>
+			<?php $a = new Area('Providers Sidebar'); $a->display($c); ?>
 		</div>
 		<div class="span9">
 			<?php if($this->controller->getTask() == 'profile'): ?>
@@ -25,7 +26,7 @@
 						<span class="thumbnail placeholder pull-left">Photo Unavailable</span>
 					<?php endif; ?>
 					<h3 style="margin-top:0;"><?php echo "{$personnelObj->getFirstName()} {$personnelObj->getLastName()}"; ?> <small><?php echo $personnelObj->getTitle(); ?></small></h3>
-					<p>Location: <?php echo $personnelObj->getProviderHandle(true); ?></p>
+					<p><strong>Location:</strong> <?php echo $personnelObj->getProviderHandle(true); ?></p>
 					<?php echo $personnelObj->getDescription(); ?>
 				</div>
 				
