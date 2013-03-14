@@ -2,38 +2,42 @@
 	<div class="container content">
 		<div class="row">
 			<div class="span8">
-				<div class="container-fluid">
+				<div class="container-fluid" style="padding:0;">
 					<div class="row-fluid">
 						<div class="span4">
+							<?php $a = new GlobalArea('Footer Area 1'); $a->display($c); ?>
+							<!--<h4>Visiting Clinica</h4>
 							<ul class="unstyled">
-								<li><h4>Visiting Clinica</h4></li>
 								<li><a>Link 1</a></li>
 								<li><a>Link 2 Here</a></li>
-							</ul>
+							</ul>-->
 						</div>
 						<div class="span4">
+							<?php $a = new GlobalArea('Footer Area 2'); $a->display($c); ?>
+							<!--<h4>Get Involved</h4>
 							<ul class="unstyled">
-								<li><h4>Get Involved</h4></li>
 								<li><a>Volunteer With Clinica</a></li>
 								<li><a>Donations</a></li>
-							</ul>
+							</ul>-->
 						</div>
 						<div class="span4">
+							<?php $a = new GlobalArea('Footer Area 3'); $a->display($c); ?>
+							<!--<h4>Something Else</h4>
 							<ul class="unstyled">
-								<li><h4>Something Else</h4></li>
 								<li><a>Link 1</a></li>
 								<li><a>Link 2 Here</a></li>
-							</ul>
+							</ul>-->
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="span4">
+				<?php $a = new GlobalArea('Footer Area 4'); $a->display($c); ?>
+				<!--<h4>Contact Us</h4>
 				<ul class="unstyled">
-					<li><h4>Contact Us</h4></li>
 					<li>1345 Plaza Court North, 1A, Lafayette, CO 80026</li>
 					<li>Patient Services: (303) 123-4567</li>
-				</ul>
+				</ul>-->
 			</div>
 		</div>
 	</div>

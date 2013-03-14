@@ -27,7 +27,7 @@
 						<a class="active">English</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a>Espanol</a>
 					</div>
 					<div class="pull-right">
-						(303) 650-4460
+						<?php $a = new GlobalArea('Header Orange Bar Right'); $a->display($c); ?>
 					</div>
 				</div>
 			</div>

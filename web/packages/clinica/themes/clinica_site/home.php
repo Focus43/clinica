@@ -10,7 +10,6 @@
 <!-- Enjoy checking out what's under the hood? We should talk! www.focus-43.com -->
 
 <body class="clinicaPage home">
-	<a id="onlineBillPay" href="<?php echo $this->url('bill_pay'); ?>" title="Online Bill Pay"></a>
 	
 	<div id="minHeighter">
 		<div id="bgContainer" data-background="<?php echo $backgroundImage; ?>"></div>
@@ -22,9 +21,6 @@
 				<div class="span12 clearfix">
 					<div id="homeContent">
 						<?php $area1 = new Area('Editable Area 1'); $area1->setCustomTemplate('image', 'templates/align_center.php'); $area1->display($c); ?>
-						<!--<h3>Clinica Family Health Services</h3>
-						<p>Clinica's mission is to provide quality affordable health care to underserved individuals and families. Clinica is a non-profit organization, having provided affordable health care
-							since 1972.</p>-->
 						<p class="centerize" style="margin-top:1.4em;">
 							<a class="btn btn-large btn-info" href="<?php echo $this->url('/about'); ?>">Learn More About Clinica</a>
 						</p>
@@ -44,7 +40,7 @@
 						</div>
 					</div>
 				</div>
-				<?php Loader::packageElement('theme_footer', 'clinica'); ?>
+				<?php Loader::packageElement('theme_footer', 'clinica', array('c' => $c)); ?>
 			</div>
 		</div>
 	</div>

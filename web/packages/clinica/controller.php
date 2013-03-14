@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.27';
+	    protected $pkgVersion 			= '0.28';
 	
 		
 		/**
@@ -106,6 +106,7 @@
 				 ->setupUserAttributes()
 				 ->setupCollectionAttributes()
 				 ->setupTransactionAttributes()
+				 ->setupBlocks()
 				 ->setupTheme()
 				 ->setupPageTypes()
 				 ->setupSitePages();
@@ -256,6 +257,19 @@
 	        
 	        return $this;
 	    }
+
+
+		/**
+		 * @return ClinicaPackage
+		 */
+		private function setupBlocks(){
+			// PageChoozer
+			if(!is_object(BlockType::getByHandle('page_choozer'))) {
+				BlockType::installBlockTypeFromPackage('page_choozer', $this->packageObject());
+			}
+			
+			return $this;
+		}
 		
 		
 		/**

@@ -10,7 +10,6 @@
 <!-- Enjoy checking out what's under the hood? We should talk! www.focus-43.com -->
 
 <body class="clinicaPage fullWidth">
-	<a id="onlineBillPay" href="<?php echo $this->url('bill_pay'); ?>" title="Online Bill Pay"></a>
 	
 	<div id="minHeighter">
 		<?php Loader::packageElement('theme_header', 'clinica'); ?>
@@ -46,7 +45,7 @@
 		<div id="pushFooter"></div>
 	</div>
 	
-	<?php Loader::packageElement('theme_footer', 'clinica'); ?>
+	<?php Loader::packageElement('theme_footer', 'clinica', array('c' => $c)); ?>
     <?php Loader::element('footer_required'); // REQUIRED BY C5 // ?>
 </body>
 </html>

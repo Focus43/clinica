@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<schema version="0.3">
+	<table name="btPageChoozer">
+		<field name="bID" type="I">
+			<key />
+			<unsigned />
+		</field>
+		<field name="serializedPageIDs" type="X" />
+	</table>
+</schema>
