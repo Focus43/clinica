@@ -3,9 +3,13 @@ table#clinicaSearchTable thead tr th {padding-left:6px;}
 #clinicaWrap h4 {margin-bottom:.6em;}
 #clinicaWrap form {margin-bottom:0;}
 #clinicaWrap table tr.no-stripe:hover td {background:#fff;}
+#clinicaSearchTable thead tr th {white-space:nowrap;}
+
+/* PERSONNEL TABLE */
 #clinicaSearchTable.group-left thead tr th:last-child {width:98%;}
 #clinicaSearchTable.group-left tbody tr td {padding-left:10px;padding-right:10px;}
-#clinicaSearchTable thead tr th {white-space:nowrap;}
-#clinicaSearchTable tbody tr td.name {white-space:nowrap;}
-#clinicaSearchTable tbody tr td .thumbnail {display:inline-block;}
+#clinicaSearchTable.group-left tbody tr td.name, 
+#clinicaSearchTable.group-left tbody tr td.title,
+#clinicaSearchTable.group-left tbody tr td.provider {white-space:nowrap;}
+#clinicaSearchTable.group-left tbody tr td .thumbnail {display:inline-block;}
 
