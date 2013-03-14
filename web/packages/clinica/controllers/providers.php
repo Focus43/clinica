@@ -19,7 +19,9 @@
 		
 		
 		public function profile( $id ){
-			$this->set('personnelObj', ClinicaPersonnel::getByID($id));
+			$personnelObj = ClinicaPersonnel::getByID($id);
+			$this->set('personnelObj', $personnelObj);
+			$this->set('providerHandle', $personnelObj->getProviderHandle());
 		}
 		
 		

@@ -49,6 +49,9 @@ body.clinicaPage div.message.alert ul {margin:0;}
 #tagLiner {padding:15px 0 5px;color:#fff;text-align:center;background:rgba(216,155,36, 0.57);text-shadow:0 1px #111;}
 
 /* PROVIDERS PAGE */
+#providersList {margin-top:1em;}
+	#providersList .span6 {margin-bottom:0;}
+	#providersList.applyFilter .span6 {float:none;width:100%;margin-left:0;}
 .provider {padding:5px;display:block;margin-bottom:.8em;color:inherit;position:relative;left:-5px; -webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}
 .provider.profile {padding:0;}
 	.provider:hover {text-decoration:none;color:inherit;background:#f5f5f5;}
