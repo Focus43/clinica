@@ -1,12 +1,12 @@
 <?php defined('C5_EXECUTE') or die("Access Denied.");
 
-	$permissions = new Permissions( Page::getByPath('/dashboard/clinica/transactions') );
+	$permissions = new Permissions( Page::getByPath('/dashboard/clinica/personnel') );
 	
 	// does caller of this URL have access?
 	if( $permissions->canViewPage() ){
-		if(!empty($_POST['transactionID'])){
-			foreach($_POST['transactionID'] AS $transactionID){
-				ClinicaTransaction::getByID($transactionID)->delete();
+		if(!empty($_POST['personnelID'])){
+			foreach($_POST['personnelID'] AS $personnelID){
+				ClinicaPersonnel::getByID($personnelID)->delete();
 			}
 		}
 		

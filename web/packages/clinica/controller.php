@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.28';
+	    protected $pkgVersion 			= '0.34';
 	
 		
 		/**
@@ -46,10 +46,14 @@
 				
 				// Clinica transactional stuff (handler, records, attributes, search interface, etc.)
 				'ClinicaBaseObject'			=> array('library', 'clinica_base_object', $this->pkgHandle),
-				'ClinicaTransactionHandler'	=> array('model', 'clinica_transaction_handler', $this->pkgHandle),
+				'ClinicaTransactionHandler'	=> array('library', 'clinica_transaction_handler', $this->pkgHandle),
 				'ClinicaTransaction'		=> array('model', 'clinica_transaction', $this->pkgHandle),
 				'ClinicaTransactionAttributeKey,ClinicaTransactionAttributeValue' => array('model', 'attribute/categories/clinica_transaction', $this->pkgHandle),
-				'ClinicaTransactionList'	=> array('model', 'clinica_transaction_list', $this->pkgHandle)
+				'ClinicaTransactionList'	=> array('model', 'clinica_transaction_list', $this->pkgHandle),
+				
+				// Other clinica data
+				'ClinicaPersonnel'			=> array('model', 'clinica_personnel', $this->pkgHandle),
+				'ClinicaPersonnelList'		=> array('model', 'clinica_personnel_list', $this->pkgHandle),
 			));
 			
 			// load the SOAP client, if it exists
@@ -354,13 +358,21 @@
 			SinglePage::add('/giving', $this->packageObject());
 			SinglePage::add('/bill_pay', $this->packageObject());
 			
-			// dashboard pages
+			// clinica transaction dashboard pages
 			SinglePage::add('/dashboard/clinica', $this->packageObject());
 			$transactions = SinglePage::add('/dashboard/clinica/transactions', $this->packageObject());
 			if( is_object($transactions) ){
 				$transactions->setAttribute('icon_dashboard', 'icon-search');
 			}
 			SinglePage::add('/dashboard/clinica/transactions/search', $this->packageObject());
+			
+			// clinica personnel dashboard pages
+			$personnel = SinglePage::add('/dashboard/clinica/personnel', $this->packageObject());
+			if( is_object($personnel) ){
+				$personnel->setAttribute('icon_dashboard', 'icon-user');
+			}
+			SinglePage::add('/dashboard/clinica/personnel/search', $this->packageObject());
+			
 			
 			return $this;
 		}

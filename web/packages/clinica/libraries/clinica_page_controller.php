@@ -37,18 +37,9 @@
 		 * Add js/css + tools URL meta tag; clear the flash.
 		 * @return void
 		 */
-		public function on_start(){
-			// @NOTE: Currently doesn't work b/c of full page caching
-			// redirect to non-https url?
-			/*if( !$this->requireHttps && (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on')) && !(User::isLoggedIn()) ){
-				if( !($_SERVER['REQUEST_METHOD'] == 'POST') ){
-					$nonHttps = str_replace('https', 'http', BASE_URL . Page::getCurrentPage()->getCollectionPath());
-					header("Location: " . $nonHttps);
-				}
-			}*/
-			
-			// force https
-			if( $this->requireHttps && !( isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on') ) ){
+		public function on_start(){			
+			// force https (if $requireHTTPS == true)
+			if( $this->requireHttps == true && !( isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on') ) ){
 				header("Location: " . str_replace('http', 'https', BASE_URL . Page::getCurrentPage()->getCollectionPath()));
 			}
 			

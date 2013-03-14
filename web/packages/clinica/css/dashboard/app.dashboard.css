@@ -1,3 +1,11 @@
-table#transactionList thead tr th {padding-left:6px;}
-#ctManager h3.lead {margin-bottom:0;}
-#ctManager h4 {margin-bottom:.6em;}
+table#clinicaSearchTable thead tr th {padding-left:6px;}
+#clinicaWrap h3.lead {margin-bottom:0;}
+#clinicaWrap h4 {margin-bottom:.6em;}
+#clinicaWrap form {margin-bottom:0;}
+#clinicaWrap table tr.no-stripe:hover td {background:#fff;}
+#clinicaSearchTable.group-left thead tr th:last-child {width:98%;}
+#clinicaSearchTable.group-left tbody tr td {padding-left:10px;padding-right:10px;}
+#clinicaSearchTable thead tr th {white-space:nowrap;}
+#clinicaSearchTable tbody tr td.name {white-space:nowrap;}
+#clinicaSearchTable tbody tr td .thumbnail {display:inline-block;}
+

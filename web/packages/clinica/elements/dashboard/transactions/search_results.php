@@ -4,17 +4,17 @@
 	<div class="ccm-pane-body">
 		<div class="clearfix">
 			<div class="pull-left">
-				<select id="actionMenu" class="span3" disabled="disabled">
+				<select id="actionMenu" class="span3" disabled="disabled" data-action-delete="<?php echo 'dashboard/transactions/delete'; ?>">
 					<option value="">** With Selected</option>
 					<option value="delete">Delete Transaction(s)</option>
 				</select>
 			</div>
 			<div class="pull-right">
-				<a class="btn success" href="<?php echo View::url('dashboard/clinica/transactions/add'); ?>" target="_blank">Manually Add Transaction</a>
+				<a class="btn success" href="<?php echo View::url('dashboard/clinica/transactions/add'); ?>">Manually Add Transaction</a>
 			</div>
 		</div>
 		
-		<table id="transactionList" border="0" cellspacing="0" cellpadding="0" class="ccm-results-list">
+		<table id="clinicaSearchTable" border="0" cellspacing="0" cellpadding="0" class="ccm-results-list">
 			<thead>
 				<tr>
 					<th><input id="checkAllBoxes" type="checkbox" /></th>

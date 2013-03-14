@@ -18,11 +18,11 @@
 		
 		
 		public function __toString(){
-			return (string) 'placeholder';
+			return "{$this->firstName} {$this->lastName}";
 		}
 		
 		
-		/** @return int Get the serverID */
+		/** @return int Get the transactionID */
 		public function getTransactionID(){ return $this->id; }
 		
 		/** @return string Get transaction type handle */

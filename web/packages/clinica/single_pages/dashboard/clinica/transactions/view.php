@@ -1,7 +1,7 @@
 <?php /** @var $transactionObj ClinicaTransaction */ ?>
 <?php echo Loader::helper('concrete/dashboard')->getDashboardPaneHeaderWrapper(t('Transaction Details'), t('View transaction details.'), false, false ); ?>
 	
-	<div id="ctManager">
+	<div id="clinicaWrap">
 		<div class="ccm-pane-body">
 			<div class="clearfix">
 				<h3 class="lead pull-left"><?php echo Loader::helper('text')->unhandle($transactionObj->getTypeHandle()) . ' amount $' . number_format($transactionObj->getAmount(), 2); ?></h3>

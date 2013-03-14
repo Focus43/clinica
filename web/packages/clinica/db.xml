@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <schema version="0.3">
 	
-	<!-- SERVER ENTITY -->
+	<!-- CLINICA TRANSACTION ENTITY -->
 	<table name="ClinicaTransaction">
         <field name="id" type="I">
             <autoincrement />
@@ -120,5 +120,44 @@
             <DEFAULT value="0"/>
         </field>
 	</table>
+	
+	
+	<table name="ClinicaPersonnel">
+        <field name="id" type="I">
+            <autoincrement />
+            <key />
+            <unsigned />
+        </field>
+        
+        <!-- timing -->
+        <field name="createdUTC" type="T">
+        	<NOTNULL/>
+        </field>
+        <field name="modifiedUTC" type="T">
+        	<NOTNULL/>
+      		<DEFTIMESTAMP/>
+        </field>
+        
+        <!-- details -->
+        <field name="firstName" type="C" size="255" />
+        <field name="lastName" type="C" size="255" />
+        <field name="title" type="C" size="255" />
+        <field name="picID" type="I" size="11">
+        	<unsigned />
+        </field>
+        <field name="description" type="X2" />
+        <field name="providerHandle" type="C" size="255" />
+        
+        <!-- indices -->
+        <index name="firstName">
+        	<col>firstName</col>
+        </index>
+        <index name="lastName">
+        	<col>lastName</col>
+        </index>
+        <index name="providerHandle">
+        	<col>lastName</col>
+        </index>
+    </table>
 	
 </schema>

@@ -12,8 +12,6 @@
 		public function save();
 		public function delete();
 		public static function getByID( $id );
-		public function getAttributeCategoryHandle();
-		
 	}
 	
 	
@@ -24,6 +22,7 @@
 		public function getAttribute( $ak, $displayMode = false );
 		public function getAttributeField( $ak );
 		public function getAttributeValueObject( $ak, $createIfNotFound = false );
+		public function getAttributeCategoryHandle();
 	}
 	
 	

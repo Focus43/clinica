@@ -2,7 +2,7 @@
 	
 	// does caller of this URL have access?
 	$permissions = new Permissions( Page::getByPath('/dashboard/clinica/transactions') );
-	if( ! $permissions->canView() ){ throw new Exception('Insufficient permission.'); }
+	if( ! $permissions->canViewPage() ){ throw new Exception('Insufficient permission.'); }
 	
 	// has permission; proceed
 	Loader::model('clinica_transaction_list', 'clinica');
