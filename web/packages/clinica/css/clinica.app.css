@@ -48,6 +48,14 @@ body.clinicaPage div.message.alert ul {margin:0;}
 #homeContent h3 {color:inherit;text-shadow:inherit;}
 #tagLiner {padding:15px 0 5px;color:#fff;text-align:center;background:rgba(216,155,36, 0.57);text-shadow:0 1px #111;}
 
+/* PROVIDERS PAGE */
+.provider {padding:5px;display:block;margin-bottom:.8em;color:inherit;position:relative;left:-5px; -webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}
+	.provider:hover {text-decoration:none;color:inherit;background:#f5f5f5;}
+	.provider.profile:hover {background:none;}
+.provider .thumbnail {margin-right:12px;}
+.provider .thumbnail.placeholder {height:60px;width:75px;background:#f1f1f1;text-align:center;font-size:11px;color:#c1c1c1;}
+.provider.profile .thumbnail.placeholder {width:200px;height:300px;}
+
 /* FOOTER AREA */
 div#pushFooter {height:195px;} /* NEEDED FOR IE8 STICKY FOOTER */
 div#cFooter {height:155px;overflow:hidden;font-size:13px;color:#e1e1e1;position:relative;border-top:3px solid #db9d25;background:url('../images/blue_wood.jpg');}

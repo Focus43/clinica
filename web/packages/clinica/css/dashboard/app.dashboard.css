@@ -6,10 +6,11 @@ table#clinicaSearchTable thead tr th {padding-left:6px;}
 #clinicaSearchTable thead tr th {white-space:nowrap;}
 
 /* PERSONNEL TABLE */
-#clinicaSearchTable.group-left thead tr th:last-child {width:98%;}
-#clinicaSearchTable.group-left tbody tr td {padding-left:10px;padding-right:10px;}
+#clinicaSearchTable.group-left thead tr th:last-child {width:50%;}
+#clinicaSearchTable.group-left tbody tr td {padding-left:10px;}
+#clinicaSearchTable.group-left tbody tr td:first-child {padding-left:6px;}
 #clinicaSearchTable.group-left tbody tr td.name, 
 #clinicaSearchTable.group-left tbody tr td.title,
 #clinicaSearchTable.group-left tbody tr td.provider {white-space:nowrap;}
-#clinicaSearchTable.group-left tbody tr td .thumbnail {display:inline-block;}
-
+#clinicaSearchTable.group-left tbody tr td a.thumbnail {display:inline-block;}
+#clinicaSearchTable.group-left tbody tr td a.thumbnail img {width:75px;}

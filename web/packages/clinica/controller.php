@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.34';
+	    protected $pkgVersion 			= '0.35';
 	
 		
 		/**
@@ -357,6 +357,7 @@
 			// setup single pages
 			SinglePage::add('/giving', $this->packageObject());
 			SinglePage::add('/bill_pay', $this->packageObject());
+			SinglePage::add('/providers', $this->packageObject());
 			
 			// clinica transaction dashboard pages
 			SinglePage::add('/dashboard/clinica', $this->packageObject());

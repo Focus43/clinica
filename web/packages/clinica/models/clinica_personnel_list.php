@@ -32,6 +32,11 @@
 		}
 		
 		
+		public function sortByLastName(){
+			parent::sortBy('cp.lastName', 'asc');
+		}
+		
+		
 		public function get( $itemsToGet = 100, $offset = 0 ){
             $personnel = array();
             $this->createQuery();
@@ -78,7 +83,7 @@
 		}
 		
 		public function getProvider( ClinicaPersonnel $personnelObj ){
-			return ucwords(str_replace(array('_', '-', '/'), ' ', $personnelObj->getProviderHandle()));
+			return $personnelObj->getProviderHandle(true);
 		}
 		
 		public function getCurrent(){

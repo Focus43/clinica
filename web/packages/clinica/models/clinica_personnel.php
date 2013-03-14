@@ -36,7 +36,7 @@
 		
 		
 		public function __toString(){
-			return "{$this->firstName} {$this->lastName}";
+			return "{$this->lastName}, {$this->firstName}";
 		}
 		
 		/** @return int Get the personnelID */
@@ -46,9 +46,9 @@
 		/** @return string Date the object was last modified */
 		public function getDateModified(){ return $this->modifiedUTC; }
 		/** @return string Get first name */
-		public function getFirstName(){ return $this->firstName; }
+		public function getFirstName(){ return ucfirst($this->firstName); }
 		/** @return string Get last name */
-		public function getLastName(){ return $this->lastName; }
+		public function getLastName(){ return ucfirst($this->lastName); }
 		/** @return string Get title */
 		public function getTitle(){ return $this->title; }
 		/** @return string Get picture ID (File object ID) */
@@ -56,10 +56,18 @@
 		/** @return string Get description */
 		public function getDescription(){ return $this->description; }
 		/** @return string Get provider location handle */
-		public function getProviderHandle(){ return $this->providerHandle; }
+		public function getProviderHandle($formatted = false){
+			if( $formatted === true ){
+				return ucwords(str_replace(array('_', '-', '/'), ' ', $this->providerHandle));
+			}
+			return $this->providerHandle; 
+		 }
 		
 		public function getPictureFileObj(){
-			return File::getByID( $this->picID );
+			if( $this->_fileObj === null ){
+				$this->_fileObj = File::getByID( $this->picID );
+			}
+			return $this->_fileObj;
 		}
 		
 		/**
