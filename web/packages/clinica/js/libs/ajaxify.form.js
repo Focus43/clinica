@@ -15,9 +15,12 @@
 			expectBack: 'json',
 			showFeedback: true,
 			hideFeedbackAfter: false,
-			sendWithData: {}
+			sendWithData: {},
+			beforeSend: function( $form ){
+				// if a message was already appended to the screen, remove it before submit
+				$('.message', $form).remove();
+			}
 		}, _options);
-
 
 		
 		// assemble the response message html; depends on bootstrap's .alert classes
@@ -94,15 +97,12 @@
 					$form.trigger('ajaxify_complete', [_respData, _config]);
 					
 				},
-				beforeSend: function(){
-					
-					// if a message was already appended to the screen, remove it before submit
-					$('.message', $form).remove();
-					
-				}
+				beforeSend: _submitEvent.data.defaults.beforeSend( $form )
 			});
 			
 		});
+		
+		return $(this.selector);
 		
 	}
 	

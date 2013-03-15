@@ -45,7 +45,18 @@
 			 * Ajaxify forms
 			 */
 			if( $.fn.ajaxifyForm ){
-				$('form[data-method="ajax"]').ajaxifyForm();
+				var formHandler = $('form[data-method="ajax"]').ajaxifyForm({
+					beforeSend: function( $form ){
+						$('.message', $form).remove();
+						$form.animate({height:80}, 400, 'easeInSine').addClass('ajaxProcessing');
+					}
+				}).on('ajaxify_complete', function(event, respData){
+					var $form = $(this);
+					if( respData.code === 1 ){
+						$form.addClass('ajaxSuccess');
+					}
+					$form.css({height:'auto'}).removeClass('ajaxProcessing');
+				});
 			}
 			
 			

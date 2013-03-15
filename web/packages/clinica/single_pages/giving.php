@@ -1,15 +1,13 @@
 <div class="row-fluid">
-	
 	<div class="span5">
 		<h3>Support Clinica!</h3>
 		<?php $area = new Area('Giving Page Content'); $area->display($c); ?>
 	</div>
 	
 	<div class="span7">
-		<form method="post" data-method="ajax" action="<?php echo $this->controller->secureAction('process'); ?>">
-			<h3>Donation Form</h3>
-			<div class="well">
-				
+		<h3>Donation Form</h3>
+		<div class="well">
+			<form method="post" data-method="ajax" action="<?php echo $this->controller->secureAction('process'); ?>">
 				<?php Loader::packageElement('flash_message', 'clinica', array('flash' => $flash)); ?>
 				
 				<?php Loader::packageElement('payment_form/personal_info', 'clinica', array('form' => $form)); ?>
@@ -38,8 +36,8 @@
 				</div>
 				
 				<button class="btn btn-block btn-primary btn-large">Submit Donation!</button>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
 </div>
 

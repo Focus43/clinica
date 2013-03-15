@@ -73,3 +73,6 @@
 	
 	// sitemap.xml file
 	define('SITEMAPXML_FILE', 'files/sitemap.xml');
+	
+	// issue emails from address
+	define('OUTGOING_MAIL_ISSUER_ADDRESS', $_SERVER['OUTGOING_MAIL_ISSUER']);

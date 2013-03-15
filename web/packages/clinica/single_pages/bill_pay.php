@@ -1,15 +1,13 @@
 <div class="row-fluid">
-	
 	<div class="span5">
 		<h3>On-line Bill Payment</h3>
 		<?php $area = new Area('Bill Pay Page Content'); $area->display($c); ?>
 	</div>
 	
 	<div class="span7">
-		<form method="post" data-method="ajax" action="<?php echo $this->controller->secureAction('process'); ?>">
-			<h3>Bill Pay Form</h3>
-			<div class="well">
-				
+		<h3>Bill Pay Form</h3>
+		<div class="well">
+			<form method="post" data-method="ajax" action="<?php echo $this->controller->secureAction('process'); ?>">
 				<?php Loader::packageElement('flash_message', 'clinica', array('flash' => $flash)); ?>
 				
 				<h4>Patient Information <small>Account Details For Clinica Patient</small></h4>
@@ -44,8 +42,8 @@
 				</div>
 				
 				<button class="btn btn-block btn-primary btn-large">Submit Bill Payment</button>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
 </div>
 

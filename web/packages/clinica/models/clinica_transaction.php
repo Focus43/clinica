@@ -18,7 +18,7 @@
 		
 		
 		public function __toString(){
-			return "{$this->firstName} {$this->lastName}";
+			return ucwords("{$this->firstName} {$this->lastName}");
 		}
 		
 		
@@ -26,60 +26,65 @@
 		public function getTransactionID(){ return $this->id; }
 		
 		/** @return string Get transaction type handle */
-		public function getTypeHandle(){ return $this->typeHandle; }
+		public function getTypeHandle( $formatted = false ){
+			if( $formatted === true ){
+				return ucwords(str_replace(array('_', '-', '/'), ' ', $this->typeHandle));
+			}
+			return $this->typeHandle; 
+		}
 		
 		/** @return string Get person's first name */
 		public function getFirstName(){ return $this->firstName; }
 		
-		/** @return int Get person's middle initial */
+		/** @return string Get person's middle initial */
 		public function getMiddleInitial(){ return $this->middleInitial; }
 		
-		/** @return int Get person's last name */
+		/** @return string Get person's last name */
 		public function getLastName(){ return $this->lastName; }
 		
-		/** @return int Get person's phone # */
+		/** @return string Get person's phone # */
 		public function getPhone(){ return $this->phone; }
 		
-		/** @return int Get person's email */
+		/** @return string Get person's email */
 		public function getEmail(){ return $this->email; }
 		
-		/** @return int Get address line 1 */
+		/** @return string Get address line 1 */
 		public function getAddress1(){ return $this->address1; }
 		
-		/** @return int Get address line 2 */
+		/** @return string Get address line 2 */
 		public function getAddress2(){ return $this->address2; }
 		
-		/** @return int Get address city */
+		/** @return string Get address city */
 		public function getCity(){ return $this->city; }
 		
-		/** @return int Get address state */
+		/** @return string Get address state */
 		public function getState(){ return $this->state; }
 		
 		/** @return int Get address zip */
 		public function getZip(){ return $this->zip; }
 		
-		/** @return int Get transaction amount */
+		/** @return float Get transaction amount */
 		public function getAmount(){ return $this->amount; }
 		
 		/** @return int Get authorize.net response code */
 		public function getAuthNetResponseCode(){ return $this->authNetResponseCode; }
 		
-		/** @return int Get authorize.net authorization code */
+		/** @return string Get authorize.net authorization code */
 		public function getAuthNetAuthorizationCode(){ return $this->authNetAuthorizationCode; }
 		
-		/** @return int Get authorize.net address verification response */
+		/** @return string Get authorize.net address verification response */
 		public function getAuthNetAvsResponse(){ return $this->authNetAvsResponse; }
 		
-		/** @return int Get authorize.net transaction ID */
+		/** @return string Get authorize.net transaction ID */
 		public function getAuthNetTransactionID(){ return $this->authNetTransactionID; }
 		
-		/** @return int Get authorize.net method */
+		/** @return string Get authorize.net method */
 		public function getAuthNetMethod(){ return $this->authNetMethod; }
 		
-		/** @return int Get authorize.net transaction type */
+		/** @return string Get authorize.net transaction type */
 		public function getAuthNetTransactionType(){ return $this->authNetTransactionType; }
 		
-		/** @return int Get authorize.net md5 transaction hash */
+		/** @return string Get authorize.net md5 transaction hash */
 		public function getAuthNetMd5Hash(){ return $this->authNetMd5Hash; }
 		
 		/** @return int Get last 4 digits of credit card */
@@ -91,8 +96,13 @@
 		/** @return int Get credit card expiration year */
 		public function getCardExpYear(){ return $this->cardExpYear; }
 		
-		/** @return int Get the associated message */
+		/** @return string Get the associated message */
 		public function getMessage(){ return $this->message; }
+		
+		/** @return string Get the address as a formatted string */
+		public function getAddressString(){
+			return ucwords( t("%s %s %s, %s %s", $this->address1, $this->address2, $this->city, $this->state, $this->zip) );
+		}
 		
 		
 		protected function persistable(){

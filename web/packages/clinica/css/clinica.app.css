@@ -49,6 +49,15 @@ body.clinicaPage div.message.alert ul {margin:0;}
 #homeContent h3 {color:inherit;text-shadow:inherit;}
 #tagLiner {padding:15px 0 5px;color:#fff;text-align:center;background:rgba(216,155,36, 0.75);text-shadow:0 1px #111;}
 
+/* FORMS AND AJAX WAITING MESSAGE */
+.well form {margin-bottom:0;padding-bottom:0;}
+body.clinicaPage form.ajaxProcessing {background:transparent url('../images/loader.gif') no-repeat 50% 50%;}
+body.clinicaPage form.ajaxProcessing * {display:none;}
+body.clinicaPage form.ajaxSuccess * {display:none;}
+body.clinicaPage form.ajaxSuccess div.ajax-flash-target {display:block;}
+body.clinicaPage form.ajaxSuccess div.ajax-flash-target * {display:inherit;}
+body.clinicaPage form.ajaxSuccess div.ajax-flash-target div.message.alert {margin:0;}
+
 /* PROVIDERS PAGE */
 #providersList {margin-top:1em;}
 	#providersList .span6 {margin-bottom:0;}

@@ -20,7 +20,7 @@
 			$this->data 			= $data;
 			$this->transactionType 	= $transactionType;
 			$this->response 		= $this->preValidate()->authorizeNetObj()->authorizeAndCapture();
-			$this->saveIfSuccessful();
+			$this->onSuccess();
 		}
 		
 		
@@ -39,7 +39,7 @@
 		 * @param string
 		 * @return void
 		 */
-		private function saveIfSuccessful(){
+		private function onSuccess(){
 			// if payment processed ok...
 			if( (bool) $this->response->approved ){
 				$data = $this->data;
@@ -63,7 +63,16 @@
 				
 				// create the transaction record, then save it
 				$transaction = new ClinicaTransaction($data);
-				$transaction->save();
+				$transaction = $transaction->save();
+				
+				// send mail receipt
+				$mailHelper = Loader::helper('mail');
+				$mailHelper->to($transaction->getEmail());
+				$mailHelper->from(OUTGOING_MAIL_ISSUER_ADDRESS);
+				$mailHelper->addParameter('transaction', $transaction);
+				$mailHelper->addParameter('amount', number_format($transaction->getAmount(), 2));
+				$mailHelper->load('transaction', 'clinica');
+				$mailHelper->sendMail();
 			}
 		}
 		
