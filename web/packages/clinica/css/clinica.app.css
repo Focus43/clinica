@@ -83,4 +83,16 @@ div#cFooter div.legaleze a {color:#969696;}
 #cPrimary ul#sidebarNav li.nav-path-selected a {color:#fff;background:#b95b03;}
 #cPrimary h2:first-child {margin-top:0;}
 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+	
+}
 
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+	
+}
+
+@media (max-width:979px) {
+	/*#flexHeader {position:fixed;margin:0;top:0;left:0;right:0;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}*/
+}
