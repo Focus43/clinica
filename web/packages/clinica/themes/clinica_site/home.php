@@ -19,12 +19,15 @@
 		<div class="container">
 			<div class="row">
 				<div class="span12 clearfix">
-					<div id="homeContent">
+					<div style="position:relative;z-index:5;min-height:20px;width:100%;">
+						<?php $a = new Area('Homepage Content'); $a->display($c); ?>
+					</div>
+					<!--<div id="homeContent">
 						<?php $area1 = new Area('Editable Area 1'); $area1->setCustomTemplate('image', 'templates/align_center.php'); $area1->display($c); ?>
 						<p class="centerize" style="margin-top:1.4em;">
 							<a class="btn btn-large btn-info" href="<?php echo $this->url('/about'); ?>">Learn More About Clinica</a>
 						</p>
-					</div>
+					</div>-->
 				</div>
 			</div>
 		</div>
@@ -34,7 +37,7 @@
 				<div id="tagLiner" class="serifFont">
 					<div class="container">
 						<div class="row">
-							<div class="span12" style="color:#222;text-shadow:0 1px rgba(255,255,255,.5);">
+							<div class="span12" style="color:#222;text-shadow:0 1px rgba(255,255,255,.55);">
 								<?php $area2 = new Area('Tag Line'); $area2->setBlockLimit(1); $area2->display($c); ?>
 							</div>
 						</div>

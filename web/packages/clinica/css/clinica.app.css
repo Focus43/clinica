@@ -45,8 +45,9 @@ body.clinicaPage div.message.alert ul {margin:0;}
 /* CLINICA HOMEPAGE; BIG IMAGE OVERLAY SECTION */
 #bgContainer {position:absolute;left:0;top:0;right:0;bottom:155px;}
 #homeContent {float:right;max-width:32%;position:relative;background:rgba(0,0,0,.45);z-index:2;padding:12px;border-radius:6px; color:#f1f1f1;text-shadow:0 1px #111;}
+	#homeContent.custom-template {max-width:none;width:auto;float:none;}
 #homeContent h3 {color:inherit;text-shadow:inherit;}
-#tagLiner {padding:15px 0 5px;color:#fff;text-align:center;background:rgba(216,155,36, 0.57);text-shadow:0 1px #111;}
+#tagLiner {padding:15px 0 5px;color:#fff;text-align:center;background:rgba(216,155,36, 0.75);text-shadow:0 1px #111;}
 
 /* PROVIDERS PAGE */
 #providersList {margin-top:1em;}
