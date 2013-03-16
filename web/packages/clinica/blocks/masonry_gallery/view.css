@@ -1,0 +1,32 @@
+.masonryContainer {width:100%;}
+.masonryContainer .masonryItem {float:left;margin:10px;padding:5px;display:block;background:#e5e5e5;}
+.masonryContainer .masonryItem .masonryInner {position:relative;overflow:hidden;}
+.masonryContainer .masonryItem .masonryInner span.titleOverlay {color:#fff;text-align:center;padding:5px;position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.65);}
+
+.masonryContainer .masonryItem,
+.masonryContainer .masonryItem .masonryInner,
+.masonryContainer .masonryItem img {-webkit-border-radius:7px;-moz-border-radius:7px;border-radius:7px;}
+
+.masonry, .masonry .masonry-brick {
+  -webkit-transition-duration: 0.45s;
+     -moz-transition-duration: 0.45s;
+      -ms-transition-duration: 0.45s;
+       -o-transition-duration: 0.45s;
+          transition-duration: 0.45s;
+}
+
+.masonry {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.masonry .masonry-brick {
+  -webkit-transition-property: left, right, top;
+     -moz-transition-property: left, right, top;
+      -ms-transition-property: left, right, top;
+       -o-transition-property: left, right, top;
+          transition-property: left, right, top;
+}

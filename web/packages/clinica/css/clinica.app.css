@@ -71,6 +71,28 @@ body.clinicaPage form.ajaxSuccess div.ajax-flash-target div.message.alert {margi
 .provider .thumbnail.placeholder {height:85px;width:75px;background:#f1f1f1;text-align:center;font-size:11px;color:#c1c1c1;}
 .provider.profile .thumbnail.placeholder {width:200px;height:300px;}
 
+/* SUPPORTER LOGOS */
+span.boxedImage {
+	padding:8px;
+	display:inline-block;
+	border:1px solid #d5d5d5;
+	-webkit-border-radius:7px;
+	-moz-border-radius:7px;
+	border-radius:7px;
+	-moz-box-shadow:0 0 5px rgba(11,11,11,.4);
+	-webkit-box-shadow:0 0 5px rgba(11,11,11,.4);
+	box-shadow:0 0 5px rgba(11,11,11,.4);
+	
+	background-color:@start;
+	background-image:-moz-linear-gradient(top, @start, @finish);
+	background-image:-webkit-gradient(linear, 0 0, 0 100%, from(@start), to(@finish));
+	background-image:-webkit-linear-gradient(top, #f6f6f6, #e5e5e5);
+	background-image:-o-linear-gradient(top, @start, @finish);
+	background-image:linear-gradient(to bottom, #f6f6f6, #e5e5e5);
+	background-repeat:repeat-x;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@start', endColorstr='@finish', GradientType=0);
+}
+
 /* FOOTER AREA */
 div#pushFooter {height:195px;} /* NEEDED FOR IE8 STICKY FOOTER */
 div#cFooter {height:155px;overflow:hidden;font-size:13px;color:#e1e1e1;position:relative;border-top:3px solid #db9d25;background:url('../images/blue_wood.jpg');}

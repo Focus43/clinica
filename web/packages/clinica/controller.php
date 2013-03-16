@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.35';
+	    protected $pkgVersion 			= '0.36';
 	
 		
 		/**
@@ -270,6 +270,11 @@
 			// PageChoozer
 			if(!is_object(BlockType::getByHandle('page_choozer'))) {
 				BlockType::installBlockTypeFromPackage('page_choozer', $this->packageObject());
+			}
+			
+			// Masonry Gallery
+			if(!is_object(BlockType::getByHandle('masonry_gallery'))) {
+				BlockType::installBlockTypeFromPackage('masonry_gallery', $this->packageObject());
 			}
 			
 			return $this;
