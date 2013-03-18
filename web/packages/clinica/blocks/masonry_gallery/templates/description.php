@@ -10,6 +10,11 @@
 			margin: <?php echo $controller->margin; ?>px;
 			padding: <?php echo $controller->padding; ?>px; 
 		}
+		.masonryItem p {
+			font-size:12px;
+			padding:8px 8px 6px;
+			margin:0;
+		}
 	</style>
 
 	<div id="masonryBlock-<?php echo $controller->bID; ?>" class="masonryContainer clearfix">
@@ -26,6 +31,8 @@
 					}
 					
 					echo '</a>';
+					
+					echo '<p class="centerize">'.$fileObj->getTitle().'</p>';
 				?>
 			</div>
 		<?php } ?>
