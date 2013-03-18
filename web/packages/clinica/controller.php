@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.36';
+	    protected $pkgVersion 			= '0.37';
 	
 		
 		/**
@@ -105,6 +105,7 @@
 		 */
 		private function installAndUpdate(){
 			$this->registerEntityCategories()
+				 ->setupAttributeTypes()
 				 ->setupAttributeSets()
 				 ->setupUserGroups()
 				 ->setupUserAttributes()
@@ -128,6 +129,19 @@
 				$transactionAkc->associateAttributeKeyType( $this->attributeType('number') );
 				$transactionAkc->associateAttributeKeyType( $this->attributeType('textarea') );
 				$transactionAkc->associateAttributeKeyType( $this->attributeType('select') );
+			}
+			
+			return $this;
+		}
+		
+		
+		/**
+		 * @return ClinicaPackage
+		 */
+		private function setupAttributeTypes(){
+			if( !(AttributeType::getByHandle('page_selector')->getAttributeTypeID() >= 1 ) ){
+				AttributeType::add('page_selector', t('Page Selector'), $this->packageObject());
+				$this->attributeKeyCategory('file')->associateAttributeKeyType( $this->attributeType('page_selector') );
 			}
 			
 			return $this;

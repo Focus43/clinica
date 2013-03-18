@@ -17,18 +17,16 @@
 			<div class="masonryItem masonryItem-<?php echo $controller->bID; ?>">
 				<?php
 					$urlPath = Page::getByID( $fileObj->getAttribute('page_link') )->getCollectionPath();
-					if( !empty($urlPath) ){
-						echo '<a class="masonryInner" href="'.$this->url($urlPath).'">';
-					}else{
-						echo '<a class="masonryInner">';
-					}
+					echo t('<a class="masonryInner" href="%s">', (!empty($urlPath) ? $urlPath : 'javascript:void(0)'));
 					
 					$imageHelper->outputThumbnail($fileObj, $controller->maxWidth, 0);
+					
 					if( (bool) $controller->showTitleOverlay ){
 						echo '<span class="titleOverlay">'.$fileObj->getTitle().'</span>';
 					}
+					
+					echo '</a>';
 				?>
-				</a>
 			</div>
 		<?php } ?>
 	</div>

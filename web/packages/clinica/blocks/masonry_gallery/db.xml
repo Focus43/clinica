@@ -15,7 +15,12 @@
 		</field>
 		<field name="maxWidth" type="I" size="11">
 			<unsigned />
-			<notnull />
+		</field>
+		<field name="padding" type="I" size="11">
+			<unsigned />
+		</field>
+		<field name="margin" type="I" size="11">
+			<unsigned />
 		</field>
 	</table>
 </schema>

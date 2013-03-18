@@ -17,7 +17,9 @@
 		
 		public $fileSetID,
 			   $showTitleOverlay = 0,
-			   $maxWidth = 250;
+			   $maxWidth 		 = 250,
+			   $padding			 = 3,
+			   $margin			 = 3;
 			   
 		
 		public function getBlockTypeDescription(){
@@ -48,6 +50,7 @@
 			if( $this->_imagesList === null ){
 				$fileListObj = new FileList;
 				$fileListObj->filterBySet( FileSet::getByID($this->fileSetID) );
+				$fileListObj->sortByFileSetDisplayOrder();
 				$this->_imagesList = $fileListObj->get();
 			}
 			return $this->_imagesList;
@@ -71,6 +74,8 @@
 			$args['fileSetID'] 			= (int) $data['fileSetID'];
 			$args['showTitleOverlay']	= (int) $data['showTitleOverlay'];
 			$args['maxWidth']			= (int) $data['maxWidth'];
+			$args['margin']				= (int) $data['margin'];
+			$args['padding']			= (int) $data['padding'];
 			parent::save( $args );
 		}
 		

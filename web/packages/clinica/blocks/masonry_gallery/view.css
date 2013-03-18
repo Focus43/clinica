@@ -1,7 +1,7 @@
 .masonryContainer {width:100%;}
-.masonryContainer .masonryItem {float:left;margin:10px;padding:5px;display:block;background:#e5e5e5;}
-.masonryContainer .masonryItem .masonryInner {position:relative;overflow:hidden;}
-.masonryContainer .masonryItem .masonryInner span.titleOverlay {color:#fff;text-align:center;padding:5px;position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.65);}
+.masonryContainer .masonryItem {float:left;display:block;background:#e5e5e5;}
+.masonryContainer .masonryItem .masonryInner {position:relative;display:block;overflow:hidden;}
+.masonryContainer .masonryItem .masonryInner span.titleOverlay {color:#fff;text-align:center;padding:5px;position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.55);}
 
 .masonryContainer .masonryItem,
 .masonryContainer .masonryItem .masonryInner,
