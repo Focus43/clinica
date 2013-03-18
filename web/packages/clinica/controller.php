@@ -31,6 +31,9 @@
 	        define('CLINICA_TOOLS_URL', BASE_URL . REL_DIR_FILES_TOOLS_PACKAGES . '/' . $this->pkgHandle . '/');
 			define('CLINICA_IMAGES_URL', DIR_REL . '/packages/' . $this->pkgHandle . '/images/');
 			
+			// set theme paths
+			View::getInstance()->setThemeByPath('/login', 'clinica_site');
+			
 			// autoload classes
 			Loader::registerAutoload(array(
 				// page controller
@@ -153,6 +156,11 @@
 		 */
 		private function setupAttributeSets(){
 			$this->getOrCreateAttributeSet('user_info', 'user');
+			
+			if( !class_exists('ClinicaTransaction') ){
+				Loader::library('clinica_base_object', $this->packageObject());
+				Loader::model('clinica_transaction', $this->packageObject());
+			}
 			
 			// transaction attribute sets
 			$this->getOrCreateAttributeSet(ClinicaTransaction::TYPE_DONATION, 'clinica_transaction');
@@ -286,11 +294,6 @@
 				BlockType::installBlockTypeFromPackage('page_choozer', $this->packageObject());
 			}
 			
-			// Masonry Gallery
-			if(!is_object(BlockType::getByHandle('masonry_gallery'))) {
-				BlockType::installBlockTypeFromPackage('masonry_gallery', $this->packageObject());
-			}
-			
 			return $this;
 		}
 		
@@ -334,7 +337,7 @@
 			$homePage = Page::getByID(1);
 			
 			// setup pages if less than 0.3
-			if( (float) $this->pkgVersion <= 0.03 ){
+			if( (float) $this->pkgVersion <= 0.37 ){
 				$aboutPage = $this->pageFactory($homePage, 'About');
 					$this->pageFactory($aboutPage, 'Mission + Vision');
 					$this->pageFactory($aboutPage, 'History');

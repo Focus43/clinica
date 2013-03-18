@@ -20,6 +20,3 @@ $v->setThemeByPath('/page_forbidden', "yourtheme");
 $v->setThemeByPath('/register', "yourtheme");
 
 */
-
-$v = View::getInstance();
-$v->setThemeByPath('/login', 'clinica_site');
