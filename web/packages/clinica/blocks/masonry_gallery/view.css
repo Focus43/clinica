@@ -7,6 +7,11 @@
 .masonryContainer .masonryItem .masonryInner,
 .masonryContainer .masonryItem img {-webkit-border-radius:7px;-moz-border-radius:7px;border-radius:7px;}
 
+.masonryModal {width:800px;margin-left:-400px;}
+.masonryModal .modal-body {text-align:center;}
+.masonryModal .modal-body .carousel-control {top:50%;}
+.masonryModal .modal-body img {width:auto;margin:0 auto;}
+
 .masonry, .masonry .masonry-brick {
   -webkit-transition-duration: 0.45s;
      -moz-transition-duration: 0.45s;

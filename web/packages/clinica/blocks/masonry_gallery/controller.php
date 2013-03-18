@@ -46,6 +46,18 @@
 		}
 		
 		
+		/**
+		 * Get the full URL to the block tools directory
+		 * @return string
+		 */
+		public function getBlockToolsURL( $resource = null ){
+			if( $this->_btUrl == null ){
+				$this->_btUrl = Loader::helper('concrete/urls')->getBlockTypeToolsURL(BlockType::getByHandle('masonry_gallery'));
+			}
+			return $resource ? "{$this->_btUrl}/$resource" : $this->_btUrl;
+		}
+		
+		
 		private function imagesList(){
 			if( $this->_imagesList === null ){
 				$fileListObj = new FileList;

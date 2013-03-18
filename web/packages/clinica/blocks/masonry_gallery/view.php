@@ -14,7 +14,7 @@
 
 	<div id="masonryBlock-<?php echo $controller->bID; ?>" class="masonryContainer clearfix">
 		<?php foreach($imagesList AS $fileObj){ ?>
-			<div class="masonryItem masonryItem-<?php echo $controller->bID; ?>">
+			<div class="masonryItem masonryItem-<?php echo $controller->bID; ?>" data-file-id="<?php echo $fileObj->getFileID(); ?>">
 				<?php
 					$urlPath = Page::getByID( $fileObj->getAttribute('page_link') )->getCollectionPath();
 					if( !empty($urlPath) ){
@@ -35,6 +35,7 @@
 	
 	<script type="text/javascript">
 		$(function(){
+			// initialize masonry layout
 			if( $.isFunction( $.fn.masonry ) ){
 				var $masonryContainer = $('#masonryBlock-<?php echo $controller->bID; ?>');
 				$masonryContainer.imagesLoaded(function(){
@@ -50,5 +51,52 @@
 					});
 				});
 			}
+			
+			function updateImageSrc( $modal, fileID, onComplete ){
+				$.get('<?php echo $controller->getBlockToolsURL('resized_src'); ?>', {fileID: fileID}, function( data ){
+					$('img', $modal).attr('src', data.src);
+					if( $.isFunction(onComplete) ){
+						onComplete();
+					}  
+				}, 'json');
+			}
+			
+			// modal gallery
+			$('.masonryItem-<?php echo $controller->bID; ?>').on('click', function(){
+				var $this  = $(this),
+					$modal = $('#masonryModal-<?php echo $controller->bID; ?>'),
+					fileID = $this.attr('data-file-id');
+					
+				$this.addClass('active').siblings('.masonryItem').removeClass('active');
+					
+				if( !$modal.length ){
+					$.get('<?php echo $controller->getBlockToolsURL('modal'); ?>', {fileID: fileID, bID: <?php echo $controller->bID; ?>}, function( html ){
+						$(html).modal();
+					}, 'html');
+				}else{
+					updateImageSrc($modal, fileID, function(){
+						$modal.modal();
+					});
+				}
+			});
+			
+			$(document).on('click', '#masonryModal-<?php echo $controller->bID; ?> a.carousel-control', function(){
+				var $clicked = $(this),
+					$modal	 = $('#masonryModal-<?php echo $controller->bID; ?>'),
+					$current = $('.masonryItem.active', '#masonryBlock-<?php echo $controller->bID; ?>');
+				
+				// going back?
+				if( $clicked.hasClass('left') ){
+					var $target = $current.prev('.masonryItem');
+				}else{
+					var $target = $current.next('.masonryItem');
+				}
+				
+				// set as the new active one
+				$target.addClass('active').siblings('.masonryItem').removeClass('active');
+				
+				// nope, going forward...
+				updateImageSrc($modal, $target.attr('data-file-id'));
+			});
 		});
 	</script>
