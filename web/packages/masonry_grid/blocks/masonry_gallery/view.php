@@ -12,12 +12,14 @@
 		}
 	</style>
 
-	<ul id="<?php echo $controller->getFilterListID(); ?>" class="nav nav-pills">
-		<li class="active"><a data-set-handle="__all__" data-toggle="pill">All</a></li>
-		<?php foreach($fileSetObjects AS $fileSetObj): ?>
-			<li><a data-toggle="pill" data-set-handle="<?php echo $textHelper->handle($fileSetObj->getFileSetName()); ?>"><?php echo $fileSetObj->getFileSetName(); ?></a></li>
-		<?php endforeach; ?>
-	</ul>
+	<?php if( (bool) $controller->showFileSetFilters ): ?>
+		<ul id="<?php echo $controller->getFilterListID(); ?>" class="nav nav-pills">
+			<li class="active"><a data-set-handle="__all__" data-toggle="pill">All</a></li>
+			<?php foreach($fileSetObjects AS $fileSetObj): ?>
+				<li><a data-toggle="pill" data-set-handle="<?php echo $textHelper->handle($fileSetObj->getFileSetName()); ?>"><?php echo $fileSetObj->getFileSetName(); ?></a></li>
+			<?php endforeach; ?>
+		</ul>
+	<?php endif; ?>
 
 	<div id="<?php echo $controller->getContainerID(); ?>" class="masonryContainer clearfix">
 		<?php foreach($imagesList AS $fileObj){
@@ -36,7 +38,8 @@
 				itemClass: '.<?php echo $controller->getItemClass(); ?>',
 				columnWidth: <?php echo $controller->getColumnWidth(); ?>,
 				setFiltersID: '#<?php echo $controller->getFilterListID(); ?>',
-				toolsURL: '<?php echo MASONRY_TOOLS_URL; ?>'
+				toolsURL: '<?php echo MASONRY_TOOLS_URL; ?>',
+				enableModals: <?php echo (bool) $controller->enableModals ? 'true' : 'false'; ?>
 			});
 		});
 	</script>

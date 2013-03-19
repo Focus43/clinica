@@ -10,7 +10,7 @@
 	<div id="masonryBlock" class="ccm-ui">
 		<table class="table table-bordered">
 			<tr>
-				<td>File Set</td>
+				<td>File Set(s)</td>
 				<td colspan="5" class="chosenParent">
 					<select class="input-block-level" name="fileSetIDs[]" multiple data-placeholder="Choose one or more File Set">
 						<?php foreach($availableFileSets AS $fsObj): ?>
@@ -28,8 +28,16 @@
 				<td><?php echo $formHelper->text('padding', $controller->padding, array('class' => 'input-block-level')); ?></td>
 			</tr>
 			<tr>
-				<td>Title Overlay?</td>
-				<td colspan="5"><?php echo $formHelper->checkbox('showTitleOverlay', 1, $controller->showTitleOverlay); ?></td>
+				<td>Show File Set Filters</td>
+				<td colspan="5"><?php echo $formHelper->checkbox('showFileSetFilters', 1, $controller->showFileSetFilters); ?></td>
+			</tr>
+			<tr>
+				<td>Enable Modals</td>
+				<td colspan="5"><?php echo $formHelper->checkbox('enableModals', 1, $controller->enableModals); ?></td>
+			</tr>
+			<tr>
+				<td>Paging</td>
+				<td colspan="5"><?php echo $formHelper->select('pagingResults', MasonryGalleryBlockController::$pagingOptions, $controller->pagingResults, array('class' => 'span2')); ?> &nbsp; Images Per Page</td>
 			</tr>
 		</table>
 	</div>

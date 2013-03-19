@@ -16,10 +16,21 @@
 		protected $btCacheBlockOutputLifetime 				= CACHE_LIFETIME;
 		
 		public $fileSetIDs,
-			   $showTitleOverlay = 0,
-			   $maxWidth 		 = 250,
-			   $padding			 = 3,
-			   $margin			 = 3;
+			   $showFileSetFilters 	= 1,
+			   $enableModals		= 0,
+			   $maxWidth 		 	= 250,
+			   $padding			 	= 3,
+			   $margin			 	= 3,
+			   $pagingResults		= 15;
+			   
+		
+		public static $pagingOptions = array(
+			'10' => '10',
+			'15' => '15',
+			'20' => '20',
+			'25' => '25',
+			'30' => '30'
+		);
 			   
 		
 		public function getBlockTypeDescription(){
@@ -33,7 +44,7 @@
 		
 		
 		public function view(){
-			$this->set('imagesList', $this->masonryFileList()->get(20));
+			$this->set('imagesList', $this->masonryFileList()->get( $this->pagingResults ));
 			$this->set('fileSetObjects', $this->getSelectedFileSetObjects());
 			$this->set('imageHelper', Loader::helper('image'));
 			$this->set('textHelper', Loader::helper('text'));
@@ -142,10 +153,12 @@
 			}
 			
 			$args['fileSetIDs'] 		= join(',', $_REQUEST['fileSetIDs']);
-			$args['showTitleOverlay']	= (int) $data['showTitleOverlay'];
+			$args['showFileSetFilters']	= (int) $data['showFileSetFilters'];
+			$args['enableModals']		= (int) $data['enableModals'];
 			$args['maxWidth']			= (int) $data['maxWidth'];
 			$args['margin']				= (int) $data['margin'];
 			$args['padding']			= (int) $data['padding'];
+			$args['pagingResults']		= (int) $data['pagingResults'];
 			parent::save( $args );
 		}
 		

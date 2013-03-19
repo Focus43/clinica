@@ -3,7 +3,7 @@
 	/** @var $block MasonryGalleryBlockController */
 	$block 		= Block::getByID( $_REQUEST['blockID'] )->getInstance();
 	$listObj 	= $block->masonryFileList();
-	$results	= $listObj->get(20, ((int)$_REQUEST['offset'] * 20));
+	$results	= $listObj->get($block->pagingResults, ((int)$_REQUEST['offset'] * $block->pagingResults));
 
 	// output results
 	foreach($results AS $fileObj){

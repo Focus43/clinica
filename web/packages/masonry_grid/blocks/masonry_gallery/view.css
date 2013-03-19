@@ -20,11 +20,14 @@
 
 /* overlay */
 #masonryOverlay {display:none;text-align:center;position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(11,11,11,.8);z-index:99;vertical-align:middle;}
-#masonryOverlay .overlayContent {padding:6px;background:#e5e5e5;display:block;margin:0 auto;position:relative; -webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;-moz-box-shadow:0 0 12px rgba(0,0,0,.65);-webkit-box-shadow:0 0 12px rgba(0,0,0,.65);box-shadow:0 0 12px rgba(0,0,0,.65);}
+#masonryOverlay .overlayContent {padding:6px;min-height:38px;background:#f1f1f1 url('images/loader.gif') no-repeat 50% 50%;display:block;margin:0 auto;position:relative; -webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;-moz-box-shadow:0 0 12px rgba(0,0,0,.65);-webkit-box-shadow:0 0 12px rgba(0,0,0,.65);box-shadow:0 0 12px rgba(0,0,0,.65);}
 #masonryOverlay .overlayContent img.pic {display:none;}
-
-.arrow-control{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:100;position:absolute;top:50%;left:15px;width:40px;height:40px;margin-top:-20px;font-size:60px;font-weight:100;line-height:30px;color:#ffffff;text-align:center;background:#222222;border:3px solid #ffffff;z-index:101;-webkit-border-radius:23px;-moz-border-radius:23px;border-radius:23px;opacity:0.5;filter:alpha(opacity=50);}.arrow-control.right{left:auto;right:15px;}
-.arrow-control:hover,.arrow-control:focus{color:#ffffff;text-decoration:none;opacity:0.9;filter:alpha(opacity=90);}
+#masonryOverlay .arrow-control{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:100;position:absolute;top:50%;left:15px;width:40px;height:40px;margin-top:-20px;font-size:60px;font-weight:100;line-height:30px;color:#ffffff;text-align:center;background:#222222;border:3px solid #ffffff;z-index:101;-webkit-border-radius:23px;-moz-border-radius:23px;border-radius:23px;opacity:0.5;filter:alpha(opacity=50);}
+#masonryOverlay .arrow-control.right{left:auto;right:15px;}
+#masonryOverlay .arrow-control:hover,
+#masonryOverlay .arrow-control:focus{color:#ffffff;text-decoration:none;opacity:0.9;filter:alpha(opacity=90);}
+#masonryOverlay .closer {position:absolute;right:10px;bottom:10px;font-size:18px;color:#fff;}
+#masonryOverlay .closer:hover {text-decoration:none;}
 
 /* CSS TRANSITION ANIMATIONS */
 .masonry, .masonry .masonry-brick {
