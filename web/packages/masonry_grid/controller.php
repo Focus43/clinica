@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'masonry_grid';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.1';
+	    protected $pkgVersion 			= '0.12';
 	
 		
 		/**
@@ -28,13 +28,12 @@
 		 * @return void
 		 */
 	    public function on_start(){
-	        define('MASONRY_TOOLS_URL', BASE_URL . REL_DIR_FILES_TOOLS_PACKAGES . '/' . $this->pkgHandle . '/');
+	        define('MASONRY_TOOLS_URL', REL_DIR_FILES_TOOLS_PACKAGES . '/' . $this->pkgHandle . '/');
 			define('MASONRY_IMAGES_URL', DIR_REL . '/packages/' . $this->pkgHandle . '/images/');
 			
 			// autoload classes
 			Loader::registerAutoload(array(
-				// page controller
-				//'ClinicaPageController'	=> array('library', 'clinica_page_controller', $this->pkgHandle)
+				'MasonryFileList' => array('model', 'masonry_file_list', $this->pkgHandle)
 			));
 	    }
 		
@@ -111,6 +110,12 @@
 		 * @return MasonryGridPackage
 		 */
 		private function setupPages(){
+			SinglePage::add('/dashboard/masonry_grid/', $this->packageObject());
+			$settings = SinglePage::add('/dashboard/masonry_grid/settings', $this->packageObject());
+			if( is_object(($settings)) ){
+				$settings->setAttribute('icon_dashboard', 'icon-th-large');
+			}
+			
 			return $this;
 		}
 		

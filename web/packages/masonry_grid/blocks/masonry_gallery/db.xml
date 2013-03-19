@@ -5,9 +5,7 @@
 			<key />
 			<unsigned />
 		</field>
-		<field name="fileSetID" type="I" size="11">
-			<unsigned />
-		</field>
+		<field name="fileSetIDs" type="C" size="255" />
 		<field name="showTitleOverlay" type="I1">
 			<unsigned />
 			<notnull />
