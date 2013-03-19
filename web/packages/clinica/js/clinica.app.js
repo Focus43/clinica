@@ -84,12 +84,14 @@
 			 */
 			$document.on('click', 'a[href^="#"]', function( _event ){
 				_event.preventDefault();
-				var $target = $( $(this).attr('href') );
-				if( $target.length ){
-					var fromTop = $target.offset().top;
-					$('html,body').stop().animate({scrollTop: fromTop}, 850, 'easeOutExpo');
+				var $this	= $(this),
+					$target = $( $this.attr('href') );
+				if( !$this.hasClass('carousel-control') ){
+					if( $target.length ){
+						var fromTop = $target.offset().top;
+						$('html,body').stop().animate({scrollTop: fromTop}, 850, 'easeOutExpo');
+					}
 				}
-					
 			});
 
 		}
