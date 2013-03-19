@@ -4,6 +4,6 @@
 	<?php else: ?>
 		<span class="thumbnail placeholder pull-left">Unavailable</span>
 	<?php endif; ?>
-	<strong><?php echo $personnelObj->getLastName(); ?></strong>, <?php echo $personnelObj->getFirstName(); ?> - <?php echo $personnelObj->getTitle(); ?><br /> 
+	<?php echo $personnelObj->getFirstName() . ' ' . $personnelObj->getLastName();; ?>, <?php echo $personnelObj->getTitle(); ?><br /> 
 	<?php echo $personnelObj->getProviderHandle(true); ?>
 </a>
