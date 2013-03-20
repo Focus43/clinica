@@ -9,10 +9,10 @@
 		protected $btTable 									= 'btMasonryGallery';
 		protected $btInterfaceWidth 						= '450';
 		protected $btInterfaceHeight						= '400';
-		protected $btCacheBlockRecord 						= false;
-		protected $btCacheBlockOutput 						= false;
-		protected $btCacheBlockOutputOnPost 				= false;
-		protected $btCacheBlockOutputForRegisteredUsers 	= false;
+		protected $btCacheBlockRecord 						= true;
+		protected $btCacheBlockOutput 						= true;
+		protected $btCacheBlockOutputOnPost 				= true;
+		protected $btCacheBlockOutputForRegisteredUsers 	= true;
 		protected $btCacheBlockOutputLifetime 				= CACHE_LIFETIME;
 		
 		public $fileSetIDs,
