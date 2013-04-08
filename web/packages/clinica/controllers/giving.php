@@ -50,6 +50,12 @@
 				$this->_formValidator->addRequired('city', 'Missing required field city.');
 				$this->_formValidator->addRequired('state', 'Missing required field state.');
 				$this->_formValidator->addRequired('zip', 'Missing required field zip.');
+                
+                // if minimum amount is set in dashboard clinica config...
+                $minTrxnAmount = (int) Config::get('CLINICA_TRXN_MINIMUM_AMOUNT');
+                if( $minTrxnAmount > 0 ){
+                    $this->_formValidator->addRequiredMinimum('amount', $minTrxnAmount, t('The minimum donation amount is $%s', $minTrxnAmount));
+                }
 			}
 			return $this->_formValidator;
 		}

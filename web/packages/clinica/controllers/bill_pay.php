@@ -79,6 +79,12 @@
 				$this->_formValidator->addRequiredAttribute(ClinicaTransactionAttributeKey::getByHandle('patient_first_name'));
 				$this->_formValidator->addRequiredAttribute(ClinicaTransactionAttributeKey::getByHandle('patient_last_name'));
 				$this->_formValidator->addRequiredAttribute(ClinicaTransactionAttributeKey::getByHandle('patient_birthdate'));
+                
+                // if minimum amount is set in dashboard clinica config...
+                $minTrxnAmount = (int) Config::get('CLINICA_TRXN_MINIMUM_AMOUNT');
+                if( $minTrxnAmount > 0 ){
+                    $this->_formValidator->addRequiredMinimum('amount', $minTrxnAmount, t('The minimum payment amount is $%s', $minTrxnAmount));
+                }
 			}
 			return $this->_formValidator;
 		}

@@ -48,14 +48,14 @@
 				var formHandler = $('form[data-method="ajax"]').ajaxifyForm({
 					beforeSend: function( $form ){
 						$('.message', $form).remove();
-						$form.animate({height:80}, 400, 'easeInSine').addClass('ajaxProcessing');
+						$form.animate({height:80}, 150, 'easeInSine').addClass('ajaxProcessing');
 					}
 				}).on('ajaxify_complete', function(event, respData){
-					var $form = $(this);
+					var $form = $(event.target);
 					if( respData.code === 1 ){
 						$form.addClass('ajaxSuccess');
 					}
-					$form.css({height:'auto'}).removeClass('ajaxProcessing');
+					$form.stop(true, true).height('').removeClass('ajaxProcessing');
 				});
 			}
 			
