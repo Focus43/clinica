@@ -20,7 +20,10 @@
 			<div class="row">
 				<div class="span12 clearfix">
 					<div style="position:relative;z-index:5;min-height:20px;width:100%;">
-						<?php $a = new Area('Homepage Content'); $a->display($c); ?>
+						<?php// $a = new Area('Homepage Content'); $a->display($c); ?>
+						<div id="homeContent">
+						    <?php $a = new Area('Homepage Content'); $a->display($c); ?>
+						</div>
 					</div>
 					<!--<div id="homeContent">
 						<?php $area1 = new Area('Editable Area 1'); $area1->setCustomTemplate('image', 'templates/align_center.php'); $area1->display($c); ?>
@@ -43,10 +46,12 @@
 						</div>
 					</div>
 				</div>
-				<?php Loader::packageElement('theme_footer', 'clinica', array('c' => $c)); ?>
+				<?php// Loader::packageElement('theme_footer', 'clinica', array('c' => $c)); ?>
 			</div>
 		</div>
 	</div>
+	
+	<?php Loader::packageElement('theme_footer', 'clinica', array('c' => $c)); ?>
     
     <?php Loader::element('footer_required'); // REQUIRED BY C5 // ?>
 </body>
