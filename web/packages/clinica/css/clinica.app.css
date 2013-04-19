@@ -105,7 +105,6 @@ div#cFooter div.legaleze a {color:#969696;}
 #cPrimary ul#sidebarNav li.nav-path-selected a {color:#fff;background:#b95b03;}
 #cPrimary h2:first-child {margin-top:0;}
 
-
 @media (min-width:980px) {
     #flexHeader .nav-collapse.collapse {height:auto;display:block;float:right;}
     ul#headerNavigation {margin:28px 25px 0 0;font-size:inherit;text-align:left;}
@@ -116,6 +115,11 @@ div#cFooter div.legaleze a {color:#969696;}
 @media (min-width:1200px) {
     ul#headerNavigation {font-weight:700;}
     ul#headerNavigation li {margin-left:3.9em;}
+}
+
+@media (min-width:980px) and (max-width:1199px){
+    #clinicaLogo img {height:50px;}
+    ul#headerNavigation {margin-top:20px;}
 }
 
 /* Portrait tablet to landscape and desktop */
