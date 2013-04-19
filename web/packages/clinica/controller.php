@@ -56,7 +56,7 @@
 				
 				// Other clinica data
 				'ClinicaPersonnel'			=> array('model', 'clinica_personnel', $this->pkgHandle),
-				'ClinicaPersonnelList'		=> array('model', 'clinica_personnel_list', $this->pkgHandle),
+				'ClinicaPersonnelList'		=> array('model', 'clinica_personnel_list', $this->pkgHandle)
 			));
 			
 			// load the SOAP client, if it exists

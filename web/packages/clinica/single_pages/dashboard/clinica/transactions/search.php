@@ -15,4 +15,4 @@
 		)); ?>
 	</div>
 	
-<?php echo Loader::helper('concrete/dashboard')->getDashboardPaneFooterWrapper(false); ?>
+<?php echo Loader::helper('concrete/dashboard')->getDashboardPaneFooterWrapper(false);

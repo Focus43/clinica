@@ -110,7 +110,7 @@ foreach ($navItems as $ni) {
 
 //*** Step 2 of 2: Output menu HTML ***/
 
-echo '<ul id="headerNavigation" class="nav unstyled">'; //opens the top-level menu
+echo '<ul id="headerNavigation" class="nav unstyled clearfix">'; //opens the top-level menu
 
 foreach ($navItems as $ni) {
 

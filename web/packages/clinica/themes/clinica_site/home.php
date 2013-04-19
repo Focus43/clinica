@@ -12,41 +12,31 @@
 <body class="clinicaPage home">
 	
 	<div id="minHeighter">
-		<div id="bgContainer" data-background="<?php echo $backgroundImage; ?>"></div>
+		<div id="bgContainer" class="hidden-phone" data-background="<?php echo $backgroundImage; ?>"></div>
 		
 		<?php Loader::packageElement('theme_header', 'clinica'); ?>
 		
 		<div class="container">
 			<div class="row">
 				<div class="span12 clearfix">
-					<div style="position:relative;z-index:5;min-height:20px;width:100%;">
-						<?php// $a = new Area('Homepage Content'); $a->display($c); ?>
+					<div class="clearfix" style="position:relative;z-index:5;min-height:20px;width:100%;">
 						<div id="homeContent">
 						    <?php $a = new Area('Homepage Content'); $a->display($c); ?>
 						</div>
 					</div>
-					<!--<div id="homeContent">
-						<?php $area1 = new Area('Editable Area 1'); $area1->setCustomTemplate('image', 'templates/align_center.php'); $area1->display($c); ?>
-						<p class="centerize" style="margin-top:1.4em;">
-							<a class="btn btn-large btn-info" href="<?php echo $this->url('/about'); ?>">Learn More About Clinica</a>
-						</p>
-					</div>-->
 				</div>
 			</div>
 		</div>
 		
-		<div style="position:absolute;left:0;bottom:0;right:0;">
-			<div style="position:relative;">
-				<div id="tagLiner" class="serifFont">
-					<div class="container">
-						<div class="row">
-							<div class="span12" style="color:#222;text-shadow:0 1px rgba(255,255,255,.55);">
-								<?php $area2 = new Area('Tag Line'); $area2->setBlockLimit(1); $area2->display($c); ?>
-							</div>
+		<div id="tagLiner">
+			<div class="tagLinerContent serifFont">
+				<div class="container">
+					<div class="row">
+						<div class="span12">
+							<?php $area2 = new Area('Tag Line'); $area2->setBlockLimit(1); $area2->display($c); ?>
 						</div>
 					</div>
 				</div>
-				<?php// Loader::packageElement('theme_footer', 'clinica', array('c' => $c)); ?>
 			</div>
 		</div>
 	</div>

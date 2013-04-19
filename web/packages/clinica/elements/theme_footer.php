@@ -47,7 +47,7 @@
 			<div class="row">
 				<div class="span12">
 					<div class="pull-left">
-						Copyright &copy; <?php echo date('Y'); ?> Clinica Family Health Services. All Rights Reserved
+						Copyright &copy; <?php echo date('Y'); ?> Clinica Family Health Services. <span class="hidden-phone">All Rights Reserved.</span>
 					</div>
 					<div class="pull-right">
 						<a>Terms of Use</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a>Privacy Policy</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a>Security Policy</a>

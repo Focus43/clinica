@@ -23,6 +23,8 @@ body.clinicaPage div.message.alert ul {margin:0;}
 /* RESPONSIVE HEADER BAR */
 #flexHeader {margin:30px 0;-webkit-border-radius:7px;-moz-border-radius:7px;border-radius:7px;}
 	#flexHeader div.main {position:relative;z-index:3;background:url('../images/textures/bedge_grunge.png');border:1px solid #adaaa1;border-bottom:0; -webkit-border-radius:7px;-moz-border-radius:7px;border-radius:7px; -moz-box-shadow:0 0 4px rgba(0,0,0,.25);-webkit-box-shadow:0 0 4px rgba(0,0,0,.25);box-shadow:0 0 4px rgba(0,0,0,.25);}
+	a#clinicaLogo {padding:4px 10px 4px 14px;display:block;float:left;background:transparent url('../images/logo_gradient.png') repeat-x;-webkit-border-radius:7px;-moz-border-radius:7px;border-radius:7px; -moz-box-shadow:1px 0 1px rgba(11,11,11,.3);-webkit-box-shadow:1px 0 1px rgba(11,11,11,.3);box-shadow:1px 0 1px rgba(11,11,11,.3);}
+	
 	body.home #flexHeader div.main {border:0;}
 		ul#headerNavigation {margin:28px 25px 0 0;font-family: 'Enriqueta', serif;font-weight:400;}
 		ul#headerNavigation li {display:inline-block;float:left;margin-left:.9em;}
@@ -35,18 +37,14 @@ body.clinicaPage div.message.alert ul {margin:0;}
 		#flexHeader div.sub a.active {font-weight:500;}
 		#flexHeader div.sub p {margin:0;padding:0;}
 	#responsiveTrigger {position:relative;top:23px;right:25px;}
-	/* variable width nav */
-	@media (min-width:1200px) {
-		ul#headerNavigation {font-weight:700;}
-		ul#headerNavigation li {margin-left:3.9em;}
-	}
 
 /* CLINICA HOMEPAGE; BIG IMAGE OVERLAY SECTION */
 #bgContainer {position:absolute;left:0;top:0;right:0;bottom:0;/*155px;*/}
 #homeContent {float:right;position:relative;background:rgba(0,0,0,.65);z-index:2;padding:12px;border-radius:6px; color:#f1f1f1;text-shadow:0 1px #111;}
 	#homeContent.custom-template {max-width:none;width:auto;float:none;}
 #homeContent h3 {color:inherit;text-shadow:inherit;}
-#tagLiner {padding:16px 0 9px;color:#fff;text-align:center;background:rgba(216,155,36, 0.75);text-shadow:0 1px #111;}
+#tagLiner {position:absolute;left:0;bottom:0;right:0;}
+#tagLiner .tagLinerContent {position:relative;padding:16px 0 9px;color:#fff;text-align:center;background:rgba(216,155,36, 0.75);color:#222;text-shadow:0 1px rgba(255,255,255,.55);}
 
 /* FORMS AND AJAX WAITING MESSAGE */
 .well form {margin-bottom:0;padding-bottom:0;}
@@ -81,7 +79,6 @@ span.boxedImage {
 	-moz-box-shadow:0 0 5px rgba(11,11,11,.4);
 	-webkit-box-shadow:0 0 5px rgba(11,11,11,.4);
 	box-shadow:0 0 5px rgba(11,11,11,.4);
-	
 	background-color:@start;
 	background-image:-moz-linear-gradient(top, @start, @finish);
 	background-image:-webkit-gradient(linear, 0 0, 0 100%, from(@start), to(@finish));
@@ -103,27 +100,65 @@ div#cFooter div.content ul li a {color:#d5d5d5;display:block;}
 div#cFooter div.legaleze {color:#969696;background:#2a2a2a;border-top:1px solid #444;font-size:11px;padding:10px 0;position:absolute;bottom:0;left:0;right:0;}
 div#cFooter div.legaleze a {color:#969696;}
 
-@media (max-width:767px){
-	div#cFooter {height:auto;background:none;}
-	div#cFooter div.content {display:none;}
-	div#cFooter div.legaleze {position:relative;}
-}
-
 /* LANDING PAGES */
 #cPrimary {margin-top:5px;background:#fff;padding:20px;-webkit-border-radius:7px;-moz-border-radius:7px;border-radius:7px;-moz-box-shadow:0 0 5px rgba(11,11,11,.4);-webkit-box-shadow:0 0 5px rgba(11,11,11,.4);box-shadow:0 0 5px rgba(11,11,11,.4);}
 #cPrimary ul#sidebarNav li.nav-path-selected a {color:#fff;background:#b95b03;}
 #cPrimary h2:first-child {margin-top:0;}
 
+
+@media (min-width:980px) {
+    #flexHeader .nav-collapse.collapse {height:auto;display:block;float:right;}
+    ul#headerNavigation {margin:28px 25px 0 0;font-size:inherit;text-align:left;}
+    ul#headerNavigation li {float:inherit;margin-left:18px;}
+}
+
+/* variable width nav */
+@media (min-width:1200px) {
+    ul#headerNavigation {font-weight:700;}
+    ul#headerNavigation li {margin-left:3.9em;}
+}
+
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
-	
+	a#clinicaLogo {float:none;text-align:center; -moz-box-shadow:0 0 4px rgba(0,0,0,.25);-webkit-box-shadow:0 0 4px rgba(0,0,0,.25);box-shadow:0 0 4px rgba(0,0,0,.25);}
+    a#clinicaLogo img {height:45px;}
+    #flexHeader .nav-collapse.collapse {height:auto;display:block;float:none;}
+    #flexHeader div.main {background:#005073;}
+    ul#headerNavigation {margin:0;font-size:.8em;text-align:center;}
+    ul#headerNavigation li {float:none;}
+    ul#headerNavigation li a {color:#fff;padding:9px 10px;text-shadow:0 1px rgba(0,0,0,.7);}
+    ul#headerNavigation li a:hover {color:#ddd;}
 }
 
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
+	body {padding:0;}
+    /* homepage specific */
+    #homeContent {float:none;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
+	#tagLiner {position:relative;}
 	
+	#minHeighter {margin:auto;min-height:auto !important;height:auto !important;}
+	#flexHeader {margin:0;}
+	#flexHeader div.main, #flexHeader div.sub {-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
+    	a#clinicaLogo {float:none;text-align:center;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
+    	a#clinicaLogo img {height:45px;}
+    	#responsiveTrigger {float:none;top:0;right:0; -webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+    	#flexHeader .nav-collapse.pull-right {float:none;}
+    	ul#headerNavigation {margin:0;font-size:.8em;}
+    	ul#headerNavigation li {float:left;width:33.33%;margin:0;}
+	#pageTitle, #pageTitle h1 {background:#fff;padding:0;margin:0;line-height:1em;}
+	#pageTitle h1 {font-size:2em;padding:.875em 20px 0;}
+	#cPrimary {margin:0;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;-moz-box-shadow:none;-webkit-box-shadow:none;box-shadow:none;}
+	div#pushFooter {display:none;}
+	div#cFooter {position:relative;height:auto;padding:0 12px 68px;}
+	div#cFooter div.legaleze {padding:10px 12px;}
+	div#cFooter div.legaleze .pull-left, div#cFooter div.legaleze .pull-right {float:none;width:100%;text-align:center;}
 }
 
-@media (max-width:979px) {
-	/*#flexHeader {position:fixed;margin:0;top:0;left:0;right:0;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}*/
+@media (max-width:480px){
+    #flexHeader ul#headerNavigation li {width:50%;}
+}
+
+@media (max-width:320px){
+    #flexHeader ul#headerNavigation li {width:100%;display:block;float:none;}
 }
