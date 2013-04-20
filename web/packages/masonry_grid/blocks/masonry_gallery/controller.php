@@ -16,7 +16,7 @@
 		protected $btCacheBlockOutputLifetime 				= CACHE_LIFETIME;
 		
 		public $fileSetIDs,
-			   $showFileSetFilters 	= 1,
+			   $showFileSetFilters 	= 0,
 			   $enableModals		= 0,
 			   $maxWidth 		 	= 250,
 			   $padding			 	= 3,
