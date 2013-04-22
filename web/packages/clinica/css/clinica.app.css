@@ -141,7 +141,7 @@ div#cFooter div.legaleze a {color:#969696;}
     #homeContent {float:none;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
 	#tagLiner {position:relative;font-size:1.3em;}
 	#tagLiner .tagLinerContent {padding:10px 0 4px;}
-	#minHeighter {margin:auto;min-height:auto !important;height:auto !important;}
+	#minHeighter {margin:auto;min-height:initial;height:auto !important;}
 	#responsiveTrigger {-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
 	#homeContent {color:#111;background:rgba(220,220,220,.55);text-shadow:none;}
 	#flexHeader {margin:0;}
