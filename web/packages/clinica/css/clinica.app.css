@@ -142,10 +142,9 @@ div#cFooter div.legaleze a {color:#969696;}
 	#tagLiner {position:relative;font-size:1.3em;}
 	#tagLiner .tagLinerContent {padding:10px 0 4px;}
 	#minHeighter {margin:auto;min-height:initial;height:auto !important;}
-	#responsiveTrigger {-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
 	#homeContent {color:#111;background:rgba(220,220,220,.55);text-shadow:none;}
 	#flexHeader {margin:0;}
-	#flexHeader div.main, #flexHeader div.sub {-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
+	#flexHeader div.main, #flexHeader div.sub, #responsiveTrigger {border:0;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
     	a#clinicaLogo {float:none;text-align:center;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
     	a#clinicaLogo img {height:45px;}
     	#responsiveTrigger {float:none;top:0;right:0; -webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
