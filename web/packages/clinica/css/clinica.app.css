@@ -141,8 +141,9 @@ div#cFooter div.legaleze a {color:#969696;}
     #homeContent {float:none;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
 	#tagLiner {position:relative;font-size:1.3em;}
 	#tagLiner .tagLinerContent {padding:10px 0 4px;}
-	
 	#minHeighter {margin:auto;min-height:auto !important;height:auto !important;}
+	#responsiveTrigger {-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
+	#homeContent {color:#111;background:rgba(220,220,220,.55);text-shadow:none;}
 	#flexHeader {margin:0;}
 	#flexHeader div.main, #flexHeader div.sub {-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
     	a#clinicaLogo {float:none;text-align:center;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
@@ -158,7 +159,7 @@ div#cFooter div.legaleze a {color:#969696;}
 	div#cFooter {position:relative;height:auto;padding:0 12px 68px;}
 	div#cFooter div.legaleze {padding:10px 12px;}
 	div#cFooter div.legaleze .pull-left, div#cFooter div.legaleze .pull-right {float:none;width:100%;text-align:center;}
-	div#cFooter .span3 ul, p {display:none;}
+	div#cFooter .span3 ul, div#cFooter .span3 p {display:none;}
 	div#cFooter .span3 .footer-gray {cursor:pointer;font-size:16px;padding:4px 0;display:block;text-align:center;background:rgba(255,255,255,.3); -webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}
 }
 
