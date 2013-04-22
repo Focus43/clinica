@@ -5,6 +5,7 @@
 		public $helpers = array('form');
 		
 		protected $requireHttps = true;
+        protected $includeThemeAssets = true;
 		
 		
 		public function on_start(){

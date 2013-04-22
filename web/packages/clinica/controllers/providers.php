@@ -4,6 +4,7 @@
 		
 		public $helpers = array('form', 'image');
 		
+        protected $includeThemeAssets = true;
 		
 		public function on_start(){
 			$this->addFooterItem( $this->getHelper('html')->javascript('libs/ajaxify.form.js', self::PACKAGE_HANDLE) );

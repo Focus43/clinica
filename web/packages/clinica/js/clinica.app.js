@@ -93,6 +93,11 @@
 					}
 				}
 			});
+			
+			
+			$('.footer-gray', '#cFooter').on('click', function(){
+			    $(this).siblings().slideToggle(250, 'easeOutExpo');
+			});
 
 		}
 		

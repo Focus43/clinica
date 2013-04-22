@@ -1,4 +1,6 @@
-<?php Loader::packageElement('flash_message', 'clinica', array('flash' => $flash)); ?>
+<div id="ccm-dashboard-result-message" class="ccm-ui">
+    <?php Loader::packageElement('flash_message', 'clinica', array('flash' => $flash)); ?>
+</div>
 
 <?php echo Loader::helper('concrete/dashboard')->getDashboardPaneHeaderWrapper(t('Clinica Settings'), t('Clinica site settings'), false, false ); ?>
     

@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.38';
+	    protected $pkgVersion 			= '0.42';
 	
 		
 		/**
@@ -302,9 +302,15 @@
 		 * @return ClinicaPackage
 		 */
 		private function setupTheme(){
+		    // primary clinica theme
 			try {
 				PageTheme::add('clinica_site', $this->packageObject());
 			}catch(Exception $e){ /* fail gracefully */ }
+            
+            // miss greek theme
+            try {
+                PageTheme::add('miss_greek', $this->packageObject());
+            }catch(Exception $e){ /* fail gracefully */ }
 			
 			return $this;
 		}
@@ -325,6 +331,10 @@
 			if( !is_object($this->pageType('full_width')) ){
 	            CollectionType::add(array('ctHandle' => 'full_width', 'ctName' => 'Full Width'), $this->packageObject());
 	        }
+            
+            if( !is_object($this->pageType('miss_greek')) ){
+                CollectionType::add(array('ctHandle' => 'miss_greek', 'ctName' => 'Miss Greek'), $this->packageObject());
+            }
 
 			return $this;
 		}
