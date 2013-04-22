@@ -95,9 +95,12 @@
 			});
 			
 			
-			$('.footer-gray', '#cFooter').on('click', function(){
-			    $(this).siblings().slideToggle(250, 'easeOutExpo');
-			});
+			
+			$('#cFooter').on('click', '.footer-gray', function(_event){
+			    if( $body.width() <= 767){
+                    $(this).siblings().slideToggle(250, 'easeOutExpo');
+                }
+            });
 
 		}
 		
