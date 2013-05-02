@@ -181,8 +181,14 @@
 			$this->addColumn(new DatabaseItemListColumn('state', t('State'), 'getState'));
 			$this->addColumn(new DatabaseItemListColumn('zip', t('Zip'), 'getZip'));
 			$this->addColumn(new DatabaseItemListColumn('message', t('Message'), 'getMessage'));
+            $this->addColumn(new DatabaseItemListColumn('cardExpMonth', t('Card Exp.'), array('ClinicaTransactionAvailableColumnSet', 'getCardExp')));
 			parent::__construct();
 		}
+        
+        
+        public function getCardExp( ClinicaTransaction $transaction ){
+            return str_pad($transaction->getCardExpMonth(), 2, "0", STR_PAD_LEFT) . "/{$transaction->getCardExpYear()}";
+        }
 	}
 	
 	
