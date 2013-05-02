@@ -33,7 +33,7 @@
         <field name="zip" type="C" size="10" />
         
         <!-- auth.net record stuff -->
-        <field name="amount" type="F" size="10,6" />
+        <field name="amount" type="N" size="19,4" />
         <field name="authNetResponseCode" type="I" size="11">
         	<unsigned />
         </field>

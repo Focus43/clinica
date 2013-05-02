@@ -14,3 +14,15 @@ table#clinicaSearchTable thead tr th {padding-left:6px;}
 #clinicaSearchTable.group-left tbody tr td.provider {white-space:nowrap;}
 #clinicaSearchTable.group-left tbody tr td a.thumbnail {display:inline-block;}
 #clinicaSearchTable.group-left tbody tr td a.thumbnail img {width:75px;}
+
+.ccm-ui #clinicaWrap.addTrxn .container-fluid {padding:0;margin:0;}
+.ccm-ui #clinicaWrap.addTrxn .controls {*zoom:1;}.ccm-ui #clinicaWrap .controls:before, .ccm-ui #clinicaWrap .controls:after{display:table;content:"";line-height:0;}
+.ccm-ui #clinicaWrap.addTrxn .controls:after{clear:both;}
+.ccm-ui #clinicaWrap.addTrxn .controls input,
+.ccm-ui #clinicaWrap.addTrxn .controls select {float:left;margin-bottom:.6em;margin-right:4px;}
+.ccm-ui #clinicaWrap.addTrxn .controls input:last-child {margin-right:0;}
+.ccm-ui #clinicaWrap.addTrxn .controls input.span12 {width:100%;}
+/* SPECIFIC CONFIGURATIONS */
+.ccm-ui #clinicaWrap.addTrxn .controls #state {width:180px;float:left;}
+.ccm-ui #clinicaWrap.addTrxn .controls #zip {width:80px;}
+.ccm-ui #clinicaWrap.addTrxn .typeOptions {display:none;}

@@ -3,7 +3,7 @@
 	
 	$(function(){
 		
-		ClinicaDash = new function(){
+		ClinicaDash = new function(){ 
 			
 			var self 		= this,
 				$document 	= $(document);
@@ -19,6 +19,16 @@
 				selector: '.helpTip',
 				placement: 'bottom'
 			});
+			
+			
+			// ajaxif'ied form
+			if( $.fn.ajaxifyForm ){
+			    $('form[data-method="ajax"]').ajaxifyForm({
+			        
+			    }).on('ajaxify_complete', function(event, respData){
+			        console.log(respData)
+			    });
+			}
 			
 			
 			// check all checkboxes
@@ -62,6 +72,14 @@
 				
 				// reset the menu
 				$this.val('');
+			});
+			
+			
+			// used w/ the manually add transactions page
+			$('#typeHandle').on('change', {groups: $('.typeOptions', '#clinicaWrap')}, function( _event ){
+                var $this = $(this),
+                    _chzn = $this.val();
+                _event.data.groups.hide().filter('[data-toggle-on="'+_chzn+'"]').show();
 			});
 		}
 		

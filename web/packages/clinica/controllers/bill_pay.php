@@ -3,11 +3,14 @@
 	class BillPayController extends ClinicaPageController {
 		
 		public $helpers = array('form');
-		
 		protected $requireHttps = true;
         protected $includeThemeAssets = true;
 		
 		
+        /**
+         * Add required page assets, trigger parent on_start
+         * @return void
+         */
 		public function on_start(){
 			$this->addFooterItem( $this->getHelper('html')->javascript('libs/ajaxify.form.js', self::PACKAGE_HANDLE) );
 			$this->set('transactionHelper', Loader::helper('clinica_transaction', 'clinica'));
@@ -15,6 +18,9 @@
 		}
 		
 		
+        /**
+         * @return void
+         */
 		public function view(){
 			$attrKeysList = AttributeSet::getByHandle(ClinicaTransaction::TYPE_BILL_PAY)->getAttributeKeys();
 			
@@ -38,6 +44,10 @@
 		}
 		
 		
+        /**
+         * Accessed via POST when processing a transaction. Renders JSON formatted response.
+         * @return void
+         */
 		public function process(){
 			// first, validate all the form data not checked by auth.net
 			if( !$this->validator()->test() ){

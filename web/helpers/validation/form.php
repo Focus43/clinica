@@ -31,7 +31,8 @@
                 foreach($this->requiredMinimums AS $obj){
                     // test
                     if( !((int)$this->data[$obj->field] >= (int)$obj->minValue) ){
-                        $this->error->add($obj->message);
+                        //$this->error->add($obj->message);
+                        $this->fieldsInvalid[] = $obj;
                     }
                 }
             }
@@ -40,10 +41,13 @@
 			if( !empty($this->attributeKeysToValidate) ){
 				foreach($this->attributeKeysToValidate AS $akObjContainer){
 					$formValue = $this->data['akID'][$akObjContainer->akObj->getAttributeKeyID()]['value'];
-					if( !$stringsVal->notempty($formValue) ){
-						$errorMsg = !is_null($akObjContainer->message) ? $akObjContainer->message : 'Missing required field ' . $akObjContainer->akObj->akName;
-						$this->error->add($errorMsg);
-					}
+                    if( !$stringsVal->notempty($formValue) ){
+                        $errorMsg = !is_null($akObjContainer->message) ? $akObjContainer->message : 'Missing required field ' . $akObjContainer->akObj->akName;
+                        //$this->error->add($errorMsg);
+                        $this->fieldsInvalid[] = (object) array(
+                            'message' => $errorMsg
+                        );
+                    }
 				}
 			}
 
