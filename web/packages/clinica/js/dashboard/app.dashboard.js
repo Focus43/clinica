@@ -23,9 +23,7 @@
 			
 			// ajaxif'ied form
 			if( $.fn.ajaxifyForm ){
-			    $('form[data-method="ajax"]').ajaxifyForm({
-			        
-			    }).on('ajaxify_complete', function(event, respData){
+			    $('form[data-method="ajax"]').ajaxifyForm().on('ajaxify_complete', function(event, respData){
 			        console.log(respData)
 			    });
 			}
