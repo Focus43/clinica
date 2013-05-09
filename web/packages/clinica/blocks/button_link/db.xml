@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<schema version="0.3">
+	<table name="btButtonLink">
+		<field name="bID" type="I">
+			<key />
+			<unsigned />
+		</field>
+		<field name="pageOrUrl" type="I1">
+            <unsigned />
+            <notnull />
+            <default value="1" />
+        </field>
+		<field name="pageID" type="I">
+		    <unsigned />
+	    </field>
+	    <field name="hrefUrl" type="X" />
+	    <field name="buttonColorClass" type="C" size="255" />
+	    <field name="buttonSizeClass" type="C" size="255" />
+	    <field name="fullWidth" type="I1">
+            <unsigned />
+            <default value="0" />
+        </field>
+	    <field name="linkText" type="X" />
+	</table>
+</schema>
