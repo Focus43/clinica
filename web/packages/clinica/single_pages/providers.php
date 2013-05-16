@@ -20,16 +20,20 @@
 			<?php if($this->controller->getTask() == 'profile'): ?>
 				
 				<?php if($personnelObj->getPersonnelID() >= 1): ?>
-					<div class="provider profile clearfix">
-						<?php if( $personnelObj->getPictureFileObj()->getFileID() >= 1 ): ?>
-							<img class="thumbnail pull-left" src="<?php echo $image->getThumbnail($personnelObj->getPictureFileObj(), 200, 300, true)->src; ?>" />
-						<?php else: ?>
-							<span class="thumbnail placeholder pull-left">Photo Unavailable</span>
-						<?php endif; ?>
-						<h3 style="margin-top:0;"><?php echo "{$personnelObj->getFirstName()} {$personnelObj->getLastName()}"; ?> <small><?php echo $personnelObj->getTitle(); ?></small></h3>
-						<p><strong>Location:</strong> <?php echo $personnelObj->getProviderHandle(true); ?></p>
-						<?php echo $personnelObj->getDescription(); ?>
-					</div>
+				    <div class="row-fluid provider profile">
+                        <div class="span3">
+                            <?php if( $personnelObj->getPictureFileObj()->getFileID() >= 1 ): ?>
+                                <img class="thumbnail pull-left" src="<?php echo $image->getThumbnail($personnelObj->getPictureFileObj(), 200, 300, true)->src; ?>" />
+                            <?php else: ?>
+                                <span class="thumbnail placeholder pull-left">Photo Unavailable</span>
+                            <?php endif; ?>
+                        </div>
+                        <div class="span9">
+                            <h3 style="margin-top:0;"><?php echo "{$personnelObj->getFirstName()} {$personnelObj->getLastName()}"; ?> <small><?php echo $personnelObj->getTitle(); ?></small></h3>
+                            <p><strong>Location:</strong> <?php echo $personnelObj->getProviderHandle(true); ?></p>
+                            <?php echo $personnelObj->getDescription(); ?>
+                        </div>
+                    </div>
 				<?php else: ?>
 					<div class="alert alert-danger"><h5>Provider cannot be found.</h5></div>
 				<?php endif; ?>

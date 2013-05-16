@@ -28,6 +28,9 @@
 		// application profiler. disable this for live sites! (just comment out)
 		//define('ENABLE_APPLICATION_PROFILER', true);
 		
+		// thumbnail compression defaults
+		define('AL_THUMBNAIL_JPEG_COMPRESSION', 90);
+		
 		// AUTHORIZE.NET STUFF (CLINICA SPECIFIC)
 		define('AUTHORIZENET_API_LOGIN_ID', '7ep7L4U4');
 		define('AUTHORIZENET_TRANSACTION_KEY', '4y4G4436kMYJg749');

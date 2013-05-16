@@ -25,7 +25,7 @@ body.clinicaPage div.message.alert ul {margin:0;}
 
 /* GLOBAL BLOCK OUTPUT STYLES */
 .btContent img, .btContent img.thumbnail,
-.btImage img, .btImage img.thumbnail {max-width:94%;margin:1em auto;display:block; padding:0;border:2px solid #888;box-shadow:0 3px 9px rgba(0,0,0,.4);}
+.btImage img, .btImage img.thumbnail, img.thumbnail {max-width:94%;margin:1em auto;display:block; padding:0;border:2px solid #888;box-shadow:0 3px 9px rgba(0,0,0,.4);}
 
 /* RESPONSIVE HEADER BAR */
 #flexHeader {margin:30px 0;-webkit-border-radius:7px;-moz-border-radius:7px;border-radius:7px;}
@@ -67,13 +67,14 @@ body.clinicaPage form.ajaxSuccess div.ajax-flash-target div.message.alert {margi
 	#providersList .span6 {margin-bottom:0;}
 	#providersList.applyFilter .span6 {float:none;width:100%;margin-left:0;}
 .provider {padding:5px;display:block;margin-bottom:.8em;color:inherit;position:relative;left:-5px; -webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}
+    .provider strong.plus {font-size:1.3em;}
 .provider.profile {padding:0;}
 	.provider:hover {text-decoration:none;color:inherit;background:#f5f5f5;}
 	.provider.profile:hover {background:none;}
-.provider .thumbnail {margin-right:12px;}
-.provider.profile .thumbnail {margin-right:20px;}
+.provider .thumbnail {margin:0 12px 0 0;}
+    .provider.profile .thumbnail {margin-right:20px;}
 .provider .thumbnail.placeholder {height:85px;width:75px;background:#f1f1f1;text-align:center;font-size:11px;color:#c1c1c1;}
-.provider.profile .thumbnail.placeholder {width:200px;height:300px;}
+    .provider.profile .thumbnail.placeholder {width:200px;height:300px;}
 
 /* SUPPORTER LOGOS */
 span.boxedImage {

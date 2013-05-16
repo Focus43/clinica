@@ -14,7 +14,8 @@
 		protected function getPageBackgroundImageURL(){
 			$fileObj = $this->getCollectionObject()->getAttribute('page_background');
 			if( $fileObj instanceof File ){
-				return $fileObj->getRecentVersion()->getRelativePath();
+			    return Loader::helper('image')->getThumbnail($fileObj, 1100, 1100)->src;
+				//return $fileObj->getRecentVersion()->getRelativePath();
 			}
 		}
         
