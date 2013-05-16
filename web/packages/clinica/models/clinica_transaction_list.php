@@ -138,7 +138,6 @@
 		
 		
 		public function __construct(){
-			$this->addColumn(new DatabaseItemListColumn('typeHandle', t('Type'), array('ClinicaTransactionDefaultColumnSet', 'getTypeHandle')));
 			$this->addColumn(new DatabaseItemListColumn('createdUTC', t('Added'), array('ClinicaTransactionDefaultColumnSet', 'getDateCreated')));
 			$this->addColumn(new DatabaseItemListColumn('firstName', t('First Name'), 'getFirstName'));
 			$this->addColumn(new DatabaseItemListColumn('lastName', t('Last Name'), 'getLastName'));
@@ -159,13 +158,6 @@
 		}
 		
 		
-		public function getTypeHandle( ClinicaTransaction $transaction ){
-			$url  = View::url('dashboard/clinica/transactions/', $transaction->getTransactionID());
-			$name = ucwords(str_replace(array('_', '-', '/'), ' ', $transaction->getTypeHandle()));
-			return '<a href="'.$url.'">'.$name.'</a>';
-		}
-		
-		
 		public function getAmount( ClinicaTransaction $transaction ){
 			return number_format( $transaction->getAmount(), 2 );
 		}
@@ -182,12 +174,22 @@
 			$this->addColumn(new DatabaseItemListColumn('zip', t('Zip'), 'getZip'));
 			$this->addColumn(new DatabaseItemListColumn('message', t('Message'), 'getMessage'));
             $this->addColumn(new DatabaseItemListColumn('cardExpMonth', t('Card Exp.'), array('ClinicaTransactionAvailableColumnSet', 'getCardExp')));
+            $this->addColumn(new DatabaseItemListColumn('userID', t('Transaction Run By'), array('ClinicaTransactionAvailableColumnSet', 'getTransactionRunBy')));
 			parent::__construct();
 		}
         
         
         public function getCardExp( ClinicaTransaction $transaction ){
             return str_pad($transaction->getCardExpMonth(), 2, "0", STR_PAD_LEFT) . "/{$transaction->getCardExpYear()}";
+        }
+        
+        
+        public function getTransactionRunBy( ClinicaTransaction $transaction ){
+            if( $transaction->getUserID() >= 1 ){
+                $userInfoObj = UserInfo::getByID( $transaction->getUserID() );
+                return ucwords( t('%s, %s', $userInfoObj->getAttribute('last_name'), $userInfoObj->getAttribute('first_name')) );
+            }
+            return 'Visitor';
         }
 	}
 	

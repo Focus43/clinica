@@ -18,6 +18,7 @@
 			<thead>
 				<tr>
 					<th><input id="checkAllBoxes" type="checkbox" /></th>
+					<th>Transaction Type</th>
 					<?php foreach($columns->getColumns() as $col) { ?>
 		                <?php if ($col->isColumnSortable()) { ?>
 		                	<th class="<?php echo $listObject->getSearchResultsClass($col->getColumnKey())?>"><a href="<?php echo $listObject->getSortByURL($col->getColumnKey(), $col->getColumnDefaultSortDirection(), (CLINICA_TOOLS_URL . 'dashboard/transactions/search_results'), array())?>"><?php echo $col->getColumnName()?></a></th>
@@ -31,6 +32,7 @@
 				<?php foreach($listResults AS $transaction): ?>
 					<tr>
 						<td><input type="checkbox" name="transactionID[]" value="<?php echo $transaction->getTransactionID(); ?>" /></td>
+						<td><a href="<?php echo View::url('dashboard/clinica/transactions/', $transaction->getTransactionID()); ?>"><?php echo ucwords(str_replace(array('_', '-', '/'), ' ', $transaction->getTypeHandle())) ?></a></td>
 						<?php foreach($columns->getColumns() AS $colObj){ ?>
 							<td><?php echo $colObj->getColumnValue($transaction); ?></td>
 						<?php } ?>

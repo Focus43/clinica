@@ -98,6 +98,9 @@
 		
 		/** @return string Get the associated message */
 		public function getMessage(){ return $this->message; }
+        
+        /** @return int Get userID of the person who conducted the transaction (would only be an employee) */
+        public function getUserID(){ return $this->userID; }
 		
 		/** @return string Get the address as a formatted string */
 		public function getAddressString(){
@@ -111,7 +114,7 @@
 				'phone', 'email', 'address1', 'address2', 'city', 'state', 'zip', 'amount',
 				'authNetResponseCode', 'authNetAuthorizationCode', 'authNetAvsResponse',
 				'authNetTransactionID', 'authNetMethod', 'authNetTransactionType', 'authNetMd5Hash',
-				'cardLastFour', 'cardExpMonth', 'cardExpYear', 'message'
+				'cardLastFour', 'cardExpMonth', 'cardExpYear', 'message', 'userID'
 			);
 			return $fields;
 		}

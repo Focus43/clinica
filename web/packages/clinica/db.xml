@@ -60,6 +60,11 @@
         <!-- message -->
         <field name="message" type="X" />
         
+        <!-- userID; if transaction conducted by someone internally in the billing dept -->
+        <field name="userID" type="I" size="4">
+            <unsigned />
+        </field>
+        
         <!-- indices -->
         <index name="created">
 	    	<col>created</col>

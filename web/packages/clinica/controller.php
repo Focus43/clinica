@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.46';
+	    protected $pkgVersion 			= '0.48';
 	
 		
 		/**
@@ -110,7 +110,6 @@
 			$this->registerEntityCategories()
 				 ->setupAttributeTypes()
 				 ->setupAttributeSets()
-				 ->setupUserGroups()
 				 ->setupUserAttributes()
 				 ->setupCollectionAttributes()
 				 ->setupTransactionAttributes()
@@ -166,18 +165,6 @@
 			$this->getOrCreateAttributeSet(ClinicaTransaction::TYPE_DONATION, 'clinica_transaction');
 			$this->getOrCreateAttributeSet(ClinicaTransaction::TYPE_BILL_PAY, 'clinica_transaction');
 			$this->getOrCreateAttributeSet(ClinicaTransaction::TYPE_MISS_GREEK, 'clinica_transaction');
-			
-			return $this;
-		}
-		
-		
-		/**
-		 * @return ClinicaPackage
-		 */
-		private function setupUserGroups(){
-			if( !(Group::getByName('Clinica Employees') instanceof Group ) ){
-				Group::add('Clinica Employees', 'Employees at Clinica; limited access to certain areas');
-			}
 			
 			return $this;
 		}

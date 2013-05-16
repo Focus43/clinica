@@ -51,7 +51,10 @@
             }
             
             // run the transaction
-            $transaction = new ClinicaTransactionHandler( $_POST, $_POST['typeHandle'] );
+            $userObj        = new User;
+            $data           = $_POST;
+            $data['userID'] = $userObj->getUserID();
+            $transaction = new ClinicaTransactionHandler( $data, $_POST['typeHandle'] );
             
             // should exit after this
             if( (bool) $transaction->getResponse()->approved ){
