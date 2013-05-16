@@ -1,0 +1,55 @@
+.masonryContainer {width:100%;}
+.masonryContainer .masonryItem {float:left;display:block;background:#e5e5e5;}
+.masonryContainer .masonryItem:hover {background:#d5d5d5;-moz-box-shadow:0 0 4px rgba(0,0,0,.45);-webkit-box-shadow:0 0 4px rgba(0,0,0,.45);box-shadow:0 0 4px rgba(0,0,0,.45);}
+.masonryContainer .masonryItem .masonryInner {position:relative;display:block;overflow:hidden;}
+.masonryContainer .masonryItem .masonryInner a {display:block;padding:0;margin:0;}
+.masonryContainer .masonryItem .masonryInner span.titleOverlay {color:#fff;font-size:11px;text-align:center;padding:1px 5px;position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.55);}
+
+.masonryContainer .masonryItem,
+.masonryContainer .masonryItem .masonryInner,
+.masonryContainer .masonryItem img,
+.masonryContainer .loadingMore {-webkit-border-radius:7px;-moz-border-radius:7px;border-radius:7px;}
+
+/* "loading more" on scroll indicator */
+.masonryContainer .loadingMore {background:rgba(0,0,0,.65);padding:10px;color:#fff;text-align:center;position:absolute;bottom:0;left:25%;right:25%;z-index:12;}
+
+/* on hover stuff */
+.masonryContainer .masonryItem .masonryInner p {display:none;padding:8px 8px 4px;margin:0;font-size:12px;line-height:1.3em;}
+.masonryContainer .masonryItem:hover {z-index:3;}
+.masonryContainer .masonryItem:hover .masonryInner p {display:block;}
+
+/* overlay */
+#masonryOverlay {display:none;text-align:center;position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(11,11,11,.8);z-index:99;vertical-align:middle;}
+#masonryOverlay .overlayContent {max-width:80%;margin:0 auto;padding:6px;min-height:38px;background:#f1f1f1 url('images/loader.gif') no-repeat 50% 50%;display:block;position:relative; -webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;-moz-box-shadow:0 0 12px rgba(0,0,0,.65);-webkit-box-shadow:0 0 12px rgba(0,0,0,.65);box-shadow:0 0 12px rgba(0,0,0,.65);}
+#masonryOverlay .overlayContent img.pic {display:none;}
+#masonryOverlay .arrow-control{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:100;position:absolute;top:50%;left:15px;width:40px;height:40px;margin-top:-20px;font-size:60px;font-weight:100;line-height:30px;color:#ffffff;text-align:center;background:#222222;border:3px solid #ffffff;z-index:101;-webkit-border-radius:23px;-moz-border-radius:23px;border-radius:23px;opacity:0.5;filter:alpha(opacity=50);}
+#masonryOverlay .arrow-control.right{left:auto;right:15px;}
+#masonryOverlay .arrow-control:hover,
+#masonryOverlay .arrow-control:focus{color:#ffffff;text-decoration:none;opacity:0.9;filter:alpha(opacity=90);}
+#masonryOverlay .closer {position:absolute;right:10px;bottom:10px;font-size:18px;color:#fff;}
+#masonryOverlay .closer:hover {text-decoration:none;}
+
+/* CSS TRANSITION ANIMATIONS */
+.masonry, .masonry .masonry-brick {
+  -webkit-transition-duration: 0.45s;
+     -moz-transition-duration: 0.45s;
+      -ms-transition-duration: 0.45s;
+       -o-transition-duration: 0.45s;
+          transition-duration: 0.45s;
+}
+
+.masonry {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.masonry .masonry-brick {
+  -webkit-transition-property: left, right, top;
+     -moz-transition-property: left, right, top;
+      -ms-transition-property: left, right, top;
+       -o-transition-property: left, right, top;
+          transition-property: left, right, top;
+}

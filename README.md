@@ -14,8 +14,7 @@ Check out the Boxfile to see the basic install settings. Features:
 
 ## Usage ##
 
-Visit https://pagodabox.com/cafe/jonohartman/concrete5. The one-click install will clone
-this repository and perform all setup.
+Please visit http://11robot.com/ for instructions on installing Concrete5 and how to develop locally.
 
 ## Installing Locally ##
 
@@ -64,3 +63,4 @@ QuickStart reviews at PagodaBox.
 
 MySQL issue: http://www.concrete5.org/developers/bugs/5-6-0-2/install-fails-with-mysql-auto-increment-offset-set/
 Memcache usage: http://www.concrete5.org/community/forums/customizing_c5/memcached-is-not-working/#239289
+

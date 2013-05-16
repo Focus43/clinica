@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<schema version="0.3">
+	
+	<!-- CLINICA TRANSACTION ENTITY -->
+	<table name="ClinicaTransaction">
+        <field name="id" type="I">
+            <autoincrement />
+            <key />
+            <unsigned />
+        </field>
+        
+        <!-- timing -->
+        <field name="createdUTC" type="T">
+        	<NOTNULL/>
+        </field>
+        <field name="modifiedUTC" type="T">
+        	<NOTNULL/>
+      		<DEFTIMESTAMP/>
+        </field>
+        
+        <field name="typeHandle" type="C" size="255" />
+        
+        <!-- personal details -->
+		<field name="firstName" type="C" size="255" />
+        <field name="middleInitial" type="C" size="255" />
+        <field name="lastName" type="C" size="255" />
+        <field name="phone" type="C" size="255" />
+        <field name="email" type="C" size="255" />
+        <field name="address1" type="C" size="255" />
+        <field name="address2" type="C" size="255" />
+        <field name="city" type="C" size="255" />
+        <field name="state" type="C" size="10" />
+        <field name="zip" type="C" size="10" />
+        
+        <!-- auth.net record stuff -->
+        <field name="amount" type="N" size="19,4" />
+        <field name="authNetResponseCode" type="I" size="11">
+        	<unsigned />
+        </field>
+        <field name="authNetAuthorizationCode" type="C" size="64" />
+        <field name="authNetAvsResponse" type="C" size="64" />
+        <field name="authNetTransactionID" type="C" size="64" />
+        <field name="authNetMethod" type="C" size="64" />
+        <field name="authNetTransactionType" type="C" size="255" />
+        <field name="authNetMd5Hash" type="C" size="255" />
+        
+        <!-- minimal card details (no pci-compliance required) -->
+        <field name="cardLastFour" type="C" size="4">
+        	<notnull />
+        </field>
+        <field name="cardExpMonth" type="I" size="2">
+        	<unsigned />
+        	<notnull />
+        </field>
+        <field name="cardExpYear" type="I" size="4">
+        	<unsigned />
+        	<notnull />
+        </field>
+        
+        <!-- message -->
+        <field name="message" type="X" />
+        
+        <!-- userID; if transaction conducted by someone internally in the billing dept -->
+        <field name="userID" type="I" size="4">
+            <unsigned />
+        </field>
+        
+        <!-- indices -->
+        <index name="created">
+	    	<col>created</col>
+	    </index>
+	    <index name="modified">
+	    	<col>modified</col>
+	    </index>
+	    <index name="typeHandle">
+        	<col>typeHandle</col>
+        </index>
+        <index name="firstName">
+        	<col>firstName</col>
+        </index>
+        <index name="lastName">
+        	<col>lastName</col>
+        </index>
+        <index name="address1">
+        	<col>address1</col>
+        </index>
+        <index name="city">
+        	<col>city</col>
+        </index>
+        <index name="state">
+        	<col>state</col>
+        </index>
+        <index name="zip">
+        	<col>zip</col>
+        </index>
+        <index name="cardLastFour">
+        	<col>cardLastFour</col>
+        </index>
+        <index name="cardExpMonth">
+        	<col>cardExpMonth</col>
+        </index>
+        <index name="cardExpYear">
+        	<col>cardExpYear</col>
+        </index>
+	</table>
+	
+	
+	<table name="ClinicaTransactionAttributeValues">
+		<field name="transactionID" type="I">
+            <KEY/>
+            <DEFAULT value="0"/>
+            <UNSIGNED />
+            <NOTNULL />
+        </field>
+        <field name="akID" type="I">
+            <KEY/>
+            <UNSIGNED />
+            <NOTNULL />
+            <DEFAULT value="0"/>
+        </field>
+        <field name="avID" type="I">
+            <KEY/>
+            <UNSIGNED />
+            <NOTNULL />
+            <DEFAULT value="0"/>
+        </field>
+	</table>
+	
+	
+	<table name="ClinicaPersonnel">
+        <field name="id" type="I">
+            <autoincrement />
+            <key />
+            <unsigned />
+        </field>
+        
+        <!-- timing -->
+        <field name="createdUTC" type="T">
+        	<NOTNULL/>
+        </field>
+        <field name="modifiedUTC" type="T">
+        	<NOTNULL/>
+      		<DEFTIMESTAMP/>
+        </field>
+        
+        <!-- details -->
+        <field name="firstName" type="C" size="255" />
+        <field name="lastName" type="C" size="255" />
+        <field name="title" type="C" size="255" />
+        <field name="picID" type="I" size="11">
+        	<unsigned />
+        </field>
+        <field name="description" type="X2" />
+        <field name="providerHandle" type="C" size="255" />
+        
+        <!-- indices -->
+        <index name="firstName">
+        	<col>firstName</col>
+        </index>
+        <index name="lastName">
+        	<col>lastName</col>
+        </index>
+        <index name="providerHandle">
+        	<col>lastName</col>
+        </index>
+    </table>
+	
+</schema>
