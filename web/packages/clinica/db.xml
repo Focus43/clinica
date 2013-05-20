@@ -161,8 +161,21 @@
         	<col>lastName</col>
         </index>
         <index name="providerHandle">
-        	<col>lastName</col>
+        	<col>providerHandle</col>
         </index>
+    </table>
+    
+    <table name="ClinicaPersonnelLocations">
+        <field name="personnelID" type="I">
+            <KEY/>
+            <DEFAULT value="0"/>
+            <UNSIGNED />
+            <NOTNULL />
+        </field>
+        <field name="providerHandle" type="C" size="255">
+            <KEY />
+            <NOTNULL />
+        </field>
     </table>
 	
 </schema>

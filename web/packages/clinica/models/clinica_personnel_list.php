@@ -28,7 +28,8 @@
 		
 		
 		public function filterByProviderHandle( $provider ){
-			$this->filter('cp.providerHandle', $provider, '=');
+		    $this->joinProvidersTable = true;
+			$this->filter('cpl.providerHandle', $provider, '=');
 		}
 		
 		
@@ -63,6 +64,9 @@
         
         public function setBaseQuery(){
             $queryStr = "SELECT cp.id FROM ClinicaPersonnel cp";
+            if( $this->joinProvidersTable === true ){
+                $queryStr .= " JOIN ClinicaPersonnelLocations cpl ON cpl.personnelID = cp.id";
+            }
             $this->setQuery( $queryStr );
         }
 		
@@ -83,7 +87,7 @@
 		}
 		
 		public function getProvider( ClinicaPersonnel $personnelObj ){
-			return $personnelObj->getProviderHandle(true);
+		    return $personnelObj->getProviderLocations(true);
 		}
 		
 		public function getCurrent(){

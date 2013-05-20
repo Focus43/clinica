@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.48';
+	    protected $pkgVersion 			= '0.54';
 	
 		
 		/**
@@ -116,7 +116,8 @@
 				 ->setupBlocks()
 				 ->setupTheme()
 				 ->setupPageTypes()
-				 ->setupSitePages();
+				 ->setupSitePages()
+                 ->setupJobs();
 		}
 		
 		
@@ -406,6 +407,18 @@
 			
 			return $this;
 		}
+
+
+        /**
+         * @return ClinicaPackage
+         */
+        private function setupJobs(){
+            if( !is_object(Job::getByHandle('migrate_provider_locations')) ){
+                Job::installByPackage( 'migrate_provider_locations', $this->packageObject() );
+            }
+            
+            return $this;
+        }
 
 
 		/**

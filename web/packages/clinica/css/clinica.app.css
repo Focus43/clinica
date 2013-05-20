@@ -74,7 +74,7 @@ body.clinicaPage form.ajaxSuccess div.ajax-flash-target div.message.alert {margi
 .provider .thumbnail {margin:0 12px 0 0;}
     .provider.profile .thumbnail {margin-right:20px;}
 .provider .thumbnail.placeholder {height:85px;width:75px;background:#f1f1f1;text-align:center;font-size:11px;color:#c1c1c1;}
-    .provider.profile .thumbnail.placeholder {width:200px;height:300px;}
+    .provider.profile .thumbnail.placeholder {width:94%;height:300px;}
 
 /* SUPPORTER LOGOS */
 span.boxedImage {

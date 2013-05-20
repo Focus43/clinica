@@ -11,7 +11,9 @@
 					<li class="<?php echo ($providerHandle == ClinicaPersonnel::PROVIDER_PEOPLES) ? 'active' : ''; ?>"><a href="<?php echo $this->action('location', ClinicaPersonnel::PROVIDER_PEOPLES); ?>">People's</a></li>
 					<li class="<?php echo ($providerHandle == ClinicaPersonnel::PROVIDER_THORNTON) ? 'active' : ''; ?>"><a href="<?php echo $this->action('location', ClinicaPersonnel::PROVIDER_THORNTON); ?>">Thornton</a></li>
 					<li class="divider"></li>
-					<li class="<?php echo ($providerHandle == ClinicaPersonnel::PROVIDER_DENTAL) ? 'active' : ''; ?>"><a href="<?php echo $this->action('location', ClinicaPersonnel::PROVIDER_DENTAL); ?>">Dental</a></li>
+					<li class="nav-header">Dental Providers</li>
+					<li class="<?php echo ($providerHandle == ClinicaPersonnel::PROVIDER_PECOS_DENTAL) ? 'active' : ''; ?>"><a href="<?php echo $this->action('location', ClinicaPersonnel::PROVIDER_PECOS_DENTAL); ?>">Pecos</a></li>
+					<li class="<?php echo ($providerHandle == ClinicaPersonnel::PROVIDER_THORNTON_DENTAL) ? 'active' : ''; ?>"><a href="<?php echo $this->action('location', ClinicaPersonnel::PROVIDER_THORNTON_DENTAL); ?>">Thornton</a></li>
 				</ul>
 			</div>
 			<?php $a = new Area('Providers Sidebar'); $a->display($c); ?>
@@ -23,14 +25,14 @@
 				    <div class="row-fluid provider profile">
                         <div class="span3">
                             <?php if( $personnelObj->getPictureFileObj()->getFileID() >= 1 ): ?>
-                                <img class="thumbnail pull-left" src="<?php echo $image->getThumbnail($personnelObj->getPictureFileObj(), 200, 300, true)->src; ?>" />
+                                <img class="thumbnail" src="<?php echo $image->getThumbnail($personnelObj->getPictureFileObj(), 200, 300, true)->src; ?>" />
                             <?php else: ?>
-                                <span class="thumbnail placeholder pull-left">Photo Unavailable</span>
+                                <span class="thumbnail placeholder">Photo Unavailable</span>
                             <?php endif; ?>
                         </div>
                         <div class="span9">
                             <h3 style="margin-top:0;"><?php echo "{$personnelObj->getFirstName()} {$personnelObj->getLastName()}"; ?> <small><?php echo $personnelObj->getTitle(); ?></small></h3>
-                            <p><strong>Location:</strong> <?php echo $personnelObj->getProviderHandle(true); ?></p>
+                            <p><strong>Location:</strong> <?php echo $personnelObj->getProviderLocations(true); ?></p>
                             <?php echo $personnelObj->getDescription(); ?>
                         </div>
                     </div>

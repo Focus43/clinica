@@ -31,7 +31,13 @@
 					</tr>
 					<tr>
 						<td colspan="2"><?php echo $assetLibrary->image('pictureID', 'picID', 'Personnel Photo', File::getByID($personnelObj->getPicID())); ?></td>
-						<td><?php echo $formHelper->select('providerHandle', ClinicaPersonnel::$providerLocations, $personnelObj->getProviderHandle()); ?></td>
+						<td>
+						    <?php foreach(ClinicaPersonnel::$providerLocations AS $locationKey => $label): ?>
+						        <label class="checkbox">
+						            <?php echo $formHelper->checkbox('providerHandle[]', $locationKey, $personnelObj->memberOfLocation($locationKey)) . " {$label}"; ?>
+						        </label>
+					        <?php endforeach; ?>
+					    </td>
 					</tr>
 					<tr>
 						<td colspan="3">Description</td>
