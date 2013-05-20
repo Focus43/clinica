@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.54';
+	    protected $pkgVersion 			= '0.57';
 	
 		
 		/**
@@ -404,8 +404,10 @@
          * @return ClinicaPackage
          */
         private function setupJobs(){
-            if( !is_object(Job::getByHandle('migrate_provider_locations')) ){
-                Job::installByPackage( 'migrate_provider_locations', $this->packageObject() );
+            if( (float) $this->pkgVersion < 0.54 ){
+                if( !is_object(Job::getByHandle('migrate_provider_locations')) ){
+                    Job::installByPackage( 'migrate_provider_locations', $this->packageObject() );
+                }
             }
             
             return $this;
