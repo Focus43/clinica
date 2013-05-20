@@ -28,6 +28,10 @@
 			$personnelObj = ClinicaPersonnel::getByID($id);
 			$personnelObj->setPropertiesFromArray($_POST);
 			$personnelObj->save();
+            
+            // purge the Providers front-facing page from the cache
+            PageCache::getLibrary()->purge( Page::getByPath('/providers') );
+            
 			$this->redirect('/dashboard/clinica/personnel/search');
 		}
 	

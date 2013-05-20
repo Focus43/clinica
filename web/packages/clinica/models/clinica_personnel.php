@@ -80,7 +80,7 @@
          * @return bool
          */
         public function memberOfLocation( $locationHandle ){
-            return in_array($locationHandle, $this->getProviderLocations());
+            return in_array($locationHandle, (array) $this->getProviderLocations());
         }
         
 		
