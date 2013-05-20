@@ -26,7 +26,7 @@
 		}
 		
 		// application profiler. disable this for live sites! (just comment out)
-		//define('ENABLE_APPLICATION_PROFILER', true);
+		define('ENABLE_APPLICATION_PROFILER', true);
 		
 		// thumbnail compression defaults
 		define('AL_THUMBNAIL_JPEG_COMPRESSION', 90);
