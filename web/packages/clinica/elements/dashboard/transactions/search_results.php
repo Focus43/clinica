@@ -7,6 +7,7 @@
 				<select id="actionMenu" class="span3" disabled="disabled" data-action-delete="<?php echo 'dashboard/transactions/delete'; ?>">
 					<option value="">** With Selected</option>
 					<option value="delete">Delete Transaction(s)</option>
+					<option value="mark_reconciled">Mark As Reconciled</option>
 				</select>
 			</div>
 			<div class="pull-right">
