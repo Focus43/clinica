@@ -56,16 +56,35 @@
 				switch( $this.val() ){
 					case 'delete':
 						if( confirm('Delete these records? This cannot be undone!') ){
+						    jQuery.fn.dialog.showLoader('Processing - Please Wait');
 							var deleteURL = tools + $('#actionMenu').attr('data-action-delete');
 							$.post( deleteURL, data, function(resp){
+							    jQuery.fn.dialog.hideLoader();
 								if( resp.code == 1 ){
 									$checkd.parents('tr').fadeOut(150);
+									ccmAlert.hud('Deleted OK', 2000, 'success');
 								}else{
-									alert('An error occurred. Try again later.');
+									ccmAlert.hud('Error deleting transactions', 2000, 'error');
 								}
 							}, 'json');
 						}
 						break;
+						
+				    case 'mark_reconciled':
+                        if( confirm('Mark selected transactions as reconciled? This cannot be undone!') ){
+                            jQuery.fn.dialog.showLoader('Processing - Please Wait');
+                            var reconcileURL = tools + $('#actionMenu').attr('data-action-reconcile');
+                            $.post( reconcileURL, data, function(resp){
+                                jQuery.fn.dialog.hideLoader();
+                                if( resp.code == 1 ){
+                                    $checkd.parents('tr').fadeOut(150);
+                                    ccmAlert.hud(resp.msg, 2000, 'success');
+                                }else{
+                                    ccmAlert.hud(resp.msg, 2000, 'error');
+                                }
+                            }, 'json');
+                        }
+                        break;
 				}
 				
 				// reset the menu

@@ -1,11 +1,8 @@
 <?php
 
-	class DashboardClinicaTransactionsSearchController extends Controller {
+	class DashboardClinicaTransactionsSearchController extends ClinicaPageController {
 	
-		public function on_start() {
-			
-		}
-		
+        protected $requireHttps = true;
 		
 		public function view(){
 			$searchInstance = 'transaction' . time();
