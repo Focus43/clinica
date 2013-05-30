@@ -3,7 +3,7 @@
     session_write_close();
     ob_clean();
     
-    if(!( sha1('cl1NiC@PASSk3y'.date('m-d-y_H')) === $_POST['key'] )){
+    if(!( sha1('cl1NiC@PASSk3y'.gmdate('m-d-y_H')) === $_POST['key'] )){
         header('HTTP/1.1 401 Unauthorized');
         die('Unauthorized');
     }
