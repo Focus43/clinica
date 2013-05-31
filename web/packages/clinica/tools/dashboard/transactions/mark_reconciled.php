@@ -14,9 +14,7 @@
                 }
             }
             
-            // send to Clinica
-            $secureTunnel = new ClinicaTunnel( $transactionsList );
-            $secureTunnel->send();
+            // do action here to mark them as reconciled
             
             // if we get here, it all worked like a charm
             echo Loader::helper('json')->encode( (object) array(
