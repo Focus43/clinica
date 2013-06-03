@@ -59,11 +59,12 @@ body.clinicaPage div.message.alert ul {margin:0;}
 /* FORMS AND AJAX WAITING MESSAGE */
 .well form {margin-bottom:0;padding-bottom:0;}
 body.clinicaPage form.ajaxProcessing {background:transparent url('../images/loader.gif') no-repeat 50% 50%;}
-body.clinicaPage form.ajaxProcessing * {display:none;}
-body.clinicaPage form.ajaxSuccess * {display:none;}
-body.clinicaPage form.ajaxSuccess div.ajax-flash-target {display:block;}
-body.clinicaPage form.ajaxSuccess div.ajax-flash-target * {display:inherit;}
+body.clinicaPage form.ajaxProcessing .form-content,
+body.clinicaPage form.ajaxSuccess .form-content {display:none;}
 body.clinicaPage form.ajaxSuccess div.ajax-flash-target div.message.alert {margin:0;}
+/*body.clinicaPage form.ajaxSuccess div.ajax-flash-target {display:block;}
+body.clinicaPage form.ajaxSuccess div.ajax-flash-target * {display:inherit;}
+body.clinicaPage form.ajaxSuccess div.ajax-flash-target div.message.alert {margin:0;}*/
 
 /* PROVIDERS PAGE */
 #providersList {margin-top:1em;}

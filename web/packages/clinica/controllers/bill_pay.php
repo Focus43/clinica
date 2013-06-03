@@ -16,6 +16,12 @@
 			$this->set('transactionHelper', Loader::helper('clinica_transaction', 'clinica'));
 			parent::on_start();
 		}
+        
+        
+        public function test_mode(){
+            $this->addFooterItem( $this->getHelper('html')->javascript('test_helpers/bill_pay.js', self::PACKAGE_HANDLE) );
+            $this->view();
+        }
 		
 		
         /**
@@ -60,7 +66,14 @@
 			
 			// should exit after this
 			if( (bool) $transaction->getResponse()->approved ){
-				$this->formResponder(true, 'Success! Your payment has been received by Clinica.');
+				$this->formResponder(true, 'Success! Your payment has been received by Clinica.', array(
+				    'payload' => array(
+				        'name'   => $transaction->getResponse()->first_name . ' ' . $transaction->getResponse()->last_name,
+				        'amount' => $transaction->getResponse()->amount,
+				        'date'   => date('m/d/Y h:i:s'),
+				        'trxnID' => $transaction->getResponse()->transaction_id
+                    )
+                ));
 				return;
 			}
 			
@@ -77,7 +90,7 @@
 			if( $this->_formValidator === null ){
 				$this->_formValidator = Loader::helper('validation/form');
 				$this->_formValidator->setData( $_POST );
-				$this->_formValidator->addRequiredEmail('email', 'A valid email address is required.');
+				//$this->_formValidator->addRequiredEmail('email', 'A valid email address is required.');
 				$this->_formValidator->addRequired('firstName', 'Missing required field first name.');
 				$this->_formValidator->addRequired('lastName', 'Missing required field last name.');
 				$this->_formValidator->addRequired('address1', 'Missing required field address 1.');

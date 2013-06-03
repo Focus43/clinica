@@ -95,7 +95,7 @@
 		 * @param mixed String || Array $message
 		 * @return void
 		 */
-		protected function formResponder( $okOrFail, $message ){
+		protected function formResponder( $okOrFail, $message, $extraData = array() ){
 			$accept = explode( ',', $_SERVER['HTTP_ACCEPT'] );
 			$accept = array_map('trim', $accept);
 			
@@ -103,10 +103,10 @@
 			// send back a JSON response
 			if( in_array($accept[0], array('application/json', 'text/javascript')) || $_SERVER['X_REQUESTED_WITH'] == 'XMLHttpRequest'){
 				header('Content-Type: application/json');
-				echo json_encode( (object) array(
+				echo json_encode( (object) (array(
 					'code'		=> (int) $okOrFail,
 					'messages'	=> is_array($message) ? $message : array($message)
-				));
+				) + $extraData));
 				exit;
 			}
 
