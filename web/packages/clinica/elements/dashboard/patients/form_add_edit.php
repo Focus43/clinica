@@ -1,9 +1,10 @@
 <?php Loader::element('editor_config');
 	$formHelper = Loader::helper('form');
+    $dateHelper = Loader::helper('form/date_time');
 	$assetLibrary = Loader::helper('concrete/asset_library');
 ?>
 			
-<form method="post" action="<?php echo $this->action('save', $patientObj->getPersonnelID()); ?>">
+<form method="post" action="<?php echo $this->action('save', $patientObj->getID()); ?>">
 	<h4>Add Or Update Personnel</h4>
 
 	<div class="row-fluid">
@@ -18,38 +19,27 @@
 					<tr>
 						<td style="width:33%;">First Name</td>
 						<td style="width:33%;">Last Name</td>
-						<td>Title</td>
+						<td>DOB</td>
+                        <td>Paid?</td>
 					</tr>
 					<tr>
 						<td><?php echo $formHelper->text('firstName', $patientObj->getFirstName(), array('class' => 'input-block-level')); ?></td>
 						<td><?php echo $formHelper->text('lastName', $patientObj->getLastName(), array('class' => 'input-block-level')); ?></td>
-						<td><?php echo $formHelper->text('title', $patientObj->getTitle(), array('class' => 'input-block-level')); ?></td>
+                        <td>
+<!--                            --><?php //echo $formHelper->text('dob', $patientObj->getDOB(), array('class' => 'input-block-level')); ?>
+                            <?php print $dateHelper->date('dob', $patientObj->getDOB(), true); ?>
+                            </td>
+                        <td>
+                            <label class="radio">
+                                <?php echo $formHelper->radio('paid', 0, $patientObj->getPaidNumeric()) . " NO"; ?>
+                            </label>
+                            <label class="radio">
+                                <?php echo $formHelper->radio('paid', 1, $patientObj->getPaidNumeric()) . " YES"; ?>
+                            </label>
+                        </td>
 					</tr>
-					<tr>
-						<td colspan="2">Picture</td>
-						<td>Provider Location</td>
-					</tr>
-					<tr>
-						<td colspan="2"><?php echo $assetLibrary->image('pictureID', 'picID', 'Personnel Photo', File::getByID($patientObj->getPicID())); ?></td>
-						<td>
-						    <?php foreach(ClinicaPersonnel::$providerLocations AS $locationKey => $label): ?>
-						        <label class="checkbox">
-						            <?php echo $formHelper->checkbox('providerHandle[]', $locationKey, $patientObj->memberOfLocation($locationKey)) . " {$label}"; ?>
-						        </label>
-					        <?php endforeach; ?>
-					    </td>
-					</tr>
-					<tr>
-						<td colspan="3">Description</td>
-					</tr>
-					<tr class="no-stripe">
-						<td colspan="3">
-							<div style="background:#fff;">
-								<?php Loader::element('editor_controls'); ?>
-								<?php echo $formHelper->textarea('description', $patientObj->getDescription(), array('class' => 'ccm-advanced-editor')); ?>
-							</div>
-						</td>
-					</tr>
+
+
 				</tbody>
 			</table>
 		</div>

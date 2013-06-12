@@ -7,7 +7,7 @@
 		
 		protected $autoSortColumns 	= array('createdUTC', 'modifiedUTC', 'firstName', 'lastName', 'title'),
 				  $itemsPerPage		= 10;
-		
+
 		
 		public function filterByKeywords($keywords) {
             $db = Loader::db();

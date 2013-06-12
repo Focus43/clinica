@@ -21,7 +21,27 @@ class ClinicaPatient {
         return "{$this->lastName}, {$this->firstName}";
     }
 
-
+    /** @return int Get the ID */
+    public function getID(){ return $this->id; }
+    /** @return string Date the object was first created */
+    public function getDateCreated(){ return $this->createdUTC; }
+    /** @return string Date the object was last modified */
+    public function getDateModified(){ return $this->modifiedUTC; }
+    /** @return string Get first name */
+    public function getFirstName(){ return ucfirst($this->firstName); }
+    /** @return string Get last name */
+    public function getLastName(){ return ucfirst($this->lastName); }
+    /** @return string Get date of birth */
+    public function getDOB($formatted = false) {
+        if ($formatted) {
+            return date('d/m/Y', strtotime($this->dob));
+        }
+        return $this->dob;
+    }
+    /** @return string Get paid */
+    public function getPaid(){ return ($this->paid == 1) ? "YES" : "NO"; }
+    /** @return string Get paid numeric version */
+    public function getPaidNumeric(){ return $this->paid; }
 
     /**
      * Set properties of the current instance
