@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.57';
+	    protected $pkgVersion 			= '0.58';
 	
 		
 		/**
@@ -56,7 +56,9 @@
 				
 				// Other clinica data
 				'ClinicaPersonnel'			=> array('model', 'clinica_personnel', $this->pkgHandle),
-				'ClinicaPersonnelList'		=> array('model', 'clinica_personnel_list', $this->pkgHandle)
+				'ClinicaPersonnelList'		=> array('model', 'clinica_personnel_list', $this->pkgHandle),
+                'ClinicaPatient'			=> array('model', 'clinica_patient', $this->pkgHandle),
+                'ClinicaPatientList'		=> array('model', 'clinica_patient_list', $this->pkgHandle)
 			));
 			
 			// load the SOAP client, if it exists
@@ -389,6 +391,13 @@
 				$personnel->setAttribute('icon_dashboard', 'icon-user');
 			}
 			SinglePage::add('/dashboard/clinica/personnel/search', $this->packageObject());
+
+            // clinica patient dashboard pages
+            $patient = SinglePage::add('/dashboard/clinica/patients', $this->packageObject());
+            if( is_object($patient) ){
+                $patient->setAttribute('icon_dashboard', 'icon-user');
+            }
+//            SinglePage::add('/dashboard/clinica/personnel/search', $this->packageObject());
             
             // settings page
 			$settings = SinglePage::add('/dashboard/clinica/settings', $this->packageObject());
