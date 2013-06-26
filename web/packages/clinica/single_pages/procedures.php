@@ -32,6 +32,8 @@
                 $.get(_uri, function(_html){
                     $('#procedureTable').empty().append(_html);
                 }, 'html');
+            }else{
+                alert(respData.messages[0]);
             }
         });
     });

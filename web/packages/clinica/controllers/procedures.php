@@ -31,7 +31,7 @@
                 return;
             }
 
-            $this->formResponder(false, 'The password does not match your account.');
+            $this->formResponder(false, 'The password does not match the account you are logged in with. Access denied.');
         }
 
 
