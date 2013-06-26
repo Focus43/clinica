@@ -18,7 +18,7 @@ class ClinicaPatient {
 
 
     public function __toString(){
-        return "{$this->lastName}, {$this->firstName}";
+        return ucfirst("{$this->lastName}, {$this->firstName}");
     }
 
     /** @return int Get the ID */

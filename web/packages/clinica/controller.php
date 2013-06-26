@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.58';
+	    protected $pkgVersion 			= '0.59';
 	
 		
 		/**
@@ -397,13 +397,15 @@
             if( is_object($patient) ){
                 $patient->setAttribute('icon_dashboard', 'icon-user');
             }
-//            SinglePage::add('/dashboard/clinica/personnel/search', $this->packageObject());
             
             // settings page
 			$settings = SinglePage::add('/dashboard/clinica/settings', $this->packageObject());
             if( is_object($settings) ){
                 $settings->setAttribute('icon_dashboard', 'icon-cog');
             }
+
+            // patient procedures page
+            SinglePage::add('/procedures', $this->packageObject());
 			
 			return $this;
 		}
