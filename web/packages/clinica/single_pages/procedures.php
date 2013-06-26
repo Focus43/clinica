@@ -1,3 +1,5 @@
+<?php defined('C5_EXECUTE') or die("Access Denied."); ?>
+
 <div class="container-fluid" style="padding:0;">
     <div class="row-fluid">
         <div class="span12">
