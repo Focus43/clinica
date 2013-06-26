@@ -1,6 +1,4 @@
-<?php $columns = ClinicaPatientColumnSet::getCurrent();
-	$imageHelper = Loader::helper('image');
-?>
+<?php $columns = ClinicaPatientColumnSet::getCurrent(); ?>
 
 <div id="ccm-<?php echo $searchInstance; ?>-search-results">
 	<div class="ccm-pane-body">
@@ -22,7 +20,7 @@
 					<th><input id="checkAllBoxes" type="checkbox" /></th>
 					<?php foreach($columns->getColumns() as $col) { ?>
 		                <?php if ($col->isColumnSortable()) { ?>
-<!--		                	<th class="--><?php //echo $listObject->getSearchResultsClass($col->getColumnKey())?><!--"><a href="--><?php //echo $listObject->getSortByURL($col->getColumnKey(), $col->getColumnDefaultSortDirection(), (CLINICA_TOOLS_URL . 'dashboard/patients/search_results'), array())?><!--">--><?php //echo $col->getColumnName()?><!--</a></th>-->
+                        <?php //echo $listObject->getSearchResultsClass($col->getColumnKey())?><!--"><a href="--><?php //echo $listObject->getSortByURL($col->getColumnKey(), $col->getColumnDefaultSortDirection(), (CLINICA_TOOLS_URL . 'dashboard/patients/search_results'), array())?><!--">--><?php //echo $col->getColumnName()?><!--</a></th>-->
                             <th><?php echo $col->getColumnName()?></th>
 		                <?php } else { ?>
 		                	<th><?php echo $col->getColumnName()?></th>
@@ -33,7 +31,7 @@
 			<tbody>
 				<?php foreach($listResults AS $patient): ?>
 					<tr>
-						<td><input type="checkbox" name="personnelID[]" value="<?php echo $patient->getID(); ?>" /></td>
+						<td><input type="checkbox" name="patientID[]" value="<?php echo $patient->getID(); ?>" /></td>
 
 						<?php foreach($columns->getColumns() AS $colObj){ ?>
 							<td class="<?php echo strtolower($colObj->getColumnName()); ?>"><?php echo $colObj->getColumnValue($patient); ?></td>
