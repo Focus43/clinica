@@ -3,5 +3,5 @@
     Loader::library('api/handler', 'clinica');
 
     $api = new ClinicaApiHandler();
-    $api->getDatabaseDump();
-    
+    $api->getTransactionList();
+

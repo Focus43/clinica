@@ -3,7 +3,8 @@
     class ProceduresController extends ClinicaPageController {
 
         protected $includeThemeAssets   = true,
-                  $requireHttps         = true;
+                  $requireHttps         = true,
+                  $supportsPageCache    = false;
 
 
         public function on_start(){
