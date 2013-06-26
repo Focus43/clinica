@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.59';
+	    protected $pkgVersion 			= '0.61';
 	
 		
 		/**
