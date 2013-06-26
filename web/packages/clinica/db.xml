@@ -177,5 +177,43 @@
             <NOTNULL />
         </field>
     </table>
-	
+
+
+    <table name="ClinicaPatient">
+        <field name="id" type="I">
+            <autoincrement />
+            <key />
+            <unsigned />
+        </field>
+
+        <!-- timing -->
+        <field name="createdUTC" type="T">
+            <NOTNULL/>
+        </field>
+        <field name="modifiedUTC" type="T">
+            <NOTNULL/>
+            <DEFTIMESTAMP/>
+        </field>
+
+        <!-- details -->
+        <field name="firstName" type="C" size="255" />
+        <field name="lastName" type="C" size="255" />
+        <field name="dob" type="C" size="255" />
+        <field name="paid" type="I" size="11">
+            <default value="0"/>
+            <unsigned />
+        </field>
+
+        <!-- indices -->
+        <index name="firstName">
+            <col>firstName</col>
+        </index>
+        <index name="lastName">
+            <col>lastName</col>
+        </index>
+        <index name="dob">
+            <col>dob</col>
+        </index>
+    </table>
+
 </schema>
