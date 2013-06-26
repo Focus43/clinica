@@ -15,7 +15,7 @@
 		
 		// connect to Redis cache
 		define('REDIS_CONNECTION_HANDLE', 'tunnel.pagodabox.com:6379');
-
+		
 		// the following depend on the constant REDIS_CONNECTION_HANDLE being defined
 		if( defined('REDIS_CONNECTION_HANDLE') ){
 			// use Redis as the page cache library
@@ -30,6 +30,14 @@
 
         // disable marketplace support b/c of Pagodabox read-only file system
         define('ENABLE_MARKETPLACE_SUPPORT', false);
+		
+		// thumbnail compression defaults
+		define('AL_THUMBNAIL_JPEG_COMPRESSION', 90);
+		
+		// AUTHORIZE.NET STUFF (CLINICA SPECIFIC)
+		define('AUTHORIZENET_API_LOGIN_ID', '7ep7L4U4');
+		define('AUTHORIZENET_TRANSACTION_KEY', '4y4G4436kMYJg749');
+		define('AUTHORIZENET_SANDBOX', true);
 	
 	/**
 	 * STAGING, LOCAL MACHINE, OR VAGRANT?
@@ -92,3 +100,7 @@
 	
 	// sitemap.xml file
 	define('SITEMAPXML_FILE', 'files/sitemap.xml');
+	
+	// issue emails from address
+	define('OUTGOING_MAIL_ISSUER_ADDRESS', $_SERVER['OUTGOING_MAIL_ISSUER']);
+
