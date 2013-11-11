@@ -27,7 +27,7 @@
 				</div>
 				<div class="sub clearfix hidden-phone">
 					<div class="pull-left">
-						<a class="active">English</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a>Espa&ntilde;ol</a>
+						<!--<a class="active">English</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a>Espa&ntilde;ol</a>-->
 					</div>
 					<div class="pull-right">
 						<?php $a = new GlobalArea('Header Orange Bar Right'); $a->display($c); ?>
