@@ -1,5 +1,10 @@
 <IfModule mod_rewrite.c>
         RewriteEngine On
+
+        # redirect all domains to clinica.org
+        RewriteCond %{HTTP_HOST} !=clinica.org
+        RewriteRule ^ http://clinica.org%{REQUEST_URI} [L,R=301]
+
         RewriteBase /
 	    RewriteCond %{REQUEST_URI} !^/favicon.ico$
         RewriteCond %{REQUEST_FILENAME} !-f
