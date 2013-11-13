@@ -2,7 +2,7 @@
         RewriteEngine On
 
         # redirect all domains to clinica.org
-        RewriteCond %{HTTP_HOST} !=clinica.org
+        RewriteCond %{HTTP_HOST} !^((clinica\.org)|(lo\.cal(.*))|localhost(.*))$ [NC]
         RewriteRule ^ http://clinica.org%{REQUEST_URI} [L,R=301]
 
         RewriteBase /

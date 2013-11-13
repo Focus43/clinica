@@ -24,9 +24,6 @@
 			// if using the FluidDNS package
 			define('PAGE_TITLE_FORMAT', '%2$s');
 		}
-		
-		// application profiler. disabled on production by default (just uncomment to use)
-		//define('ENABLE_APPLICATION_PROFILER', true);
 
         // disable marketplace support b/c of Pagodabox read-only file system
         define('ENABLE_MARKETPLACE_SUPPORT', false);
@@ -35,12 +32,12 @@
 		define('AL_THUMBNAIL_JPEG_COMPRESSION', 90);
 		
 		// AUTHORIZE.NET STUFF (CLINICA SPECIFIC)
-		define('AUTHORIZENET_API_LOGIN_ID', '7ep7L4U4');
-		define('AUTHORIZENET_TRANSACTION_KEY', '4y4G4436kMYJg749');
-		define('AUTHORIZENET_SANDBOX', true);
+		define('AUTHORIZENET_API_LOGIN_ID', $_SERVER['AUTHNET_API_LOGIN']);
+		define('AUTHORIZENET_TRANSACTION_KEY', $_SERVER['AUTHNET_API_TRXN_KEY']);
+		define('AUTHORIZENET_SANDBOX', false);
 
         // outgoing mail issuer
-        $_SERVER['OUTGOING_MAIL_ISSUER'] = 'no-reply@clinica.org';
+        define('OUTGOING_MAIL_ISSUER_ADDRESS', 'no-reply@clinica.org');
 	
 	/**
 	 * STAGING, LOCAL MACHINE, OR VAGRANT?
@@ -74,7 +71,7 @@
             //define('ENABLE_APPLICATION_PROFILER', true);
 
             // outgoing mail issuer
-            $_SERVER['OUTGOING_MAIL_ISSUER'] = 'jhartman86@gmail.com';
+            define('OUTGOING_MAIL_ISSUER_ADDRESS', 'jon@focus-43.com');
 
             // AUTHORIZE.NET STUFF (TEST ACCOUNT CREDENTIALS)
             define('AUTHORIZENET_API_LOGIN_ID', '7ep7L4U4');
@@ -113,7 +110,6 @@
 	define('SITEMAPXML_FILE', 'files/sitemap.xml');
 	
 	// issue emails from address
-	define('OUTGOING_MAIL_ISSUER_ADDRESS', $_SERVER['OUTGOING_MAIL_ISSUER']);
     define('EMAIL_DEFAULT_FROM_ADDRESS', OUTGOING_MAIL_ISSUER_ADDRESS);
     define('EMAIL_ADDRESS_FORGOT_PASSWORD', OUTGOING_MAIL_ISSUER_ADDRESS);
     define('EMAIL_DEFAULT_FROM_NAME', 'Clinica.org');
