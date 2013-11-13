@@ -38,6 +38,9 @@
 		define('AUTHORIZENET_API_LOGIN_ID', '7ep7L4U4');
 		define('AUTHORIZENET_TRANSACTION_KEY', '4y4G4436kMYJg749');
 		define('AUTHORIZENET_SANDBOX', true);
+
+        // outgoing mail issuer
+        $_SERVER['OUTGOING_MAIL_ISSUER'] = 'no-reply@clinica.org';
 	
 	/**
 	 * STAGING, LOCAL MACHINE, OR VAGRANT?
@@ -69,6 +72,14 @@
             }
             // application profiler. disable this for live sites! (just comment out)
             //define('ENABLE_APPLICATION_PROFILER', true);
+
+            // outgoing mail issuer
+            $_SERVER['OUTGOING_MAIL_ISSUER'] = 'jhartman86@gmail.com';
+
+            // AUTHORIZE.NET STUFF (TEST ACCOUNT CREDENTIALS)
+            define('AUTHORIZENET_API_LOGIN_ID', '7ep7L4U4');
+            define('AUTHORIZENET_TRANSACTION_KEY', '4y4G4436kMYJg749');
+            define('AUTHORIZENET_SANDBOX', true);
 
         }else{
 
