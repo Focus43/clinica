@@ -6,9 +6,8 @@
         RewriteRule ^ http://clinica.org%{REQUEST_URI} [L,R=301]
 
         # force sitewide https
-        #RewriteEngine On
-        #RewriteCond %{HTTP:X-Forwarded-Proto} =http
-        #RewriteRule (.*) https://%{HTTP_HOST}/$1 [R]
+        RewriteCond %{HTTP:X-Forwarded-Proto} !https
+        RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R,L]
 
         RewriteBase /
 	    RewriteCond %{REQUEST_URI} !^/favicon.ico$
