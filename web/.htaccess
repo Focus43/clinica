@@ -5,14 +5,11 @@
         RewriteCond %{HTTP_HOST} !^((clinica\.org)|(lo\.cal(.*))|localhost(.*))$ [NC]
         RewriteRule ^ http://clinica.org%{REQUEST_URI} [L,R=301]
 
+        # force site-wide SSL
         # http://httpd.apache.org/docs/trunk/da/rewrite/avoid.html#setenv
         RewriteCond %{HTTP:X-Forwarded-Proto} !https
         RewriteCond %{HTTPS} off
         RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R,L]
-
-        # LOCAL force SSL
-        #RewriteCond %{HTTPS} !=on
-        #RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R,L]
 
         RewriteBase /
 	    RewriteCond %{REQUEST_URI} !^/favicon.ico$
