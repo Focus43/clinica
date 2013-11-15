@@ -25,6 +25,7 @@
 					</div>
 					<div class="pull-right">
 						<!--<a>Terms of Use</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a>Privacy Policy</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a>Security Policy</a>-->
+                        <a href="https://www.facebook.com/pages/Clinica-Family-Health-Services/114217321986190" target="_blank"><img src="<?php echo CLINICA_IMAGES_URL; ?>ico_facebook.png" alt="Facebook" style="max-height:18px;" /></a>
 					</div>
 				</div>
 			</div>
