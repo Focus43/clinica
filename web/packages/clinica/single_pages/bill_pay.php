@@ -19,14 +19,18 @@
                         <div class="controls controls-row">
                             <?php foreach($attrKeysList AS $akObj){ /** @var $akObj AttributeKey */ ?>
                                 <div class="span4">
-                                    <?php echo $akObj->render('paymentForm'); ?>
+                                    <?php echo $akObj->render('paymentForm');
+                                        if( $akObj->getAttributeKeyHandle() === 'patient_birthdate' ){
+                                            echo '<p class="muted" style="font-size:11px;margin:0;position:relative;top:-8px;">Format: mm/dd/yyyy</p>';
+                                        }
+                                    ?>
                                 </div>
                             <?php } ?>
                         </div>
                     </div>
                     
                     <h4>Payment Amount <small>Pay some or all of amount due</small></h4>
-                    <div class="controls controls-row poptip" data-placement="left" title="Donation Amount" data-content="On behalf of everyone at Clinica, and all the people we serve - thank you!">
+                    <div class="controls controls-row poptip" data-placement="left" title="Payment Amount" data-content="Enter just the number of the amount you would like to pay. For example, enter: 23.25 into the field to pay $23.25.">
                         <div class="input-prepend">
                             <span class="add-on">$</span>
                             <?php echo $form->text('amount'); ?>
@@ -54,7 +58,7 @@
         $('#frmBillPay').on('ajaxify_complete', function( _formEvent, respData ){
             if( respData.code === 1 ){
                 var $receipt = $('<div class="receipt" />');
-                $receipt.append('<h4>Payment Receipt (<span class="label label-important">DO NOT CLOSE/REFRESH BEFORE PRINTING</span>)</h4>');
+                $receipt.append('<h4>Payment Receipt (<span class="label label-important">PRINT BEFORE CLOSING THIS PAGE.</span>)</h4>');
                 $receipt.append('<table class="table table-bordered"></table>');
                 $('table', $receipt).append('<tr><td>Name</td><td>'+respData.payload.name+'</td></tr>');
                 $('table', $receipt).append('<tr><td>Paid</td><td>$'+respData.payload.amount+'</td></tr>');

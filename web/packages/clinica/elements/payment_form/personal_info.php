@@ -2,7 +2,7 @@
 <div class="controls controls-row poptip" title="Email Address" data-placement="left" data-content="Your receipt of payment will be emailed to this address, and is used for nothing else.">
 	<?php if($phone == true){
 		echo $form->text('email', '', array('class' => 'span6', 'placeholder' => 'Email address'));
-		echo $form->text('phone', '', array('class' => 'span6', 'placeholder' => 'Phone'));
+		echo $form->text('phone', '', array('class' => 'span6', 'placeholder' => 'Phone: 123-123-1234'));
 	}else{
 		echo $form->text('email', '', array('class' => 'input-block-level', 'placeholder' => 'Email address'));
 	} ?>

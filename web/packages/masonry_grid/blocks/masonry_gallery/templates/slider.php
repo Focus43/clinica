@@ -38,7 +38,7 @@
 	<script type="text/javascript">
 		$(function(){
 			$('#carousel-<?php echo $controller->bID; ?>').carousel({
-				interval: 2200
+				interval: 4000
 			});
 		});
 	</script>

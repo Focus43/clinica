@@ -32,7 +32,7 @@
 			
 			// should exit after this
 			if( (bool) $transaction->getResponse()->approved ){
-				$this->formResponder(true, 'Success! Thank you for supporting Clinica.');
+				$this->formResponder(true, 'Thank you for supporting Clinica! A receipt has been sent to your email address.');
 				return;
 			}
 			
@@ -49,7 +49,7 @@
 			if( $this->_formValidator === null ){
 				$this->_formValidator = Loader::helper('validation/form');
 				$this->_formValidator->setData( $_POST );
-				//$this->_formValidator->addRequiredEmail('email', 'A valid email address is required.');
+				$this->_formValidator->addRequiredEmail('email', 'A valid email address is required.');
 				$this->_formValidator->addRequired('firstName', 'Missing required field first name.');
 				$this->_formValidator->addRequired('lastName', 'Missing required field last name.');
 				$this->_formValidator->addRequired('address1', 'Missing required field address 1.');

@@ -66,7 +66,7 @@
 			
 			// should exit after this
 			if( (bool) $transaction->getResponse()->approved ){
-				$this->formResponder(true, 'Success! Your payment has been received by Clinica.', array(
+				$this->formResponder(true, 'Success! Your payment has been received by Clinica, and a receipt has been to your email address.', array(
 				    'payload' => array(
 				        'name'   => $transaction->getResponse()->first_name . ' ' . $transaction->getResponse()->last_name,
 				        'amount' => $transaction->getResponse()->amount,
@@ -90,7 +90,7 @@
 			if( $this->_formValidator === null ){
 				$this->_formValidator = Loader::helper('validation/form');
 				$this->_formValidator->setData( $_POST );
-				//$this->_formValidator->addRequiredEmail('email', 'A valid email address is required.');
+				$this->_formValidator->addRequiredEmail('email', 'A valid email address is required.');
 				$this->_formValidator->addRequired('firstName', 'Missing required field first name.');
 				$this->_formValidator->addRequired('lastName', 'Missing required field last name.');
 				$this->_formValidator->addRequired('address1', 'Missing required field address 1.');
