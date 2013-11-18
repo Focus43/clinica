@@ -8,7 +8,7 @@
         # force site-wide SSL
         # http://httpd.apache.org/docs/trunk/da/rewrite/avoid.html#setenv
         RewriteCond %{HTTP:X-Forwarded-Proto} !https
-        RewriteCond %{HTTPS} off
+        #RewriteCond %{HTTPS} off
         RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R,L]
 
         RewriteBase /
