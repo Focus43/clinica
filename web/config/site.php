@@ -37,7 +37,7 @@
 		define('AUTHORIZENET_SANDBOX', false);
 
         // outgoing mail issuer
-        define('OUTGOING_MAIL_ISSUER_ADDRESS', 'no-reply@clinica.org');
+        define('OUTGOING_MAIL_ISSUER_ADDRESS', 'webreceipt@clinica.org');
 	
 	/**
 	 * STAGING, LOCAL MACHINE, OR VAGRANT?
@@ -112,5 +112,5 @@
 	// issue emails from address
     define('EMAIL_DEFAULT_FROM_ADDRESS', OUTGOING_MAIL_ISSUER_ADDRESS);
     define('EMAIL_ADDRESS_FORGOT_PASSWORD', OUTGOING_MAIL_ISSUER_ADDRESS);
-    define('EMAIL_DEFAULT_FROM_NAME', 'Clinica.org');
+    define('EMAIL_DEFAULT_FROM_NAME', 'Clinica.org Website');
 
