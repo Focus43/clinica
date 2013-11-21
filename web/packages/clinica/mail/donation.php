@@ -12,6 +12,8 @@ $payersAddress  = $transaction->getAddressString();
 $paymentAmount  = number_format($transaction->getAmount(), 2);
 $message        = $transaction->getMessage();
 
+$logoSrc = BASE_URL . CLINICA_IMAGES_URL . '/logo_transparent.png';
+
 $template = <<< heredoc
 <html>
 	<head>
@@ -49,9 +51,21 @@ $template = <<< heredoc
 													<hr>
 													<p style="text-align:center;">Thank you for your generosity. Clinica Family Health Services is a 501(c)(3) tax-exempt organization. Your gift is tax deductible.</p>
 													<hr>
-													<p style="text-align:center;"><strong>Clinica Family Health Services</strong></p>
-													<p style="text-align:center;">1345 Plaza Court North, 1A<br>Lafayette, CO 80026<br>Phone: (303) 650-4460</p>
 												</td>
+											</tr>
+											<tr>
+											    <td>
+											        <table cellpadding="0" cellspacing="0" border="0">
+											            <tr>
+											                <td>
+                                                                <p><strong>Clinica Family Health Services</strong></p>
+                                                                <p>1345 Plaza Court North, 1A<br>Lafayette, CO 80026<br>Phone: (303) 650-4460</p>
+                                                                <p>{$logoSrc}</p>
+													        </td>
+											                <td style="text-align:right;"><img src="{$logoSrc}" alt="Clinica Logo" /></td>
+											            </tr>
+											        </table>
+											    </td>
 											</tr>
 										</table>
 									</td>
