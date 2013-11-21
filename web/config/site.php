@@ -35,9 +35,6 @@
 		define('AUTHORIZENET_API_LOGIN_ID', $_SERVER['AUTHNET_API_LOGIN']);
 		define('AUTHORIZENET_TRANSACTION_KEY', $_SERVER['AUTHNET_API_TRXN_KEY']);
 		define('AUTHORIZENET_SANDBOX', false);
-
-        // outgoing mail issuer
-        define('OUTGOING_MAIL_ISSUER_ADDRESS', 'webreceipt@clinica.org');
 	
 	/**
 	 * STAGING, LOCAL MACHINE, OR VAGRANT?
@@ -69,9 +66,6 @@
             }
             // application profiler. disable this for live sites! (just comment out)
             //define('ENABLE_APPLICATION_PROFILER', true);
-
-            // outgoing mail issuer
-            define('OUTGOING_MAIL_ISSUER_ADDRESS', 'jon@focus-43.com');
 
             // AUTHORIZE.NET STUFF (TEST ACCOUNT CREDENTIALS)
             define('AUTHORIZENET_API_LOGIN_ID', '7ep7L4U4');
@@ -110,6 +104,7 @@
 	define('SITEMAPXML_FILE', 'files/sitemap.xml');
 	
 	// issue emails from address
+    define('OUTGOING_MAIL_ISSUER_ADDRESS', 'webreceipt@clinica.org');
     define('EMAIL_DEFAULT_FROM_ADDRESS', OUTGOING_MAIL_ISSUER_ADDRESS);
     define('EMAIL_ADDRESS_FORGOT_PASSWORD', OUTGOING_MAIL_ISSUER_ADDRESS);
     define('EMAIL_DEFAULT_FROM_NAME', 'Clinica.org Website');

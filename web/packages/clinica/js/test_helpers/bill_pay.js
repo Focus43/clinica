@@ -23,6 +23,7 @@
                 });
                 
                 $('[placeholder="Patient Birth Date"]').val('04/17/1986');
+                $('[name="email"]').val('jhartman86@gmail.com');
                 $('[name="state"]').val('MD');
                 $('[name="zip"]').val( randomString(5, true) );
                 $('[name="amount"]').val( randomString(3, true) );
