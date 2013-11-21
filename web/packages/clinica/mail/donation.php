@@ -12,7 +12,7 @@ $payersAddress  = $transaction->getAddressString();
 $paymentAmount  = number_format($transaction->getAmount(), 2);
 $message        = $transaction->getMessage();
 
-$logoSrc = BASE_URL . CLINICA_IMAGES_URL . '/logo_transparent.png';
+$logoSrc = BASE_URL . CLINICA_IMAGES_URL . '/logo_full.jpg';
 
 $template = <<< heredoc
 <html>
@@ -49,7 +49,7 @@ $template = <<< heredoc
 													<hr>
 													<p class="p"><strong>Message From Sender:</strong> {$message}</p>
 													<hr>
-													<p style="text-align:center;">Thank you for your generosity. Clinica Family Health Services is a 501(c)(3) tax-exempt organization. Your gift is tax deductible.</p>
+													<p style="text-align:center;">Thank you for your generosity. Clinica Family Health Services is a 501(c)(3) tax-exempt organization. Your gift is tax deductible. Clinica's Tax ID number: 84-0743432.</p>
 													<hr>
 												</td>
 											</tr>
@@ -60,7 +60,6 @@ $template = <<< heredoc
 											                <td>
                                                                 <p><strong>Clinica Family Health Services</strong></p>
                                                                 <p>1345 Plaza Court North, 1A<br>Lafayette, CO 80026<br>Phone: (303) 650-4460</p>
-                                                                <p>{$logoSrc}</p>
 													        </td>
 											                <td style="text-align:right;"><img src="{$logoSrc}" alt="Clinica Logo" /></td>
 											            </tr>

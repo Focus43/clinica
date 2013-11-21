@@ -15,7 +15,7 @@ $paymentAmount  = number_format($transaction->getAmount(), 2);
 $transactionID  = $transaction->getAuthNetTransactionID(); // the *AUTHORIZE.NET* transaction ID
 $message        = $transaction->getMessage();
 
-$logoSrc = BASE_URL . CLINICA_IMAGES_URL . '/logo_transparent.png';
+$logoSrc = BASE_URL . CLINICA_IMAGES_URL . '/logo_full.jpg';
 
 $template = <<< heredoc
 <html>
