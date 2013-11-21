@@ -3,6 +3,15 @@
 
 $subject = t("Clinica.org %s Receipt", $transaction->getTypeHandle(true));
 
+$dateObj = new DateTime( $transaction->getDateCreated(), new DateTimeZone('UTC') );
+$dateObj->setTimezone(new DateTimeZone('America/Denver'));
+$paymentDate = $dateObj->format('M d, Y g:i a ') . ' America/Denver';
+
+$payersName     = $transaction->__toString();
+$payersAddress  = $transaction->getAddressString();
+$paymentAmount  = number_format($transaction->getAmount(), 2);
+$message        = $transaction->getMessage();
+
 $template = <<< heredoc
 <html>
 	<head>
@@ -30,12 +39,18 @@ $template = <<< heredoc
 										<table border="0" cellpadding="10" cellspacing="0" width="600">
 											<tr>
 												<td>
-													<p class="p"><strong>Name:</strong> {$transaction->__toString()}</p>
-													<p class="p"><strong>Address:</strong> {$transaction->getAddressString()}</p>
-													<p class="p"><strong>Message:</strong> {$transaction->getMessage()}</p>
-													<p class="p">------------------------------------------------------------</p>
-													<p class="p"><strong>Amount:</strong> &#36;{$amount}</p>
-													<p class="p"><strong>Transaction ID:</strong> {$transaction->getTransactionID()}</p>
+													<p class="p"><strong>Donor Name:</strong> {$payersName}</p>
+													<p class="p"><strong>Donor Address:</strong> {$payersAddress}</p>
+													<hr>
+													<p class="p"><strong>Donation Date:</strong> {$paymentDate}</p>
+													<p class="p"><strong>Amount:</strong> &#36;{$paymentAmount}</p>
+													<hr>
+													<p class="p"><strong>Message From Sender:</strong> {$message}</p>
+													<hr>
+													<p style="text-align:center;">Thank you for your generosity. Clinica Family Health Services is a 501(c)(3) tax-exempt organization. Your gift is tax deductible.</p>
+													<hr>
+													<p style="text-align:center;"><strong>Clinica Family Health Services</strong></p>
+													<p style="text-align:center;">1345 Plaza Court North, 1A<br>Lafayette, CO 80026<br>Phone: (303) 650-4460</p>
 												</td>
 											</tr>
 										</table>

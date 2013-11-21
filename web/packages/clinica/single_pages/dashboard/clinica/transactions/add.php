@@ -3,7 +3,7 @@
     
     <div id="clinicaWrap" class="addTrxn">
         <div class="ccm-pane-body">
-            <form data-method="ajax" action="<?php echo $this->action('create'); ?>">
+            <form id="frmManualTrxn" data-method="ajax" action="<?php echo $this->action('create'); ?>">
                 <!-- ajax response feedback -->
                 <?php Loader::packageElement('flash_message', 'clinica'); ?>
                 
@@ -42,7 +42,7 @@
                 <div class="well">
                     <div class="container-fluid">
                         <div class="row-fluid">
-                            <?php Loader::packageElement('payment_form/personal_info', 'clinica', array('form' => $form)); ?>
+                            <?php Loader::packageElement('payment_form/personal_info', 'clinica', array('form' => $form, 'phone' => true)); ?>
                         </div>
                     </div>
                 </div>
@@ -68,9 +68,29 @@
                 </div>
                 
                 <button type="submit" class="btn">Save</button>
+                <img id="ajax-waiting" src="<?php echo CLINICA_IMAGES_URL; ?>loader.gif" style="display:none;" />
             </form>
         </div>
         <div class="ccm-pane-footer"></div>
     </div>
+
+<script type="text/javascript">
+    $(function(){
+        if( $.fn.ajaxifyForm ){
+            $('form[data-method="ajax"]').ajaxifyForm({
+                beforeSend: function( $form ){
+                    $('#ajax-waiting').show().siblings('button.btn').hide();
+                }
+            }).on('ajaxify_complete', function(event, respData){
+                if( respData.code === 1 ){
+                    $('#ajax-waiting').remove();
+                }else{
+                    $('#ajax-waiting').hide().siblings('button.btn').show();
+                }
+
+            });
+        }
+    });
+</script>
 
 <?php echo Loader::helper('concrete/dashboard')->getDashboardPaneFooterWrapper(false); ?>

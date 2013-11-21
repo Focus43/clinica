@@ -49,21 +49,23 @@
                 $this->formResponder(false, $this->validator()->getError()->getList());
                 return;
             }
-            
+
             // run the transaction
             $userObj        = new User;
             $data           = $_POST;
             $data['userID'] = $userObj->getUserID();
-            $transaction = new ClinicaTransactionHandler( $data, $_POST['typeHandle'] );
-            
+            $transactionHandler = new ClinicaTransactionHandler( $data, $_POST['typeHandle'] );
+            $transactionHandler->setMailTemplate( $_POST['typeHandle'] );
+            $transactionHandler->execute();
+
             // should exit after this
-            if( (bool) $transaction->getResponse()->approved ){
+            if( (bool) $transactionHandler->getAuthnetResponse()->approved ){
                 $this->formResponder(true, 'Success! Your payment has been received by Clinica.');
                 return;
             }
             
             // if we get here, it failed
-            $this->formResponder(false, $transaction->getResponse()->response_reason_text);
+            $this->formResponder(false, $transactionHandler->getAuthnetResponse()->response_reason_text);
         }
         
         
@@ -77,7 +79,7 @@
                 $this->_formValidator = $this->getHelper('validation/form');
                 $this->_formValidator->setData( $_POST );
                 $this->_formValidator->addRequired('typeHandle', 'A transaction type must be selected.');
-                $this->_formValidator->addRequiredEmail('email', 'A valid email address is required.');
+                //$this->_formValidator->addRequiredEmail('email', 'A valid email address is required.');
                 $this->_formValidator->addRequired('firstName', 'Missing required field first name.');
                 $this->_formValidator->addRequired('lastName', 'Missing required field last name.');
                 $this->_formValidator->addRequired('address1', 'Missing required field address 1.');

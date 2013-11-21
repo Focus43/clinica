@@ -123,7 +123,7 @@
 		public function save(){
 			// record already exists, do an update
 			if( $this->id >= 1 ){
-				
+				// *** TRANSACTIONS ARE WRITE-ONCE ONLY *** //
 			}else{
 				$db 		= Loader::db();
 				$fields		= $this->persistable();

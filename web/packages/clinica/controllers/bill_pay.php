@@ -62,23 +62,33 @@
 			}
 			
 			// run the transaction
-			$transaction = new ClinicaTransactionHandler( $_POST, ClinicaTransaction::TYPE_BILL_PAY );
+			$transactionHandler = new ClinicaTransactionHandler( $_POST, ClinicaTransaction::TYPE_BILL_PAY );
+            $transactionHandler->setMailTemplate('bill_payment');
+            $transactionHandler->execute();
+
 			
-			// should exit after this
-			if( (bool) $transaction->getResponse()->approved ){
-				$this->formResponder(true, 'Success! Your payment has been received by Clinica, and a receipt has been to your email address.', array(
+			// send back JSON response
+			if( (bool) $transactionHandler->getAuthnetResponse()->approved ){
+				// just double check to make sure getTransactionRecordObj is returning the obj properly
+                if( $transactionHandler->getTransactionRecordObj() instanceof ClinicaTransaction ){
+                    $clinicaAcctNum = $transactionHandler->getTransactionRecordObj()->getAttribute('clinica_account_number');
+                }
+
+                // finally, issue the response
+                $this->formResponder(true, 'Success! Your payment has been received by Clinica, and a receipt has been to your email address.', array(
 				    'payload' => array(
-				        'name'   => $transaction->getResponse()->first_name . ' ' . $transaction->getResponse()->last_name,
-				        'amount' => $transaction->getResponse()->amount,
+				        'name'   => $transactionHandler->getAuthnetResponse()->first_name . ' ' . $transactionHandler->getAuthnetResponse()->last_name,
+				        'amount' => $transactionHandler->getAuthnetResponse()->amount,
 				        'date'   => date('m/d/Y h:i:s'),
-				        'trxnID' => $transaction->getResponse()->transaction_id
+				        'trxnID' => $transactionHandler->getAuthnetResponse()->transaction_id,
+                        'acct'   => $clinicaAcctNum
                     )
                 ));
 				return;
 			}
 			
 			// if we get here, it failed
-			$this->formResponder(false, $transaction->getResponse()->response_reason_text);
+			$this->formResponder(false, $transactionHandler->getAuthnetResponse()->response_reason_text);
 		}
 		
 		

@@ -6,51 +6,76 @@
 	 */
 	class ClinicaTransactionHandler {
 		
-		private $data,
-				$transactionType,
-				$response;
+		private $data, $transactionType;
 		
 		
 		/**
-		 * Run a transaction against authorize.net. Always use this class so its
+		 * Prepare an authorize.net transactions. Always use this class so its
 		 * properly processed and logged to the database.
 		 * @param array $data ['amount', 'card_number', 'exp_month', 'exp_year']; usually $_POST
 		 */
 		public function __construct( array $data, $transactionType ){
 			$this->data 			= $data;
 			$this->transactionType 	= $transactionType;
-			$this->response 		= $this->preValidate()->authorizeNetObj()->authorizeAndCapture();
-			$this->onSuccess();
+
 		}
+
+
+        /**
+         * Pass a string representing the name of the mail template to use.
+         * @param $templateHandle
+         */
+        public function setMailTemplate( $templateHandle ){
+            $this->_emailTemplateHandle = $templateHandle;
+        }
+
+
+        /**
+         * Execute the transaction. This should only occur after a mail template has been set.
+         */
+        public function execute(){
+            $this->_authNetResponse = $this->preValidate()->authorizeNetObj()->authorizeAndCapture();
+            $this->onComplete();
+        }
 		
 		
 		/**
-		 * Was the transaction successful or not?
+		 * Was the transaction successful or not? This is the response data from the AUTHORIZE.NET
+         * API!
 		 * @return AuthorizeNetAIM_Response object
 		 */
-		public function getResponse(){
-			return $this->response;
+		public function getAuthnetResponse(){
+			return $this->_authNetResponse;
 		}
+
+
+        /**
+         * Get the object as it was persisted to the database!
+         * @return ClinicaTransaction
+         */
+        public function getTransactionRecordObj(){
+            return $this->_transactionRecordObj;
+        }
 		
 		
 		/**
-		 * Log the transaction, according to its type (eg. donation, bill_payment). Tests
-		 * for if null to make sure the record is only saved once.
+		 * Log the transaction to the database, according to its type (eg. donation, bill_payment),
+         * and take care of issuing an email. Tests for if null to make sure the record is only saved once.
 		 * @param string
 		 * @return void
 		 */
-		private function onSuccess(){
+		private function onComplete(){
 			// if payment processed ok...
-			if( (bool) $this->response->approved ){
+			if( (bool) $this->_authNetResponse->approved ){
 				$data = $this->data;
 				$data['typeHandle']					= $this->transactionType;
-				$data['authNetResponseCode'] 		= $this->response->response_code;
-				$data['authNetAuthorizationCode']	= $this->response->authorization_code;
-				$data['authNetAvsResponse']			= $this->response->avs_response;
-				$data['authNetTransactionID']		= $this->response->transaction_id;
-				$data['authNetMethod']				= $this->response->method;
-				$data['authNetTransactionType']		= $this->response->transaction_type;
-				$data['authNetMd5Hash']				= $this->response->md5_hash;
+				$data['authNetResponseCode'] 		= $this->_authNetResponse->response_code;
+				$data['authNetAuthorizationCode']	= $this->_authNetResponse->authorization_code;
+				$data['authNetAvsResponse']			= $this->_authNetResponse->avs_response;
+				$data['authNetTransactionID']		= $this->_authNetResponse->transaction_id;
+				$data['authNetMethod']				= $this->_authNetResponse->method;
+				$data['authNetTransactionType']		= $this->_authNetResponse->transaction_type;
+				$data['authNetMd5Hash']				= $this->_authNetResponse->md5_hash;
 				$data['cardLastFour']				= substr( preg_replace('/[^0-9]/', '', $this->data['card_number']), -4 );
 				$data['cardExpMonth']				= $this->data['exp_month'];
 				$data['cardExpYear']				= $this->data['exp_year'];
@@ -61,20 +86,43 @@
 				unset($data['exp_month']);
 				unset($data['exp_year']);
 				
-				// create the transaction record, then save it
-				$transaction = new ClinicaTransaction($data);
-				$transaction = $transaction->save();
+				// create the transaction record, then save it and set it as a class property
+				$this->_transactionRecordObj = new ClinicaTransaction($data);
+                $this->_transactionRecordObj = $this->_transactionRecordObj->save();
 				
 				// send mail receipt
-				$mailHelper = Loader::helper('mail');
-				$mailHelper->to($transaction->getEmail());
-				$mailHelper->from(OUTGOING_MAIL_ISSUER_ADDRESS);
-				$mailHelper->addParameter('transaction', $transaction);
-				$mailHelper->addParameter('amount', number_format($transaction->getAmount(), 2));
-				$mailHelper->load('transaction', 'clinica');
-				$mailHelper->sendMail();
+                $this->issueEmail($this->_transactionRecordObj);
 			}
 		}
+
+
+        /**
+         * Issue an outgoing email. This depends on a template being set; if its not, just
+         * log some of the details to the standard C5 log.
+         * @param ClinicaTransaction $transactionRecord
+         * @return void
+         */
+        private function issueEmail( ClinicaTransaction $transactionRecord ){
+            if( $this->_emailTemplateHandle === null ){
+                $logger = new Log('transaction', true);
+                $logger->write('TRANSACTION OCCURRED WITH NO EMAIL RECEIPT SENT:');
+                $logger->write("To: {$transactionRecord->firstName} {$transactionRecord->lastName}");
+                $logger->write("Email: {$transactionRecord->email}");
+                $logger->write("Phone: {$transactionRecord->phone}");
+                $logger->write("Amount: {$transactionRecord->amount}");
+                $logger->write("Type: {$transactionRecord->typeHandle}");
+                $logger->close();
+                return;
+            }
+
+            // if we get here, template handle is available so run it
+            $mailerObj = Loader::helper('mail');
+            $mailerObj->to( $transactionRecord->getEmail() );
+            $mailerObj->from(OUTGOING_MAIL_ISSUER_ADDRESS);
+            $mailerObj->addParameter('transaction', $transactionRecord);
+            $mailerObj->load( $this->_emailTemplateHandle, 'clinica' );
+            $mailerObj->sendMail();
+        }
 		
 		
 		/**

@@ -60,9 +60,10 @@
                 var $receipt = $('<div class="receipt" />');
                 $receipt.append('<h4>Payment Receipt (<span class="label label-important">PRINT BEFORE CLOSING THIS PAGE.</span>)</h4>');
                 $receipt.append('<table class="table table-bordered"></table>');
-                $('table', $receipt).append('<tr><td>Name</td><td>'+respData.payload.name+'</td></tr>');
+                $('table', $receipt).append('<tr><td>Payer Name</td><td>'+respData.payload.name+'</td></tr>');
                 $('table', $receipt).append('<tr><td>Paid</td><td>$'+respData.payload.amount+'</td></tr>');
                 $('table', $receipt).append('<tr><td>Date</td><td>'+respData.payload.date+'</td></tr>');
+                $('table', $receipt).append('<tr><td>Clinica Acct #</td><td>'+respData.payload.acct+'</td></tr>');
                 $('table', $receipt).append('<tr><td>Transaction #</td><td>'+respData.payload.trxnID+'</td></tr>');
                 $receipt.insertBefore( $('.form-content', '#frmBillPay') );
             }

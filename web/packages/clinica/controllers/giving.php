@@ -28,16 +28,18 @@
 			}
 			
 			// run the transaction
-			$transaction = new ClinicaTransactionHandler( $_POST, ClinicaTransaction::TYPE_DONATION );
+			$transactionHandler = new ClinicaTransactionHandler( $_POST, ClinicaTransaction::TYPE_DONATION );
+            $transactionHandler->setMailTemplate('donation');
+            $transactionHandler->execute();
 			
 			// should exit after this
-			if( (bool) $transaction->getResponse()->approved ){
+			if( (bool) $transactionHandler->getAuthnetResponse()->approved ){
 				$this->formResponder(true, 'Thank you for supporting Clinica! A receipt has been sent to your email address.');
 				return;
 			}
 			
 			// if we get here, it failed
-			$this->formResponder(false, $transaction->getResponse()->response_reason_text);
+			$this->formResponder(false, $transactionHandler->getAuthnetResponse()->response_reason_text);
 		}
 		
 		
