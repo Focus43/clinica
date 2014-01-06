@@ -43,8 +43,19 @@
                 <div id="imageSelections">
                     <p>Click, hold, and drag to reorder images. Single click to edit file properties.</p>
                     <div class="inner clearfix">
-                        <?php foreach($imageList AS $fvObj){ /** @var FileVersion $fvObj */ ?>
-                            <div class="item" data-fileid="<?php echo $fvObj->getFileID(); ?>"><i class="icon-minus-sign remover"></i><i class="icon-move"></i><table><tr><td><img src="<?php echo $fvObj->getThumbnail(1, false); ?>" /><input type="hidden" name="fileIDs[]" value="<?php echo $fvObj->getFileID(); ?>" /></td></tr></table></div>
+                        <?php foreach($imageList AS $fileObj){ /** @var FlexryFile $fileObj */ ?>
+                            <div class="item" data-fileid="<?php echo $fileObj->getFileID(); ?>">
+                                <i class="icon-minus-sign remover"></i>
+                                <i class="icon-move"></i>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <img src="<?php echo $fileObj->getThumbnail(1, false); ?>" />
+                                            <input type="hidden" name="fileIDs[]" value="<?php echo $fileObj->getFileID(); ?>" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                         <?php } ?>
                     </div>
                 </div>
@@ -69,14 +80,15 @@
                                     <td><?php echo $formHelper->checkbox('thumbCrop', 1, $this->controller->thumbCrop); ?></td>
                                 </tr>
                             </table>
-                            <p class="muted">Note: both width and height are optional. If only one of either field is set, the image will be resized (with the correct ratio) to that dimension.</p>
+                            <p class="muted">Note: both width and height are required. The image ratio will be maintained, and the image will fit to the max of either the width or height.</p>
                         </div>
                     </div>
                     <div class="span6">
                         <div class="well">
                             <h3>Full Image Size</h3>
                             <p>i.e. Click image to open in overlay (if enabled).</p>
-                            <table class="table table-bordered">
+                            <p><?php echo $formHelper->checkbox('fullUseOriginal', 1, $this->controller->fullUseOriginal); ?> Use Original Image (uncheck to enable resizing)</p>
+                            <table data-toggle-watch="fullUseOriginal" class="table table-bordered" style="<?php if( (bool)$this->controller->fullUseOriginal ){ echo 'display:none;'; } ?>">
                                 <tr>
                                     <td><strong>Max Width</strong></td>
                                     <td><?php echo $formHelper->text('fullWidth', ($this->controller->fullWidth >= 1 ? $this->controller->fullWidth : ''), array('class' => 'span1', 'placeholder' => '900')); ?> px</td>
@@ -90,7 +102,7 @@
                                     <td><?php echo $formHelper->checkbox('fullCrop', 1, $this->controller->fullCrop); ?></td>
                                 </tr>
                             </table>
-                            <p class="muted">Note: both width and height are optional. If only one of either field is set, the image will be resized (with the correct ratio) to that dimension.</p>
+                            <p data-toggle-watch="fullUseOriginal" class="muted" style="<?php if( (bool)$this->controller->fullUseOriginal ){ echo 'display:none;'; } ?>">Note: both width and height are required. The image ratio will be maintained, and the image will fit to the max of either the width or height.</p>
                         </div>
                     </div>
                 </div>

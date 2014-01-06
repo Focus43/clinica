@@ -22,7 +22,6 @@
         protected function validationKey(){
             $pepper = gmdate('Y_m_d.G') . '@R3Qu$t!';
             return hash('sha512', self::AUTHORIZATION_KEY . $pepper);
-            //return hash('sha512', sha1(self::AUTHORIZATION_KEY . gmdate('m-d-y_H') . gmdate('H:mdY') . gmdate('Md:h-Y')));
         }
 
 

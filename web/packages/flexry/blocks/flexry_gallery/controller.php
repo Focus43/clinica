@@ -6,8 +6,10 @@
 	 */
 	class FlexryGalleryBlockController extends BlockController {
 
-        const CROP_FALSE = 0,
-              CROP_TRUE  = 1;
+        const CROP_FALSE                = 0,
+              CROP_TRUE                 = 1,
+              FULL_USE_ORIGINAL_FALSE   = 0,
+              FULL_USE_ORIGINAL_TRUE    = 1;
 
 		protected $btTable 									= 'btFlexryGallery';
 		protected $btInterfaceWidth 						= '710';
@@ -20,9 +22,10 @@
 		
         // database fields
         public  $fileIDs,
-                $thumbWidth     = 250,
-                $thumbHeight    = 250,
-                $thumbCrop      = self::CROP_FALSE,
+                $thumbWidth         = 250,
+                $thumbHeight        = 250,
+                $thumbCrop          = self::CROP_FALSE,
+                $fullUseOriginal    = self::FULL_USE_ORIGINAL_TRUE,
                 $fullWidth,  // not required
                 $fullHeight, // not required
                 $fullCrop       = self::CROP_FALSE;
@@ -44,47 +47,13 @@
         
         
         public function edit(){
-            $this->set('imageList', $this->fileVersionListResults());
+            $this->set('imageList', $this->fileListResults());
         }
 		
         
 		public function view(){
-            $this->set('thumbnailList', $this->thumbnailList());
+            $this->set('imageList', $this->fileListResults());
 		}
-
-
-        /**
-         * Get a list of stdObj's containing the resized thumbnail data, and the associated
-         * File and FileVersion objects.
-         * @return array : Properties ->src, ->width, ->height, ->fileObj
-         */
-        public function thumbnailList(){
-            if( $this->_thumbnailList === null ){
-                $this->_thumbnailList = array();
-                foreach($this->fileListResults() AS $fileObj){ /** @var File $fileObj */
-                    // create the FlexryImage
-                    $flexryImage = new FlexryImage($fileObj, $this->thumbWidth, $this->thumbHeight, $this->thumbCrop);
-                    // push onto the result stack
-                    array_push($this->_thumbnailList, $flexryImage);
-                }
-            }
-            return $this->_thumbnailList;
-        }
-
-
-        /**
-         * Get the FileVersion objects for each File object returned in the FileListResults.
-         * @return array
-         */
-        protected function fileVersionListResults(){
-            if( $this->_fileVersionListResults === null ){
-                /** @var File $fileObj */
-                $this->_fileVersionListResults = array_map(function( $fileObj ){
-                    return $fileObj->getApprovedVersion();
-                }, $this->fileListResults());
-            }
-            return $this->_fileVersionListResults;
-        }
 
 
         /**
@@ -93,15 +62,8 @@
          */
         protected function fileListResults(){
             if( $this->_fileListResults === null ){
-                // the json'ified array of fileIDs in the database
-                $savedList = (array) $this->getHelper('json')->decode($this->fileIDs);
-                // assuming block list isn't empty; apply filter of the fileIDs
-                if( !empty($savedList) ){
-                    $this->fileListObj()->filter(false, 'f.fID IN ('.join(',', $savedList).')');
-                    $this->_fileListResults = $this->fileListObj()->get();
-                }else{
-                    $this->_fileListResults = array();
-                }
+                // get the results
+                $this->_fileListResults = $this->fileListObj()->get();
             }
             return $this->_fileListResults;
         }
@@ -110,12 +72,11 @@
         /**
          * Get the FileList object (before a query ->get() is executed!), with the fileID
          * filter applied.
-         * @return FileList
+         * @return FlexryFileList
          */
         private function fileListObj(){
             if( $this->_fileListObj === null ){
-                // set FileList object no matter what
-                $this->_fileListObj = new FileList;
+                $this->_fileListObj = new FlexryFileList( $this->record );
             }
             return $this->_fileListObj;
         }
@@ -126,15 +87,36 @@
          * @param array $data
          */
         public function save( $data ){
-            $data['fileIDs']        = $this->getHelper('json')->encode($data['fileIDs']);
-            $data['thumbWidth']     = (int) $data['thumbWidth'];
-            $data['thumbHeight']    = (int) $data['thumbHeight'];
-            $data['thumbCrop']      = (int) $data['thumbCrop'];
-            $data['fullWidth']      = (int) $data['fullWidth'];
-            $data['fullHeight']     = (int) $data['fullHeight'];
-            $data['fullCrop']       = (int) $data['fullCrop'];
-			parent::save( $data );
+            // persist in the join table
+            $this->persistFiles( (array) $data['fileIDs'] );
+            // main block data
+            $blockData                      = array();
+            $blockData['thumbWidth']        = (int) $data['thumbWidth'];
+            $blockData['thumbHeight']       = (int) $data['thumbHeight'];
+            $blockData['thumbCrop']         = (int) $data['thumbCrop'];
+            $blockData['fullUseOriginal']   = (int) $data['fullUseOriginal'];
+            $blockData['fullWidth']         = (int) $data['fullWidth'];
+            $blockData['fullHeight']        = (int) $data['fullHeight'];
+            $blockData['fullCrop']          = (int) $data['fullCrop'];
+			parent::save( $blockData );
 		}
+
+
+        /**
+         * When this gets run, it *always* first deletes any existing records (instead of going
+         * through and updating).
+         * @param array $fileIDs
+         * @return void
+         */
+        protected function persistFiles( array $fileIDs = array() ){
+            $db = Loader::db();
+            $db->Execute("DELETE FROM btFlexryGalleryFiles WHERE bID = ?", array( $this->bID ));
+            foreach( $fileIDs AS $orderIndex => $fileID ){
+                $db->Execute("INSERT INTO btFlexryGalleryFiles (bID, fileID, displayOrder) VALUES(?,?,?)", array(
+                    $this->bID, $fileID, ($orderIndex + 1)
+                ));
+            }
+        }
 
 
         /**

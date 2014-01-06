@@ -116,11 +116,23 @@ $(function(){
         $('#chooseImg').toggle( $this.attr('data-tab') === '#tab-choose-images' );
     });
 
+    $('#fullUseOriginal').on('change', function(){
+        var $this = $(this),
+            _val  = $this.is(':checked');
+        $('[data-toggle-watch="'+$this.attr('id')+'"]', '#tab-settings').toggle( !_val );
+    });
+
     // gets called automatically on initialization for .items that already exist.
-    normalizeHeights();
     initInteractions();
 
-    // @todo: on first load, do image.onload for *all* the thumbnails that get loaded in
-    // (for saved/existing galleries), and once finished and they're displayed, *then*
-    // run normalizeheights();
+    // wait to run normalizeHeights until all the images are done loading in!
+    var $existingImages = $('img', '#imageSelections');
+    $existingImages.on('load', {count: 0, len: $existingImages.length}, function( _loadEvent ){
+        _loadEvent.data.count++;
+        if( _loadEvent.data.count === _loadEvent.data.len ){
+            normalizeHeights();
+            console.log('ran');
+        }
+    });
+
 });
