@@ -4,10 +4,10 @@
 
     <div id="flexrySlider-<?php echo $this->controller->bID; ?>" class="owl-carousel">
         <?php foreach($thumbnailList AS $flexryImage): /** @var FlexryImage $flexryImage */ ?>
-            <a class="flexryItem" title="<?php echo $flexryImage->getFileVersionObj()->getDescription(); ?>" href="<?php echo $flexryImage->getFileVersionObj()->getRelativePath(); ?>">
+            <a class="flexryItem" title="<?php echo $flexryImage->getFileVersionObj()->getTitle(); ?>" href="<?php echo $flexryImage->getFileVersionObj()->getRelativePath(); ?>">
                 <span><?php echo $flexryImage->getFileVersionObj()->getTitle(); ?></span>
                 <img src="<?php echo $flexryImage->getSrc(); ?>" alt="Gallery Image" />
-                <p><?php echo $flexryImage->getFileVersionObj()->getDescription(); ?></p>
+                <p data-descr><?php echo $flexryImage->getFileVersionObj()->getDescription(); ?></p>
             </a>
         <?php endforeach; ?>
     </div>
@@ -23,11 +23,14 @@
             pagination: false,
             lazyLoad: true
         });
+
         // lightboxes
         $('.flexryItem', $slider).swipebox({hideBarsDelay:0, beforeOpen: function(){
             setTimeout(function(){
                 if ($.swipebox.isOpen){
-                    $('#swipebox-action').append('<span>asdfwe</span>')
+                    $('#swipebox-prev,#swipebox-next').on('click', function(){
+
+                    });
                 }
             },500);
         }});
