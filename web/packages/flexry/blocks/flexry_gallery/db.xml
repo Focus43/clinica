@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<schema version="0.3">
+
+    <table name="btFlexryGallery">
+		<field name="bID" type="I">
+			<key />
+			<unsigned />
+		</field>
+        <field name="fileIDs" type="X2" />
+        <field name="thumbWidth" type="I" size="11" />
+        <field name="thumbHeight" type="I" size="11" />
+        <field name="thumbCrop" type="I1">
+            <unsigned />
+            <default value="0" />
+        </field>
+        <field name="fullWidth" type="I" size="11" />
+        <field name="fullHeight" type="I" size="11" />
+        <field name="fullCrop" type="I1">
+            <unsigned />
+            <default value="0" />
+        </field>
+	</table>
+
+</schema>
