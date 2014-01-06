@@ -119,4 +119,8 @@ $(function(){
     // gets called automatically on initialization for .items that already exist.
     normalizeHeights();
     initInteractions();
+
+    // @todo: on first load, do image.onload for *all* the thumbnails that get loaded in
+    // (for saved/existing galleries), and once finished and they're displayed, *then*
+    // run normalizeheights();
 });

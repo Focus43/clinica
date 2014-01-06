@@ -247,7 +247,7 @@
 .owl-item.loading{min-height: 150px;background: url(AjaxLoader.gif) no-repeat center center;}
 
 /* FLEXRY CUSTOMIZATIONS */
-.owl-wrapper-outer {background:#e1e1e1;border-radius:6px;}
+.owl-wrapper-outer {background:#2a2a2a;border-radius:6px;}
 .flexryItem {color:#333;display:block;font-size:12px;margin:6px;padding:6px;text-align:center;background:#f1f1f1;border-radius:4px;box-shadow:0 0 4px rgba(0,0,0,.3);}
 .flexryItem:hover {text-decoration:none;color:inherit;}
 .flexryItem span {}

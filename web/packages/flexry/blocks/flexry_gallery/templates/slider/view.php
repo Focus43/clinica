@@ -7,7 +7,7 @@
             <a class="flexryItem" title="<?php echo $flexryImage->getFileVersionObj()->getDescription(); ?>" href="<?php echo $flexryImage->getFileVersionObj()->getRelativePath(); ?>">
                 <span><?php echo $flexryImage->getFileVersionObj()->getTitle(); ?></span>
                 <img src="<?php echo $flexryImage->getSrc(); ?>" alt="Gallery Image" />
-                <!--<p><?php echo $flexryImage->getFileVersionObj()->getDescription(); ?></p>-->
+                <p><?php echo $flexryImage->getFileVersionObj()->getDescription(); ?></p>
             </a>
         <?php endforeach; ?>
     </div>
@@ -24,6 +24,12 @@
             lazyLoad: true
         });
         // lightboxes
-        $('.flexryItem', $slider).swipebox({hideBarsDelay:0});
+        $('.flexryItem', $slider).swipebox({hideBarsDelay:0, beforeOpen: function(){
+            setTimeout(function(){
+                if ($.swipebox.isOpen){
+                    $('#swipebox-action').append('<span>asdfwe</span>')
+                }
+            },500);
+        }});
     });
 </script>
