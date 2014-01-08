@@ -58,7 +58,9 @@
 
 
         /**
-         * Get the full image url path (relative).
+         * Get the full image url path (relative). Checks for "use original image" being
+         * checked, and if so, skips generating a resized thumbnail and just returns the
+         * original image path.
          * @return string
          */
         public function fullImgSrc(){

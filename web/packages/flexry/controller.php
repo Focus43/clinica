@@ -21,7 +21,6 @@
 	        define('FLEXRY_TOOLS_URL', BASE_URL . REL_DIR_FILES_TOOLS_PACKAGES . '/' . $this->pkgHandle . '/');
 			
 			Loader::registerAutoload(array(
-				//'FlexryImage'    => array('model', 'flexry_image', $this->pkgHandle),
                 'FlexryFile'     => array('model', 'flexry_file', $this->pkgHandle),
                 'FlexryFileList' => array('model', 'flexry_file_list', $this->pkgHandle)
 			));

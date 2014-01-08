@@ -1,13 +1,11 @@
-<?php defined('C5_EXECUTE') or die("Access Denied.");
-/** @var array $thumbnailList : Array of FlexryImage objects */
-?>
+<?php defined('C5_EXECUTE') or die("Access Denied."); /** @var array $imageList */ ?>
 
     <div id="flexrySlider-<?php echo $this->controller->bID; ?>" class="owl-carousel">
-        <?php foreach($thumbnailList AS $flexryImage): /** @var FlexryImage $flexryImage */ ?>
-            <a class="flexryItem" title="<?php echo $flexryImage->getFileVersionObj()->getTitle(); ?>" href="<?php echo $flexryImage->getFileVersionObj()->getRelativePath(); ?>">
-                <span><?php echo $flexryImage->getFileVersionObj()->getTitle(); ?></span>
-                <img src="<?php echo $flexryImage->getSrc(); ?>" alt="Gallery Image" />
-                <p data-descr><?php echo $flexryImage->getFileVersionObj()->getDescription(); ?></p>
+        <?php foreach($imageList AS $flexryFile): /** @var FlexryFile $flexryFile */ ?>
+            <a class="flexryItem" title="<?php echo $flexryFile->getTitle(); ?>" href="<?php echo $flexryFile->getRelativePath(); ?>">
+                <span><?php echo $flexryFile->getTitle(); ?></span>
+                <img src="<?php echo $flexryFile->thumbnailImgSrc(); ?>" alt="<?php echo $flexryFile->getTitle(); ?>" />
+                <p data-descr><?php echo $flexryFile->getDescription(); ?></p>
             </a>
         <?php endforeach; ?>
     </div>
@@ -25,14 +23,6 @@
         });
 
         // lightboxes
-        $('.flexryItem', $slider).swipebox({hideBarsDelay:0, beforeOpen: function(){
-            setTimeout(function(){
-                if ($.swipebox.isOpen){
-                    $('#swipebox-prev,#swipebox-next').on('click', function(){
-
-                    });
-                }
-            },500);
-        }});
+        $('.flexryItem', $slider).swipebox({hideBarsDelay:0});
     });
 </script>
