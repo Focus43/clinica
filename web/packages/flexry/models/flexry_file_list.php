@@ -16,10 +16,36 @@
         }
 
 
+        /**
+         * Takes data from the block record and figures out how to apply required fitlers to
+         * the list.
+         * @return void
+         */
         private function _requiredFilters(){
-            $this->addToQuery("RIGHT JOIN btFlexryGalleryFiles flxry ON flxry.fileID = f.fID");
-            $this->filter('flxry.bID', (int) $this->_blockRecord->bID, '=');
-            $this->sortBy('flxry.displayOrder', 'asc');
+            // are we using a custom file source method?
+            if( (int) $this->_blockRecord->fileSourceMethod === FlexryGalleryBlockController::FILE_SOURCE_METHOD_CUSTOM ){
+                $this->addToQuery("RIGHT JOIN btFlexryGalleryFiles flxry ON flxry.fileID = f.fID");
+                $this->filter('flxry.bID', (int) $this->_blockRecord->bID, '=');
+                $this->sortBy('flxry.displayOrder', 'asc');
+                return;
+            }
+
+            // no, we're using File Sets
+            $fileSetIDs = (array) Loader::helper('json')->decode( $this->_blockRecord->fileSetIDs );
+            // if more than one file set is being used
+            if( count($fileSetIDs) > 1 ){
+                $orFilters = array();
+                foreach($fileSetIDs AS $fsID){
+                    array_push($orFilters, t('fsID = %s', (int) $fsID));
+                }
+                $this->addToQuery("LEFT JOIN FileSetFiles fsfl ON fsfl.fID = f.fID");
+                $this->filter(false, t('f.fID IN (SELECT DISTINCT fID FROM FileSetFiles WHERE %s)', join(" OR ", $orFilters)));
+            }
+            // if only one
+            if( count($fileSetIDs) === 1 ){
+                $this->filteredFileSetIDs = $fileSetIDs;
+                $this->sortByFileSetDisplayOrder();
+            }
         }
 
 

@@ -5,7 +5,7 @@ $(function(){
      * @return void
      */
     function normalizeHeights(){
-        var $items = $('.item', '#imageSelections');
+        var $items = $('.item', '#imageSelections').height('auto');
         $items.height((function( _items ){
             var _h = 0;
             for(var i = 0; i < _items.length; i++){
@@ -14,6 +14,7 @@ $(function(){
             return _h;
         }( $items )));
     }
+
 
     /**
      * Make items sortable and initialize tooltips. Should be called after new image are added to ensure always
@@ -25,32 +26,35 @@ $(function(){
     }
 
     /**
-     * Run after new images are added; determines if duplicates have been added and will
-     * show the alert message.
+     * Run after new images are added; remove if any duplicates occurred and show the alert
+     * message.
      * @return void
      */
-    function scanDuplicates(){
-        var _dups = false,
-            _list  = [];
+    function scanAndPurgeDuplicates(){
+        var _list = [], _containsDuplicates = false;
         $('.item', '#imageSelections').each(function(idx, el){
             var $item = $(el), _fileID = $item.attr('data-fileid');
             if( _list.indexOf(_fileID) === -1 ){
                 _list.push(_fileID);
             }else{
-                _dups = true;
+                _containsDuplicates = true;
+                $item.remove();
             }
         });
 
-        if( _dups ){ $('#tab-choose-images').addClass('dups'); }
+        if( _containsDuplicates ){
+            $('#tab-choose-images').addClass('dups');
+        }
     }
+
 
     /**
      * Launch the asset manager and select one or more files.
      */
     $('#chooseImg').on('click', function(){
         var _stack = [], _timeOut;
-        // This function is the handler for once the file(s) are selected in the file manager. This function gets
-        // called once for every file object chosen.
+        // Handler function, called once for each image added via custom selection. The setTimeout
+        // is used to make sure the function are run only once after this func is called a bunch of times.
         ccm_chooseAsset = function(obj){
             _stack.push(obj);
             clearTimeout(_timeOut);
@@ -60,7 +64,7 @@ $(function(){
                 });
                 normalizeHeights();
                 initInteractions();
-                scanDuplicates();
+                scanAndPurgeDuplicates();
             }, 250);
         }
 
@@ -68,6 +72,10 @@ $(function(){
         ccm_alLaunchSelectorFileManager();
     }).tooltip({animation:false, placement:'bottom'});
 
+
+    /**
+     * Edit the image properties, or remove it?
+     */
     $('#imageSelections').on('click', '.item', function( _clickEv ){
         if( $(_clickEv.target).hasClass('remover') ){
             $(this).tooltip('destroy').remove();
@@ -81,58 +89,70 @@ $(function(){
         }
     });
 
-    /**
-     * If user clicks on Eliminate Duplicates; do it...
-     */
-    $('#eliminateDups').on('click', function(){
-        var _list = [];
-        $('.item', '#imageSelections').each(function(idx, el){
-            var $item = $(el), _fileID = $item.attr('data-fileid');
-            if( _list.indexOf(_fileID) === -1 ){
-                _list.push(_fileID);
-            }else{
-                $item.remove();
-            }
-        });
-
-        $('#tab-choose-images').removeClass('dups');
-    });
 
     /**
-     * User chose not to eliminate duplicates and close the warning.
+     * Hide the duplicates warning message.
      */
     $('.close', '.dups-warning').on('click', function(){
         $('#tab-choose-images').removeClass('dups');
     });
 
+
     /**
      * Tabs
      */
     $('a', '.nav-tabs').on('click', function( _clickEv ){
-        var $this = $(this),
-            $targ = $( $this.attr('data-tab') );
+        var $this = $(this), $targ = $( $this.attr('data-tab') );
         $this.parent('li').add($targ).addClass('active').siblings().removeClass('active');
         // show the Add Images button?
-        $('#chooseImg').toggle( $this.attr('data-tab') === '#tab-choose-images' );
+        $('#flexryOptionsRight').toggle( $this.attr('data-tab') === '#tab-choose-images' );
     });
 
+
+    /**
+     * Use original image? (settings area)
+     */
     $('#fullUseOriginal').on('change', function(){
-        var $this = $(this),
-            _val  = $this.is(':checked');
-        $('[data-toggle-watch="'+$this.attr('id')+'"]', '#tab-settings').toggle( !_val );
+        var $this = $(this);
+        $('[data-toggle-watch="'+$this.attr('id')+'"]', '#tab-settings').toggle( ! $this.is(':checked') );
     });
 
-    // gets called automatically on initialization for .items that already exist.
-    initInteractions();
 
-    // wait to run normalizeHeights until all the images are done loading in!
-    var $existingImages = $('img', '#imageSelections');
-    $existingImages.on('load', {count: 0, len: $existingImages.length}, function( _loadEvent ){
-        _loadEvent.data.count++;
-        if( _loadEvent.data.count === _loadEvent.data.len ){
-            normalizeHeights();
-            console.log('ran');
+    /**
+     * File Source dropdown switcher
+     */
+    $('#fileSourceMethod').on('change', function(){
+        var _val = $(this).val(), $btn  = $('#chooseImg');
+        $('.fileSourceMethod', '#flexryGallery').removeClass('active').filter('[data-method='+_val+']').addClass('active');
+        $btn.toggle( +(_val) === +($btn.attr('data-method')) );
+        initHandler();
+    });
+
+
+    /**
+     * On init, determine what to run.
+     */
+    function initHandler(){
+        switch( +($('.fileSourceMethod.active').attr('data-method')) ){
+            case 0: // custom
+                // wait to run normalizeHeights until all the images are done loading in!
+                var $images = $('img', '#imageSelections');
+                $images.on('load', {count: 0, len: $images.length}, function( _loadEvent ){
+                    _loadEvent.data.count++;
+                    if( _loadEvent.data.count === _loadEvent.data.len ){
+                        normalizeHeights();
+                    }
+                });
+                initInteractions();
+                break;
+
+            case 1: // sets
+                $('#fileSetPicker').chosen();
+                break;
         }
-    });
+    }
+
+
+    initHandler();
 
 });

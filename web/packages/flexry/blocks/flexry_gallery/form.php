@@ -4,9 +4,13 @@
 
 	<style type="text/css">
         #flexryGallery {}
+        #flexryGallery .nav-tabs select {width:160px;}
+        #flexryGallery .well {padding-top:11px;padding-bottom:11px;}
+        #flexryGallery .well p:last-child {margin:0;}
         #tab-choose-images .alert {display:none;}
         #imageSelections {background:#eee;position:absolute;top:58px;right:10px;bottom:10px;left:10px;border:1px dashed #bbb;overflow-y:scroll;overflow-x:hidden;}
         #imageSelections p {text-align:center;font-size:11px;color:#777;margin:0;padding:8px 0;}
+        #imageSelections p i {position:relative;top:-2px;}
         #imageSelections .inner {width:100%;height:100%;position:relative;}
         #imageSelections .item {position:relative;background:#fff;padding:5px;text-align:center;border:1px solid #ccc;float:left;margin:0 0 8px 8px;cursor:pointer;box-shadow:0 0 4px rgba(0,0,0,.25);border-radius:3px;}
         #imageSelections .item i.remover {display:none;position:absolute;bottom:-8px;right:-6px;}
@@ -15,8 +19,7 @@
         #imageSelections .item:hover i.icon-move {display:block;cursor:move}
         #imageSelections .item table {height:100%;vertical-align:middle;}
 
-        #tab-settings .well {padding-top:11px;padding-bottom:11px;}
-        #tab-settings .well p:last-child {margin:0;}
+        #flexryGallery .tab-content {overflow:visible;}
         #tab-settings .well p.muted {font-size:11px;}
         #tab-settings table.table {margin-bottom:8px;background:#fff;}
         #tab-settings table.table td {white-space:nowrap;vertical-align: middle;background:#fff;}
@@ -26,40 +29,67 @@
         #tab-choose-images.dups .alert .btn {color:inherit;float:right;}
         #tab-choose-images.dups .alert .close {top:1px;}
         #tab-choose-images.dups #imageSelections {top:110px;}
+
+        #flexryGallery .fileSourceMethod {display:none;}
+        #flexryGallery .fileSourceMethod.active {display:block;}
+
+        <?php if((int)$this->controller->fileSourceMethod === FlexryGalleryBlockController::FILE_SOURCE_METHOD_SETS){ ?>
+        #chooseImg {display:none;}
+        <?php } ?>
 	</style>
 
 	<div id="flexryGallery" class="ccm-ui">
         <ul class="nav nav-tabs">
             <li class="active"><a data-tab="#tab-choose-images">Images</a></li>
             <li><a data-tab="#tab-settings">Settings</a></li>
-            <li class="pull-right">
-                <button id="chooseImg" type="button" class="btn" title="Select multiple with checkboxes.">Add Images</button>
+            <li id="flexryOptionsRight" class="pull-right">
+                <?php echo $formHelper->select('fileSourceMethod', FlexryGalleryBlockController::$fileSourceMethods, $this->controller->fileSourceMethod); ?>
+                <button id="chooseImg" type="button" class="btn" title="Select multiple with checkboxes." data-method="<?php echo FlexryGalleryBlockController::FILE_SOURCE_METHOD_CUSTOM; ?>">Add Images</button>
             </li>
         </ul>
 
         <div class="tab-content">
+            <!-- image selection tab -->
             <div id="tab-choose-images" class="tab-pane active">
-                <div class="dups-warning alert alert-danger">The same image has been added more than once. <button type="button" class="close" data-dismiss="alert">&times;</button><button id="eliminateDups" type="button" class="btn btn-mini">Eliminate duplicates?</button></div>
-                <div id="imageSelections">
-                    <p>Click, hold, and drag to reorder images. Single click to edit file properties.</p>
-                    <div class="inner clearfix">
-                        <?php foreach($imageList AS $fileObj){ /** @var FlexryFile $fileObj */ ?>
-                            <div class="item" data-fileid="<?php echo $fileObj->getFileID(); ?>">
-                                <i class="icon-minus-sign remover"></i>
-                                <i class="icon-move"></i>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <img src="<?php echo $fileObj->getThumbnail(1, false); ?>" />
-                                            <input type="hidden" name="fileIDs[]" value="<?php echo $fileObj->getFileID(); ?>" />
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        <?php } ?>
+                <!-- build gallery manually -->
+                <div class="fileSourceMethod <?php if((int)$this->controller->fileSourceMethod === FlexryGalleryBlockController::FILE_SOURCE_METHOD_CUSTOM){ echo 'active'; } ?>" data-method="<?php echo FlexryGalleryBlockController::FILE_SOURCE_METHOD_CUSTOM; ?>">
+                    <div class="dups-warning alert alert-warning">The same image was added more than once; duplicates have been removed automatically.  <button type="button" class="close">&times;</button></div>
+                    <div id="imageSelections">
+                        <p><i class="icon-minus-sign remover"></i> to reorder. <i class="icon-move"></i> to remove. Click to edit file properties.</p>
+                        <div class="inner clearfix">
+                            <?php foreach($imageList AS $fileObj){ /** @var FlexryFile $fileObj */ ?>
+                                <div class="item" data-fileid="<?php echo $fileObj->getFileID(); ?>">
+                                    <i class="icon-minus-sign remover"></i><i class="icon-move"></i>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <img src="<?php echo $fileObj->getThumbnail(1, false); ?>" />
+                                                <input type="hidden" name="fileIDs[]" value="<?php echo $fileObj->getFileID(); ?>" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- compose gallery from sets -->
+                <div class="fileSourceMethod <?php if((int)$this->controller->fileSourceMethod === FlexryGalleryBlockController::FILE_SOURCE_METHOD_SETS){ echo 'active'; } ?>" data-method="<?php echo FlexryGalleryBlockController::FILE_SOURCE_METHOD_SETS; ?>">
+                    <div class="well">
+                        <h3>Choose One Or More File Sets</h3>
+                        <p>If more than one File Set is used, images will be ordered randomly.</p>
+                        <select id="fileSetPicker" class="input-block-level" name="fileSetIDs[]" multiple data-placeholder="Choose one or more File Set">
+                            <?php foreach($availableFileSets AS $fsObj): ?>
+                                <option value="<?php echo $fsObj->getFileSetID(); ?>"<?php if(in_array($fsObj->getFileSetID(), $savedFileSets)){ echo ' selected="selected"'; } ?>><?php echo $fsObj->getFileSetName(); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <p class="muted">The advantage to using File Sets is that you can simply add one or more images to a set, or image sets, in the File Manager, and the gallery will automatically update with the images (instead of adding by hand using the custom gallery option).</p>
                     </div>
                 </div>
             </div>
+
+            <!-- settings tab -->
             <div id="tab-settings" class="tab-pane">
                 <div class="row-fluid">
                     <div class="span6">

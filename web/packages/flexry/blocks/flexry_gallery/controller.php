@@ -9,7 +9,15 @@
         const CROP_FALSE                = 0,
               CROP_TRUE                 = 1,
               FULL_USE_ORIGINAL_FALSE   = 0,
-              FULL_USE_ORIGINAL_TRUE    = 1;
+              FULL_USE_ORIGINAL_TRUE    = 1,
+              FILE_SOURCE_METHOD_CUSTOM = 0,
+              FILE_SOURCE_METHOD_SETS   = 1;
+
+        // file source selection method
+        public static $fileSourceMethods = array(
+            self::FILE_SOURCE_METHOD_CUSTOM => 'Custom Gallery',
+            self::FILE_SOURCE_METHOD_SETS   => 'Pull From File Set(s)'
+        );
 
 		protected $btTable 									= 'btFlexryGallery';
 		protected $btInterfaceWidth 						= '710';
@@ -19,50 +27,70 @@
 		protected $btCacheBlockOutputOnPost 				= false;
 		protected $btCacheBlockOutputForRegisteredUsers 	= false;
 		protected $btCacheBlockOutputLifetime 				= CACHE_LIFETIME;
-		
-        // database fields
-        public  $fileIDs,
+
+        // defaults
+        public  $fileSourceMethod   = self::FILE_SOURCE_METHOD_CUSTOM,
+                $fileSetIDs         = null,
                 $thumbWidth         = 250,
                 $thumbHeight        = 250,
                 $thumbCrop          = self::CROP_FALSE,
                 $fullUseOriginal    = self::FULL_USE_ORIGINAL_TRUE,
-                $fullWidth,  // not required
-                $fullHeight, // not required
-                $fullCrop       = self::CROP_FALSE;
-        
-        
-		public function getBlockTypeDescription(){
+                $fullWidth,  // no default
+                $fullHeight, // no default
+                $fullCrop           = self::CROP_FALSE;
+
+
+        /**
+         * @return string
+         */
+        public function getBlockTypeDescription(){
 			return t("Flexible Image Gallery Management");
 		}
-		
-		
-		public function getBlockTypeName(){
+
+
+        /**
+         * @return string
+         */
+        public function getBlockTypeName(){
 			return t("Flexry Gallery");
 		}
-        
-        
+
+
+        /**
+         * Controller method (proxies to the edit() method).
+         * @return void
+         */
         public function add(){
             $this->edit();
         }
-        
-        
+
+
+        /**
+         * Controller method.
+         * @return void
+         */
         public function edit(){
             $this->set('imageList', $this->fileListResults());
+            $this->set('availableFileSets', $this->availableFileSets());
+            $this->set('savedFileSets', $this->savedFileSets());
         }
-		
-        
-		public function view(){
+
+
+        /**
+         * Controller method.
+         * @return void
+         */
+        public function view(){
             $this->set('imageList', $this->fileListResults());
 		}
 
 
         /**
          * Get the results from the prepared FileListObj.
-         * @return array
+         * @return array : of FlexryFile objects
          */
         protected function fileListResults(){
             if( $this->_fileListResults === null ){
-                // get the results
                 $this->_fileListResults = $this->fileListObj()->get();
             }
             return $this->_fileListResults;
@@ -83,14 +111,43 @@
 
 
         /**
+         * Get an array of file set IDs.
+         * @return array
+         */
+        private function savedFileSets(){
+            if( $this->_savedFileSets === null ){
+                $this->_savedFileSets = (array) $this->getHelper('json')->decode( $this->fileSetIDs );
+            }
+            return $this->_savedFileSets;
+        }
+
+
+        /**
+         * Get an array of existing FileSet objects (all available in the
+         * @return array
+         */
+        private function availableFileSets(){
+            if( $this->_availableFileSets === null ){
+                $fileSetListObj = new FileSetList;
+                $this->_availableFileSets = $fileSetListObj->get();
+            }
+            return $this->_availableFileSets;
+        }
+
+
+        /**
          * Save block data.
          * @param array $data
          */
         public function save( $data ){
+            // validate that shit first
+            $this->validate( $data );
             // persist in the join table
             $this->persistFiles( (array) $data['fileIDs'] );
             // main block data
             $blockData                      = array();
+            $blockData['fileSourceMethod']  = (int) $data['fileSourceMethod'];
+            $blockData['fileSetIDs']        = $this->getHelper('json')->encode( (array) $data['fileSetIDs'] );
             $blockData['thumbWidth']        = (int) $data['thumbWidth'];
             $blockData['thumbHeight']       = (int) $data['thumbHeight'];
             $blockData['thumbCrop']         = (int) $data['thumbCrop'];
@@ -98,8 +155,35 @@
             $blockData['fullWidth']         = (int) $data['fullWidth'];
             $blockData['fullHeight']        = (int) $data['fullHeight'];
             $blockData['fullCrop']          = (int) $data['fullCrop'];
+            // persist it
 			parent::save( $blockData );
 		}
+
+
+        /**
+         * Validate the submitted block data.
+         * @param $data
+         * @return ValidationErrorHelper
+         */
+        public function validate( $data ){
+            // if using file sets, make sure at least one is selected
+            if( ((int)$data['fileSourceMethod'] === self::FILE_SOURCE_METHOD_SETS) && (count( (array)$data['fileSetIDs'] ) === 0) ){
+                $this->getHelper('validation/error')->add('At least one File Set must be selected.');
+            }
+            // thumbnail width
+            if( !( (int)$data['thumbWidth'] >= 1) ){ $this->getHelper('validation/error')->add('Thumbnail Width must be >= 1.'); }
+            // thumbnail height
+            if( !( (int)$data['thumbHeight'] >= 1) ){ $this->getHelper('validation/error')->add('Thumbnail Height must be >= 1.'); }
+            // if the full size image is *not* set to use original, then validate the sizes
+            if( !( (int)$data['fullUseOriginal'] === self::FULL_USE_ORIGINAL_TRUE ) ){
+                // full width
+                if( !( (int)$data['fullWidth'] >= 1) ){ $this->getHelper('validation/error')->add('Full Width must be >= 1.'); }
+                // full height
+                if( !( (int)$data['fullHeight'] >= 1) ){ $this->getHelper('validation/error')->add('Full Height must be >= 1.'); }
+            }
+
+            return $this->getHelper('validation/error');
+        }
 
 
         /**

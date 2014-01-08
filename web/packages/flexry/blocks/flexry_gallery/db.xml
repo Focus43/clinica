@@ -6,6 +6,11 @@
 			<key />
 			<unsigned />
 		</field>
+        <field name="fileSourceMethod" type="I" size="2">
+            <unsigned />
+            <default value="0" />
+        </field>
+        <field name="fileSetIDs" type="X2" />
         <field name="thumbWidth" type="I" size="11" />
         <field name="thumbHeight" type="I" size="11" />
         <field name="thumbCrop" type="I1">
