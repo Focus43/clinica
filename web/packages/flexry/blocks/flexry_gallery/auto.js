@@ -43,7 +43,7 @@ $(function(){
         });
 
         if( _containsDuplicates ){
-            $('#tab-choose-images').addClass('dups');
+            $('#tabPaneImages').addClass('dups');
         }
     }
 
@@ -94,7 +94,7 @@ $(function(){
      * Hide the duplicates warning message.
      */
     $('.close', '.dups-warning').on('click', function(){
-        $('#tab-choose-images').removeClass('dups');
+        $('#tabPaneImages').removeClass('dups');
     });
 
 
@@ -105,7 +105,7 @@ $(function(){
         var $this = $(this), $targ = $( $this.attr('data-tab') );
         $this.parent('li').add($targ).addClass('active').siblings().removeClass('active');
         // show the Add Images button?
-        $('#flexryOptionsRight').toggle( $this.attr('data-tab') === '#tab-choose-images' );
+        $('#flexryOptionsRight').toggle( $this.attr('data-tab') === '#tabPaneImages' );
     });
 
 
@@ -114,7 +114,7 @@ $(function(){
      */
     $('#fullUseOriginal').on('change', function(){
         var $this = $(this);
-        $('[data-toggle-watch="'+$this.attr('id')+'"]', '#tab-settings').toggle( ! $this.is(':checked') );
+        $('[data-toggle-watch="'+$this.attr('id')+'"]', '#tabPaneSettings').toggle( ! $this.is(':checked') );
     });
 
 
@@ -126,6 +126,15 @@ $(function(){
         $('.fileSourceMethod', '#flexryGallery').removeClass('active').filter('[data-method='+_val+']').addClass('active');
         $btn.toggle( +(_val) === +($btn.attr('data-method')) );
         initHandler();
+    });
+
+
+    /**
+     * Template forms selector
+     */
+    $('#flexryTemplateHandle').on('change', function(){
+        var _val = $(this).val();
+        $('.template-form', '#tabPaneTemplates').removeClass('active').filter('[data-tmpl="'+_val+'"]').addClass('active');
     });
 
 

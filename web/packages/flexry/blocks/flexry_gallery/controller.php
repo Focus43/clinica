@@ -70,9 +70,11 @@
          * @return void
          */
         public function edit(){
-            $this->set('imageList', $this->fileListResults());
+            $this->set('imageList', $this->fileListObj()->forceCustomResults()->get());
             $this->set('availableFileSets', $this->availableFileSets());
             $this->set('savedFileSets', $this->savedFileSets());
+            $this->set('templateSelectList', $this->templatesSelectList());
+            $this->set('templateDirList', $this->templateAndDirectoryList());
         }
 
 
@@ -98,8 +100,8 @@
 
 
         /**
-         * Get the FileList object (before a query ->get() is executed!), with the fileID
-         * filter applied.
+         * Get the FileList object (before a query ->get() is executed!), passing the block
+         * record to the FlexryFileList to automatically apply filters.
          * @return FlexryFileList
          */
         private function fileListObj(){
@@ -136,6 +138,64 @@
 
 
         /**
+         * Get an array ready for passing to formHelper->select, with the key as the template
+         * handle and the value as the prettified template name.
+         * @return array
+         */
+        private function templatesSelectList(){
+            $selectList = array('' => 'Default');
+            foreach( $this->templateAndDirectoryList() AS $fileSystemHandle => $path ){
+                if( strpos($fileSystemHandle, '.') !== false ){
+                    $selectList[ $fileSystemHandle ] = substr($this->getHelper('text')->unhandle($fileSystemHandle), 0, strrpos($fileSystemHandle, '.'));
+                }else{
+                    $selectList[ $fileSystemHandle ] = $this->getHelper('text')->unhandle($fileSystemHandle);
+                }
+            }
+            return $selectList;
+        }
+
+
+        /**
+         * Get an array of the available templates (normally you'd access by clicking the block
+         * in edit mode and choose 'Edit Template'). Array uses the file system handle as the key
+         * and the path to the template as the value.
+         * @see {root}/web/concrete/core/models/block_types.php
+         * @see {root}/web/concrete/elements/block_custom_template.php
+         * @return array
+         */
+        private function templateAndDirectoryList(){
+            if( $this->_blockTemplatesList === null ){
+                $blockTypeHandle            = $this->getBlockObject()->getBlockTypeHandle();
+                $this->_blockTemplatesList  = array();
+
+                // top level templates (in {root}/blocks/flexry_gallery/templates)
+                $topLevelBlocksPath = DIR_FILES_BLOCK_TYPES . "/{$blockTypeHandle}/" . DIRNAME_BLOCK_TEMPLATES;
+                if( file_exists($topLevelBlocksPath) ){
+                    $topLevelFileHandles = $this->getHelper('file')->getDirectoryContents($topLevelBlocksPath);
+                    foreach($topLevelFileHandles AS $dirItem){
+                        $this->_blockTemplatesList[ $dirItem ] = $topLevelBlocksPath . '/' . $dirItem;
+                    }
+                }
+
+                // templates in packages (in {root}/packages/{package_name}/blocks/flexry_gallery/templates)
+                $packageList = PackageList::get()->getPackages();
+                foreach( $packageList AS $pkgObj ){
+                    $pkgPath        = (is_dir(DIR_PACKAGES . '/' . $pkgObj->getPackageHandle())) ? DIR_PACKAGES . '/'. $pkgObj->getPackageHandle() : DIR_PACKAGES_CORE . '/'. $pkgObj->getPackageHandle();
+                    $pkgBlocksPath  = $pkgPath . '/' . DIRNAME_BLOCKS . '/' . $blockTypeHandle . '/' . DIRNAME_BLOCK_TEMPLATES;
+                    if( is_dir($pkgBlocksPath) ){
+                        $pkgTemplateFileHandles = $this->getHelper('file')->getDirectoryContents($pkgBlocksPath);
+                        foreach( $pkgTemplateFileHandles AS $dirItem ){
+                            $this->_blockTemplatesList[ $dirItem ] = $pkgBlocksPath . '/' . $dirItem;
+                        }
+                    }
+                }
+            }
+
+            return $this->_blockTemplatesList;
+        }
+
+
+        /**
          * Save block data.
          * @param array $data
          */
@@ -157,6 +217,11 @@
             $blockData['fullCrop']          = (int) $data['fullCrop'];
             // persist it
 			parent::save( $blockData );
+
+            // *AFTER* block has been updated, in case the recordID changed
+            Block::getByID( $this->record->bID )->updateBlockInformation(array(
+                'bFilename' => $data['flexryTemplateHandle']
+            ));
 		}
 
 

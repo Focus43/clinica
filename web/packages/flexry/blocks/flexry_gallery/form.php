@@ -1,5 +1,7 @@
 <?php defined('C5_EXECUTE') or die("Access Denied.");
+    /** @var FormHelper $formHelper */
     $formHelper = Loader::helper('form');
+    /** @var BlockView $this */
 ?>
 
 	<style type="text/css">
@@ -7,7 +9,8 @@
         #flexryGallery .nav-tabs select {width:160px;}
         #flexryGallery .well {padding-top:11px;padding-bottom:11px;}
         #flexryGallery .well p:last-child {margin:0;}
-        #tab-choose-images .alert {display:none;}
+        #flexryGallery .well p.muted {font-size:11px;}
+        #tabPaneImages .alert {display:none;}
         #imageSelections {background:#eee;position:absolute;top:58px;right:10px;bottom:10px;left:10px;border:1px dashed #bbb;overflow-y:scroll;overflow-x:hidden;}
         #imageSelections p {text-align:center;font-size:11px;color:#777;margin:0;padding:8px 0;}
         #imageSelections p i {position:relative;top:-2px;}
@@ -20,18 +23,20 @@
         #imageSelections .item table {height:100%;vertical-align:middle;}
 
         #flexryGallery .tab-content {overflow:visible;}
-        #tab-settings .well p.muted {font-size:11px;}
-        #tab-settings table.table {margin-bottom:8px;background:#fff;}
-        #tab-settings table.table td {white-space:nowrap;vertical-align: middle;background:#fff;}
-        #tab-settings table.table tr td:last-child {width:98%;}
+        #tabPaneSettings table.table {margin-bottom:8px;background:#fff;}
+        #tabPaneSettings table.table td {white-space:nowrap;vertical-align: middle;background:#fff;}
+        #tabPaneSettings table.table tr td:last-child {width:98%;}
 
-        #tab-choose-images.dups .alert {display:block;}
-        #tab-choose-images.dups .alert .btn {color:inherit;float:right;}
-        #tab-choose-images.dups .alert .close {top:1px;}
-        #tab-choose-images.dups #imageSelections {top:110px;}
+        #tabPaneImages.dups .alert {display:block;}
+        #tabPaneImages.dups .alert .btn {color:inherit;float:right;}
+        #tabPaneImages.dups .alert .close {top:1px;}
+        #tabPaneImages.dups #imageSelections {top:110px;}
 
         #flexryGallery .fileSourceMethod {display:none;}
         #flexryGallery .fileSourceMethod.active {display:block;}
+
+        #tabPaneTemplates .template-form {display:none;margin:10px 0 0;}
+        #tabPaneTemplates .template-form.active {display:block;}
 
         <?php if((int)$this->controller->fileSourceMethod === FlexryGalleryBlockController::FILE_SOURCE_METHOD_SETS){ ?>
         #chooseImg {display:none;}
@@ -40,8 +45,9 @@
 
 	<div id="flexryGallery" class="ccm-ui">
         <ul class="nav nav-tabs">
-            <li class="active"><a data-tab="#tab-choose-images">Images</a></li>
-            <li><a data-tab="#tab-settings">Settings</a></li>
+            <li class="active"><a data-tab="#tabPaneImages">Images</a></li>
+            <li><a data-tab="#tabPaneSettings">Settings</a></li>
+            <li><a data-tab="#tabPaneTemplates">Templates</a></li>
             <li id="flexryOptionsRight" class="pull-right">
                 <?php echo $formHelper->select('fileSourceMethod', FlexryGalleryBlockController::$fileSourceMethods, $this->controller->fileSourceMethod); ?>
                 <button id="chooseImg" type="button" class="btn" title="Select multiple with checkboxes." data-method="<?php echo FlexryGalleryBlockController::FILE_SOURCE_METHOD_CUSTOM; ?>">Add Images</button>
@@ -50,12 +56,12 @@
 
         <div class="tab-content">
             <!-- image selection tab -->
-            <div id="tab-choose-images" class="tab-pane active">
+            <div id="tabPaneImages" class="tab-pane active">
                 <!-- build gallery manually -->
                 <div class="fileSourceMethod <?php if((int)$this->controller->fileSourceMethod === FlexryGalleryBlockController::FILE_SOURCE_METHOD_CUSTOM){ echo 'active'; } ?>" data-method="<?php echo FlexryGalleryBlockController::FILE_SOURCE_METHOD_CUSTOM; ?>">
                     <div class="dups-warning alert alert-warning">The same image was added more than once; duplicates have been removed automatically.  <button type="button" class="close">&times;</button></div>
                     <div id="imageSelections">
-                        <p><i class="icon-minus-sign remover"></i> to reorder. <i class="icon-move"></i> to remove. Click to edit file properties.</p>
+                        <p>Hover images and: <i class="icon-hand-up"></i> <strong>click</strong> to edit; <i class="icon-move"></i> to reorder; <i class="icon-minus-sign remover"></i> to remove.</p>
                         <div class="inner clearfix">
                             <?php foreach($imageList AS $fileObj){ /** @var FlexryFile $fileObj */ ?>
                                 <div class="item" data-fileid="<?php echo $fileObj->getFileID(); ?>">
@@ -90,7 +96,7 @@
             </div>
 
             <!-- settings tab -->
-            <div id="tab-settings" class="tab-pane">
+            <div id="tabPaneSettings" class="tab-pane">
                 <div class="row-fluid">
                     <div class="span6">
                         <div class="well">
@@ -136,6 +142,20 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div id="tabPaneTemplates" class="tab-pane">
+                <?php echo $formHelper->select('flexryTemplateHandle', $templateSelectList, $this->controller->getBlockObject()->bFilename, array('class' => 'input-block-level')); ?>
+
+                <?php foreach($templateDirList AS $k => $templatePath): ?>
+                        <div class="template-form well <?php if( $this->controller->getBlockObject()->bFilename == $k ){ echo 'active'; } ?>" data-tmpl="<?php echo $k; ?>">
+                            <?php if( is_dir($templatePath) && file_exists($templatePath . '/options_form.php') ){ ?>
+                                <?php include($templatePath . '/options_form.php'); ?>
+                            <?php }else{ ?>
+                                <p>This template has no editable options.</p>
+                            <?php } ?>
+                        </div>
+                <?php endforeach; ?>
             </div>
         </div>
 	</div>

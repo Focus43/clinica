@@ -5,6 +5,9 @@
         /** @var BlockRecord $_blockRecord */
         protected $_blockRecord;
 
+        /** @var bool $_forceCustomResults */
+        protected $_forceCustomResults = false;
+
         /**
          * Using the FlexryFileList *requires* that a block record be passed in to use it.
          * @param BlockRecord $record
@@ -12,18 +15,29 @@
         public function __construct( BlockRecord $record = null ){
             // cloning it retains ghetto immutability...
             $this->_blockRecord = is_null($record) ? new BlockRecord : clone $record;
-            $this->_requiredFilters();
         }
 
 
         /**
-         * Takes data from the block record and figures out how to apply required fitlers to
+         * This will be run only when the block is in edit mode: scenario being, if the user
+         * had created a custom list, then chose to use Sets instead, and then if they want to
+         * go back to the custom list (it should retain how they had it before).
+         * @return FlexryFileList
+         */
+        public function forceCustomResults(){
+            $this->_forceCustomResults = true;
+            return $this;
+        }
+
+
+        /**
+         * Takes data from the block record and figures out how to apply required filters to
          * the list.
          * @return void
          */
         private function _requiredFilters(){
             // are we using a custom file source method?
-            if( (int) $this->_blockRecord->fileSourceMethod === FlexryGalleryBlockController::FILE_SOURCE_METHOD_CUSTOM ){
+            if( $this->_forceCustomResults === true || ((int) $this->_blockRecord->fileSourceMethod === FlexryGalleryBlockController::FILE_SOURCE_METHOD_CUSTOM) ){
                 $this->addToQuery("RIGHT JOIN btFlexryGalleryFiles flxry ON flxry.fileID = f.fID");
                 $this->filter('flxry.bID', (int) $this->_blockRecord->bID, '=');
                 $this->sortBy('flxry.displayOrder', 'asc');
@@ -55,6 +69,9 @@
          * @return array
          */
         public function get($itemsToGet = 0, $offset = 0) {
+            // apply the required filters
+            $this->_requiredFilters();
+            // regular fetch
             $files = array();
             $this->createQuery();
             $r = DatabaseItemList::get($itemsToGet, $offset);
