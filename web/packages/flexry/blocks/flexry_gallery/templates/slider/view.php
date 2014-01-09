@@ -13,12 +13,14 @@
 <script type="text/javascript">
     $(function(){
         var $slider = $('#flexrySlider-<?php echo $this->controller->bID; ?>');
-        // owl carousel init
+
+        // carousel init
         $slider.owlCarousel({
             theme: 'flexry-theme',
-            items: 3,
-            navigation: true,
-            pagination: false,
+            autoPlay: <?php echo ((bool) $templateData->slider->autoplay) ? 'true' : 'false'; ?>,
+            items: <?php echo ($templateData->slider->items >= 1) ? $templateData->slider->items : '3'; ?>,
+            navigation: <?php echo ((bool) $templateData->slider->showNavigation) ? 'true' : 'false'; ?>,
+            pagination: <?php echo ((bool) $templateData->slider->showPagination) ? 'true' : 'false'; ?>,
             lazyLoad: true
         });
 

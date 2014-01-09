@@ -37,6 +37,11 @@
 
         #tabPaneTemplates .template-form {display:none;margin:10px 0 0;}
         #tabPaneTemplates .template-form.active {display:block;}
+        #tabPaneTemplates .template-form table {vertical-align:middle;}
+        #tabPaneTemplates .template-form table:last-child {margin-bottom:0;}
+        #tabPaneTemplates .template-form table tr td {white-space:nowrap;vertical-align:middle;}
+        #tabPaneTemplates .template-form table tr td:last-child {width:98%;}
+        #tabPaneTemplates .template-form table label {display:inline-block;margin:0;padding-right:8px;}
 
         <?php if((int)$this->controller->fileSourceMethod === FlexryGalleryBlockController::FILE_SOURCE_METHOD_SETS){ ?>
         #chooseImg {display:none;}
@@ -148,13 +153,13 @@
                 <?php echo $formHelper->select('flexryTemplateHandle', $templateSelectList, $this->controller->getBlockObject()->bFilename, array('class' => 'input-block-level')); ?>
 
                 <?php foreach($templateDirList AS $k => $templatePath): ?>
-                        <div class="template-form well <?php if( $this->controller->getBlockObject()->bFilename == $k ){ echo 'active'; } ?>" data-tmpl="<?php echo $k; ?>">
-                            <?php if( is_dir($templatePath) && file_exists($templatePath . '/options_form.php') ){ ?>
-                                <?php include($templatePath . '/options_form.php'); ?>
-                            <?php }else{ ?>
-                                <p>This template has no editable options.</p>
-                            <?php } ?>
-                        </div>
+                    <div class="template-form well <?php if( $this->controller->getBlockObject()->bFilename == $k ){ echo 'active'; } ?>" data-tmpl="<?php echo $k; ?>">
+                        <?php if( is_dir($templatePath) && file_exists($templatePath . '/settings.php') ){ ?>
+                            <?php include($templatePath . '/settings.php'); ?>
+                        <?php }else{ ?>
+                            <p>This template has no editable options.</p>
+                        <?php } ?>
+                    </div>
                 <?php endforeach; ?>
             </div>
         </div>

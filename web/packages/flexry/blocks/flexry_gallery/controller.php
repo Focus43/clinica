@@ -39,6 +39,9 @@
                 $fullHeight, // no default
                 $fullCrop           = self::CROP_FALSE;
 
+        // json'ified string (needs transforming before use, so dont make publicly accessible)
+        protected $templateData = null;
+
 
         /**
          * @return string
@@ -75,6 +78,7 @@
             $this->set('savedFileSets', $this->savedFileSets());
             $this->set('templateSelectList', $this->templatesSelectList());
             $this->set('templateDirList', $this->templateAndDirectoryList());
+            $this->set('templateData', $this->getHelper('json')->decode($this->templateData));
         }
 
 
@@ -84,6 +88,7 @@
          */
         public function view(){
             $this->set('imageList', $this->fileListResults());
+            $this->set('templateData', $this->getHelper('json')->decode($this->templateData));
 		}
 
 
@@ -165,11 +170,10 @@
          */
         private function templateAndDirectoryList(){
             if( $this->_blockTemplatesList === null ){
-                $blockTypeHandle            = $this->getBlockObject()->getBlockTypeHandle();
-                $this->_blockTemplatesList  = array();
+                $this->_blockTemplatesList = array();
 
                 // top level templates (in {root}/blocks/flexry_gallery/templates)
-                $topLevelBlocksPath = DIR_FILES_BLOCK_TYPES . "/{$blockTypeHandle}/" . DIRNAME_BLOCK_TEMPLATES;
+                $topLevelBlocksPath = DIR_FILES_BLOCK_TYPES . "/{$this->btHandle}/" . DIRNAME_BLOCK_TEMPLATES;
                 if( file_exists($topLevelBlocksPath) ){
                     $topLevelFileHandles = $this->getHelper('file')->getDirectoryContents($topLevelBlocksPath);
                     foreach($topLevelFileHandles AS $dirItem){
@@ -181,7 +185,7 @@
                 $packageList = PackageList::get()->getPackages();
                 foreach( $packageList AS $pkgObj ){
                     $pkgPath        = (is_dir(DIR_PACKAGES . '/' . $pkgObj->getPackageHandle())) ? DIR_PACKAGES . '/'. $pkgObj->getPackageHandle() : DIR_PACKAGES_CORE . '/'. $pkgObj->getPackageHandle();
-                    $pkgBlocksPath  = $pkgPath . '/' . DIRNAME_BLOCKS . '/' . $blockTypeHandle . '/' . DIRNAME_BLOCK_TEMPLATES;
+                    $pkgBlocksPath  = $pkgPath . '/' . DIRNAME_BLOCKS . '/' . $this->btHandle . '/' . DIRNAME_BLOCK_TEMPLATES;
                     if( is_dir($pkgBlocksPath) ){
                         $pkgTemplateFileHandles = $this->getHelper('file')->getDirectoryContents($pkgBlocksPath);
                         foreach( $pkgTemplateFileHandles AS $dirItem ){
@@ -193,36 +197,6 @@
 
             return $this->_blockTemplatesList;
         }
-
-
-        /**
-         * Save block data.
-         * @param array $data
-         */
-        public function save( $data ){
-            // validate that shit first
-            $this->validate( $data );
-            // persist in the join table
-            $this->persistFiles( (array) $data['fileIDs'] );
-            // main block data
-            $blockData                      = array();
-            $blockData['fileSourceMethod']  = (int) $data['fileSourceMethod'];
-            $blockData['fileSetIDs']        = $this->getHelper('json')->encode( (array) $data['fileSetIDs'] );
-            $blockData['thumbWidth']        = (int) $data['thumbWidth'];
-            $blockData['thumbHeight']       = (int) $data['thumbHeight'];
-            $blockData['thumbCrop']         = (int) $data['thumbCrop'];
-            $blockData['fullUseOriginal']   = (int) $data['fullUseOriginal'];
-            $blockData['fullWidth']         = (int) $data['fullWidth'];
-            $blockData['fullHeight']        = (int) $data['fullHeight'];
-            $blockData['fullCrop']          = (int) $data['fullCrop'];
-            // persist it
-			parent::save( $blockData );
-
-            // *AFTER* block has been updated, in case the recordID changed
-            Block::getByID( $this->record->bID )->updateBlockInformation(array(
-                'bFilename' => $data['flexryTemplateHandle']
-            ));
-		}
 
 
         /**
@@ -248,6 +222,52 @@
             }
 
             return $this->getHelper('validation/error');
+        }
+
+
+        /**
+         * Save block data.
+         * @param array $data
+         */
+        public function save( $data ){
+            // validate that shit first
+            $this->validate( $data );
+            // persist in the join table
+            $this->persistFiles( (array) $data['fileIDs'] );
+            // main block data
+            $blockData                      = array();
+            $blockData['fileSourceMethod']  = (int) $data['fileSourceMethod'];
+            $blockData['fileSetIDs']        = $this->getHelper('json')->encode( (array) $data['fileSetIDs'] );
+            $blockData['thumbWidth']        = (int) $data['thumbWidth'];
+            $blockData['thumbHeight']       = (int) $data['thumbHeight'];
+            $blockData['thumbCrop']         = (int) $data['thumbCrop'];
+            $blockData['fullUseOriginal']   = (int) $data['fullUseOriginal'];
+            $blockData['fullWidth']         = (int) $data['fullWidth'];
+            $blockData['fullHeight']        = (int) $data['fullHeight'];
+            $blockData['fullCrop']          = (int) $data['fullCrop'];
+            // transform the template data to a json'ified document (avoid db table creation!)
+            $blockData['templateData']      = $this->encodeTemplateData( (array) $data['templateData'] );
+
+            // Now persist everything to the block record
+			parent::save( $blockData );
+
+            // Set block template *AFTER* save, in case the recordID changed
+            Block::getByID( $this->record->bID )->updateBlockInformation(array(
+                'bFilename' => $data['flexryTemplateHandle']
+            ));
+		}
+
+
+        /**
+         * @param array $data
+         * @return string
+         */
+        private function encodeTemplateData( array $data = array() ){
+            $objectified = array_map(function( $templateDataArray ){
+                return (object) $templateDataArray;
+            }, $data);
+
+            return $this->getHelper('json')->encode($objectified);
         }
 
 
