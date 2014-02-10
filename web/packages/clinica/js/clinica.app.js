@@ -97,8 +97,9 @@
 			
 			
 			$('#cFooter').on('click', '.footer-gray', function(_event){
+                console.log('clicked');
 			    if( $body.width() <= 767){
-                    $(this).siblings().slideToggle(250, 'easeOutExpo');
+                    $(this).parents('.span3').find('ul').add($(this).siblings('p')).slideToggle(250, 'easeOutExpo');
                 }
             });
 
