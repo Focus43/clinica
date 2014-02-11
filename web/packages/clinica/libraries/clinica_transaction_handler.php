@@ -152,6 +152,21 @@
 				$this->_authNetObj->zip			= $this->data['zip'];
 				$this->_authNetObj->phone		= $this->data['phone'];
 				$this->_authNetObj->email		= $this->data['email'];
+
+                // Set description field as either donation or bill payment
+                if( $this->transactionType === ClinicaTransaction::TYPE_DONATION ){
+                    $this->_authNetObj->description = "Donation";
+                }
+
+                if( $this->transactionType === ClinicaTransaction::TYPE_BILL_PAY ){
+                    // For the description field, get the clinica_account_number attribute
+                    $akObj = ClinicaTransactionAttributeKey::getByHandle('clinica_account_number');
+                    if( $akObj instanceof AttributeKey ){
+                        $akID    = $akObj->getAttributeKeyID();
+                        $account = $this->data['akID'][$akID]['value'];
+                    }
+                    $this->_authNetObj->description = "{$this->transactionType}; Account #: {$account}";
+                }
 			}
 			return $this->_authNetObj;
 		}
