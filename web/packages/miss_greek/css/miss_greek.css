@@ -1,9 +1,0 @@
-body {overflow:hidden;overflow-y:auto;padding:20px inherit;background:transparent url('../images/textures/miss_greek_plaid.png') repeat;}
-
-.container.whiteBack {background:#fff;}
-
-#superShowWrap {padding:10px 0;background:transparent url('../images/textures/squairy_light.png') repeat;}
-#superShow {width:500%;position:relative;height:400px;}
-#superShow .inner {width:100%;position:absolute;min-height:100% !important;height:100% !important;}
-#superShow .inner .item {background:#fff;width:20%;float:left;position:relative;min-height:100% !important;height:100% !important;opacity:.85;}
-#superShow .inner .item.active {opacity:1; -moz-box-shadow:0 0 14px rgba(0,0,0,.75);-webkit-box-shadow:0 0 14px rgba(0,0,0,.75);box-shadow:0 0 14px rgba(0,0,0,.75);z-index:2;}

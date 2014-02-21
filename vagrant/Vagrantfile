@@ -31,12 +31,15 @@ Vagrant.configure("2") do |config|
         :gems        => {
           "2.1.0"    => [
             {:name   => 'bundler'},
-            {:name   => 'sass'}
+            {:name   => 'compass'}
           ]
         }
       }]
     }
   }
+
+  # CUSTOM - open another port for live reload (used optionally w/ Grunt)
+  config.vm.network :forwarded_port, guest: 9090, host: 9090, auto_correct: true
 
   # The precise64-pristine box is a bare-bones Ubuntu installation with just Ruby 1.9.3
   # and Chef 11.6 installed; just enough to allow the machine to provision itself.
@@ -60,8 +63,8 @@ Vagrant.configure("2") do |config|
     config.vm.provider "virtualbox" do |v|
       v.name = File.basename(File.expand_path("../"))
     end
-  rescue 
-    $stdout.puts "Unable to rename Concrete5 VM; VirtualBox will display a generic name..." 
+  rescue
+    $stdout.puts "Unable to rename Concrete5 VM; VirtualBox will display a generic name..."
   end
 
   # Resource usage caps for VM
@@ -69,8 +72,8 @@ Vagrant.configure("2") do |config|
     config.vm.provider "virtualbox" do |v|
       v.customize ['modifyvm', :id, '--memory', box_settings[:vm_memory]]
     end
-  rescue 
-    $stdout.puts "Unable to set resource usage for VirtualBox; proceeding with defaults..." 
+  rescue
+    $stdout.puts "Unable to set resource usage for VirtualBox; proceeding with defaults..."
   end
 
   # Set base attributes for Chef cookbooks
@@ -122,12 +125,12 @@ Vagrant.configure("2") do |config|
       :keepaliverequests    => "100",
       :keepalivetimeout     => "5",
       :default_modules      => [
-        'mod_mime', 
-        'mod_expires', 
-        'mod_php5', 
-        'mod_rewrite', 
-        'mod_deflate', 
-        'mod_headers', 
+        'mod_mime',
+        'mod_expires',
+        'mod_php5',
+        'mod_rewrite',
+        'mod_deflate',
+        'mod_headers',
         'mod_ssl'
       ]
     },

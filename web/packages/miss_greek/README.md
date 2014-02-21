@@ -1,2 +1,0 @@
-# MissGreek Site Package #
-
