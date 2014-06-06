@@ -53,7 +53,7 @@ class ClinicaPatientColumnSet extends DatabaseItemListColumnSet {
     public function __construct(){
         $this->addColumn(new DatabaseItemListColumn('lastName', t('Name'), array('ClinicaPatientColumnSet', 'getNameAsLast')));
         $this->addColumn(new DatabaseItemListColumn('dob', t('DOB'), array('ClinicaPatientColumnSet', 'getDOB')));
-        $this->addColumn(new DatabaseItemListColumn('paid', t('Paid'), 'getPaid'));
+        $this->addColumn(new DatabaseItemListColumn('paid', t('Proceed With Procedure'), 'getPaid'));
     }
 
     public function getNameAsLast( ClinicaPatient $patientObj ){
