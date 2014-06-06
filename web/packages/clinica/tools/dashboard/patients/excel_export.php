@@ -12,7 +12,7 @@
         header('Content-Type: application/force-download');
         header('Content-Type: application/octet-stream');
         header('Content-Type: application/download');
-        header('Content-Disposition: attachment;filename=DataExport.xls');
+        header('Content-Disposition: attachment;filename=DataExport.xlsx');
         header('Content-Transfer-Encoding: binary');
 
         Loader::registerAutoload(array(
