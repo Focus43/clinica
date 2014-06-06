@@ -138,7 +138,7 @@
 		
 		
 		public function __construct(){
-			$this->addColumn(new DatabaseItemListColumn('createdUTC', t('Added'), array('ClinicaTransactionDefaultColumnSet', 'getDateCreated')));
+			$this->addColumn(new DatabaseItemListColumn('createdUTC', t('Date'), array('ClinicaTransactionDefaultColumnSet', 'getDateCreated')));
 			$this->addColumn(new DatabaseItemListColumn('firstName', t('First Name'), 'getFirstName'));
 			$this->addColumn(new DatabaseItemListColumn('lastName', t('Last Name'), 'getLastName'));
 			$this->addColumn(new DatabaseItemListColumn('cardLastFour', t('Card Last 4'), array('ClinicaTransactionDefaultColumnSet', 'getCardLastFour')));
@@ -168,6 +168,7 @@
 	class ClinicaTransactionAvailableColumnSet extends ClinicaTransactionDefaultColumnSet {
 		public function __construct(){
 			$this->addColumn(new DatabaseItemListColumn('email', t('Email'), 'getEmail'));
+            $this->addColumn(new DatabaseItemListColumn('typeHandle', t('Transaction Type'), 'getTypeHandle'));
 			$this->addColumn(new DatabaseItemListColumn('phone', t('Phone'), 'getPhone'));
 			$this->addColumn(new DatabaseItemListColumn('city', t('City'), 'getCity'));
 			$this->addColumn(new DatabaseItemListColumn('state', t('State'), 'getState'));
@@ -175,6 +176,7 @@
 			$this->addColumn(new DatabaseItemListColumn('message', t('Message'), 'getMessage'));
             $this->addColumn(new DatabaseItemListColumn('cardExpMonth', t('Card Exp.'), array('ClinicaTransactionAvailableColumnSet', 'getCardExp')));
             $this->addColumn(new DatabaseItemListColumn('userID', t('Transaction Run By'), array('ClinicaTransactionAvailableColumnSet', 'getTransactionRunBy')));
+            $this->addColumn(new DatabaseItemListColumn('authNetTransactionID', t('AuthNet Transaction ID'), 'getAuthNetTransactionID'));
 			parent::__construct();
 		}
         
