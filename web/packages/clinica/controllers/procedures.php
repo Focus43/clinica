@@ -36,6 +36,10 @@
         }
 
 
+        /**
+         * Call this "obfuscated" path to actually receive data.
+         * @param $token string
+         */
         public function asdfio23490asdf09zxcvihu234897asdf78234basdf89234( $token ){
             if( Loader::helper('validation/token')->validate('access', $token) ){
                 // pass data to the element

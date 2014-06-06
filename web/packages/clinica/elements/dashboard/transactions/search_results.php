@@ -12,6 +12,7 @@
 			</div>
 			<div class="pull-right">
 				<a class="btn success" href="<?php echo View::url('dashboard/clinica/transactions/add'); ?>">Manually Add Transaction</a>
+                <a class="btn" href="<?php echo CLINICA_TOOLS_URL . 'dashboard/transactions/excel_export'; ?>">Excel Export</a>
 			</div>
 		</div>
 		

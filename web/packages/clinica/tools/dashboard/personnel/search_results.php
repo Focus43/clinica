@@ -6,7 +6,7 @@
 		$controller  = Loader::controller('/dashboard/clinica/personnel/search');
 		$listObject  = $controller->personnelListObj();
 		$listResults = $listObject->getPage();
-		
+
 		Loader::packageElement('dashboard/personnel/search_results', 'clinica', array(
 			'searchInstance'	=> $searchInstance,
 			'listObject'		=> $listObject,

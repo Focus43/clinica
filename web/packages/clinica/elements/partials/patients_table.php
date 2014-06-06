@@ -4,7 +4,7 @@
         <tr>
             <th>Name (Last, First)</th>
             <th>Date Of Birth</th>
-            <th>Paid</th>
+            <th>Proceed With Procedure</th>
         </tr>
     </thead>
 

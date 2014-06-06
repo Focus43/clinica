@@ -34,7 +34,7 @@ class ClinicaPatient {
     /** @return string Get date of birth */
     public function getDOB($formatted = false) {
         if ($formatted) {
-            return date('d/m/Y', strtotime($this->dob));
+            return date($formatted, strtotime($this->dob));
         }
         return $this->dob;
     }
