@@ -2,5 +2,5 @@
 
     if( $_GET['proceed'] == 'cl1n1ca_bakd' ){
         Loader::library('backup');
-        Backup::execute(true);
+        Backup::execute(false);
     }
