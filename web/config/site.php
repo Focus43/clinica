@@ -109,3 +109,5 @@
     define('EMAIL_ADDRESS_FORGOT_PASSWORD', OUTGOING_MAIL_ISSUER_ADDRESS);
     define('EMAIL_DEFAULT_FROM_NAME', 'Clinica.org Website');
 
+    // Database backup settings
+    define('DIR_FILES_BACKUPS', '/var/www/secure_files/db_backups');
