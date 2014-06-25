@@ -6,8 +6,7 @@
 			<div class="pull-left">
 				<select id="actionMenu" class="span3" disabled="disabled" data-action-delete="dashboard/transactions/delete" data-action-reconcile="dashboard/transactions/mark_reconciled">
 					<option value="">** With Selected</option>
-					<!--<option value="delete">Delete Transaction(s)</option>-->
-					<option value="mark_reconciled">Mark As Reconciled</option>
+					<option value="delete">Delete Transaction(s)</option>
 				</select>
 			</div>
 			<div class="pull-right">
