@@ -42,6 +42,15 @@ class ClinicaPatient {
     public function getPaid(){ return ($this->paid == 1) ? "YES" : "NO"; }
     /** @return string Get paid numeric version */
     public function getPaidNumeric(){ return $this->paid; }
+    /** @return int Get the file object ID for the procedure form */
+    public function getProcedureFormFileID(){ return $this->procedureFormFileID; }
+    /** @return File Concrete5 File object */
+    public function getProcedureFormFileObj(){
+        if( $this->_procedureFileObj === null ){
+            $this->_procedureFileObj = File::getByID($this->procedureFormFileID);
+        }
+        return $this->_procedureFileObj;
+    }
 
     /**
      * Set properties of the current instance
@@ -56,7 +65,7 @@ class ClinicaPatient {
 
 
     protected function persistable(){
-        return array('firstName', 'lastName', 'paid', 'dob');
+        return array('firstName', 'lastName', 'paid', 'dob', 'procedureFormFileID');
     }
 
 

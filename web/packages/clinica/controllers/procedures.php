@@ -2,56 +2,53 @@
 
     class ProceduresController extends ClinicaPageController {
 
+        const ACCESS_TOKEN = 'access_prcdz';
+
         protected $includeThemeAssets   = true,
                   $requireHttps         = true,
                   $supportsPageCache    = false;
 
 
         public function on_start(){
+            $this->tokenHelper = Loader::helper('validation/token');
             $this->addFooterItem( $this->getHelper('html')->javascript('libs/ajaxify.form.js', self::PACKAGE_HANDLE) );
             parent::on_start();
         }
 
 
         /**
-         * Action used as a second layer of validation to make sure the user has access.
+         * Tokens, by default, are valid for 24 hours (86400 seconds). $validFor makes the token
+         * valid for only 10 seconds.
          * @return void
          */
-        public function authorize(){
-            $user       = new User(); // current user
-            $passHash   = User::encryptPassword( $_POST['password'], PASSWORD_SALT );
-            $existence  = Loader::db()->GetOne("SELECT uIsActive FROM Users WHERE uID = ? AND uPassword  = ?", array(
-                            $user->getUserID(), $passHash
-                        ));
-
-            if( (bool)$existence === true ){
-                $this->formResponder(true, 'Success', array(
-                    'token' => Loader::helper('validation/token')->generate('access'),
-                    'uri'   => $this->secureAction('asdfio23490asdf09zxcvihu234897asdf78234basdf89234')
-                ));
-                return;
-            }
-
-            $this->formResponder(false, 'The password does not match the account you are logged in with. Access denied.');
+        public function view(){
+            $validFor = (int) (time() - 86390);
+            $this->set('accessToken', $this->tokenHelper->generate(self::ACCESS_TOKEN, $validFor));
         }
 
 
         /**
-         * Call this "obfuscated" path to actually receive data.
-         * @param $token string
+         * Ajax request to load the patient table data.
+         * @param string $token
          */
-        public function asdfio23490asdf09zxcvihu234897asdf78234basdf89234( $token ){
-            if( Loader::helper('validation/token')->validate('access', $token) ){
-                // pass data to the element
-                $patientListObj = new ClinicaPatientList();
-                $patientListObj->sortBy('lastName', 'asc');
-                $patients       = $patientListObj->get(1000);
-
-                // load the package element as a view
-                Loader::packageElement('partials/patients_table', 'clinica', array('patients' => $patients));
-            }else{
-                echo '<tr><td>An error occurred, please contact an administrator.</td></tr>';
+        public function get_data( $token = null ){
+            // Is the token request valid? Expires after ten seconds...
+            if( $this->tokenHelper->validate(self::ACCESS_TOKEN, $token) ){
+                $userObj = new User();
+                // Does the user have permission?
+                if( $userObj->inGroup(Group::getByName(ClinicaPackage::GROUP_VIEW_PROCEDURES_TABLE)) ){
+                    // Load the patient list
+                    $patientListObj = new ClinicaPatientList();
+                    $patientListObj->sortBy('lastName', 'asc');
+                    $patients       = $patientListObj->get(1000);
+                    // Render the view partial
+                    Loader::packageElement('partials/patients_table', 'clinica', array('patients' => $patients));
+                    exit;
+                }
             }
+
+            // Either token expired or user didn't have permission; render error.
+            echo '<tr><td>Either your request took too long or you dont have permission Please contact an administrator.</td></tr>';
             exit;
         }
 

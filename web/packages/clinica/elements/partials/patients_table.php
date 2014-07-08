@@ -1,10 +1,13 @@
-<?php defined('C5_EXECUTE') or die("Access Denied."); ?>
+<?php defined('C5_EXECUTE') or die("Access Denied.");
+/** @var $patientObj ClinicaPatient */
+?>
 
     <thead>
         <tr>
             <th>Name (Last, First)</th>
             <th>Date Of Birth</th>
-            <th>Proceed With Procedure</th>
+            <th>Proceed?</th>
+            <th>Procedure Form</th>
         </tr>
     </thead>
 
@@ -14,6 +17,15 @@
                 <td><?php echo $patientObj; ?></td>
                 <td><?php echo $patientObj->getDOB('M d, Y'); ?></td>
                 <td><?php echo $patientObj->getPaid(); ?></td>
+                <td>
+                    <?php if( !((int)$patientObj->getProcedureFormFileID() >= 1) ): ?>
+                        ----------
+                    <?php else: ?>
+                        <a class="procedure-form" href="<?php echo $patientObj->getProcedureFormFileObj()->getDownloadURL(); ?>">
+                            <img src="<?php echo $patientObj->getProcedureFormFileObj()->getThumbnail(2, false); ?>" alt="File Icon" />
+                        </a>
+                    <?php endif; ?>
+                </td>
             </tr>
         <?php endforeach; }else{ ?>
             <tr>

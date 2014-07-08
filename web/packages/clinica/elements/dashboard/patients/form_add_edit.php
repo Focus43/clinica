@@ -1,7 +1,8 @@
-<?php Loader::element('editor_config');
-	$formHelper = Loader::helper('form');
-    $dateHelper = Loader::helper('form/date_time');
-	$assetLibrary = Loader::helper('concrete/asset_library');
+<?php /** @var $patientObj ClinicaPatient */
+Loader::element('editor_config');
+$formHelper = Loader::helper('form');
+$dateHelper = Loader::helper('form/date_time');
+$assetLibrary = Loader::helper('concrete/asset_library');
 ?>
 			
 <form method="post" action="<?php echo $this->action('save', $patientObj->getID()); ?>">
@@ -25,10 +26,7 @@
 					<tr>
 						<td><?php echo $formHelper->text('firstName', $patientObj->getFirstName(), array('class' => 'input-block-level')); ?></td>
 						<td><?php echo $formHelper->text('lastName', $patientObj->getLastName(), array('class' => 'input-block-level')); ?></td>
-                        <td>
-<!--                            --><?php //echo $formHelper->text('dob', $patientObj->getDOB(), array('class' => 'input-block-level')); ?>
-                            <?php print $dateHelper->date('dob', $patientObj->getDOB(), true); ?>
-                            </td>
+                        <td><?php print $dateHelper->date('dob', $patientObj->getDOB(), true); ?></td>
                         <td>
                             <label class="radio">
                                 <?php echo $formHelper->radio('paid', 0, $patientObj->getPaidNumeric()) . " NO"; ?>
@@ -38,8 +36,14 @@
                             </label>
                         </td>
 					</tr>
-
-
+                    <tr>
+                        <td colspan="4">Procedure Form</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <?php echo $assetLibrary->file('fileID', 'procedureFormFileID', 'Procedure Form', $patientObj->getProcedureFormFileObj()); ?>
+                        </td>
+                    </tr>
 				</tbody>
 			</table>
 		</div>

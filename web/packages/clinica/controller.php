@@ -4,8 +4,14 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.65';
-	
+	    protected $pkgVersion 			= '0.68';
+
+        // Fileset names
+        const FILESET_PROCEDURE_FORMS   = 'SecureProcedureForms';
+
+        // User groups
+        const GROUP_VIEW_PROCEDURES_TABLE = 'View Procedures Table';
+
 		
 		/**
 		 * @return string
@@ -65,6 +71,11 @@
 			if( class_exists('SoapClient') ){
 				Loader::registerAutoload(array('AuthorizeNetSOAP', array('library', 'authorize_net_sdk/lib/AuthorizeNetSOAP', $this->pkgHandle)));
 			}
+
+            // event hooks for when the user is logged in
+            if( User::isLoggedIn() ){
+                Events::extend('on_file_added_to_set', 'ClinicaFileEvents', 'onFileAddedToSet', "packages/{$this->pkgHandle}/libraries/system_event_hooks/file_events.php");
+            }
 	    }
 		
 	
@@ -119,7 +130,9 @@
 				 ->setupTheme()
 				 ->setupPageTypes()
 				 ->setupSitePages()
-                 ->setupJobs();
+                 ->setupJobs()
+                 ->setupFileSets()
+                 ->setupUserGroups();
 		}
 		
 		
@@ -427,6 +440,30 @@
                 }
             }
             
+            return $this;
+        }
+
+
+        /**
+         * @return ClinicaPackage
+         */
+        private function setupFileSets(){
+            if( !(FileSet::getByName(self::FILESET_PROCEDURE_FORMS) instanceof FileSet) ){
+                FileSet::createAndGetSet(self::FILESET_PROCEDURE_FORMS, FileSet::TYPE_PUBLIC);
+            }
+
+            return $this;
+        }
+
+
+        /**
+         * @return ClinicaPackage
+         */
+        private function setupUserGroups(){
+            if( !(Group::getByName(self::GROUP_VIEW_PROCEDURES_TABLE) instanceof Group) ){
+                Group::add(self::GROUP_VIEW_PROCEDURES_TABLE, 'Can view procedures table');
+            }
+
             return $this;
         }
 

@@ -19,14 +19,9 @@
 			<thead>
 				<tr>
 					<th><input id="checkAllBoxes" type="checkbox" /></th>
-					<?php foreach($columns->getColumns() as $col) { ?>
-		                <?php if ($col->isColumnSortable()) { ?>
-                        <?php //echo $listObject->getSearchResultsClass($col->getColumnKey())?><!--"><a href="--><?php //echo $listObject->getSortByURL($col->getColumnKey(), $col->getColumnDefaultSortDirection(), (CLINICA_TOOLS_URL . 'dashboard/patients/search_results'), array())?><!--">--><?php //echo $col->getColumnName()?><!--</a></th>-->
-                            <th><?php echo $col->getColumnName()?></th>
-		                <?php } else { ?>
-		                	<th><?php echo $col->getColumnName()?></th>
-		                <?php } ?>
-	                <?php } ?>
+					<?php foreach($columns->getColumns() as $col) {
+                        echo "<th>{$col->getColumnName()}</th>";
+	                } ?>
 				</tr>
 			</thead>
 			<tbody>

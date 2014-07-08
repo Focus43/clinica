@@ -54,6 +54,7 @@ class ClinicaPatientColumnSet extends DatabaseItemListColumnSet {
         $this->addColumn(new DatabaseItemListColumn('lastName', t('Name'), array('ClinicaPatientColumnSet', 'getNameAsLast')));
         $this->addColumn(new DatabaseItemListColumn('dob', t('DOB'), array('ClinicaPatientColumnSet', 'getDOB')));
         $this->addColumn(new DatabaseItemListColumn('paid', t('Proceed With Procedure'), 'getPaid'));
+        $this->addColumn(new DatabaseItemListColumn('procedureFormFileID', t('Procedure Form'), array('ClinicaPatientColumnSet', 'getProcedureFormLink')));
     }
 
     public function getNameAsLast( ClinicaPatient $patientObj ){
@@ -64,10 +65,14 @@ class ClinicaPatientColumnSet extends DatabaseItemListColumnSet {
     public function getDOB( ClinicaPatient $patientObj ){
         return $patientObj->getDOB(true);
     }
-//
-//    public function getProvider( ClinicaPersonnel $patientObj ){
-//        return $patientObj->getProviderLocations(true);
-//    }
+
+    public function getProcedureFormLink( ClinicaPatient $patientObj ){
+        if( !((int)$patientObj->getProcedureFormFileID() >= 1) ):
+            return 'Unavailable.';
+        else:
+            return '<a href="'.$patientObj->getProcedureFormFileObj()->getDownloadURL().'">'.$patientObj->getProcedureFormFileObj()->getTitle().'</a>';
+        endif;
+    }
 
     public function getCurrent(){
         return new self;
