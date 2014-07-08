@@ -22,7 +22,7 @@
                         ----------
                     <?php else: ?>
                         <a class="procedure-form" href="<?php echo $patientObj->getProcedureFormFileObj()->getDownloadURL(); ?>">
-                            <img src="<?php echo $patientObj->getProcedureFormFileObj()->getThumbnail(2, false); ?>" alt="File Icon" />
+                            <img src="<?php echo $patientObj->getProcedureFormFileObj()->getThumbnail(2, false); ?>" alt="File Icon" /> Download
                         </a>
                     <?php endif; ?>
                 </td>

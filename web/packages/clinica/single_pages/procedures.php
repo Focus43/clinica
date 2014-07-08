@@ -4,7 +4,7 @@
     #procedureTable tr td, #procedureTable tr th {white-space:nowrap;}
     #procedureTable tr td:last-child {width:99%;}
     #procedureTable .procedure-form {display:block;}
-    #procedureTable .procedure-form img {display:block;margin:0 auto;max-height:75px;}
+    #procedureTable .procedure-form img {display:inline-block;max-height:50px;margin-right:5px;}
 </style>
 
 <div class="container-fluid" style="padding:0;">
