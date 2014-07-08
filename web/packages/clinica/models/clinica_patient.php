@@ -108,10 +108,13 @@ class ClinicaPatient {
 
 
     /**
-     * Delete the record, and any attribute values associated w/ it
+     * Delete the record, and any attribute values associated w/ it. ALSO delete any procedure file associated.
      * @return void
      */
     public function delete(){
+        // Delete the procedure form first, if it exists
+        $this->getProcedureFormFileObj()->delete();
+
         $db = Loader::db();
         $db->Execute("DELETE FROM {$this->tableName} WHERE id = ?", array($this->id));
     }
