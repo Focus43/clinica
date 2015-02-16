@@ -1,24 +1,43 @@
+global:
+  env:
+    - PAGODA_PRODUCTION: true
+
 web1:
-  document_root: web
-  shared_writable_dirs: [web/files, secure_files]
-  php_version: 5.3.10
-  php_extensions: [mysql, curl, apc, gd, mbstring, zip, redis]
+  httpd_document_root: web
+  type: php
+  version: 5.3
+  stability: production
+  php_extensions:
+    - mysql
+    - pdo
+    - curl
+    - apc
+    - gd
+    - mbstring
+    - zip
+    - redis
   php_short_open_tab: "1"
   php_file_uploads: "1"
   php_upload_max_filesize: "20M"
   php_max_file_uploads: 20
   php_post_max_size: "20M"
   php_session_save_handler: redis
-  php_session_save_path: "tcp://tunnel.pagodabox.com:6379"
+  php_session_save_path: "tcp://${CACHE1_HOST}:${CACHE1_PORT}"
   after_build:
     - "cd -- /var/www/web; ln -s files/sitemap.xml sitemap.xml"
+  network_dirs:
+    storage1:
+      - web/files
+      - secure_files
 
-global:
-  env:
-    - PAGODA_PRODUCTION: true
-
-db1:
+database1:
   type: mysql
+  version: 5.6
+  stability: production
 
 cache1:
   type: redis
+
+storage1:
+  name: network_store
+  type: nfs
