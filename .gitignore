@@ -25,7 +25,7 @@ __MACOSX
 /web/languages/*
 /web/tools/*
 #/web/controllers/* #pagoda
-/web/single_pages/*
+#/web/single_pages/*
 #/web/models/*
 
 # ignore sitemap.xml
