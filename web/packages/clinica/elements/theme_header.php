@@ -30,11 +30,14 @@
 						<!--<a class="active">English</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a>Espa&ntilde;ol</a>-->
                         <span style="display:inline-block;padding-top:2px;">Language:&nbsp;&nbsp;</span>
                         <span style="display:inline-block;">
-                            <div id="google_translate_element"></div><script type="text/javascript">
+                            <div id="google_translate_element"></div>
+                            <?php if( ! Page::getCurrentPage()->isEditMode() ): ?>
+                            <script type="text/javascript">
                                 function googleTranslateElementInit() {
                                     new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
                                 }
                             </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                            <?php endif; ?>
                         </span>
                     </div>
 					<div class="pull-right">

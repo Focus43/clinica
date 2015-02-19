@@ -51,10 +51,10 @@
 
         if( (isset($_SERVER['VAGRANT_VM']) && ((bool) $_SERVER['VAGRANT_VM'] === true)) || in_array('VAGRANT_VM', (array) $argv) ){
 
-            $_SERVER['DB1_HOST'] = 'localhost';
-            $_SERVER['DB1_USER'] = 'root';
-            $_SERVER['DB1_PASS'] = 'root';
-            $_SERVER['DB1_NAME'] = 'concrete5_site';
+            $_SERVER['DATABASE1_HOST'] = 'localhost';
+            $_SERVER['DATABASE1_USER'] = 'root';
+            $_SERVER['DATABASE1_PASS'] = 'root';
+            $_SERVER['DATABASE1_NAME'] = 'concrete5_site';
 
             // enable all url rewriting
             define('URL_REWRITING_ALL', true);
