@@ -1,0 +1,26 @@
+---
+php_ppa: ppa:ondrej/php5-5.6
+
+php_packages:
+  - php5-cli
+  - php5-common
+  - php5-dev
+  - php-pear
+  - php5-mysql
+  - php5-readline
+  - php5-gd
+  - php5-curl
+
+install_xdebug: false
+install_phpunit: false
+install_composer: true
+install_phpredis: true
+use_phpredis_sessions: true
+
+phpINI_httpd_settings: []
+phpINI_httpd_defaults:
+  - { key: "short_open_tag", val: "On" }
+
+phpINI_cli_settings: []
+phpINI_cli_defaults:
+  - { key: "short_open_tag", val: "On" }

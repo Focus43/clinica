@@ -1,6 +1,2 @@
-# if updating cookbooks w/ Librarian, ignore the build files
-.librarian
-/tmp
-
-# make sure the .vagrant directory isn't tracked
 .vagrant
+provisioning/setup.yml

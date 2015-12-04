@@ -1,0 +1,24 @@
+---
+- name: update apt cache
+  apt: update_cache=yes
+  sudo: true
+
+- name: Install APT packages
+  apt: pkg={{ item }} state=present install_recommends=no
+  with_items:
+    - git
+    - curl
+    - software-properties-common
+    - build-essential
+    - autoconf
+    - bison
+    - libssl-dev
+    - libyaml-dev
+    - libncurses5-dev
+    - zlib1g-dev
+    - libcurl4-openssl-dev
+    - libffi-dev
+    - libreadline-dev
+    - libxml2-dev
+    - libxslt1-dev
+  sudo: true

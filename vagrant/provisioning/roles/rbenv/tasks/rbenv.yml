@@ -1,0 +1,52 @@
+---
+- name: Checkout rbenv
+  git: repo={{ rbenv.main.repo }} dest={{ rbenv_root }} update=no version={{ rbenv.main.version }} depth=1 accept_hostkey=yes
+  sudo: true
+  sudo_user: "{{ rbenv_user }}"
+
+- name: Checkout ruby-build plugin
+  git: repo={{ rbenv.ruby_build.repo }} dest={{ rbenv_root }}/plugins/ruby-build update=no version={{ rbenv.ruby_build.version }} depth=1 accept_hostkey=yes
+  sudo: true
+  sudo_user: "{{ rbenv_user }}"
+
+- name: Checkout gem-rehash plugin
+  git: repo={{ rbenv.gem_rehash.repo }} dest={{ rbenv_root }}/plugins/rbenv-gem-rehash update=no version={{ rbenv.gem_rehash.version }} depth=1 accept_hostkey=yes
+  sudo: true
+  sudo_user: "{{ rbenv_user }}"
+
+- name: Add rbenv initialization to profile
+  template: src=rbenv.sh.j2 dest=/etc/profile.d/rbenv.sh owner=root group=root mode=0644
+  sudo: true
+
+- name: Set gemrc for user {{ rbenv_user }}
+  copy: src=gemrc dest=/home/{{ rbenv_user }}/.gemrc
+  sudo: true
+  sudo_user: "{{ rbenv_user }}"
+
+- name: Check installed ruby version
+  shell: $SHELL -lc "rbenv versions | grep {{ rbenv_ruby_version }}"
+  sudo: true
+  sudo_user: "{{ rbenv_user }}"
+  register: ruby_installed
+  ignore_errors: yes
+
+- name: Install ruby version {{ rbenv_ruby_version }}
+  shell: $SHELL -lc "rbenv install {{ rbenv_ruby_version }} --verbose"
+  sudo: true
+  sudo_user: "{{ rbenv_user }}"
+  when:
+    - ruby_installed.rc != 0
+
+- name: Set global ruby version and exec rbenv rehash
+  shell: $SHELL -lc "rbenv global {{ rbenv_ruby_version }} && rbenv rehash"
+  sudo: true
+  sudo_user: "{{ rbenv_user }}"
+  register: rbenv_rehashed
+
+# Invoke this way so we can ensure the correct shell (honoring rbenv) is used
+- name: Install default gems
+  shell: $SHELL -lc "gem install {{ item }}"
+  when: rbenv_rehashed.rc == 0
+  sudo: true
+  sudo_user: "{{ rbenv_user }}"
+  with_items: rbenv_default_gems

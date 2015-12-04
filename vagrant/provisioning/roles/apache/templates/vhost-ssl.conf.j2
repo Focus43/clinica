@@ -1,0 +1,21 @@
+<VirtualHost *:443>
+    ServerName {{ item.servername }}
+    DocumentRoot {{ item.docroot }}
+    ServerAlias {{ item.serveralias }}
+
+    SSLEngine on
+    SSLCertificateFile /etc/ssl/certs/vagrant_apache_ssl.pem
+
+{% for env_var in item.env_vars %}
+    SetEnv {{ env_var.name }} {{ env_var.value }}
+{% endfor %}
+
+{% for php_env_var in item.php_env_vars %}
+    php_value {{ php_env_var.name }} {{ php_env_var.value }}
+{% endfor %}
+
+    <Directory {{ item.docroot }}>
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>

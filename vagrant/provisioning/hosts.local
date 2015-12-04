@@ -1,0 +1,4 @@
+# Note, to run these Ansible recipes against a live host - DO NOT keep secure
+# credentials in the hosts file like this. EVER.
+
+localhost   ansible_ssh_host=127.0.0.1  ansible_ssh_user=vagrant    ansible_ssh_pass=vagrant    ansible_sudo_pass=vagrant

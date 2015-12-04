@@ -1,0 +1,9 @@
+---
+# Gather stats on installation status
+- stat: path={{ project_web_composer_vendor_dir }}
+  register: composer_libs
+
+# Install composer stuff (concrete/vendor)
+- name: Composer dependencies
+  composer: command=install working-dir={{ project_web_concrete_dir }}
+  when: not composer_libs.stat.exists

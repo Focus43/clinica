@@ -1,0 +1,29 @@
+---
+- name: Check nodejs is installed
+  shell: $SHELL -lc "which nodejs"
+  sudo: true
+  register: nodejs_installed
+  ignore_errors: yes
+
+- name: Register NodeJS PPA
+  shell: curl -sL https://deb.nodesource.com/setup | sudo bash -
+  when:
+    - nodejs_installed.rc == 1
+
+- name: Install NodeJS and NPM
+  apt: pkg=nodejs state=installed update_cache=yes
+  register: nodejs_package_installed
+  when:
+    - nodejs_installed.rc == 1
+
+- name: Install global npm packages
+  npm: name={{ item }} global=yes state=present
+  with_items: npm_global_packages
+
+- name: Confirm package.json exists if auto-installing packages
+  stat: path="{{ npm_package_json.path }}/package.json"
+  register: packagejsonfile
+
+- name: Install npm dependencies in package.json
+  npm: path={{ npm_package_json.path }}
+  when: (npm_package_json.install) and (packagejsonfile.stat.exists == true)

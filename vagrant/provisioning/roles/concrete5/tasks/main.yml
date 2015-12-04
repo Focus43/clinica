@@ -1,0 +1,25 @@
+---
+- include: composer.yml
+  when: run_composer
+
+- include: build_assets.yml
+  when: build_core_assets
+
+- name: Apply patch files
+  copy: src="{{ project_quickstart_dir }}/patch/application/" dest="{{ project_web_root_dir }}/application"
+  when: apply_patches
+
+# Run after_exec hook to generate doctrine proxies
+- name: Execute after_exec hook (generate doctrine proxies)
+  command: php {{ project_quickstart_dir }}/generate_proxies.php
+
+# ... And finally, install C5
+- name: Install Concrete5 via CLI
+  shell: >
+    php {{ project_quickstart_dir }}/install.php \
+      --admin-email=change@me.com \
+      --admin-password=c5@dmin \
+      --db-database={{ shared.dbname }} \
+      --db-username={{ shared.dbuser }} \
+      --db-password={{ shared.dbpass }} \
+      --db-server={{ shared.dbhost }}

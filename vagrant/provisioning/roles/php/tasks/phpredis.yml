@@ -1,0 +1,30 @@
+---
+- name: Checkout phpredis build directory
+  git:
+    repo: https://github.com/phpredis/phpredis.git
+    dest: /usr/local/src/phpredis
+    version: 2.2.7
+    update: no
+
+- name: Build phpredis extension
+  shell: cd /usr/local/src/phpredis && phpize && ./configure && make && make install
+  sudo: yes
+  args:
+    chdir: /usr/local/src/phpredis
+    creates: /usr/local/src/phpredis/build
+  register: phpredis_result
+
+- name: Add phpredis.ini
+  template: src=redis.ini.j2 dest=/etc/php5/mods-available/redis.ini owner=root group=root mode=0644
+
+- name: Enable phpredis module with php5enmod
+  shell: php5enmod redis
+  sudo: yes
+  when: phpredis_result|changed
+
+- name: Use redis for sessions
+  lineinfile: dest=/etc/php5/apache2/php.ini regexp="{{ item.regexp }}" line="{{ item.line }}" backup=yes
+  with_items:
+    - { regexp: "session.save_handler =", line: "session.save_handler = redis" }
+    - { regexp: ";session.save_path =", line: 'session.save_path = \"tcp://127.0.0.1:6379?weight=1\"' }
+  when: use_phpredis_sessions == true

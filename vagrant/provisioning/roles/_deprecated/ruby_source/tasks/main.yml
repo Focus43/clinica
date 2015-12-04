@@ -1,0 +1,18 @@
+---
+# Install via Brightbox: https://www.brightbox.com/docs/ruby/ubuntu/
+- name: Gather Ruby version facts
+  command: ruby -v
+  register: ruby_version
+  ignore_errors: True
+
+- name: Add Ruby Brightbox PPA
+  apt_repository: repo=ppa:brightbox/ruby-ng
+  when: ruby_version.rc !=0 or ruby_version.stdout.split()[1] != "2.2.0p0"
+
+- name: Update apt cache
+  apt: update_cache=yes
+  when: ruby_version.rc !=0 or ruby_version.stdout.split()[1] != "2.2.0p0"
+
+- name: Install Ruby 2.2
+  apt: pkg=ruby2.2 state=latest
+  when: ruby_version.rc !=0 or ruby_version.stdout.split()[1] != "2.2.0p0"

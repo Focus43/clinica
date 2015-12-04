@@ -1,0 +1,10 @@
+---
+- name: Install PHPUnit 4.5.0
+  shell: >
+    cd /usr/local/bin \
+      && wget https://phar.phpunit.de/phpunit.phar \
+      && mv phpunit.phar phpunit \
+      && chmod +x phpunit
+  sudo: yes
+  args:
+    creates: /usr/local/bin/phpunit

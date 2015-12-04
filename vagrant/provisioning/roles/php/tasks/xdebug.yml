@@ -1,0 +1,9 @@
+---
+- name: Install Xdebug PHP package
+  apt: pkg={{ item }} state=present
+  with_items:
+    - php5-xdebug
+
+- name: Configure Xdebug
+  template: src=xdebug.ini.j2 dest=/etc/php5/mods-available/xdebug.ini owner=root group=root mode=0644
+  when: install_xdebug == true

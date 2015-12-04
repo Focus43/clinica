@@ -1,0 +1,21 @@
+---
+# Install GruntJS?
+- name: Installing GruntJS
+  command: npm install -g grunt-cli
+  sudo: yes
+  args:
+    creates: /usr/bin/grunt
+
+# Install NPM modules if build core assets
+- name: Install NPM modules for Concrete5 core Build
+  command: npm install chdir={{ project_core_build_dir }}
+  sudo: yes
+  args:
+    creates: "{{ project_core_build_dir }}/node_modules"
+
+# Actually build the assets
+- name: Run Concrete5 asset build
+  command: grunt release chdir={{ project_core_build_dir }}
+  sudo: yes
+  args:
+    creates: "{{ project_web_concrete_dir }}/js/app.js"

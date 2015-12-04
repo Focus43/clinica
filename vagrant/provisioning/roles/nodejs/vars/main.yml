@@ -1,0 +1,7 @@
+---
+npm_global_packages: []
+
+# Install files from package.json?
+npm_package_json:
+  install: false
+  path: ""

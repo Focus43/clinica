@@ -1,0 +1,11 @@
+---
+project_root_dir: "/home/vagrant/app"
+project_web_root_dir: "{{ project_root_dir }}/web"
+project_web_concrete_dir: "{{ project_web_root_dir }}/concrete"
+project_web_composer_vendor_dir: "{{ project_web_concrete_dir }}/vendor"
+project_core_build_dir: "{{ project_root_dir }}/build"
+project_quickstart_dir: "{{ project_root_dir }}/_quickstart"
+
+run_composer: true
+build_core_assets: true
+apply_patches: true
