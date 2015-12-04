@@ -5,9 +5,6 @@
 	 */
 	if( isset($_SERVER['PAGODA_PRODUCTION']) && ((bool) $_SERVER['PAGODA_PRODUCTION'] === true) ) {
 		
-		// enable all url rewriting
-		define('URL_REWRITING_ALL', true);
-		
 		// needed for successful installation on Pagodabox. see issue
 		// http://www.concrete5.org/developers/bugs/5-6-0-2/install-fails-with-mysql-auto-increment-offset-set/
 		define('REGISTERED_GROUP_ID', '5');
@@ -49,56 +46,31 @@
 	 */
 	}else{
 
-        if( (isset($_SERVER['VAGRANT_VM']) && ((bool) $_SERVER['VAGRANT_VM'] === true)) || in_array('VAGRANT_VM', (array) $argv) ){
-
-            $_SERVER['DATABASE1_HOST'] = 'localhost';
-            $_SERVER['DATABASE1_USER'] = 'root';
-            $_SERVER['DATABASE1_PASS'] = 'root';
-            $_SERVER['DATABASE1_NAME'] = 'concrete5_site';
-
-            // enable all url rewriting
-            define('URL_REWRITING_ALL', true);
-            // connect to Redis cache
-            define('REDIS_CONNECTION_HANDLE', '127.0.0.1:6379');
-            // the following depend on the constant REDIS_CONNECTION_HANDLE being defined
-            if( defined('REDIS_CONNECTION_HANDLE') ){
-                // use Redis as the page cache library
-                define('PAGE_CACHE_LIBRARY', 'Redis');
-                // if using the FluidDNS package
-                define('PAGE_TITLE_FORMAT', '%2$s');
-            }
-            // application profiler. disable this for live sites! (just comment out)
-            //define('ENABLE_APPLICATION_PROFILER', true);
-
-            // AUTHORIZE.NET STUFF (TEST ACCOUNT CREDENTIALS)
-            define('AUTHORIZENET_API_LOGIN_ID', '7ep7L4U4');
-            define('AUTHORIZENET_TRANSACTION_KEY', '4y4G4436kMYJg749');
-            define('AUTHORIZENET_SANDBOX', true);
-
-            // Database backup settings for developing locally
-            //define('DIR_FILES_BACKUPS', '/home/vagrant/app/web/files/backups');
-            //define('DIR_FILES_BACKUPS', '/files/backups');
-
-        }else{
-
-            require __DIR__ . '/site.local.php';
-
-            /**************************** SAMPLE *****************************
-            $_SERVER['DB1_HOST'] = 'localhost';
-            $_SERVER['DB1_USER'] = 'root';
-            $_SERVER['DB1_PASS'] = '';
-            $_SERVER['DB1_NAME'] = '';
-
-            // enable url rewriting. use locally if you have an Apache VirtualHost setup
-            define('URL_REWRITING_ALL', true);
-
-            // if you have Redis installed on your local machine...
-            define('REDIS_CONNECTION_HANDLE', '127.0.0.1:6379');
-            *****************************************************************/
-
+        // connect to Redis cache
+        define('REDIS_CONNECTION_HANDLE', '127.0.0.1:6379');
+        // the following depend on the constant REDIS_CONNECTION_HANDLE being defined
+        if( defined('REDIS_CONNECTION_HANDLE') ){
+            // use Redis as the page cache library
+            define('PAGE_CACHE_LIBRARY', 'Redis');
+            // if using the FluidDNS package
+            define('PAGE_TITLE_FORMAT', '%2$s');
         }
+        // application profiler. disable this for live sites! (just comment out)
+        //define('ENABLE_APPLICATION_PROFILER', true);
+
+        // AUTHORIZE.NET STUFF (TEST ACCOUNT CREDENTIALS)
+        define('AUTHORIZENET_API_LOGIN_ID', '7ep7L4U4');
+        define('AUTHORIZENET_TRANSACTION_KEY', '4y4G4436kMYJg749');
+        define('AUTHORIZENET_SANDBOX', true);
+
+        // Database backup settings for developing locally
+        //define('DIR_FILES_BACKUPS', '/home/vagrant/app/web/files/backups');
+        //define('DIR_FILES_BACKUPS', '/files/backups');
 
 	}
+
+    // enable all url rewriting
+    define('URL_REWRITING_ALL', true);
 
 	// server variables are set by Pagoda, or by you in site.local.php
     define('DB_SERVER',     $_SERVER['DATABASE1_HOST']);
@@ -115,5 +87,3 @@
     define('EMAIL_DEFAULT_FROM_ADDRESS', OUTGOING_MAIL_ISSUER_ADDRESS);
     define('EMAIL_ADDRESS_FORGOT_PASSWORD', OUTGOING_MAIL_ISSUER_ADDRESS);
     define('EMAIL_DEFAULT_FROM_NAME', 'Clinica.org Website');
-
-
