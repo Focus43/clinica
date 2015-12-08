@@ -27,7 +27,7 @@ module.exports = function( gulp ){
                 app: _pathTo('css/src/clinica.app.scss'),
                 ie8: _pathTo('css/src/ie8.scss')
             }
-        }
+        };
         //sources = {
         //    scss: {
         //        core: _pathTo('css/src/core.scss'),
@@ -58,13 +58,22 @@ module.exports = function( gulp ){
      * @returns {*|pipe|pipe}
      */
     function runSass( files, _style ){ utils.log("runSass" )
-        return gulp.src(files)
-            .pipe(sass({compass:true, style:(_style || 'nested')}))
+        return sass(files, {
+                compass:    true,
+                style:      (_style || 'nested')
+            })
             .on('error', function( err ){
                 utils.log(utils.colors.red(err.toString()));
                 this.emit('end');
             })
             .pipe(gulp.dest(_pathTo('css/')));
+        //return gulp.src(files)
+        //    .pipe(sass({compass:true, style:(_style || 'nested')}))
+        //    .on('error', function( err ){
+        //        utils.log(utils.colors.red(err.toString()));
+        //        this.emit('end');
+        //    })
+        //    .pipe(gulp.dest(_pathTo('css/')));
     }
 
     /**

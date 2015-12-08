@@ -11,9 +11,9 @@ VM_SETTINGS = {
 
 	# See Vagrantfile for definition
 	httpd_writable_dirs: [
-		{ # Ex. for setting up a writable directory for Concrete5
-			host_relative_path: '../web/application/files',
-			vm_absolute_path: '/home/vagrant/app/web/application/files',
+		{ # Ex. for setting up a writable directory for Concrete5.7
+			host_relative_path: '../web/files',
+			vm_absolute_path: '/home/vagrant/app/web/files',
 			owner: 'vagrant',
 			group: 'www-data',
 			mount_options: ['dmode=775,fmode=664']

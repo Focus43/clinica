@@ -3,6 +3,7 @@
   sudo: yes
 
   vars:
+    custom_role_path: "vagrant/roles"
     install_apache: true
     install_mysql: true
     install_redis: true
@@ -21,7 +22,7 @@
     ######################################################################
     # Setup base system stuff; generally don't screw with this...
     ######################################################################
-    - role: system
+    - role: "{{ custom_role_path }}/system"
       user_env_variables:
         - { user: vagrant, regexp: "export DATABASE1_HOST=", line: "export DATABASE1_HOST={{ shared.dbhost }}" }
         - { user: vagrant, regexp: "export DATABASE1_USER=", line: "export DATABASE1_USER={{ shared.dbuser }}" }
@@ -45,7 +46,7 @@
     #     index.php * <- entry point
     # then you'd want to set it to /home/vagrant/app/web
     ######################################################################
-    - role: apache
+    - role: "{{ custom_role_path }}/apache"
       apache_users:
         - vagrant
       virtual_hosts:
@@ -71,8 +72,10 @@
     # 14 default of install 5.5. If you DO want to use 5.5, simply remove
     # the __mysql_packages all together.
     ######################################################################
-    - role: geerlingguy.mysql
+    - role: "{{ custom_role_path }}/geerlingguy.mysql"
       mysql_root_password: root
+      mysql_root_password_update: yes
+      mysql_log_error: /var/log/mysql/error.log
       __mysql_packages:
         - mysql-server-5.6
         - mysql-common-5.6
@@ -85,11 +88,14 @@
         - { name: "admin", host: "%", password: "admin", priv: "*.*:ALL" }
         - { name: "{{ shared.dbuser }}", host: "%", password: "{{ shared.dbpass }}", priv: "{{ shared.dbname }}.*:ALL" }
       when: install_mysql == true
+      become: yes
+      become_user: root
+      become_method: su
 
     ######################################################################
     # Installs Redis if you specify true in the vars at the top
     ######################################################################
-    - role: redis
+    - role: "{{ custom_role_path }}/redis"
       when: install_redis == true
 
     ######################################################################
@@ -103,10 +109,10 @@
     #   phpINI_httpd_settings:
     #     - { key: "config_key", val: "config_values" }
     ######################################################################
-    - role: php
+    - role: "{{ custom_role_path }}/php"
       install_xdebug: false
       install_phpunit: false
-      install_composer: false
+      install_composer: true
       install_phpredis: true
       use_phpredis_sessions: true
       when: install_php == true
@@ -121,7 +127,7 @@
     # packages on provisioning the machine, just remove npm_package_json and
     # subsequent lines
     ######################################################################
-    - role: nodejs
+    - role: "{{ custom_role_path }}/nodejs"
       npm_global_packages:
         - gulp
         - bower
@@ -131,21 +137,11 @@
       when: install_nodejs == true
 
     ######################################################################
-    # Install Ruby/Rbenv (see roles/rbenv/vars for examples of var definitions);
-    # note, this sets up for the USER, not system-wide.
-    # --------------------------------------------------------------------
-    # rbenv_user: almost always leave to vagrant, unless you're going to
-    # point this ansible run at a host you want to use for something else
-    # --------------------------------------------------------------------
-    # rbenv_default_gems: specify what gems to install by default
-    # --------------------------------------------------------------------
-    # Optionally, specify the ruby version with "rbenv_ruby_version"; it
-    # defaults to 2.2.1. Note that this is the only guaranteed version to
-    # build OK.
+    # Install ruby gems (assumes using system ruby)
     ######################################################################
-    - role: rbenv
-      rbenv_user: vagrant
-      rbenv_default_gems:
+    - role: "{{ custom_role_path }}/ruby"
+      ruby_user: vagrant
+      ruby_default_gems:
         - bundler
         - compass
       when: install_ruby == true
@@ -155,7 +151,7 @@
     # enable autoinstall_C5 if you're dropping into a C5 project and this
     # will install during the provision.
     ######################################################################
-    - role: concrete5
+    - role: "{{ custom_role_path }}/concrete5"
       run_composer: true
       build_core_assets: true
       apply_patches: true
