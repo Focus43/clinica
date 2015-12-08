@@ -1,5 +1,5 @@
-<?php 
-	
+<?php
+
 	/**
 	 * PAGODABOX PRODUCTION SETTINGS
 	 */
@@ -33,6 +33,8 @@
 		define('AUTHORIZENET_TRANSACTION_KEY', $_SERVER['AUTHNET_API_TRXN_KEY']);
 		define('AUTHORIZENET_SANDBOX', false);
 
+		// File upload destination
+		define('DIR_FILES_UPLOADED', '/var/www/web/files');
         // Database backup settings (Boxfile must declare 'secure_files' as a writable directory)
         define('DIR_FILES_BACKUPS', '/var/www/secure_files/db_backups');
 	
