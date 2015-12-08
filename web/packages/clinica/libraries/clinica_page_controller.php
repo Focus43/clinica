@@ -60,7 +60,6 @@
             // header and CSS items
             $this->addHeaderItem('<meta name="google-translate-customization" content="3567b59082bacffd-3fff6379e3eabe3a-g94318f2bd40049ae-b"></meta>');
             $this->addHeaderItem( '<meta id="clinicaToolsDir" value="'.CLINICA_TOOLS_URL.'" />' );
-            $this->addHeaderItem( $this->getHelper('html')->css('bootstrap.min.css', self::PACKAGE_HANDLE) );
             $this->addHeaderItem( $this->getHelper('html')->css('clinica.app.css', self::PACKAGE_HANDLE) );
             $this->addHeaderItem( $this->getHelper('html')->javascript('libs/modernizr.min.js', self::PACKAGE_HANDLE) );
             

@@ -6,7 +6,7 @@
 		
 		public function view(){
 			$searchInstance = 'transaction' . time();
-			$this->addHeaderItem(Loader::helper('html')->css('dashboard/app.dashboard.css', 'clinica'));
+			$this->addHeaderItem(Loader::helper('html')->css('clinica.dashboard.css', 'clinica'));
 			$this->addHeaderItem( '<meta id="clinicaToolsDir" value="'.CLINICA_TOOLS_URL.'" />' );
 			$this->addFooterItem('<script type="text/javascript">$(function() { ccm_setupAdvancedSearch(\''.$searchInstance.'\'); });</script>');
 			$this->addFooterItem(Loader::helper('html')->javascript('dashboard/app.dashboard.js', 'clinica'));

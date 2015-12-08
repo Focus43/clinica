@@ -4,7 +4,7 @@
 	
 	
 		public function on_start(){
-			$this->addHeaderItem(Loader::helper('html')->css('dashboard/app.dashboard.css', 'clinica'));
+			$this->addHeaderItem(Loader::helper('html')->css('clinica.dashboard.css', 'clinica'));
 		}
 	
 	

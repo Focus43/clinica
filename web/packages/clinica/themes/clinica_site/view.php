@@ -3,7 +3,6 @@ if( !($this->controller instanceof ClinicaPageController) ){
 	$htmlHelper = Loader::helper('html');
 	// header and CSS items
 	$this->addHeaderItem( '<meta id="clinicaToolsDir" value="'.CLINICA_TOOLS_URL.'" />' );
-	$this->addHeaderItem( $htmlHelper->css('bootstrap.min.css', 'clinica') );
 	$this->addHeaderItem( $htmlHelper->css('clinica.app.css', 'clinica') );
 	$this->addHeaderItem( $htmlHelper->javascript('libs/modernizr.min.js', 'clinica') );
 	

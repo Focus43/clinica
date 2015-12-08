@@ -24,7 +24,7 @@
         
         public function on_start(){
             $this->set('formHelper', Loader::helper('form'));
-            $this->addHeaderItem(Loader::helper('html')->css('dashboard/app.dashboard.css', self::PACKAGE_HANDLE));
+            $this->addHeaderItem(Loader::helper('html')->css('clinica.dashboard.css', self::PACKAGE_HANDLE));
             
             // message flash
             if( isset($_SESSION['flash_msg']) ){

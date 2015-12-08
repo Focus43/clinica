@@ -46,3 +46,5 @@ error_log
 # ignore Eclipse-specific files
 /.settings/
 /.buildpath
+
+node_modules/

@@ -7,8 +7,8 @@
     install_mysql: true
     install_redis: true
     install_php: true
-    install_nodejs: false
-    install_ruby: false
+    install_nodejs: true
+    install_ruby: true
     autoinstall_C5: false
     # Edit these if you prefer
     shared:

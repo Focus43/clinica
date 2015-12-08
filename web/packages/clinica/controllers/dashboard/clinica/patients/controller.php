@@ -4,21 +4,21 @@
 	
 	
 		public function on_start(){
-			$this->addHeaderItem(Loader::helper('html')->css('dashboard/app.dashboard.css', 'clinica'));
+			$this->addHeaderItem(Loader::helper('html')->css('clinica.dashboard.css', 'clinica'));
 		}
 
 
         public function view( $id = null ) {
             // viewing a specific transaction
             if( !is_null($id) && ((int) $id >= 1) ){
-                $this->addHeaderItem(Loader::helper('html')->css('dashboard/app.dashboard.css', 'clinica'));
+                $this->addHeaderItem(Loader::helper('html')->css('clinica.dashboard.css', 'clinica'));
                 $patientObj = ClinicaPatient::getByID($id);
                 $this->set('patientObj', $patientObj);
                 return;
             }
 
             $searchInstance = 'patient' . time();
-            $this->addHeaderItem(Loader::helper('html')->css('dashboard/app.dashboard.css', 'clinica'));
+            $this->addHeaderItem(Loader::helper('html')->css('clinica.dashboard.css', 'clinica'));
             $this->addHeaderItem( '<meta id="clinicaToolsDir" value="'.CLINICA_TOOLS_URL.'" />' );
             $this->addFooterItem('<script type="text/javascript">$(function() { ccm_setupAdvancedSearch(\''.$searchInstance.'\'); });</script>');
             $this->addFooterItem(Loader::helper('html')->javascript('dashboard/app.dashboard.js', 'clinica'));

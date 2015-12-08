@@ -18,7 +18,10 @@
     - zlib1g-dev
     - libcurl4-openssl-dev
     - libffi-dev
-    - libreadline-dev
+    - libreadline6
+    - libreadline6-dev
     - libxml2-dev
     - libxslt1-dev
+    - libgdbm3
+    - libgdbm-dev
   sudo: true

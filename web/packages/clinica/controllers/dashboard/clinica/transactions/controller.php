@@ -11,7 +11,7 @@
 		public function view( $id = null ) {
 			// viewing a specific transaction
 			if( !is_null($id) && ((int) $id >= 1) ){
-				$this->addHeaderItem(Loader::helper('html')->css('dashboard/app.dashboard.css', 'clinica'));
+				$this->addHeaderItem(Loader::helper('html')->css('clinica.dashboard.css', 'clinica'));
 				$transactionObj = ClinicaTransaction::getByID($id);
 				$this->set('transactionObj', $transactionObj);
 				$this->set('attributeKeys', AttributeSet::getByHandle($transactionObj->getTypeHandle())->getAttributeKeys() );
@@ -30,7 +30,7 @@
 		public function add(){
 		    Loader::helper('clinica_transaction', 'clinica');
 		    $this->set('form', $this->getHelper('form'));
-            $this->addHeaderItem($this->getHelper('html')->css('dashboard/app.dashboard.css', 'clinica'));
+            $this->addHeaderItem($this->getHelper('html')->css('clinica.dashboard.css', 'clinica'));
             $this->addFooterItem($this->getHelper('html')->javascript('libs/ajaxify.form.js', 'clinica'));
             $this->addFooterItem($this->getHelper('html')->javascript('dashboard/app.dashboard.js', 'clinica'));
             
