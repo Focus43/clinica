@@ -101,20 +101,16 @@
     ######################################################################
     # Install PHP (see roles/php/vars for examples of var definitions)
     # --------------------------------------------------------------------
-    # To modify php.ini settings for httpd/apache, add
-    #   phpINI_httpd_settings:
-    #     - { key: "config_key", val: "config_values" }
-    # --------------------------------------------------------------------
-    # To modify php.ini settings for CLI, add
-    #   phpINI_httpd_settings:
-    #     - { key: "config_key", val: "config_values" }
+    # To modify php.ini settings:
+    # php_ini_settings:
+    #   - { k: 'short_open_tag', v: 'Off' }
     ######################################################################
     - role: "{{ custom_role_path }}/php"
-      install_xdebug: false
-      install_phpunit: false
-      install_composer: true
-      install_phpredis: true
-      use_phpredis_sessions: true
+      php_install_xdebug: false
+      php_install_phpunit: false
+      php_install_composer: true
+      php_install_redis_ext: true
+      php_sessions_use_redis: true
       when: install_php == true
 
     ######################################################################
