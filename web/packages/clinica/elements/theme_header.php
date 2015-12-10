@@ -4,7 +4,7 @@
 			<div id="flexHeader">
 				<div class="main clearfix">
 					<!--<a href="<?php echo $this->url(''); ?>">
-						<img src="<?php echo CLINICA_IMAGES_URL; ?>logo_header.png" alt="Clinica Family Health Services Logo" />
+						<img src="<?php echo CLINICA_IMAGES_URL; ?>logo_header.png" alt="Clinica Family Health Logo" />
 					</a>-->
 					<a id="clinicaLogo" href="<?php echo $this->url(''); ?>">
 					    <img src="<?php echo CLINICA_IMAGES_URL; ?>logo_transparent.png" />

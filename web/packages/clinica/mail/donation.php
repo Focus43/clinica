@@ -49,7 +49,7 @@ $template = <<< heredoc
 													<hr>
 													<p class="p"><strong>Message From Sender:</strong> {$message}</p>
 													<hr>
-													<p style="text-align:center;">Thank you for your generosity. Clinica Family Health Services is a 501(c)(3) tax-exempt organization. Your gift is tax deductible. Clinica's Tax ID number: 84-0743432.</p>
+													<p style="text-align:center;">Thank you for your generosity. Clinica Family Health is a 501(c)(3) tax-exempt organization. Your gift is tax deductible. Clinica's Tax ID number: 84-0743432.</p>
 													<hr>
 												</td>
 											</tr>
@@ -58,7 +58,7 @@ $template = <<< heredoc
 											        <table cellpadding="0" cellspacing="0" border="0">
 											            <tr>
 											                <td>
-                                                                <p><strong>Clinica Family Health Services</strong></p>
+                                                                <p><strong>Clinica Family Health</strong></p>
                                                                 <p>1345 Plaza Court North, 1A<br>Lafayette, CO 80026<br>Phone: (303) 650-4460</p>
 													        </td>
 											                <td style="text-align:right;"><img src="{$logoSrc}" alt="Clinica Logo" /></td>
