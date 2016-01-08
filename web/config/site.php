@@ -65,6 +65,7 @@
         define('AUTHORIZENET_TRANSACTION_KEY', '4y4G4436kMYJg749');
         define('AUTHORIZENET_SANDBOX', true);
 
+		define('DIR_FILES_UPLOADED', '/home/vagrant/app/web/files');
         // Database backup settings for developing locally
         //define('DIR_FILES_BACKUPS', '/home/vagrant/app/web/files/backups');
         //define('DIR_FILES_BACKUPS', '/files/backups');

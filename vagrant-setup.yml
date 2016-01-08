@@ -106,7 +106,7 @@
     #   - { k: 'short_open_tag', v: 'Off' }
     ######################################################################
     - role: "{{ custom_role_path }}/php"
-      php_install_xdebug: false
+      php_install_xdebug: true
       php_install_phpunit: false
       php_install_composer: true
       php_install_redis_ext: true
