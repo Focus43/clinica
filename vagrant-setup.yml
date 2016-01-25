@@ -1,6 +1,8 @@
 ---
 - hosts: all
-  sudo: yes
+  become: yes
+  become_user: root
+  become_method: sudo
 
   vars:
     custom_role_path: "vagrant/roles"
