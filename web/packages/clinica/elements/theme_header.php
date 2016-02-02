@@ -2,6 +2,9 @@
   <div class="container">
     <div class="pull-left">
       <!--<a class="active">English</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a>Espa&ntilde;ol</a>-->
+    </div>
+    <div class="pull-right">
+      <?php //$a = new GlobalArea('Header Orange Bar Right'); $a->display($c); ?>
       <span style="display:inline-block;padding-top:2px;">Language:&nbsp;&nbsp;</span>
       <span style="display:inline-block;">
           <div id="google_translate_element"></div>
@@ -14,9 +17,6 @@
           <?php endif; ?>
       </span>
     </div>
-    <div class="pull-right">
-      <?php $a = new GlobalArea('Header Orange Bar Right'); $a->display($c); ?>
-    </div>
   </div>
 </div>
 <div id="flexHeader">
@@ -26,7 +26,9 @@
         <img src="<?php echo CLINICA_IMAGES_URL; ?>logo_header.png" alt="Clinica Family Health Logo" />
       </a>-->
       <a id="clinicaLogo" href="<?php echo $this->url(''); ?>">
-          <img src="<?php echo CLINICA_IMAGES_URL; ?>logo_transparent.png" />
+        <div class="logo-box"></div>
+        <h1>CLINICA <span>family health</span></h1>
+         <!--  <img src="<?php echo CLINICA_IMAGES_URL; ?>logo_transparent.png" /> -->
       </a>
       
       <!-- responsive "show on tablets/phones" -->

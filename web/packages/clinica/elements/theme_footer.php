@@ -1,4 +1,15 @@
 <div id="cFooter">
+  <div id="tagLiner">
+    <div class="tagLinerContent serifFont">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <?php $area2 = new Area('Tag Line'); $area2->setBlockLimit(1); $area2->display($c); ?>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 	<div class="container content">
 		<div class="row">
 		    <div class="span3">

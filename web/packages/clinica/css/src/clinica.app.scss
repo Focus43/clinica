@@ -14,40 +14,40 @@ $clinica-green: #B2BA35;
 $clinica-yellow: #FFDF69;
 html, body {height:100%;min-height:100% !important;}
 body {
-	background:$clinica-white url(../images/clinica_color_bg.png) no-repeat 100% bottom;
+	background:$clinica-white url(../images/clinica_bw_bg.png) no-repeat -250px -50px;
 	color:$clinica-gray
 }
 
 /* HEADER LEVEL ELEMENTS */
-body.clinicaPage h1, 
-body.clinicaPage h2,
-body.clinicaPage h3,
-body.clinicaPage h4,
-body.clinicaPage h5 {
+.clinicaPage h1, 
+.clinicaPage h2,
+.clinicaPage h3,
+.clinicaPage h4,
+.clinicaPage h5 {
 	text-transform:uppercase;
 	font-family:'Quicksand',sans-serif;
 	color:$clinica-gray;
 	font-weight:normal;
 }
-	body.clinicaPage h1 {
+	.clinicaPage h1 {
 		color:$clinica-gold;
 		margin-top:0;
 	}
 	@media (min-width:979px) { body.clinicaPage h1 small.visible-desktop {display:inline-block !important;}
 	}
-body.clinicaPage h2 {
+.clinicaPage h2 {
 	color:$clinica-blue;
 	font-size: 1.3em;
 	line-height: 2.2em;
 	font-weight: 700;
 }
 
-body.clinicaPage h3 {
+.clinicaPage h3 {
 	color:$clinica-blue;
 	font-size: 1.1em;
 }
 
-body.clinicaPage h4 {
+.clinicaPage h4 {
 	color:#454545;
 	font-size: 1em;
 }
@@ -62,14 +62,77 @@ body.clinicaPage div.message.alert ul {margin:0;}
 	background-color:transparent;
 	padding:5px 2px;
 	margin-bottom:5px;
-	li a, .active{
-		color: lighten($clinica-gray, 40%);
+	font-size: .9em;
+	li {
+		a {color: lighten($clinica-gray, 45%); }
+		&.active{
+			color: lighten($clinica-gray, 35%);
+		}
 	}
 }
 
 /* STICKY FOOTER, AND HOMEPAGE POSITIONING */
-#minHeighter {position:relative;min-height:100%;height:auto !important;height:100%;margin:0 auto -158px;}
-	body.home #minHeighter {margin:0;}
+#minHeighter {
+	position:relative;
+	min-height:100%;
+	height:auto !important;
+	height:100%;
+	margin:0 auto -158px;
+}
+.imageOverlay{
+	min-height:100%;
+	height:auto !important;
+	width: 100%;
+	z-index: 1;
+	position: absolute;
+	background: rgba(0,0,0,.65);
+}
+.homeRow{position: relative;z-index: 2;}
+.mainCall{
+	text-align: center;
+	color: $clinica-white;
+	margin: 50px 0 120px;
+	.mainLogin{
+		background-color: $clinica-aqua;
+		padding: 10px 20px;
+		color: $clinica-white;
+		margin-top: 40px;
+		font-size: 1.3em;
+		display: inline-block;
+		font-family: 'Quicksand', Helvetica, Arial, sans-serif; 
+		&:hover{
+			text-decoration: none;
+			background-color: $clinica-blue;
+		}
+	}
+	.learnMore{
+		margin-top: 20px;
+		font-size: .9em;
+		a{
+			color: lighten($clinica-gray, 40%);
+			text-decoration: underline;
+		}
+	}
+	h2{
+		color: lighten($clinica-aqua, 10%);
+		font-size: 4.7em;
+		margin: 0 0 10px 0;
+		line-height: 1.5em;
+	}
+	p{color: lighten($clinica-gray, 40%);font-size: 1.4em;}
+}
+body.home{
+	div.sub{background: rgba(0,0,0,.3);border:none;color: lighten($clinica-gray, 40%);}
+	.goog-te-gadget-simple{background:lighten($clinica-gray, 40%); }
+	#minHeighter {margin:0;padding-bottom: 20px;}
+	ul#headerNavigation li a {
+		color: lighten($clinica-gray, 40%);
+	}
+	a#clinicaLogo h1{
+		color: lighten($clinica-gray, 40%);
+	}
+	p {font-family: 'Quicksand', Helvetica, Arial, sans-serif;color: lighten($clinica-gray, 40%)}
+}
 
 /* GLOBAL BLOCK OUTPUT STYLES */
 .btContent img, .btContent img.thumbnail,
@@ -77,7 +140,12 @@ body.clinicaPage div.message.alert ul {margin:0;}
 
 .btContent img.dark, .btContent img.thumbnail.dark,
 .btImage img.dark, .btImage img.thumbnail.dark, img.thumbnail.dark {border:1px solid #444;}
-
+.btn-primary{
+	color: $clinica-white;
+  text-shadow:none;
+  background-color: $clinica-blue;
+  padding: 10px 20px;
+}
 /* RESPONSIVE HEADER BAR */
 #flexHeader {margin:0;}
 	#flexHeader div.main {
@@ -90,6 +158,33 @@ body.clinicaPage div.message.alert ul {margin:0;}
 		display:block;
 		float:left;
 		background-color:transparent;
+		&:hover{
+			text-decoration: none;
+		}
+		.logo-box{
+			background:transparent url('../images/nav-logo.png') no-repeat center center;
+    	background-size: 100% 100%;
+    	height: 70px;
+    	width: 70px;
+    	float: left;
+		}
+		h1{
+			color:$clinica-gray;
+			font-size: 1.8em;
+			padding: 10px 0 10px 5px;
+			display: block;
+			float: left;
+			line-height: 1em;
+    	margin: 0;
+    	letter-spacing: 5px;
+    	height: 50px;
+			span{
+				display: block;
+				font-size: .6em;
+				text-transform: none;
+				letter-spacing: 0;
+			}
+		}
 	}
 	
 	body.home {
@@ -97,6 +192,10 @@ body.clinicaPage div.message.alert ul {margin:0;}
 	 		background-color:rgba(255,255,255, .8);
 			margin-bottom: 20px;
 	 	}
+	 	#tagLiner {display:block;left:0;bottom:0;right:0;font-size:1.8em;}
+		#tagLiner .tagLinerContent {position:relative;padding:16px 0 9px;text-align:center;background:$clinica-gold;
+			p{color:$clinica-white;}
+		}
 	}
 	.patient-portal{
 		height: 600px;
@@ -145,6 +244,15 @@ ul#headerNavigation li a:hover {
 ul#headerNavigation li.nav-path-selected a {
 	color:darken($clinica-gray,15%);
 }
+.nav-tabs.nav-stacked{
+	> li > a{
+		border-bottom: none;
+	}
+	> li:last-child > a{
+		border-bottom: 1px solid #ddd;
+	}
+
+}
 .subheader{
 	margin-top: 0;
 }
@@ -154,6 +262,7 @@ div.sub {
 	position:relative;
 	z-index:2;
 	background-color:$clinica-gold;
+	border-bottom: 2px solid $clinica-gray;
 }
 
 div.sub a {
@@ -176,15 +285,16 @@ div.sub p {
 #homeContent {
 	float:right;
 	position:relative;
-	background:rgba(0,0,0,.65);
+	background:rgba(0,0,0,.4);
 	z-index:2;
-	padding:12px;
+	padding:10px 40px;
 	color:#f1f1f1;
+	font-size: 1.2em;
+	line-height: 1.4em;
 }
 	#homeContent.custom-template {max-width:none;width:auto;float:none;}
-#homeContent h3 {color:inherit;}
-#tagLiner {position:absolute;left:0;bottom:0;right:0;font-size:1.8em;}
-#tagLiner .tagLinerContent {position:relative;padding:16px 0 9px;color:#fff;text-align:center;background:rgba(216,155,36, 0.75);color:#222;}
+#homeContent h2 {color:$clinica-orange;}
+#tagLiner{display: none;}
 
 /* FORMS AND AJAX WAITING MESSAGE */
 .well form {margin-bottom:0;padding-bottom:0;}
@@ -212,16 +322,15 @@ body.clinicaPage form.ajaxSuccess div.ajax-flash-target div.message.alert {margi
 
 
 /* FOOTER AREA */
-div#pushFooter {height:195px;} /* NEEDED FOR IE8 STICKY FOOTER */
+div#pushFooter {height:290px;} /* NEEDED FOR IE8 STICKY FOOTER */
 div#cFooter {
-	height:155px;
+	height:250px;
 	overflow:hidden;
 	font-size:13px;
 	color:#e1e1e1;
 	position:relative;
 	background-color:$clinica-gray;
 }
-body.home div#cFooter {top:-3px;}
 div#cFooter div.content {padding-top:10px;}
 div#cFooter div.content .footer-gray {
 	margin:10px 0;

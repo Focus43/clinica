@@ -7416,38 +7416,38 @@ html, body {
   min-height: 100% !important; }
 
 body {
-  background: #fff url(../images/clinica_color_bg.png) no-repeat 100% bottom;
+  background: #fff url(../images/clinica_bw_bg.png) no-repeat -250px -50px;
   color: #5B5C60; }
 
 /* HEADER LEVEL ELEMENTS */
-body.clinicaPage h1,
-body.clinicaPage h2,
-body.clinicaPage h3,
-body.clinicaPage h4,
-body.clinicaPage h5 {
+.clinicaPage h1,
+.clinicaPage h2,
+.clinicaPage h3,
+.clinicaPage h4,
+.clinicaPage h5 {
   text-transform: uppercase;
   font-family: 'Quicksand',sans-serif;
   color: #5B5C60;
   font-weight: normal; }
 
-body.clinicaPage h1 {
+.clinicaPage h1 {
   color: #BEB899;
   margin-top: 0; }
 
 @media (min-width: 979px) {
   body.clinicaPage h1 small.visible-desktop {
     display: inline-block !important; } }
-body.clinicaPage h2 {
+.clinicaPage h2 {
   color: #007B90;
   font-size: 1.3em;
   line-height: 2.2em;
   font-weight: 700; }
 
-body.clinicaPage h3 {
+.clinicaPage h3 {
   color: #007B90;
   font-size: 1.1em; }
 
-body.clinicaPage h4 {
+.clinicaPage h4 {
   color: #454545;
   font-size: 1em; }
 
@@ -7469,9 +7469,12 @@ body.clinicaPage div.message.alert ul {
 .breadcrumb {
   background-color: transparent;
   padding: 5px 2px;
-  margin-bottom: 5px; }
-  .breadcrumb li a, .breadcrumb .active {
-    color: #c2c3c5; }
+  margin-bottom: 5px;
+  font-size: .9em; }
+  .breadcrumb li a {
+    color: #cfd0d2; }
+  .breadcrumb li.active {
+    color: #b5b6b9; }
 
 /* STICKY FOOTER, AND HOMEPAGE POSITIONING */
 #minHeighter {
@@ -7481,8 +7484,64 @@ body.clinicaPage div.message.alert ul {
   height: 100%;
   margin: 0 auto -158px; }
 
+.imageOverlay {
+  min-height: 100%;
+  height: auto !important;
+  width: 100%;
+  z-index: 1;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.65); }
+
+.homeRow {
+  position: relative;
+  z-index: 2; }
+
+.mainCall {
+  text-align: center;
+  color: #fff;
+  margin: 50px 0 120px; }
+  .mainCall .mainLogin {
+    background-color: #14B0AA;
+    padding: 10px 20px;
+    color: #fff;
+    margin-top: 40px;
+    font-size: 1.3em;
+    display: inline-block;
+    font-family: 'Quicksand', Helvetica, Arial, sans-serif; }
+    .mainCall .mainLogin:hover {
+      text-decoration: none;
+      background-color: #007B90; }
+  .mainCall .learnMore {
+    margin-top: 20px;
+    font-size: .9em; }
+    .mainCall .learnMore a {
+      color: #c2c3c5;
+      text-decoration: underline; }
+  .mainCall h2 {
+    color: #19ded6;
+    font-size: 4.7em;
+    margin: 0 0 10px 0;
+    line-height: 1.5em; }
+  .mainCall p {
+    color: #c2c3c5;
+    font-size: 1.4em; }
+
+body.home div.sub {
+  background: rgba(0, 0, 0, 0.3);
+  border: none;
+  color: #c2c3c5; }
+body.home .goog-te-gadget-simple {
+  background: #c2c3c5; }
 body.home #minHeighter {
-  margin: 0; }
+  margin: 0;
+  padding-bottom: 20px; }
+body.home ul#headerNavigation li a {
+  color: #c2c3c5; }
+body.home a#clinicaLogo h1 {
+  color: #c2c3c5; }
+body.home p {
+  font-family: 'Quicksand', Helvetica, Arial, sans-serif;
+  color: #c2c3c5; }
 
 /* GLOBAL BLOCK OUTPUT STYLES */
 .btContent img, .btContent img.thumbnail,
@@ -7496,6 +7555,12 @@ body.home #minHeighter {
 .btContent img.dark, .btContent img.thumbnail.dark,
 .btImage img.dark, .btImage img.thumbnail.dark, img.thumbnail.dark {
   border: 1px solid #444; }
+
+.btn-primary {
+  color: #fff;
+  text-shadow: none;
+  background-color: #007B90;
+  padding: 10px 20px; }
 
 /* RESPONSIVE HEADER BAR */
 #flexHeader {
@@ -7511,10 +7576,46 @@ a#clinicaLogo {
   display: block;
   float: left;
   background-color: transparent; }
+  a#clinicaLogo:hover {
+    text-decoration: none; }
+  a#clinicaLogo .logo-box {
+    background: transparent url("../images/nav-logo.png") no-repeat center center;
+    background-size: 100% 100%;
+    height: 70px;
+    width: 70px;
+    float: left; }
+  a#clinicaLogo h1 {
+    color: #5B5C60;
+    font-size: 1.8em;
+    padding: 10px 0 10px 5px;
+    display: block;
+    float: left;
+    line-height: 1em;
+    margin: 0;
+    letter-spacing: 5px;
+    height: 50px; }
+    a#clinicaLogo h1 span {
+      display: block;
+      font-size: .6em;
+      text-transform: none;
+      letter-spacing: 0; }
 
 body.home #flexHeader {
   background-color: rgba(255, 255, 255, 0.8);
   margin-bottom: 20px; }
+body.home #tagLiner {
+  display: block;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  font-size: 1.8em; }
+body.home #tagLiner .tagLinerContent {
+  position: relative;
+  padding: 16px 0 9px;
+  text-align: center;
+  background: #BEB899; }
+  body.home #tagLiner .tagLinerContent p {
+    color: #fff; }
 
 .patient-portal {
   height: 600px; }
@@ -7556,6 +7657,11 @@ ul#headerNavigation li a:hover {
 ul#headerNavigation li.nav-path-selected a {
   color: #363639; }
 
+.nav-tabs.nav-stacked > li > a {
+  border-bottom: none; }
+.nav-tabs.nav-stacked > li:last-child > a {
+  border-bottom: 1px solid #ddd; }
+
 .subheader {
   margin-top: 0; }
 
@@ -7564,7 +7670,8 @@ div.sub {
   padding: 6px 25px;
   position: relative;
   z-index: 2;
-  background-color: #BEB899; }
+  background-color: #BEB899;
+  border-bottom: 2px solid #5B5C60; }
 
 div.sub a {
   color: #fff; }
@@ -7594,33 +7701,23 @@ div.sub p {
 #homeContent {
   float: right;
   position: relative;
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(0, 0, 0, 0.4);
   z-index: 2;
-  padding: 12px;
-  color: #f1f1f1; }
+  padding: 10px 40px;
+  color: #f1f1f1;
+  font-size: 1.2em;
+  line-height: 1.4em; }
 
 #homeContent.custom-template {
   max-width: none;
   width: auto;
   float: none; }
 
-#homeContent h3 {
-  color: inherit; }
+#homeContent h2 {
+  color: #F58247; }
 
 #tagLiner {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  font-size: 1.8em; }
-
-#tagLiner .tagLinerContent {
-  position: relative;
-  padding: 16px 0 9px;
-  color: #fff;
-  text-align: center;
-  background: rgba(216, 155, 36, 0.75);
-  color: #222; }
+  display: none; }
 
 /* FORMS AND AJAX WAITING MESSAGE */
 .well form {
@@ -7694,19 +7791,16 @@ body.clinicaPage form.ajaxSuccess div.ajax-flash-target div.message.alert {margi
 
 /* FOOTER AREA */
 div#pushFooter {
-  height: 195px; }
+  height: 290px; }
 
 /* NEEDED FOR IE8 STICKY FOOTER */
 div#cFooter {
-  height: 155px;
+  height: 250px;
   overflow: hidden;
   font-size: 13px;
   color: #e1e1e1;
   position: relative;
   background-color: #5B5C60; }
-
-body.home div#cFooter {
-  top: -3px; }
 
 div#cFooter div.content {
   padding-top: 10px; }
