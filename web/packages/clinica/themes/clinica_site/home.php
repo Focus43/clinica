@@ -32,11 +32,10 @@
 				<div class="row homeRow">
 					<div class="mainCall">
 	    			<h2 style="text-align: center;">Welcome</h2>
-						<p>Here is a welcome message we wanted to share with you about the goings on at Clinica currently. Don't forget to check some things and be sure to do some other stuff too. It's gonna be great!</p>
 						<?php
 						//test
-						 // $a = new Area('Homepage Content');
-						 // $a->display($c); 
+						 $a = new Area('Homepage Content');
+						 $a->display($c); 
 						?>
 					</div>
 				</div>
