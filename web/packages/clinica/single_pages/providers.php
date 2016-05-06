@@ -19,6 +19,7 @@
 			<?php $a = new Area('Providers Sidebar'); $a->display($c); ?>
 		</div>
 		<div class="span9">
+			<div class="main-content">
 			<?php if($this->controller->getTask() == 'profile'): ?>
 				
 				<?php if($personnelObj->getPersonnelID() >= 1): ?>
@@ -62,6 +63,7 @@
 				</div>
 				
 			<?php endif; ?>
+			</div>
 		</div>
 	</div>
 </div>

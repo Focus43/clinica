@@ -1,5 +1,5 @@
 @import 'bootstrap.min';
-@import 'fontawesome';
+@import 'font-awesome/font-awesome';
 
 $clinica-gray: #5B5C60;
 $clinica-gold: #BEB899;
@@ -85,53 +85,86 @@ body.clinicaPage div.message.alert ul {margin:0;}
 	width: 100%;
 	z-index: 1;
 	position: absolute;
-	background: rgba(0,0,0,.65);
+	background: rgba(0,0,0,.33);
 }
-.homeRow{position: relative;z-index: 2;}
+.homeButton{
+	padding: 10px 20px;
+	color: $clinica-white;
+	margin-top: 10px;
+	font-size: 1.3em;
+	display: inline-block;
+	font-family: 'Quicksand', Helvetica, Arial, sans-serif; 
+	&:hover{
+		text-decoration: none;
+		background-color: $clinica-blue;
+	}
+}
+.blockRow{
+	position: relative;
+	z-index: 2;
+	.span3:first-child {
+		.homeBlock{
+			background: $clinica-orange;	
+		}
+	}
+	.span3:nth-child(2) {
+		.homeBlock{
+			background: $clinica-green;	
+		}
+	}
+	.span3:nth-child(3) {
+		.homeBlock{
+			background: $clinica-blue url('../images/cnxn.png') no-repeat center 32px;	
+			background-size: 43px 30px;
+			padding-top:76px; 
+
+		}
+	}
+	.span3:nth-child(4) {
+		.homeBlock{
+			background: $clinica-red;	
+		}
+	}
+}
+.homeRow{
+	position: relative;
+	z-index: 2;
+}
 .mainCall{
 	text-align: center;
-	color: $clinica-white;
-	margin: 50px 0 120px;
-	.mainLogin{
-		background-color: $clinica-aqua;
-		padding: 10px 20px;
-		color: $clinica-white;
-		margin-top: 40px;
-		font-size: 1.3em;
-		display: inline-block;
-		font-family: 'Quicksand', Helvetica, Arial, sans-serif; 
-		&:hover{
-			text-decoration: none;
-			background-color: $clinica-blue;
-		}
-	}
-	.learnMore{
-		margin-top: 20px;
-		font-size: .9em;
-		a{
-			color: lighten($clinica-gray, 40%);
-			text-decoration: underline;
-		}
-	}
+	//color: $clinica-white;
+	margin: 0 0 50px;
+	padding: 20px;
+	background: rgba(0,0,0,.35);
+	
 	h2{
 		color: lighten($clinica-aqua, 10%);
 		font-size: 4.7em;
 		margin: 0 0 10px 0;
 		line-height: 1.5em;
+		font-weight: normal;
 	}
-	p{color: lighten($clinica-gray, 40%);font-size: 1.4em;}
+	p{
+		//color: lighten($clinica-gray, 40%);
+		font-size: 1.4em;
+		line-height: 1.4em;
+	}
 }
 body.home{
-	div.sub{background: rgba(0,0,0,.3);border:none;color: lighten($clinica-gray, 40%);}
+	a:hover{text-decoration: none}
+	div.sub{background: rgba(0,0,0,.35);border:none;color: lighten($clinica-gray, 40%);}
 	.goog-te-gadget-simple{background:lighten($clinica-gray, 40%); }
 	#minHeighter {margin:0;padding-bottom: 20px;}
 	ul#headerNavigation li a {
-		color: lighten($clinica-gray, 40%);
+		color: lighten($clinica-gray, 80%);
 	}
 	a#clinicaLogo h1{
-		color: lighten($clinica-gray, 40%);
+		color: lighten($clinica-gray, 80%);
 	}
-	p {font-family: 'Quicksand', Helvetica, Arial, sans-serif;color: lighten($clinica-gray, 40%)}
+	p {
+		font-family: 'Quicksand', Helvetica, Arial, sans-serif;
+		color: lighten($clinica-gray, 80%)
+	}
 }
 
 /* GLOBAL BLOCK OUTPUT STYLES */
@@ -186,7 +219,13 @@ body.home{
 			}
 		}
 	}
-	
+	.centered-span{
+		float:none;
+		margin: 0 auto;
+		.flex{
+			width: 20% !important;
+		}
+	}
 	body.home {
 		#flexHeader {
 	 		background-color:rgba(255,255,255, .8);
@@ -282,18 +321,22 @@ div.sub p {
 
 /* CLINICA HOMEPAGE; BIG IMAGE OVERLAY SECTION */
 #bgContainer {position:absolute;left:0;top:0;right:0;bottom:0;/*155px;*/}
-#homeContent {
-	float:right;
-	position:relative;
-	background:rgba(0,0,0,.4);
+.homeBlock {
+	text-align: center;
+	//background:rgba(255,255,255,.75);
 	z-index:2;
-	padding:10px 40px;
-	color:#f1f1f1;
-	font-size: 1.2em;
-	line-height: 1.4em;
+	padding:20px;
+	//color:#f1f1f1;
+	font-size: 1em;
+	line-height: 1em;
+	i{font-size: 2.5em;}
+	h3,p,i{color: $clinica-white; line-height: 1.6em;}
+	h3{font-size: 1em;}
+	.homeButton{
+		background-color: $clinica-aqua;
+	}
 }
 	#homeContent.custom-template {max-width:none;width:auto;float:none;}
-#homeContent h2 {color:$clinica-orange;}
 #tagLiner{display: none;}
 
 /* FORMS AND AJAX WAITING MESSAGE */
@@ -390,34 +433,61 @@ div#cFooter div.legaleze a {color:#969696;}
 
 /* LANDSCAPE PHONE & PORTRAIT TABLET */
 @media (max-width: 767px) {
+	.breadcrumb{display: none;}
 	body {padding:0;}
+	.main-content{padding: 0 10px 20px;}
+	p{font-size: 1.3em; line-height: 1.5em}
     /* homepage specific */
     #homeContent {float:none;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
 	#tagLiner {position:relative;font-size:1.3em;}
 	#tagLiner .tagLinerContent {padding:10px 0 4px;}
 	#minHeighter {margin:auto;min-height:initial;height:auto !important;}
+	body.home #flexHeader{
+		margin-bottom: 0;
+		#responsiveTrigger {color:#fff;}
+	}
+	body.home ul#headerNavigation li a{font-size: 1.75em;}
 	#homeContent {color:#111;background:rgba(220,220,220,.55);}
 	#flexHeader {margin:0;}
 	#flexHeader div.main, #flexHeader div.sub, #responsiveTrigger {border:0;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
-    	a#clinicaLogo {float:none;text-align:center;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
+    	a#clinicaLogo {float:left;text-align:center;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;clear: both;overflow: hidden;margin: 0 0 0 20px;}
     	a#clinicaLogo img {height:45px;}
-    	#responsiveTrigger {float:none;top:0;right:0; -webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+    	#responsiveTrigger {font-family:'Quicksand',sans-serif;float:right;top:0;font-size: 2.3em;margin-top: 17px;right: 9px; -webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
     	#flexHeader .nav-collapse.pull-right {float:none;}
     	ul#headerNavigation {margin:0;font-size:.8em;}
-    	ul#headerNavigation li {float:left;width:33.33%;margin:0;}
-	#pageTitle, #pageTitle h1 {background:#fff;padding:0;margin:0;line-height:1em;}
-	#pageTitle h1 {font-size:2em;padding:.875em 20px 0;}
+    ul#headerNavigation li {    
+    	width: 100%;
+	    text-align: center;
+	    font-size: 1.5em;
+	    border-bottom: 1px solid #bbb;
+	  }
+	#pageTitle, #pageTitle h1 {padding:0;margin:0;line-height:1em;color:$clinica-blue}
+	#pageTitle h1 {font-size:2em;padding:.875em 10px 0;}
 	#cPrimary {margin:0;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
 	div#pushFooter {display:none;}
-	div#cFooter {position:relative;height:auto;padding:0 12px 68px;}
+	div#cFooter {position:relative;height:auto;padding:0 0 68px;}
+	div#cFooter #tagLiner .tagLinerContent{padding: 10px;}
 	div#cFooter div.legaleze {padding:10px 12px;}
 	div#cFooter div.legaleze .pull-left, div#cFooter div.legaleze .pull-right {float:none;width:100%;text-align:center;}
 	div#cFooter .span3 ul, div#cFooter .span3 p {display:none;}
-	div#cFooter .span3 .footer-gray {cursor:pointer;font-size:16px;padding:4px 0;display:block;text-align:center;background:rgba(255,255,255,.3);}
+	div#cFooter .span3 .footer-gray {cursor:pointer;font-size:16px;padding:4px 0;display:block;text-align:center;}
+	.centered-span{
+		float:none;
+		margin: 0 auto;
+		.flex{
+			width: 100% !important;
+		}
+	}
+	body.home #minHeighter{padding-bottom: 0;}
 }
 
 @media (max-width:480px){
-    #flexHeader ul#headerNavigation li {width:50%;}
+    #flexHeader ul#headerNavigation li {    
+    	width: 100%;
+	    text-align: center;
+	    font-size: 1.5em;
+	    border-bottom: 1px solid #bbb;
+	  }
 }
 
 @media (max-width:320px){

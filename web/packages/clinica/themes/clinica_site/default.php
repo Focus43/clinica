@@ -46,8 +46,9 @@
 											<h1><?php echo Page::getCurrentPage()->getCollectionName(); ?> <small class="visible-desktop"><?php echo Page::getCurrentPage()->getCollectionDescription(); ?></small></h1>
 										</div>
 									</div>
-									
-									<?php $a = new Area('Main Content'); $a->display($c); ?>
+									<div class="main-content">
+										<?php $a = new Area('Main Content'); $a->display($c); ?>
+									</div>
 								</div>
 							</div>
 						</div>

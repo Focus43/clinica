@@ -18,25 +18,56 @@
 		<?php Loader::packageElement('theme_header', 'clinica'); ?>
 		
 		<div class="container">
-			<div class="row homeRow">
-				<div class="span12 mainCall">
-					<h2>My Clinica Connection</h2>
-					<p>Our free patient messaging system available to you all day, every day. </p>
-					<a class="mainLogin" href ="#">Login</a>
-					<p class="learnMore" ><a href="#">learn more about My CLINICA Connection</a></p>
-				</div>
-				<div class="span2"></div>
-				<div class="span8">
-					<div id="homeContent">
-					   <?php $a = new Area('Homepage Content'); $a->display($c); ?>
+			<div class="row">
+			<div class="span8 centered-span">
+				<div class="row homeRow">
+					<div class="mainCall">
+	    			<h2 style="text-align: center;">Welcome</h2>
+						<p>Here is a welcome message we wanted to share with you about the goings on at Clinica currently. Don't forget to check some things and be sure to do some other stuff too. It's gonna be great!</p>
+						<?php
+						//test
+						 // $a = new Area('Homepage Content');
+						 // $a->display($c); 
+						?>
 					</div>
 				</div>
-				<div class="span2"></div>
-				<!-- <div class="span12 clearfix">
-					<div class="clearfix" style="position:relative;z-index:5;min-height:20px;width:100%;">
-						
+				<!-- begin homeblock -->
+				<div class="row blockRow">
+					<div class="span3 flex">
+						<a href="#">
+							<div class="homeBlock">
+								<i class="fa fa-group"></i>
+								<h3>Work at Clinica</h3>
+							</div>
+						</a>
 					</div>
-				</div> -->
+					<div class="span3 flex">
+						<a href="#">
+							<div class="homeBlock">
+								<i class="fa fa-money"></i>
+								<h3>Paying Your Bill</h3>
+							</div>
+						</a>
+					</div>
+					<div class="span3 flex">
+						<a href="#">
+							<div class="homeBlock myConnection">
+								
+								<h3>My CLINICA Connection</h3>
+							</div>
+						</a>
+					</div>
+					<div class="span3 flex">
+						<a href="#">
+							<div class="homeBlock">
+								<i class="fa fa-sign-in"></i>
+								<h3>Employee Login</h3>
+							</div>
+						</a>
+					</div>
+				</div>
+				<!-- end homeblock -->
+				</div>
 			</div>
 		</div>
 	</div>

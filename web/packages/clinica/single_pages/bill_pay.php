@@ -1,4 +1,5 @@
 <div class="row-fluid">
+ <div class="main-content">
 	<div class="span5">
 		<h3>On-line Bill Payment</h3>
 		<?php $area = new Area('Bill Pay Page Content'); $area->display($c); ?>
@@ -51,6 +52,7 @@
 			</form>
 		</div>
 	</div>
+    </div>
 </div>
 
 <script type="text/javascript">
