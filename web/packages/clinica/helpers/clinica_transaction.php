@@ -36,8 +36,8 @@
 		public static function typeHandles(){
 			return (array('' => 'Type') + array(
 				ClinicaTransaction::TYPE_BILL_PAY 	=> 'Bill Payment',
-				ClinicaTransaction::TYPE_DONATION 	=> 'Donation',
-				ClinicaTransaction::TYPE_MISS_GREEK	=> 'Miss Greek'
+				ClinicaTransaction::TYPE_DONATION 	=> 'Donation'//,
+				//ClinicaTransaction::TYPE_MISS_GREEK	=> 'Miss Greek'
 			));
 		}
 		
