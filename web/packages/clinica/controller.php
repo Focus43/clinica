@@ -210,6 +210,9 @@
                 if( !is_object(SelectAttributeTypeOption::getByValue('Reach Out And Read', $donationAk)) ){
                     SelectAttributeTypeOption::add($donationAk, 'Reach Out And Read', 1);
                 }
+                if( !is_object(SelectAttributeTypeOption::getByValue('New Lafayette Clinic', $donationAk)) ){
+                    SelectAttributeTypeOption::add($donationAk, 'New Lafayette Clinic', 1);
+                }
             }
 			
 			// bill payment attributes
