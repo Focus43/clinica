@@ -8174,7 +8174,10 @@ div#cFooter div.legaleze a {
       width: 100% !important; }
 
   body.home #minHeighter {
-    padding-bottom: 0; } }
+    padding-bottom: 0; }
+
+  .mainCall h2 {
+    font-size: 3em; } }
 @media (max-width: 480px) {
   #flexHeader ul#headerNavigation li {
     width: 100%;
