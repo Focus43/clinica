@@ -163,7 +163,7 @@ body {
   background-color: #ffffff; }
 
 a {
-  color: #0088cc;
+  color: #007B90;
   text-decoration: none; }
 
 a:hover, a:focus {
@@ -7800,7 +7800,8 @@ div.sub p {
 #responsiveTrigger {
   position: relative;
   top: 23px;
-  right: 25px; }
+  right: 25px;
+  color: #5B5C60; }
 
 /* WHEN THE MENU COLLAPSES; THIS IS THE "EXPAND" BUTTON */
 /* CLINICA HOMEPAGE; BIG IMAGE OVERLAY SECTION */
@@ -8013,7 +8014,8 @@ div#cFooter div.legaleze a {
 
   ul#headerNavigation li {
     float: none;
-    margin-right: 1.1em; }
+    margin-right: 1.1em;
+    margin: 0; }
 
   ul#headerNavigation li a {
     padding: 9px 10px; }
@@ -8059,8 +8061,9 @@ div#cFooter div.legaleze a {
     body.home #flexHeader #responsiveTrigger {
       color: #fff; }
 
-  body.home ul#headerNavigation li a {
-    font-size: 1.75em; }
+  ul#headerNavigation li a {
+    font-size: 1.75em;
+    padding: 20px; }
 
   #homeContent {
     color: #111;
@@ -8107,6 +8110,7 @@ div#cFooter div.legaleze a {
     font-size: .8em; }
 
   ul#headerNavigation li {
+    margin: 0;
     width: 100%;
     text-align: center;
     font-size: 1.5em;

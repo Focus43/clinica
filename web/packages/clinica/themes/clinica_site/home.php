@@ -44,7 +44,7 @@
 					<div class="span3 flex">
 						<a href="<?php getTheURL(821); ?>">
 							<div class="homeBlock">
-								<i class="fa fa-group"></i>
+								<i class="fa fa-user-plus"></i>
 								<h3>Work at Clinica</h3>
 							</div>
 						</a>
