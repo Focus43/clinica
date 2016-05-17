@@ -9,7 +9,7 @@ want to name the site directory 'Clinica'...
 2. `cd Clinica/vagrant && vagrant up`. If its your first time running this,
 it'll take a while. Subsequent `vagrant up`s are quick.
 3. Get a copy of the latest database from production (recommended to use Sequel
-if you're on a mac, and the `File > export` tool).
+if you're on a mac, and the `File > import` tool).
 4. Access the local MySQL database in the vagrant machine. Assuming you're using
 the Sequel client, these are the credentials for the given fields:
 	* host: `127.0.0.1`
@@ -31,4 +31,4 @@ local domain in your system's HOSTS file. This is easy:
 
 #### Access It Locally ####
 Because Clinica needs the SSL port, after following steps in item 6 above,
-you should hit `http://lo.cal:4433` and see the site.
+you should hit `https://lo.cal:4433` and see the site.
