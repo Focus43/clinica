@@ -4,7 +4,7 @@
 	
 	    protected $pkgHandle 			= 'clinica';
 	    protected $appVersionRequired 	= '5.6.1';
-	    protected $pkgVersion 			= '0.68';
+	    protected $pkgVersion 			= '0.69';
 
         // Fileset names
         const FILESET_PROCEDURE_FORMS   = 'SecureProcedureForms';
@@ -205,9 +205,11 @@
             // Make sure the donation attribute options exist
             $donationAk = ClinicaTransactionAttributeKey::getByHandle('use_donation_for');
             if( is_object($donationAk) ){
+
                 if( !is_object(SelectAttributeTypeOption::getByValue('General Operations', $donationAk)) ){
                     SelectAttributeTypeOption::add($donationAk, 'General Operations', 1);
                 }
+
                 if( !is_object(SelectAttributeTypeOption::getByValue('Reach Out And Read', $donationAk)) ){
                     SelectAttributeTypeOption::add($donationAk, 'Reach Out And Read', 1);
                 }
