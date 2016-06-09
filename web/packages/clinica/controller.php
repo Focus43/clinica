@@ -39,6 +39,7 @@
 			
 			// set theme paths
 			View::getInstance()->setThemeByPath('/login', 'clinica_site');
+			View::getInstance()->setThemeByPath('/page_not_found', 'clinica_site');
 			
 			// autoload classes
 			Loader::registerAutoload(array(
