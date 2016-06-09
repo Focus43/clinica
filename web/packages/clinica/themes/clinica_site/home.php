@@ -19,6 +19,17 @@
 <!-- Enjoy checking out what's under the hood? We should talk! www.focus-43.com -->
 
 <body class="clinicaPage home">
+	<div class="alert-bar">
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<?php 
+						$a = new GlobalArea('Alert Bar'); 
+						$a->display($c); ?>
+				</div>
+			</div>
+		</div>
+	</div>
 		<div id="minHeighter">
 		<div class="imageOverlay"></div>
 		<div id="bgContainer" class="hidden-phone" data-background="<?php echo $backgroundImage; ?>"></div>

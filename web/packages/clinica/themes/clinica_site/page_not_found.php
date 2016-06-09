@@ -27,7 +27,17 @@ if( !($this->controller instanceof ClinicaPageController) ){
 <!-- Enjoy checking out what's under the hood? We should talk! www.focus-43.com -->
 
 <body class="clinicaPage fullWidth">
-  
+  <div class="alert-bar">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <?php 
+            $a = new GlobalArea('Alert Bar'); 
+            $a->display($c); ?>
+        </div>
+      </div>
+    </div>
+  </div>
   <div id="minHeighter">
     <?php Loader::packageElement('theme_header', 'clinica'); ?>
     <div class="container">

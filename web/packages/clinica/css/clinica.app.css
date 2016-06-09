@@ -156,7 +156,7 @@ textarea {
     page-break-after: avoid; } }
 body {
   margin: 0;
-  font-family: 'Quicksand',"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 14px;
   line-height: 20px;
   color: #333333;
@@ -1046,7 +1046,7 @@ label, input, button, select, textarea {
   line-height: 20px; }
 
 input, button, select, textarea {
-  font-family: 'Quicksand',"Helvetica Neue",Helvetica,Arial,sans-serif; }
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; }
 
 label {
   display: block;
@@ -2951,7 +2951,7 @@ button.btn.btn-mini, input[type="submit"].btn.btn-mini {
 .navbar-search .search-query {
   margin-bottom: 0;
   padding: 4px 14px;
-  font-family: 'Quicksand',"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 13px;
   font-weight: normal;
   line-height: 1;
@@ -7562,6 +7562,20 @@ body.clinicaPage .serifFont {
 body.clinicaPage div.message.alert ul {
   margin: 0; }
 
+.alert-bar {
+  font-family: 'Quicksand', Helvetica, Arial, sans-serif;
+  background-color: #007B90;
+  color: #fff;
+  padding-top: 8px;
+  font-size: 1.2em;
+  overflow: hidden; }
+  .alert-bar i, .alert-bar em {
+    font-size: 1.4em;
+    margin-right: 10px; }
+  .alert-bar a {
+    color: #fff;
+    text-decoration: underline; }
+
 .breadcrumb {
   background-color: transparent;
   padding: 5px 2px;
@@ -7784,8 +7798,7 @@ div.sub {
   padding: 6px 25px;
   position: relative;
   z-index: 2;
-  background-color: #BEB899;
-  border-bottom: 2px solid #5B5C60; }
+  background-color: #BEB899; }
 
 div.sub a {
   color: #fff; }
